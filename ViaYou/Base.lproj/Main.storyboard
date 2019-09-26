@@ -339,6 +339,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="Nec-m4-k0a" id="Pg1-hn-vNU"/>
                         <outlet property="signInWithFacebook" destination="nsW-Tk-b77" id="Ne4-Pr-oi9"/>
+                        <outlet property="signInWithGoogle" destination="aG9-h1-SP9" id="gxS-bU-hLc"/>
                         <outletCollection property="socialButtonsBaseCollection" destination="Wan-FO-Yds" collectionClass="NSMutableArray" id="1oW-qa-1yp"/>
                         <outletCollection property="socialButtonsBaseCollection" destination="Y7t-4e-JSj" collectionClass="NSMutableArray" id="5h0-fS-Ye4"/>
                         <outletCollection property="socialButtonsBaseCollection" destination="2dQ-si-9mg" collectionClass="NSMutableArray" id="HPE-AT-Lgl"/>
@@ -1466,7 +1467,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YD1-Y7-czr">
-                                                    <rect key="frame" x="210" y="19" width="100" height="32"/>
+                                                    <rect key="frame" x="265" y="19" width="100" height="32"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ilj-p7-djz">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="32"/>
