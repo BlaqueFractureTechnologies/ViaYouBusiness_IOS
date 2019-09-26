@@ -14,6 +14,13 @@
 		9EA55F75233C208E003A1EBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EA55F73233C208E003A1EBB /* LaunchScreen.storyboard */; };
 		9EA55F80233C208E003A1EBB /* ViaYouTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F7F233C208E003A1EBB /* ViaYouTests.swift */; };
 		9EA55F8B233C208E003A1EBB /* ViaYouUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F8A233C208E003A1EBB /* ViaYouUITests.swift */; };
+		9EA55F99233C29FB003A1EBB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F98233C29FB003A1EBB /* SplashViewController.swift */; };
+		9EA55F9B233C2B04003A1EBB /* NewLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F9A233C2B04003A1EBB /* NewLaunchViewController.swift */; };
+		9EA55F9D233C2B24003A1EBB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F9C233C2B24003A1EBB /* SignUpViewController.swift */; };
+		9EA55F9F233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F9E233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift */; };
+		9EA55FA1233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55FA0233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift */; };
+		9EA55FA3233C2CB9003A1EBB /* NewSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55FA2233C2CB9003A1EBB /* NewSignInViewController.swift */; };
+		9EA55FA5233C3628003A1EBB /* ExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55FA4233C3628003A1EBB /* ExtensionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +54,13 @@
 		9EA55F86233C208E003A1EBB /* ViaYouUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViaYouUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA55F8A233C208E003A1EBB /* ViaYouUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaYouUITests.swift; sourceTree = "<group>"; };
 		9EA55F8C233C208E003A1EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EA55F98233C29FB003A1EBB /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		9EA55F9A233C2B04003A1EBB /* NewLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLaunchViewController.swift; sourceTree = "<group>"; };
+		9EA55F9C233C2B24003A1EBB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		9EA55F9E233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpMobileEntryViewController.swift; sourceTree = "<group>"; };
+		9EA55FA0233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPasswordEntryViewController.swift; sourceTree = "<group>"; };
+		9EA55FA2233C2CB9003A1EBB /* NewSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSignInViewController.swift; sourceTree = "<group>"; };
+		9EA55FA4233C3628003A1EBB /* ExtensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +117,13 @@
 				9EA55F71233C208E003A1EBB /* Assets.xcassets */,
 				9EA55F73233C208E003A1EBB /* LaunchScreen.storyboard */,
 				9EA55F76233C208E003A1EBB /* Info.plist */,
+				9EA55F98233C29FB003A1EBB /* SplashViewController.swift */,
+				9EA55F9A233C2B04003A1EBB /* NewLaunchViewController.swift */,
+				9EA55F9C233C2B24003A1EBB /* SignUpViewController.swift */,
+				9EA55F9E233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift */,
+				9EA55FA0233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift */,
+				9EA55FA2233C2CB9003A1EBB /* NewSignInViewController.swift */,
+				9EA55FA4233C3628003A1EBB /* ExtensionManager.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -256,8 +277,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EA55F9B233C2B04003A1EBB /* NewLaunchViewController.swift in Sources */,
+				9EA55FA3233C2CB9003A1EBB /* NewSignInViewController.swift in Sources */,
+				9EA55F99233C29FB003A1EBB /* SplashViewController.swift in Sources */,
 				9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */,
 				9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */,
+				9EA55F9D233C2B24003A1EBB /* SignUpViewController.swift in Sources */,
+				9EA55F9F233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift in Sources */,
+				9EA55FA1233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift in Sources */,
+				9EA55FA5233C3628003A1EBB /* ExtensionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
