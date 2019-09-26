@@ -29,7 +29,7 @@ class SplashViewController: UIViewController {
 //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
 //            let homeVC = storyBoard.instantiateViewController(withIdentifier: "NewsFeedsFullGridViewController") as! NewsFeedsFullGridViewController
 //            self.navigationController?.pushViewController(homeVC, animated: true)
-//        }else {
+//        }else {   
             //Else
             // .. Go To Registration Page
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)

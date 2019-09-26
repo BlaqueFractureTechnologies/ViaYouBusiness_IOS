@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>249526314647-do35ldndrhoqfd40g9q1n3vsln2srbok.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.249526314647-do35ldndrhoqfd40g9q1n3vsln2srbok</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>249526314647-1ln4vigpd1k3jh28ugp4tsp44ltnjsf9.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAxAeEMduNSZ1sNb9mS3o3-YTIEd64t_lA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>249526314647</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.promptchu.ViaYou</string>
+	<key>PROJECT_ID</key>
+	<string>livescreencast</string>
+	<key>STORAGE_BUCKET</key>
+	<string>livescreencast.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:249526314647:ios:d632092a78b9defb5dabd2</string>
+	<key>DATABASE_URL</key>
+	<string>https://livescreencast.firebaseio.com</string>
+</dict>
+</plist>
