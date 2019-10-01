@@ -66,7 +66,6 @@ extension UIView {
         self.layer.shadowOffset = CGSize(width: 0, height: 5.0)
         self.layer.shadowOpacity = 0.5
         self.layer.shadowRadius = 4.0
-        
     }
     
     func applyNewsFeedMainProfileButtonStyle() {
@@ -87,6 +86,19 @@ extension UIView {
     
     func themeYellowColor()-> UIColor {
         return UIColor(red: 255.0/255.0, green: 201.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+    }
+    
+    func themeRedColor()-> UIColor {
+        return UIColor(red: 214.0/255.0, green: 85.0/255.0, blue: 107.0/255.0, alpha: 1.0)
+    }
+    
+    
+    func addDropShadow(scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 10
     }
 }
 
@@ -275,7 +287,7 @@ extension UIViewController  {
 //        let currentLocation = CLLocation(latitude: Double(DefaultWrapper().getUserLat()) ?? 0.0, longitude: Double(DefaultWrapper().getUserLong()) ?? 0.0)
 //        print("getAllTagDetails :: currentLocation latitude====>\(currentLocation.coordinate.latitude)")
 //        print("getAllTagDetails :: currentLocation longitude====>\(currentLocation.coordinate.longitude)")
-//        
+//
 //        let distance = currentLocation.distance(from: monitoringLocation)
 //        print(String(format: "The distance is %0.2f m", distance))
 //        distanceString = String(format: "%0.2f", distance)

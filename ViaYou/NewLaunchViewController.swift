@@ -16,21 +16,15 @@ class NewLaunchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UIView.animate(withDuration: 2.0, delay: 0.0, options: [.repeat, .autoreverse], animations: {
-            self.arrowIcon.frame = CGRect(x: self.arrowIcon.frame.origin.x, y: self.arrowIcon.frame.origin.y-10, width: self.arrowIcon.frame.size.width, height: self.arrowIcon.frame.size.height)
-            
-        }, completion: nil)
-        
     }
     
     
     @IBAction func signInButtonClicked(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewSignInViewController") as! NewSignInViewController
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
         let navVC = UINavigationController(rootViewController: nextVC)
         navVC.isNavigationBarHidden = true
-        self.present(navVC, animated: true, completion: nil)
+        self.navigationController?.present(navVC, animated: true, completion: nil)
     }
     
     @IBAction func signUpButtonClicked(_ sender: Any) {
@@ -38,7 +32,7 @@ class NewLaunchViewController: UIViewController {
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
         let navVC = UINavigationController(rootViewController: nextVC)
         navVC.isNavigationBarHidden = true
-        self.present(navVC, animated: true, completion: nil)
+        self.navigationController?.present(navVC, animated: true, completion: nil)
     }
     
     @IBAction func upArrowClicked(_ sender: Any) {
