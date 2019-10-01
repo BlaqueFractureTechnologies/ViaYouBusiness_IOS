@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     @IBOutlet weak var signInWithFacebook: UIButton!
     @IBOutlet weak var signInWithGoogle: GIDSignInButton!
   //  var tokenChangeListener: IDTokenDidChangeListenerHandle?
+    
     var generatedUserToken: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +33,10 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         }
     }
     
-    //MARK:- Facebook auth
+    //MARK:- Facebook authentication
     
     @IBAction func loginFacebookAction(_ sender: Any) {
+        print("Facebook auth")
         let loginManagerr = LoginManager()
         loginManagerr.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
@@ -70,6 +72,8 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     //let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     self.getAuthenticationToken()
                    // appDelegate.goToHomeVC()
+                    //profile pic setup
+                    //profile pic setup ends
                 }
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
@@ -143,7 +147,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     print("Signed in successfully!")
                     DispatchQueue.main.async {
                         //self.activityIndicator.stopAnimating()
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
                        // appDelegate.goToHomeVC()
                     }
                 }
@@ -158,29 +162,6 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
 
             }
         })
-//        //edit ends
-//        //        Auth.auth().addIDTokenDidChangeListener({ (auth, user) in
-//        //            if let user = user {
-//        //                // Get the token, renewing it if the 60 minute expiration
-//        //                //  has occurred.
-//        //                user.getIDToken { idToken, error in
-//        //                    if let error = error {
-//        //                        // Handle error
-//        //                        print("getIDToken error: \(error)")
-//        //                        return;
-//        //                    }
-//        //
-//        //                    print("getIDToken token: \(String(describing: idToken))")
-//        //                    if let validToken = idToken {
-//        //                        self.generatedUserToken = validToken
-//        //                        print("Generated user token = \(self.generatedUserToken)")
-//        //                        UserDefaults.standard.set(self.generatedUserToken, forKey: "GeneratedUserToken")
-//        //                    }
-//        //
-//        //                    // Reauthorize Firebase with the new token: idToken
-//        //                }
-//        //            }
-//        //        })
     }
     //listener function ends
     override func viewWillAppear(_ animated: Bool) {

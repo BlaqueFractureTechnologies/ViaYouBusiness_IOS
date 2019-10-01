@@ -64,7 +64,7 @@ class SignUpMobileEntryViewController: UIViewController {
     
     @IBAction func segmentButtonClicked(_ sender: UIButton) {
         if (sender.tag == 0) {
-            segmentEmailButton.backgroundColor = self.view.themeYellowColor()
+            segmentEmailButton.backgroundColor = self.view.themeRedColor()
             segmentEmailButton.setTitleColor(UIColor.darkGray, for: .normal)
             segmentPhoneButton.backgroundColor = UIColor.clear
             segmentPhoneButton.setTitleColor(UIColor.white, for: .normal)
@@ -76,7 +76,7 @@ class SignUpMobileEntryViewController: UIViewController {
         }else {
             segmentEmailButton.backgroundColor = UIColor.clear
             segmentEmailButton.setTitleColor(UIColor.white, for: .normal)
-            segmentPhoneButton.backgroundColor = self.view.themeYellowColor()
+            segmentPhoneButton.backgroundColor = self.view.themeRedColor()
             segmentPhoneButton.setTitleColor(UIColor.darkGray, for: .normal)
             
             UIView.animate(withDuration: 1.0) {

@@ -2541,9 +2541,9 @@
         <image name="defaultFeedCellBg" width="200" height="421"/>
         <image name="defaultProfilePic" width="145" height="145"/>
         <image name="eye" width="70" height="70"/>
-        <image name="fb" width="16" height="16"/>
-        <image name="google" width="16" height="16"/>
-        <image name="instagram" width="16" height="16"/>
+        <image name="fb" width="60" height="61"/>
+        <image name="google" width="60" height="61"/>
+        <image name="instagram" width="60" height="61"/>
         <image name="loginBg" width="750" height="1334"/>
         <image name="logo" width="579" height="162"/>
         <image name="playIconWhite" width="100" height="100"/>
