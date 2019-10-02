@@ -152,11 +152,30 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
+                    //get google profile picture
+                    if (GIDSignIn.sharedInstance().currentUser != nil) {
+                        
+                        let imageUrl = GIDSignIn.sharedInstance().currentUser.profile.imageURL(withDimension: 400).absoluteString
+                        let url  = NSURL(string: imageUrl)! as URL
+                        let data = NSData(contentsOf: url)
+                        let image = UIImage(data: data! as Data)
+                        if let profileImage = image {
+                            print(profileImage)
+                            self.passingProfileImage = profileImage
+                        }
+                        self.getAuthenticationToken()
+                        print("success token")
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                        print(self.passingProfileImage)
+                        homeVC.passedProfileImage = self.passingProfileImage
+                        let navVC = UINavigationController(rootViewController: homeVC)
+                        navVC.isNavigationBarHidden = true
+                        self.navigationController?.present(navVC, animated: true, completion: nil)
                 }
-                self.getAuthenticationToken()
-                print("success token")
-                //                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                //                appDelegate.goToHomeVC()
+                    //get google profile picture ends
+                }
+         
             }
 
             // segue here
