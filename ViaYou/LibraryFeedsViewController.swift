@@ -19,30 +19,32 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var profilePicButton: UIButton!
     
     var dataArray:[String] = []
-    var passedUrl: String = ""
+    var passedProfileImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //get facebook profile picture
-        let graphRequest = GraphRequest(graphPath: "me", parameters: ["fields":"id, email, name, picture.width(480).height(480)"])
-        graphRequest.start(completionHandler: { (connection, result, error) in
-            if error != nil {
-                print("Error",error!.localizedDescription)
-            }
-            else{
-                print(result!)
-                let field = result! as? [String:Any]
-                //self.userNameLabel.text = field!["name"] as? String
-                if let imageURL = ((field!["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
-                    print(imageURL)
-                    let url = URL(string: imageURL)
-                    let data = NSData(contentsOf: url!)
-                    let image = UIImage(data: data! as Data)
-                    self.profilePicButton.setBackgroundImage(image, for: .normal)
-                }
-            }
-        })
-        //get facebook profile picture ends
+        print(self.passedProfileImage)
+        self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
+//        //get facebook profile picture
+//        let graphRequest = GraphRequest(graphPath: "me", parameters: ["fields":"id, email, name, picture.width(480).height(480)"])
+//        graphRequest.start(completionHandler: { (connection, result, error) in
+//            if error != nil {
+//                print("Error",error!.localizedDescription)
+//            }
+//            else{
+//                print(result!)
+//                let field = result! as? [String:Any]
+//                //self.userNameLabel.text = field!["name"] as? String
+//                if let imageURL = ((field!["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
+//                    print(imageURL)
+//                    let url = URL(string: imageURL)
+//                    let data = NSData(contentsOf: url!)
+//                    let image = UIImage(data: data! as Data)
+//                    self.profilePicButton.setBackgroundImage(image, for: .normal)
+//                }
+//            }
+//        })
+//        //get facebook profile picture ends
         
         for _ in 0..<10 {
             dataArray.append("0")

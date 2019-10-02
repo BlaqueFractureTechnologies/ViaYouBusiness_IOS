@@ -22,6 +22,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
   //  var tokenChangeListener: IDTokenDidChangeListenerHandle?
     
     var generatedUserToken: String = ""
+    var passingProfileImage = UIImage()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.isHidden = true
@@ -69,18 +70,42 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     }
                     return
                 }
+
                 DispatchQueue.main.async {
-                    //let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    self.getAuthenticationToken()
-                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                    let navVC = UINavigationController(rootViewController: homeVC)
-                    navVC.isNavigationBarHidden = true
-                    self.navigationController?.present(navVC, animated: true, completion: nil)
+                    //get facebook profile picture
+                    let graphRequest = GraphRequest(graphPath: "me", parameters: ["fields":"id, email, name, picture.width(480).height(480)"])
+                    graphRequest.start(completionHandler: { (connection, result, error) in
+                        if error != nil {
+                            print("Error",error!.localizedDescription)
+                        }
+                        else{
+                            print(result!)
+                            let field = result! as? [String:Any]
+                            //self.userNameLabel.text = field!["name"] as? String
+                            if let imageURL = ((field!["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
+                                print(imageURL)
+                                let url = URL(string: imageURL)
+                                let data = NSData(contentsOf: url!)
+                                let image = UIImage(data: data! as Data)
+                                if let profileImage = image {
+                                    print(profileImage)
+                                    self.passingProfileImage = profileImage
+                                }
+                            }
+                            //edit
+                            self.getAuthenticationToken()
+                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                            print(self.passingProfileImage)
+                            homeVC.passedProfileImage = self.passingProfileImage
+                            let navVC = UINavigationController(rootViewController: homeVC)
+                            navVC.isNavigationBarHidden = true
+                            self.navigationController?.present(navVC, animated: true, completion: nil)
+                            //edit ends
+                        }
+                    })
+                    //get facebook profile picture ends
                     
-                   // appDelegate.goToHomeVC()
-                    //profile pic setup
-                    //profile pic setup ends
                 }
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
@@ -182,9 +207,6 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     }
     
     @IBAction func signUpWithPhoneOrEmailButtonClicked(_ sender: UIButton) {
-        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "CreateAccountViewController") as! CreateAccountViewController
-        //        self.navigationController?.pushViewController(nextVC, animated: true)
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "SignUpMobileEntryViewController") as! SignUpMobileEntryViewController
