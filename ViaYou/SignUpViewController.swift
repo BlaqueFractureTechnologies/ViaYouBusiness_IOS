@@ -38,6 +38,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     @IBAction func loginFacebookAction(_ sender: Any) {
         print("Facebook auth")
         let loginManagerr = LoginManager()
+        loginManagerr.logOut()
         loginManagerr.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
@@ -70,6 +71,14 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 }
                 DispatchQueue.main.async {
                     //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                    let navVC = UINavigationController(rootViewController: homeVC)
+                    navVC.isNavigationBarHidden = true
+                    self.navigationController?.present(navVC, animated: true, completion: nil)
+                    // faceboook profile picture                    
+                    // faceboook profile picture ends
+                    
                     self.getAuthenticationToken()
                    // appDelegate.goToHomeVC()
                     //profile pic setup

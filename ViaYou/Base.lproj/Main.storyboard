@@ -310,6 +310,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcp-CJ-CQp">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <segue destination="802-8G-CpK" kind="show" identifier="goToInstagramVC" id="6Ny-w5-CKj"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1069,6 +1072,10 @@
                                     <constraint firstAttribute="height" constant="50" id="yeg-ia-c0d"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Fqn-aC-TS3">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <color key="color" red="0.68660688400268555" green="0.32113635540008545" blue="0.37646424770355225" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1076,6 +1083,7 @@
                             <constraint firstItem="GfK-dD-PhA" firstAttribute="top" secondItem="KC0-1A-h9e" secondAttribute="bottom" constant="5" id="6qk-BH-hpb"/>
                             <constraint firstAttribute="trailing" secondItem="GfK-dD-PhA" secondAttribute="trailing" constant="20" id="6yc-sP-SZB"/>
                             <constraint firstAttribute="trailing" secondItem="KC0-1A-h9e" secondAttribute="trailing" constant="20" id="7Ro-yd-NLH"/>
+                            <constraint firstItem="Fqn-aC-TS3" firstAttribute="centerX" secondItem="CRz-LD-iqQ" secondAttribute="centerX" id="FBh-HZ-BzH"/>
                             <constraint firstItem="LFi-hP-aJz" firstAttribute="leading" secondItem="CRz-LD-iqQ" secondAttribute="leading" id="Feb-XG-NXG"/>
                             <constraint firstItem="KC0-1A-h9e" firstAttribute="leading" secondItem="CRz-LD-iqQ" secondAttribute="leading" constant="20" id="HZE-ko-oDN"/>
                             <constraint firstAttribute="trailing" secondItem="LFi-hP-aJz" secondAttribute="trailing" id="LIH-Me-DXS"/>
@@ -1086,6 +1094,7 @@
                             <constraint firstItem="o7c-DM-YSN" firstAttribute="top" secondItem="MA8-SD-BL9" secondAttribute="bottom" id="ZxU-6x-TTD"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5dQ-Lc-HsO" secondAttribute="trailing" constant="20" id="gXS-wo-fHg"/>
                             <constraint firstItem="GfK-dD-PhA" firstAttribute="leading" secondItem="CRz-LD-iqQ" secondAttribute="leading" constant="20" id="i86-gI-1zU"/>
+                            <constraint firstItem="Fqn-aC-TS3" firstAttribute="centerY" secondItem="CRz-LD-iqQ" secondAttribute="centerY" id="jAP-rY-wHw"/>
                             <constraint firstItem="5dQ-Lc-HsO" firstAttribute="top" secondItem="IWX-6d-G9w" secondAttribute="top" constant="80" id="jbR-fl-rqY"/>
                             <constraint firstItem="E6M-vc-0hp" firstAttribute="top" secondItem="CRz-LD-iqQ" secondAttribute="top" id="nek-Wm-VpO"/>
                             <constraint firstItem="o7c-DM-YSN" firstAttribute="bottom" secondItem="IWX-6d-G9w" secondAttribute="bottom" id="oEG-4l-qLx"/>
@@ -1098,6 +1107,7 @@
                         <viewLayoutGuide key="safeArea" id="IWX-6d-G9w"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Fqn-aC-TS3" id="q2s-5u-r1m"/>
                         <outlet property="nextButtonContainer" destination="vY9-pn-PED" id="IzD-7G-bWK"/>
                         <outlet property="passwordField" destination="EvB-AG-sAe" id="Kuk-Ag-Q34"/>
                         <outlet property="passwordFieldContainerTopMarginConstraint" destination="oHm-Am-WtN" id="RDh-E1-3jt"/>
@@ -1401,6 +1411,7 @@
                     <connections>
                         <outlet property="bottomPlusButton" destination="U2N-8Q-nxA" id="tmx-K5-IfA"/>
                         <outlet property="collectioView" destination="Xq7-Sz-nHw" id="O4s-WT-s7v"/>
+                        <outlet property="profilePicButton" destination="f2d-x4-CWo" id="9KS-a8-DaP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hCE-R0-PtM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2524,6 +2535,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WP9-b6-hst" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6009" y="543"/>
+        </scene>
+        <!--Instagram Sign In View Controller-->
+        <scene sceneID="7GZ-9v-oac">
+            <objects>
+                <viewController id="802-8G-CpK" customClass="InstagramSignInViewController" customModule="Promptchu" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hFc-52-FSE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57B-qZ-93o">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="802-8G-CpK" id="qrR-1x-YSE"/>
+                                </connections>
+                            </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="K9n-nO-Khb">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="57B-qZ-93o" firstAttribute="trailing" secondItem="lYv-KW-zvC" secondAttribute="trailing" id="0kp-hg-dsd"/>
+                            <constraint firstItem="57B-qZ-93o" firstAttribute="top" secondItem="lYv-KW-zvC" secondAttribute="top" id="6W2-IX-CAz"/>
+                            <constraint firstItem="57B-qZ-93o" firstAttribute="leading" secondItem="lYv-KW-zvC" secondAttribute="leading" id="9eN-em-IHd"/>
+                            <constraint firstItem="K9n-nO-Khb" firstAttribute="centerY" secondItem="hFc-52-FSE" secondAttribute="centerY" id="MtD-Hi-m1m"/>
+                            <constraint firstItem="K9n-nO-Khb" firstAttribute="centerX" secondItem="hFc-52-FSE" secondAttribute="centerX" id="ho5-lb-JAV"/>
+                            <constraint firstItem="57B-qZ-93o" firstAttribute="bottom" secondItem="lYv-KW-zvC" secondAttribute="bottom" id="hzz-O7-7P7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lYv-KW-zvC"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="K9n-nO-Khb" id="XJc-ps-yMS"/>
+                        <outlet property="webView" destination="57B-qZ-93o" id="sRk-YN-aAH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C8Q-f2-lnU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="1726"/>
         </scene>
     </scenes>
     <resources>
