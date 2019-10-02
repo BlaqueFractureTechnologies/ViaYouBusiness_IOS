@@ -23,7 +23,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //get facebook profile picture
         let graphRequest = GraphRequest(graphPath: "me", parameters: ["fields":"id, email, name, picture.width(480).height(480)"])
         graphRequest.start(completionHandler: { (connection, result, error) in
             if error != nil {
@@ -42,6 +42,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 }
             }
         })
+        //get facebook profile picture ends
         
         for _ in 0..<10 {
             dataArray.append("0")

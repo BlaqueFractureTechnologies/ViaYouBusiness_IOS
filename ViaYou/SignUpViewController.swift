@@ -71,15 +71,13 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 }
                 DispatchQueue.main.async {
                     //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    self.getAuthenticationToken()
                     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                     let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
                     let navVC = UINavigationController(rootViewController: homeVC)
                     navVC.isNavigationBarHidden = true
                     self.navigationController?.present(navVC, animated: true, completion: nil)
-                    // faceboook profile picture                    
-                    // faceboook profile picture ends
                     
-                    self.getAuthenticationToken()
                    // appDelegate.goToHomeVC()
                     //profile pic setup
                     //profile pic setup ends
@@ -155,17 +153,18 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                     print("Signed in successfully!")
                     DispatchQueue.main.async {
-                        //self.activityIndicator.stopAnimating()
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
                         //let appDelegate = UIApplication.shared.delegate as! AppDelegate
                        // appDelegate.goToHomeVC()
                     }
                 }
                 else {
                     self.displaySingleButtonAlert(message: "Email not verified. Please verify your email")
-                    //                    DispatchQueue.main.async {
-                    //                        self.activityIndicator.stopAnimating()
-                    //                        self.activityIndicator.isHidden = true
-                    //                    }
+                                        DispatchQueue.main.async {
+                                            self.activityIndicator.stopAnimating()
+                                            self.activityIndicator.isHidden = true
+                                        }
                 }
 
 

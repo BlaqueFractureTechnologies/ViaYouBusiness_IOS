@@ -142,45 +142,26 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                     print("Signed in successfully!")
                     DispatchQueue.main.async {
-                        //self.activityIndicator.stopAnimating()
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        // appDelegate.goToHomeVC()
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                        let navVC = UINavigationController(rootViewController: homeVC)
+                        navVC.isNavigationBarHidden = true
+                        self.navigationController?.present(navVC, animated: true, completion: nil)
                     }
                 }
                 else {
                     self.displaySingleButtonAlert(message: "Email not verified. Please verify your email")
-                    //                    DispatchQueue.main.async {
-                    //                        self.activityIndicator.stopAnimating()
-                    //                        self.activityIndicator.isHidden = true
-                    //                    }
+                                        DispatchQueue.main.async {
+                                            self.activityIndicator.stopAnimating()
+                                            self.activityIndicator.isHidden = true
+                                        }
                 }
                 
                 
             }
         })
-        //        //edit ends
-        //        //        Auth.auth().addIDTokenDidChangeListener({ (auth, user) in
-        //        //            if let user = user {
-        //        //                // Get the token, renewing it if the 60 minute expiration
-        //        //                //  has occurred.
-        //        //                user.getIDToken { idToken, error in
-        //        //                    if let error = error {
-        //        //                        // Handle error
-        //        //                        print("getIDToken error: \(error)")
-        //        //                        return;
-        //        //                    }
-        //        //
-        //        //                    print("getIDToken token: \(String(describing: idToken))")
-        //        //                    if let validToken = idToken {
-        //        //                        self.generatedUserToken = validToken
-        //        //                        print("Generated user token = \(self.generatedUserToken)")
-        //        //                        UserDefaults.standard.set(self.generatedUserToken, forKey: "GeneratedUserToken")
-        //        //                    }
-        //        //
-        //        //                    // Reauthorize Firebase with the new token: idToken
-        //        //                }
-        //        //            }
-        //        //        })
     }
     //listener function ends
     override func viewWillAppear(_ animated: Bool) {
