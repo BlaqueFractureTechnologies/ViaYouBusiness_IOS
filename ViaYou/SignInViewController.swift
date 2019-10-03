@@ -21,6 +21,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     @IBOutlet weak var signInWithGoogle: GIDSignInButton!
     //  var tokenChangeListener: IDTokenDidChangeListenerHandle?
     var generatedUserToken: String = ""
+    var passingProfileImage = UIImage()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.isHidden = true
@@ -35,7 +36,9 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     //MARK:- Facebook auth
     
     @IBAction func loginFacebookAction(_ sender: Any) {
+        print("Facebook auth")
         let loginManagerr = LoginManager()
+        loginManagerr.logOut()
         loginManagerr.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
@@ -66,10 +69,42 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     }
                     return
                 }
+                
                 DispatchQueue.main.async {
-                    //let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    self.getAuthenticationToken()
-                    // appDelegate.goToHomeVC()
+                    //get facebook profile picture
+                    let graphRequest = GraphRequest(graphPath: "me", parameters: ["fields":"id, email, name, picture.width(480).height(480)"])
+                    graphRequest.start(completionHandler: { (connection, result, error) in
+                        if error != nil {
+                            print("Error",error!.localizedDescription)
+                        }
+                        else{
+                            print(result!)
+                            let field = result! as? [String:Any]
+                            //self.userNameLabel.text = field!["name"] as? String
+                            if let imageURL = ((field!["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
+                                print(imageURL)
+                                let url = URL(string: imageURL)
+                                let data = NSData(contentsOf: url!)
+                                let image = UIImage(data: data! as Data)
+                                if let profileImage = image {
+                                    print(profileImage)
+                                    self.passingProfileImage = profileImage
+                                }
+                            }
+                            //edit
+                            self.getAuthenticationToken()
+                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                            print(self.passingProfileImage)
+                            homeVC.passedProfileImage = self.passingProfileImage
+                            let navVC = UINavigationController(rootViewController: homeVC)
+                            navVC.isNavigationBarHidden = true
+                            self.navigationController?.present(navVC, animated: true, completion: nil)
+                            //edit ends
+                        }
+                    })
+                    //get facebook profile picture ends
+                    
                 }
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
@@ -116,11 +151,30 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
+                    //get google profile picture
+                    if (GIDSignIn.sharedInstance().currentUser != nil) {
+                        
+                        let imageUrl = GIDSignIn.sharedInstance().currentUser.profile.imageURL(withDimension: 400).absoluteString
+                        let url  = NSURL(string: imageUrl)! as URL
+                        let data = NSData(contentsOf: url)
+                        let image = UIImage(data: data! as Data)
+                        if let profileImage = image {
+                            print(profileImage)
+                            self.passingProfileImage = profileImage
+                        }
+                        self.getAuthenticationToken()
+                        print("success token")
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                        print(self.passingProfileImage)
+                        homeVC.passedProfileImage = self.passingProfileImage
+                        let navVC = UINavigationController(rootViewController: homeVC)
+                        navVC.isNavigationBarHidden = true
+                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                    }
+                    //get google profile picture ends
                 }
-                self.getAuthenticationToken()
-                print("success token")
-                //                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                //                appDelegate.goToHomeVC()
+                
             }
             
             // segue here
@@ -144,19 +198,16 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.isHidden = true
-                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                        let navVC = UINavigationController(rootViewController: homeVC)
-                        navVC.isNavigationBarHidden = true
-                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        // appDelegate.goToHomeVC()
                     }
                 }
                 else {
                     self.displaySingleButtonAlert(message: "Email not verified. Please verify your email")
-                                        DispatchQueue.main.async {
-                                            self.activityIndicator.stopAnimating()
-                                            self.activityIndicator.isHidden = true
-                                        }
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
+                    }
                 }
                 
                 
