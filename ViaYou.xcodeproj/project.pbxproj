@@ -35,6 +35,7 @@
 		9EA55FA5233C3628003A1EBB /* ExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55FA4233C3628003A1EBB /* ExtensionManager.swift */; };
 		9EA55FA7233C5099003A1EBB /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55FA6233C5099003A1EBB /* InviteFriendsViewController.swift */; };
 		9EA55FAB233C78E8003A1EBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA55FAA233C78E8003A1EBB /* GoogleService-Info.plist */; };
+		9EB6E342234592870086A131 /* LibraryFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB6E341234592870086A131 /* LibraryFeedResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		9EA55FA4233C3628003A1EBB /* ExtensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionManager.swift; sourceTree = "<group>"; };
 		9EA55FA6233C5099003A1EBB /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
 		9EA55FAA233C78E8003A1EBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9EB6E341234592870086A131 /* LibraryFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryFeedResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				9E403A3B2344352B002E3749 /* RegisterResponse.swift */,
 				9E403A4123443FDA002E3749 /* InstagramAuthResponseModel.swift */,
 				9E403A4323443FF5002E3749 /* InstagramUserDetailsResponse.swift */,
+				9EB6E341234592870086A131 /* LibraryFeedResponse.swift */,
 			);
 			path = "Response Models";
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */,
 				9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */,
 				9E2B87A22344020500941DF2 /* SignInViewController.swift in Sources */,
+				9EB6E342234592870086A131 /* LibraryFeedResponse.swift in Sources */,
 				9E2B879C2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift in Sources */,
 				9EA55F9D233C2B24003A1EBB /* SignUpViewController.swift in Sources */,
 				9EA55F9F233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift in Sources */,
