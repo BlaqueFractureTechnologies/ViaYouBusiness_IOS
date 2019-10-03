@@ -6,5 +6,15 @@
 //  Copyright © 2019 Promptchu Pty Ltd. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
+class LibraryFeedResponse: NSObject {
+    
+    var success: Bool = false
+    var message: String = ""
+    var data:[FeedDataArrayObject] = []
+}
+
+class FeedDataArrayObject: NSObject {
+    
+}
