@@ -8,6 +8,7 @@ target 'ViaYou' do
   # Pods for ViaYou
 
 pod 'Firebase/Analytics'
+pod 'Firebase/DynamicLinks'
 pod 'Firebase/Auth'
 pod 'Firebase/Messaging'
 pod 'Firebase/Database'
