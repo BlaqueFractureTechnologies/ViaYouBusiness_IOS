@@ -27,6 +27,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         print(self.passedProfileImage)
         self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
         collectioView.reloadData()
+        getResponseFromJSONFile()
     }
     
     
@@ -53,7 +54,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(displayBottomPlusButtonCircularWave), userInfo: nil, repeats: false)
-        getResponseFromJSONFile()
     }
     
     
