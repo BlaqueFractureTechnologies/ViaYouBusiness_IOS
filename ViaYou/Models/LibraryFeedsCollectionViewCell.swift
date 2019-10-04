@@ -15,16 +15,18 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
     @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var infoTableView: UITableView!
     @IBOutlet weak var infoSliderCloseButton: UIButton!
+    @IBOutlet weak var videoImageView: UIImageView!
     
     @IBOutlet weak var infoPopUpHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
         infoTableView.delegate = self
         infoTableView.dataSource = self
+        videoImageView.image = nil
     }
     
-    func configureCell(data:String) {
-        if (data == "0") {
+    func configureCell(dataDict:FeedDataArrayObject) {
+        if (dataDict.isInfoPopUpDisplaying == false) {
             self.infoPopUpHeight.constant = 0
         }else {
             UIView.animate(withDuration: 0.4) {
@@ -32,6 +34,9 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
                 self.layoutIfNeeded()
             }
         }
+        self.videoImageView.image = dataDict.user.videoImage
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,4 +52,9 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         cell.textLabel?.text = "Info \(indexPath.row)"
         return cell
     }
+    
+    
+    
+    
 }
+

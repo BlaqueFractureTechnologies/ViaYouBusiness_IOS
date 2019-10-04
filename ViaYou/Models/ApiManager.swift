@@ -19,34 +19,7 @@ struct ApiManager {
     let instagramAuthenticationToken = UserDefaults.standard.value(forKey: "InstagramAccessToken")
     let REGISTRATION    = "register"
     let instagramUserIdInputApiHeader = "instaAccess"
-    let profileHeader = "profile"
-    let shadowHeader = "shadow"
-    let unshadowHeader = "unshadow"
-    //    let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
-    let mainHeader = "https://promptchu-api.herokuapp.com"
-    let listAllPostsHeader = "/post/listForYou"
-    let listShadowingPostHeader = "/post/listShadowing"
-    let listDiscoverPostHeader = "/post/listDiscover"
-    let rateHeader = "/post/rate"
-    let viewedPostHeader = "/post/viewed"
-    let updateProfileHeader = "/user/updateProfile"
-    let addVideoPostHeader = "/post/add"
-    let searchCompanyHeader = "/company/search"
-    let searchHeader = "search"
-    let locationSearchHeader = "searchByLocation"
-    let getUserPromptsHeader = "listById"
-    let getUserShadowsListHeader = "shadows"
-    let getUserShadowingListHeader = "shadowing"
-    let notificationsHeader = "notifications"
-    
-    let companySearchHeader = "search"
-    let addNewCompanyHeader = "add"
-    let addCommentHeader = "/comment/add"
-    let findFriendsHeader = "findFriends"
-    let tagsHeader = "myTags"
-    let tagNotifiedHeader = "tagNotified"
-    let listCommentsHeader = "list"
-    let deleteHeader = "delete"
+    let fetchLibraryDataHeader = "listScreenCast"
     
     
     //MARK:- Registration API
@@ -94,7 +67,6 @@ struct ApiManager {
         })
         dataTask.resume()
     }
-    //editing ends
     //MARK:- Instagram Authentication API
     //instagram api starts
     func getInstagramAuthResponseFromAPI(completion: @escaping (InstagramAuthResponseModel, _ error:Error?) -> ()) {
@@ -178,6 +150,54 @@ struct ApiManager {
     
     //instagram post api ends
     
+    //MARK:- Library Posts Fetch API
+    
+    func getAllPostsAPI(from:String,
+                        size:String,
+                        completion: @escaping (LibraryFeedResponse, _ error:Error?) -> ()) {
+        
+        let parameters: [String: Any] = [
+            "from":from,
+            "size":size,
+            
+            ]
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
+        
+        let requestURLString = "\(headerUrl)\(fetchLibraryDataHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue(generatedUserToken, forHTTPHeaderField: "token")
+        request.httpMethod = "POST"
+        
+        let postData = NSMutableData()
+        for key in parameters.keys {
+            let keyString = "&\(key)"
+            let valueString = parameters[key] as? String ?? ""
+            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
+        }
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(LibraryFeedResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("jsonDict====>%@",jsonDict)
+                        completion(LibraryFeedResponse(jsonDict),nil)
+                    }else {
+                        completion(LibraryFeedResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(LibraryFeedResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
     
 }
 

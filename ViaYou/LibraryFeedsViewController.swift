@@ -11,6 +11,7 @@ import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
 import GoogleSignIn
+import AVFoundation
 
 class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -18,43 +19,16 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var bottomPlusButton: UIButton!
     @IBOutlet weak var profilePicButton: UIButton!
     
-    var dataArray:[String] = []
+    var dataArray:[FeedDataArrayObject] = []
     var passedProfileImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(self.passedProfileImage)
         self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
-//        //get facebook profile picture
-//        let graphRequest = GraphRequest(graphPath: "me", parameters: ["fields":"id, email, name, picture.width(480).height(480)"])
-//        graphRequest.start(completionHandler: { (connection, result, error) in
-//            if error != nil {
-//                print("Error",error!.localizedDescription)
-//            }
-//            else{
-//                print(result!)
-//                let field = result! as? [String:Any]
-//                //self.userNameLabel.text = field!["name"] as? String
-//                if let imageURL = ((field!["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
-//                    print(imageURL)
-//                    let url = URL(string: imageURL)
-//                    let data = NSData(contentsOf: url!)
-//                    let image = UIImage(data: data! as Data)
-//                    self.profilePicButton.setBackgroundImage(image, for: .normal)
-//                }
-//            }
-//        })
-//        //get facebook profile picture ends
-        
-        for _ in 0..<10 {
-            dataArray.append("0")
-        }
         collectioView.reloadData()
     }
     
-    override func viewWillLayoutSubviews() {
-        
-    }
     
     @objc func displayBottomPlusButtonCircularWave() {
         self.view.layoutIfNeeded()
@@ -79,7 +53,55 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(displayBottomPlusButtonCircularWave), userInfo: nil, repeats: false)
+        getResponseFromJSONFile()
+    }
+    
+    
+    func getResponseFromJSONFile() {
         
+        ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
+            if error == nil {
+                print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
+                for i in 0..<responseDict.data.count {
+                    let indexDict = responseDict.data[i]
+                    indexDict.isInfoPopUpDisplaying = false
+                    self.dataArray.append(indexDict)
+                    print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
+                }
+                self.loadAllVideoImagesForDataArray()
+                DispatchQueue.main.async {
+                    self.collectioView.reloadData()
+                    
+                }
+            }
+            else {
+                print(error?.localizedDescription)
+            }
+        }
+        //editing ends
+        //        if let path = Bundle.main.path(forResource: "feedResponse", ofType: "json") {
+        //            do {
+        //                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+        //                if  let jsonDict = try JSONSerialization.jsonObject(with: data) as? [String:Any] {
+        //                    print("jsonDict====>\(jsonDict)")
+        //                    let responseDict = LibraryFeedResponse(jsonDict)
+        //                    dataArray = []
+        //                    for i in 0..<responseDict.data.count {
+        //                        let indexDict = responseDict.data[i]
+        //                        indexDict.isInfoPopUpDisplaying = false
+        //                        dataArray.append(indexDict)
+        //                    }
+        //                    loadAllVideoImagesForDataArray()
+        //                    DispatchQueue.main.async {
+        //                        self.collectioView.reloadData()
+        //                    }
+        //                }else {
+        //                    // handle error
+        //                }
+        //            } catch {
+        //                // handle error
+        //            }
+        //        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -88,7 +110,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LibraryFeedsCollectionViewCell", for: indexPath) as! LibraryFeedsCollectionViewCell
-        cell.configureCell(data: dataArray[indexPath.row])
+        cell.configureCell(dataDict: dataArray[indexPath.row])
         
         cell.infoButton.tag = indexPath.row
         cell.infoButton.addTarget(self, action: #selector(infoButtonClicked), for: UIControl.Event.touchUpInside)
@@ -101,20 +123,20 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     @objc func infoButtonClicked(_ sender:UIButton) {
         print("infoButtonClicked...")
-        if (dataArray[sender.tag] == "0") {
-            dataArray[sender.tag] = "1"
+        if (dataArray[sender.tag].isInfoPopUpDisplaying == false) {
+            dataArray[sender.tag].isInfoPopUpDisplaying = true
         }else {
-            dataArray[sender.tag] = "0"
+            dataArray[sender.tag].isInfoPopUpDisplaying = false
         }
         collectioView.reloadData()
     }
     
     @objc func infoSliderCloseButtonClicked(_ sender:UIButton) {
         print("infoSliderCloseButtonClicked...")
-        if (dataArray[sender.tag] == "0") {
-            dataArray[sender.tag] = "1"
+        if (dataArray[sender.tag].isInfoPopUpDisplaying == false) {
+            dataArray[sender.tag].isInfoPopUpDisplaying = true
         }else {
-            dataArray[sender.tag] = "0"
+            dataArray[sender.tag].isInfoPopUpDisplaying = false
         }
         collectioView.reloadData()
     }
@@ -142,6 +164,67 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let navVC = UINavigationController(rootViewController: nextVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: false, completion: nil)
+    }
+    
+    func loadAllVideoImagesForDataArray() {
+        for i in 0..<dataArray.count {
+            let userID = dataArray[i].user._id
+            let videoName = dataArray[i].fileName
+            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+            print("videUrlString :: \(videUrlString)")
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let image = self.previewImageFromVideo(url: URL(string: videUrlString)! as NSURL)
+                if (image != nil) {
+                    self.dataArray[i].user.videoImage = image!
+                    DispatchQueue.main.async {
+                        print("****Loaded image at index :: \(i)")
+                        self.collectioView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
+    func previewImageFromVideo(url: NSURL) -> UIImage? {
+        let url = url as URL
+        let request = URLRequest(url: url)
+        let cache = URLCache.shared
+        
+        if
+            let cachedResponse = cache.cachedResponse(for: request),
+            let image = UIImage(data: cachedResponse.data)
+        {
+            return image
+        }
+        
+        let asset = AVAsset(url: url)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+        imageGenerator.maximumSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
+        var time = asset.duration
+        time.value = min(time.value, 2)
+        
+        var image: UIImage?
+        
+        do {
+            let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+            image = UIImage(cgImage: cgImage)
+        } catch { }
+        
+        if
+            let image = image,
+            let data = image.pngData(),
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+        {
+            let cachedResponse = CachedURLResponse(response: response, data: data)
+            
+            cache.storeCachedResponse(cachedResponse, for: request)
+        }
+        
+        return image
     }
     
 }
