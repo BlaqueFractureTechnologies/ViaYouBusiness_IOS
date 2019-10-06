@@ -12,8 +12,10 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import GoogleSignIn
 import AVFoundation
+import MessageUI
 
-class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var collectioView: UICollectionView!
     @IBOutlet weak var bottomPlusButton: UIButton!
@@ -21,9 +23,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     var dataArray:[FeedDataArrayObject] = []
     var passedProfileImage = UIImage()
+    var userId: String = ""
+    var invitationUrl: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userId = Auth.auth().currentUser!.uid
         print(self.passedProfileImage)
         self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
         collectioView.reloadData()
@@ -158,12 +163,41 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     @IBAction func plusButtonClicked() {
         print("didSelectItemAt...")
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "LessSpacePopUpViewController") as! LessSpacePopUpViewController
-        nextVC.modalPresentationStyle = .overCurrentContext
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.navigationController?.present(navVC, animated: false, completion: nil)
+        
+        
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let link = URL(string: "https://mygame.example.com/?invitedby=\(uid)")
+        let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: "https://promptchu.page.link")
+        
+        referralLink!.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.example.ios")
+        referralLink!.iOSParameters?.minimumAppVersion = "1.0.1"
+        referralLink!.iOSParameters?.appStoreID = "123456789"
+        
+        referralLink!.androidParameters = DynamicLinkAndroidParameters(packageName: "com.example.android")
+        referralLink!.androidParameters?.minimumVersion = 125
+        
+        referralLink!.shorten { (shortURL, warnings, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            self.invitationUrl = shortURL!
+            print(self.invitationUrl.absoluteString)
+            
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+            nextVC.passedUrlLink = self.invitationUrl.absoluteString
+            let navVC = UINavigationController(rootViewController: nextVC)
+            navVC.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "LessSpacePopUpViewController") as! LessSpacePopUpViewController
+        //        nextVC.modalPresentationStyle = .overCurrentContext
+        //        let navVC = UINavigationController(rootViewController: nextVC)
+        //        navVC.isNavigationBarHidden = true
+        //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
     
     func loadAllVideoImagesForDataArray() {

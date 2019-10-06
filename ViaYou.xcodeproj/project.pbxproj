@@ -13,6 +13,9 @@
 		9E2B879E2344007700941DF2 /* LessSpacePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */; };
 		9E2B87A0234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B879F234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift */; };
 		9E2B87A22344020500941DF2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B87A12344020500941DF2 /* SignInViewController.swift */; };
+		9E3485B6234A8FC100DFADC9 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485B5234A8FC100DFADC9 /* ContactsViewController.swift */; };
+		9E3485B8234A8FEE00DFADC9 /* PhoneContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485B7234A8FEE00DFADC9 /* PhoneContact.swift */; };
+		9E3485BA234A903F00DFADC9 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485B9234A903F00DFADC9 /* ContactsTableViewCell.swift */; };
 		9E403A39234434AE002E3749 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A38234434AE002E3749 /* ApiManager.swift */; };
 		9E403A3C2344352B002E3749 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3B2344352B002E3749 /* RegisterResponse.swift */; };
 		9E403A3E23443F0B002E3749 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3D23443F0B002E3749 /* Constants.swift */; };
@@ -67,6 +70,9 @@
 		9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessSpacePopUpViewController.swift; sourceTree = "<group>"; };
 		9E2B879F234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryFeedsCollectionViewCell.swift; sourceTree = "<group>"; };
 		9E2B87A12344020500941DF2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		9E3485B5234A8FC100DFADC9 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		9E3485B7234A8FEE00DFADC9 /* PhoneContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneContact.swift; sourceTree = "<group>"; };
+		9E3485B9234A903F00DFADC9 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		9E403A38234434AE002E3749 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		9E403A3B2344352B002E3749 /* RegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
 		9E403A3D23443F0B002E3749 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -134,6 +140,8 @@
 				9E2B879F234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift */,
 				9E403A38234434AE002E3749 /* ApiManager.swift */,
 				9E403A3D23443F0B002E3749 /* Constants.swift */,
+				9E3485B7234A8FEE00DFADC9 /* PhoneContact.swift */,
+				9E3485B9234A903F00DFADC9 /* ContactsTableViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -195,6 +203,7 @@
 				9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */,
 				9E2B87A12344020500941DF2 /* SignInViewController.swift */,
 				9E403A3F23443F34002E3749 /* InstagramSignInViewController.swift */,
+				9E3485B5234A8FC100DFADC9 /* ContactsViewController.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -443,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E403A39234434AE002E3749 /* ApiManager.swift in Sources */,
+				9E3485B6234A8FC100DFADC9 /* ContactsViewController.swift in Sources */,
 				9E2B879A2344003C00941DF2 /* LibraryFeedsViewController.swift in Sources */,
 				9EA55F9B233C2B04003A1EBB /* NewLaunchViewController.swift in Sources */,
 				9EA55FA7233C5099003A1EBB /* InviteFriendsViewController.swift in Sources */,
@@ -452,6 +462,8 @@
 				9EA55F99233C29FB003A1EBB /* SplashViewController.swift in Sources */,
 				9E403A4023443F34002E3749 /* InstagramSignInViewController.swift in Sources */,
 				9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */,
+				9E3485B8234A8FEE00DFADC9 /* PhoneContact.swift in Sources */,
+				9E3485BA234A903F00DFADC9 /* ContactsTableViewCell.swift in Sources */,
 				9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */,
 				9E2B87A22344020500941DF2 /* SignInViewController.swift in Sources */,
 				9EB6E342234592870086A131 /* LibraryFeedResponse.swift in Sources */,
