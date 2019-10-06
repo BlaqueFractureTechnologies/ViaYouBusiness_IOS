@@ -15,5 +15,7 @@ pod 'Firebase/Database'
 pod 'Firebase/RemoteConfig'
 pod 'GoogleSignIn'
 pod 'FBSDKLoginKit'
+pod 'FacebookShare'
+
 
 end
