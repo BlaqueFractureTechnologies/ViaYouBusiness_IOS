@@ -20,6 +20,7 @@ struct ApiManager {
     let REGISTRATION    = "register"
     let instagramUserIdInputApiHeader = "instaAccess"
     let fetchLibraryDataHeader = "listScreenCast"
+    let referralHeader = "referral"
     
     
     //MARK:- Registration API
@@ -193,6 +194,49 @@ struct ApiManager {
                 } catch let parsingError {
                     print("parsingError=\(parsingError)")
                     completion(LibraryFeedResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
+    //MARK:- User Referral API
+    //instagram post api starts
+    
+    func callUserReferralAPI(referredBy:String,
+                             completion: @escaping (ReferralResponse, _ error:Error?) -> ()) {
+        
+        let parameters: [String: Any] = [
+            "referredBy":referredBy
+        ]
+        
+        let requestURLString = "\(headerUrl)\(referralHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        request.httpMethod = "POST"
+        let postData = NSMutableData()
+        for key in parameters.keys {
+            let keyString = "&\(key)"
+            let valueString = parameters[key] as? String ?? ""
+            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
+        }
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(ReferralResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        completion(ReferralResponse(jsonDict),nil)
+                        print(ReferralResponse(jsonDict))
+                    }else {
+                        completion(ReferralResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(ReferralResponse([:]),parsingError)
                 }
             }
         })

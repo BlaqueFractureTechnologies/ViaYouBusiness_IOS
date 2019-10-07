@@ -35,7 +35,7 @@ class SignUpMobileEntryViewController: UIViewController {
         self.emailField.makeWhitePlaceholder()
         self.countryCodeField.makeWhitePlaceholder()
         self.phoneField.makeWhitePlaceholder()
-        
+        self.hideKeyboardWhenTappedAround()
         self.scrollView.backgroundColor = UIColor.clear
         self.segmentButtonsContainer.layer.borderColor = self.view.themeYellowColor().cgColor
         self.segmentButtonsContainer.layer.borderWidth = 1.0

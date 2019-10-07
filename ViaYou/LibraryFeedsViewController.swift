@@ -14,7 +14,6 @@ import GoogleSignIn
 import AVFoundation
 import MessageUI
 
-
 class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var collectioView: UICollectionView!
@@ -167,7 +166,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let link = URL(string: "https://mygame.example.com/?invitedby=\(uid)")
+        let link = URL(string: "https://promptchu.page.link/?invitedby=\(uid)")
         let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: "https://promptchu.page.link")
         
         referralLink!.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.example.ios")
@@ -199,6 +198,23 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        navVC.isNavigationBarHidden = true
         //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
+    
+    //    func sendEmailInvitation() {
+    //        guard let referrerName = Auth.auth().currentUser?.displayName else { return }
+    //        let subject = "\(referrerName) wants you to play MyExampleGame!"
+    //        let invitationLink = invitationUrl?.absoluteString
+    //        let msg = "<p>Let's play MyExampleGame together! Use my <a href=\"\(String(describing: invitationLink))\">referrer link</a>!</p>"
+    //
+    //        if !MFMailComposeViewController.canSendMail() {
+    //            // Device can't send email
+    //            return
+    //        }
+    //        let mailer = MFMailComposeViewController()
+    //        mailer.mailComposeDelegate = self
+    //        mailer.setSubject(subject)
+    //        mailer.setMessageBody(msg, isHTML: true)
+    //        self.present(mailer, animated: true, completion: nil)
+    //    }
     
     func loadAllVideoImagesForDataArray() {
         for i in 0..<dataArray.count {

@@ -24,9 +24,11 @@ class NewSignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInD
     //  var tokenChangeListener: IDTokenDidChangeListenerHandle?
     var generatedUserToken: String = ""
     var isFromSignUpPage: Bool = false
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,69 +55,97 @@ class NewSignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInD
     @IBAction func loginButtonClicked(_ sender: Any) {
         
         
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-//        let navVC = UINavigationController(rootViewController: nextVC)
-//        navVC.isNavigationBarHidden = true
-//        self.navigationController?.present(navVC, animated: true, completion: nil)
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+        //        let navVC = UINavigationController(rootViewController: nextVC)
+        //        navVC.isNavigationBarHidden = true
+        //        self.navigationController?.present(navVC, animated: true, completion: nil)
         
-         DispatchQueue.main.async {
-             self.activityIndicator.isHidden = false
-             self.activityIndicator.startAnimating()
-         }
-         print("emailTextField.text: \(emailTextField.text ?? "")")
-         print("passwordTextField.text: \(passwordTextField.text ?? "")")
-        
-        
-                Auth.auth().signIn(withEmail: emailTextField.text ?? "Invalid Email Address", password: passwordTextField.text ?? "Wrong Password") { (result, error) in
-                    if error != nil {
-                        print("Incorrect Credentials!")
-                        self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Incorrect Credentials!")
-                        DispatchQueue.main.async {
-                            self.activityIndicator.stopAnimating()
-                            self.activityIndicator.isHidden = true
-                        }
-                    }
-                    else {
-                        print(result!)
-                        Auth.auth().currentUser?.getIDToken(completion: { (updatedToken, error) in
-                            if (error == nil) {
-        
-                                if let verifiedStatus = Auth.auth().currentUser?.isEmailVerified {
-                                    self.isEmailVerified = verifiedStatus
-                                }
-                                print("Is email verified = \(String(describing: self.isEmailVerified))")
-                                if self.isEmailVerified {
-                                    if let userToken = updatedToken {
-                                        let generatedUserToken = userToken
-                                        UserDefaults.standard.set(generatedUserToken, forKey: "GeneratedUserToken")
-                                        print("Updated Token: \(generatedUserToken)")
-                                        UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
-                                        print("Signed in successfully!")
-                                        DispatchQueue.main.async {
-                                            self.activityIndicator.stopAnimating()
-                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                            let navVC = UINavigationController(rootViewController: homeVC)
-                                            navVC.isNavigationBarHidden = true
-                                            self.navigationController?.present(navVC, animated: true, completion: nil)
-                                        }
-                                    }
-                                }
-                                else {
-                                    self.displaySingleButtonAlert(message: "Email not verified. Please verify your email")
-                                    DispatchQueue.main.async {
-                                        self.activityIndicator.stopAnimating()
-                                        self.activityIndicator.isHidden = true
-                                    }
-                                }
+        DispatchQueue.main.async {
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
+        }
+        print("emailTextField.text: \(emailTextField.text ?? "")")
+        print("passwordTextField.text: \(passwordTextField.text ?? "")")
         
         
-                            }
-                        })
-        
-                    }
+        Auth.auth().signIn(withEmail: emailTextField.text ?? "Invalid Email Address", password: passwordTextField.text ?? "Wrong Password") { (result, error) in
+            if error != nil {
+                print("Incorrect Credentials!")
+                self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Incorrect Credentials!")
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
                 }
+            }
+            else {
+                print(result!)
+                
+                Auth.auth().currentUser?.getIDToken(completion: { (updatedToken, error) in
+                    if (error == nil) {
+                        
+                        if let verifiedStatus = Auth.auth().currentUser?.isEmailVerified {
+                            self.isEmailVerified = verifiedStatus
+                        }
+                        
+                        print("Is email verified = \(String(describing: self.isEmailVerified))")
+                        if self.isEmailVerified {
+                            if let userToken = updatedToken {
+                                let generatedUserToken = userToken
+                                UserDefaults.standard.set(generatedUserToken, forKey: "GeneratedUserToken")
+                                print("Updated Token: \(generatedUserToken)")
+                                UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
+                                
+                                //handling referral events
+                                guard let newUserStatus = result?.additionalUserInfo?.isNewUser else {return}
+                                if newUserStatus {
+                                    print("I'm a new user")
+                                    let userID = Auth.auth().currentUser?.uid
+                                    self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                        // Get user value
+                                        let value = snapshot.value as? NSDictionary
+                                        let referredUserName = value?["isReferredBy"] as? String ?? ""
+                                        print(referredUserName)
+                                        // ...
+                                        ApiManager().callUserReferralAPI(referredBy: referredUserName, completion: { (response, error) in
+                                            if error == nil {
+                                                print("User signed in using referral link")
+                                            }
+                                            else {
+                                                print(error.debugDescription)
+                                            }
+                                        })
+                                    }) { (error) in
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                                //handling referral events ends
+                                
+                                print("Signed in successfully!")
+                                DispatchQueue.main.async {
+                                    self.activityIndicator.stopAnimating()
+                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                    let navVC = UINavigationController(rootViewController: homeVC)
+                                    navVC.isNavigationBarHidden = true
+                                    self.navigationController?.present(navVC, animated: true, completion: nil)
+                                }
+                            }
+                        }
+                        else {
+                            self.displaySingleButtonAlert(message: "Email not verified. Please verify your email")
+                            DispatchQueue.main.async {
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
+                            }
+                        }
+                        
+                        
+                    }
+                })
+                
+            }
+        }
     }
     
     //MARK:- Social Media Logins
