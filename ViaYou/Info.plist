@@ -39,24 +39,24 @@
 	<string>416149332443231</string>
 	<key>FacebookDisplayName</key>
 	<string>Promptchu</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbauth2</string>
-    </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbauth2</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSContactsUsageDescription</key>
 	<string>App needs to access your contacts</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>"Monarcha_Bold.ttf"</string>
+		<string>"Monarcha_SemiBold.ttf"</string>
+		<string>"monarcha_regular.ttf"</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>&quot;Monarcha_Bold.ttf&quot;</string>
-		<string>&quot;Monarcha_SemiBold.ttf&quot;</string>
-		<string>&quot;monarcha_regular.ttf&quot;</string>
-	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
