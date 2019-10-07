@@ -328,7 +328,7 @@ extension UIViewController  {
             phoneContact.familyName = familyName
             phoneContact.fullName = "\(phoneContact.firstName) \(phoneContact.familyName)"
             
-            var phoneNumbersArray:[String] = []
+           // var phoneNumbersArray:[String] = []
             for j in 0..<phoneNumberFromContacts.count {
                 if let phone = (phoneNumberFromContacts[j].value ).value(forKey: "stringValue") as? String {
                     var phoneFromContact = phone
@@ -345,6 +345,7 @@ extension UIViewController  {
                         phoneFromContact = "\(localCountryCode)\(phoneFromContact)"
                         // If no country code is prepened on the number
                     }
+                    var phoneNumbersArray:[String] = []
                     phoneNumbersArray.append(phoneFromContact)
                     
                     if contacts[i].thumbnailImageData != nil {
@@ -354,14 +355,16 @@ extension UIViewController  {
                                 phoneContact.profilePic = pic
                             }
                         }
+                     phoneContact.phoneNumbers = phoneNumbersArray
+                        phoneContacts.append(phoneContact)
                     }
                 }
             }
-            phoneContact.phoneNumbers = phoneNumbersArray
-            
-            if (phoneContact.phoneNumbers.count > 0) {
-                phoneContacts.append(phoneContact)
-            }
+//            phoneContact.phoneNumbers = phoneNumbersArray
+//
+//            if (phoneContact.phoneNumbers.count > 0) {
+//                phoneContacts.append(phoneContact)
+//            }
             
         }
         print("Fetched phoneContacts contacts \(phoneContacts.count)")

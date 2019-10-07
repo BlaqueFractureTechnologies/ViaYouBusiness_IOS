@@ -2612,11 +2612,12 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V9h-ps-ZX8">
                                                 <rect key="frame" x="10" y="10" width="50" height="50"/>
-                                                <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="Yx0-q8-Ffl"/>
                                                     <constraint firstAttribute="height" constant="50" id="pbF-uU-Krq"/>
                                                 </constraints>
+                                                <state key="normal" image="Back button Icon"/>
                                                 <connections>
                                                     <action selector="backButtonClicked:" destination="eRx-xO-Bpg" eventType="touchUpInside" id="ixH-dI-KsA"/>
                                                 </connections>
@@ -2635,9 +2636,9 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bcl-G5-KBC">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Contacts Icon" translatesAutoresizingMaskIntoConstraints="NO" id="Bcl-G5-KBC">
                                         <rect key="frame" x="102" y="71.5" width="24" height="24"/>
-                                        <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="6sw-nz-hpM"/>
                                             <constraint firstAttribute="height" constant="24" id="gaB-gi-3Qi"/>
@@ -2689,9 +2690,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7W-JM-YaY">
                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="55"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-Jc-RQ5">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-Jc-RQ5">
                                                         <rect key="frame" x="22.5" y="12.5" width="30" height="30"/>
-                                                        <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="11d-yd-RUp"/>
                                                             <constraint firstAttribute="height" constant="30" id="Lo1-is-w5P"/>
@@ -2717,9 +2718,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ga3-fs-u8X">
                                                 <rect key="frame" x="75" y="0.0" width="75" height="55"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sZx-10-C0W">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter" translatesAutoresizingMaskIntoConstraints="NO" id="sZx-10-C0W">
                                                         <rect key="frame" x="22.5" y="12.5" width="30" height="30"/>
-                                                        <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="JYi-oE-CVj"/>
                                                             <constraint firstAttribute="width" constant="30" id="OFa-Bb-j8p"/>
@@ -2745,9 +2746,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAq-ea-m7i">
                                                 <rect key="frame" x="150" y="0.0" width="75" height="55"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XfJ-dQ-hY1">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="XfJ-dQ-hY1">
                                                         <rect key="frame" x="22.5" y="12.5" width="30" height="30"/>
-                                                        <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="Sdb-2h-z5h"/>
                                                             <constraint firstAttribute="width" constant="30" id="WpX-0g-r2P"/>
@@ -2773,9 +2774,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bul-05-Rvj">
                                                 <rect key="frame" x="225" y="0.0" width="75" height="55"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qmN-CU-sK6">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="qmN-CU-sK6">
                                                         <rect key="frame" x="22.5" y="12.5" width="30" height="30"/>
-                                                        <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="btr-jF-ydl"/>
                                                             <constraint firstAttribute="width" constant="30" id="yZB-BH-Qt9"/>
@@ -2994,6 +2995,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Back button Icon" width="10.5" height="18.5"/>
+        <image name="Contacts Icon" width="20" height="15.5"/>
         <image name="Launch Page" width="413" height="737"/>
         <image name="ShadowButton" width="16" height="16"/>
         <image name="SplashPage" width="375" height="667"/>
@@ -3020,5 +3023,7 @@
         <image name="profilePicOutline" width="200" height="200"/>
         <image name="searchIconWhite" width="16" height="16"/>
         <image name="shareIconWhite" width="200" height="200"/>
+        <image name="twitter" width="32" height="32"/>
+        <image name="whatsapp" width="32" height="32"/>
     </resources>
 </document>
