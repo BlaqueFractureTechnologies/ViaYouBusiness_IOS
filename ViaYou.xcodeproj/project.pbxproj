@@ -229,20 +229,12 @@
 			path = ViaYouUITests;
 			sourceTree = "<group>";
 		};
-		9EA659E0234BDE93008A4340 /* Fonts */ = {
+		9EF50BC52346DC1D00D255FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				9EF50BC82346DC3700D255FF /* Monarcha_Bold.ttf */,
 				9EF50BC62346DC3700D255FF /* monarcha_regular.ttf */,
 				9EF50BC72346DC3700D255FF /* Monarcha_SemiBold.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		9EF50BC52346DC1D00D255FF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				9EA659E0234BDE93008A4340 /* Fonts */,
 				9EA55F71233C208E003A1EBB /* Assets.xcassets */,
 			);
 			path = Resources;
