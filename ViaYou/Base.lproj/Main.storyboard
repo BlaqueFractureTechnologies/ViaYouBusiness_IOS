@@ -1051,6 +1051,7 @@
                                             <outlet property="infoSliderCloseButton" destination="gvJ-qO-bwk" id="LsZ-Ts-45f"/>
                                             <outlet property="infoTableView" destination="JHn-35-TLR" id="caS-Yk-EmS"/>
                                             <outlet property="videoImageView" destination="y0F-Vx-KGB" id="keq-6I-BXo"/>
+                                            <outlet property="videoTitleLabel" destination="mDt-U3-zWs" id="Mdo-fs-Y1F"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
