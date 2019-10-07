@@ -133,11 +133,11 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let url  = URL(string: "whatsapp://send?text=\(escapedString!)")
         
-        if UIApplication.shared.canOpenURL(url! as URL) {
+   //     if UIApplication.shared.canOpenURL(url! as URL) {
             UIApplication.shared.open(url! as URL, options: [:], completionHandler: nil)
-        }else {
-            self.displayAlert(msg: "Install Whatsapp")
-        }
+//        }else {
+//            self.displayAlert(msg: "Install Whatsapp")
+//        }
     }
     
     //MARK:-- Instagram (Refer: https://medium.com/@maximbilan/ios-sharing-via-instagram-9bf9a9f7f14d) and implement
