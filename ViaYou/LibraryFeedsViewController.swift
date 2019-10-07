@@ -82,30 +82,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 print(error?.localizedDescription)
             }
         }
-        //editing ends
-        //        if let path = Bundle.main.path(forResource: "feedResponse", ofType: "json") {
-        //            do {
-        //                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-        //                if  let jsonDict = try JSONSerialization.jsonObject(with: data) as? [String:Any] {
-        //                    print("jsonDict====>\(jsonDict)")
-        //                    let responseDict = LibraryFeedResponse(jsonDict)
-        //                    dataArray = []
-        //                    for i in 0..<responseDict.data.count {
-        //                        let indexDict = responseDict.data[i]
-        //                        indexDict.isInfoPopUpDisplaying = false
-        //                        dataArray.append(indexDict)
-        //                    }
-        //                    loadAllVideoImagesForDataArray()
-        //                    DispatchQueue.main.async {
-        //                        self.collectioView.reloadData()
-        //                    }
-        //                }else {
-        //                    // handle error
-        //                }
-        //            } catch {
-        //                // handle error
-        //            }
-        //        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -198,23 +174,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        navVC.isNavigationBarHidden = true
         //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
-    
-    //    func sendEmailInvitation() {
-    //        guard let referrerName = Auth.auth().currentUser?.displayName else { return }
-    //        let subject = "\(referrerName) wants you to play MyExampleGame!"
-    //        let invitationLink = invitationUrl?.absoluteString
-    //        let msg = "<p>Let's play MyExampleGame together! Use my <a href=\"\(String(describing: invitationLink))\">referrer link</a>!</p>"
-    //
-    //        if !MFMailComposeViewController.canSendMail() {
-    //            // Device can't send email
-    //            return
-    //        }
-    //        let mailer = MFMailComposeViewController()
-    //        mailer.mailComposeDelegate = self
-    //        mailer.setSubject(subject)
-    //        mailer.setMessageBody(msg, isHTML: true)
-    //        self.present(mailer, animated: true, completion: nil)
-    //    }
+
     
     func loadAllVideoImagesForDataArray() {
         for i in 0..<dataArray.count {
