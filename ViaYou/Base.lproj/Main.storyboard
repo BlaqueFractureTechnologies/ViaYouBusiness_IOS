@@ -1964,10 +1964,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="Kmx-Tv-grt" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Og4-dr-rfh">
-                                <rect key="frame" x="97.5" y="579" width="180" height="28"/>
+                                <rect key="frame" x="97.5" y="576.5" width="180" height="30.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="kY5-ky-9fB"/>
                                 </constraints>
@@ -2647,9 +2647,9 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obV-Ey-etM">
                                         <rect key="frame" x="10" y="102" width="355" height="40"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eLQ-AR-UEA">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search Icon" translatesAutoresizingMaskIntoConstraints="NO" id="eLQ-AR-UEA">
                                                 <rect key="frame" x="5" y="5" width="30" height="30"/>
-                                                <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="6Of-2A-MGe"/>
                                                     <constraint firstAttribute="height" constant="30" id="sBr-cG-KYP"/>
@@ -2925,13 +2925,13 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iuw-CA-PQM">
                                                     <rect key="frame" x="265" y="15" width="80" height="30"/>
-                                                    <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="92v-M2-pEE"/>
                                                         <constraint firstAttribute="height" constant="30" id="alW-CW-1aE"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
-                                                    <state key="normal" title="Invite">
+                                                    <state key="normal" title="Invite" backgroundImage="Invite Button Bubble">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
@@ -2997,7 +2997,9 @@
     <resources>
         <image name="Back button Icon" width="10.5" height="18.5"/>
         <image name="Contacts Icon" width="20" height="15.5"/>
+        <image name="Invite Button Bubble" width="61" height="16"/>
         <image name="Launch Page" width="413" height="737"/>
+        <image name="Search Icon" width="17.5" height="17.5"/>
         <image name="ShadowButton" width="16" height="16"/>
         <image name="SplashPage" width="375" height="667"/>
         <image name="account-group" width="16" height="16"/>
