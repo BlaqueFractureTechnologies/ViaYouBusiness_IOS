@@ -88,7 +88,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
                     }
                     self.loadAllVideoImagesForDataArray()
-                    self.loadVideoSize()
+                  //  self.loadVideoSize()
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 0
                         self.collectioView.reloadData()
@@ -211,26 +211,26 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        navVC.isNavigationBarHidden = true
         //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
-    func loadVideoSize() {
-        for i in 0..<dataArray.count {
-            let userID = dataArray[i].user._id
-            let videoName = dataArray[i].fileName
-            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
-            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-            print("videUrlString :: \(videUrlString)")
-            
-            getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
-                if (error == nil) {
-                    DispatchQueue.main.async {
-                        let size = "\(size) KB"
-                        self.dataArray[i].videoFileSize = size
-                        self.collectioView.reloadData()
-                    }
-                }
-            }
-            
-        }
-    }
+//    func loadVideoSize() {
+//        for i in 0..<dataArray.count {
+//            let userID = dataArray[i].user._id
+//            let videoName = dataArray[i].fileName
+//            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+//            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+//            print("videUrlString :: \(videUrlString)")
+//
+//            getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
+//                if (error == nil) {
+//                    DispatchQueue.main.async {
+//                        let size = "\(size) KB"
+//                        self.dataArray[i].videoFileSize = size
+//                        self.collectioView.reloadData()
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
     
     func getDownloadSize(url: URL, completion: @escaping (Int64, Error?) -> Void) {
         let timeoutInterval = 5.0
@@ -272,6 +272,20 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                 }
             }
+            
+            //get video size
+                
+                getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
+                    if (error == nil) {
+                        DispatchQueue.main.async {
+                            let size = "\(size) KB"
+                            self.dataArray[i].videoFileSize = size
+                            self.collectioView.reloadData()
+                        }
+                    }
+                }
+
+            //get video size ended
         }
     }
     
