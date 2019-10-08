@@ -23,6 +23,7 @@
 		9E403A4023443F34002E3749 /* InstagramSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3F23443F34002E3749 /* InstagramSignInViewController.swift */; };
 		9E403A4223443FDA002E3749 /* InstagramAuthResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A4123443FDA002E3749 /* InstagramAuthResponseModel.swift */; };
 		9E403A4423443FF5002E3749 /* InstagramUserDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A4323443FF5002E3749 /* InstagramUserDetailsResponse.swift */; };
+		9E91AE1D234D332A0044AB5C /* HomeInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E91AE1C234D33290044AB5C /* HomeInfoTableViewCell.swift */; };
 		9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F6A233C208D003A1EBB /* AppDelegate.swift */; };
 		9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F6C233C208D003A1EBB /* ViewController.swift */; };
 		9EA55F70233C208D003A1EBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EA55F6E233C208D003A1EBB /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		9E403A3F23443F34002E3749 /* InstagramSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramSignInViewController.swift; sourceTree = "<group>"; };
 		9E403A4123443FDA002E3749 /* InstagramAuthResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAuthResponseModel.swift; sourceTree = "<group>"; };
 		9E403A4323443FF5002E3749 /* InstagramUserDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUserDetailsResponse.swift; sourceTree = "<group>"; };
+		9E91AE1C234D33290044AB5C /* HomeInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9EA55F67233C208D003A1EBB /* ViaYou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaYou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA55F6A233C208D003A1EBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EA55F6C233C208D003A1EBB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				9E403A3D23443F0B002E3749 /* Constants.swift */,
 				9E3485B7234A8FEE00DFADC9 /* PhoneContact.swift */,
 				9E3485B9234A903F00DFADC9 /* ContactsTableViewCell.swift */,
+				9E91AE1C234D33290044AB5C /* HomeInfoTableViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				9E2B879A2344003C00941DF2 /* LibraryFeedsViewController.swift in Sources */,
 				9EA55F9B233C2B04003A1EBB /* NewLaunchViewController.swift in Sources */,
 				9EA55FA7233C5099003A1EBB /* InviteFriendsViewController.swift in Sources */,
+				9E91AE1D234D332A0044AB5C /* HomeInfoTableViewCell.swift in Sources */,
 				9E2B879E2344007700941DF2 /* LessSpacePopUpViewController.swift in Sources */,
 				9EA55FA3233C2CB9003A1EBB /* NewSignInViewController.swift in Sources */,
 				9E403A4223443FDA002E3749 /* InstagramAuthResponseModel.swift in Sources */,

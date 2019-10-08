@@ -48,6 +48,9 @@ class FeedDataArrayObject: NSObject {
     
     var isInfoPopUpDisplaying:Bool = false
     
+    var videoImage:UIImage = UIImage(named: "defaultFeedCellBg")!
+    var videoFileSize:String = ""
+    
     init(_ dictionary: [String: Any]) {
         self.location   =  FeedDataLocation(dictionary["location"] as? [String:Any] ?? [:])
         self.title    = dictionary["title"] as? String ?? ""
@@ -114,6 +117,9 @@ class FeedDataArrayObject: NSObject {
             let objectAtIndex = FeedUserViewdByArrayObject(viewedByDataArray[i])
             viewedBy.append(objectAtIndex)
         }
+        self.videoImage = dictionary["videoImage"] as? UIImage ?? UIImage(named: "defaultFeedCellBg")!
+        
+        self.videoFileSize = dictionary["videoFileSize"] as? String ?? ""
         
     }
 }

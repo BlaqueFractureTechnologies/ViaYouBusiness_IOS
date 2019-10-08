@@ -88,6 +88,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
                     }
                     self.loadAllVideoImagesForDataArray()
+                    self.loadVideoSize()
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 0
                         self.collectioView.reloadData()
@@ -210,6 +211,39 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        navVC.isNavigationBarHidden = true
         //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
+    func loadVideoSize() {
+        for i in 0..<dataArray.count {
+            let userID = dataArray[i].user._id
+            let videoName = dataArray[i].fileName
+            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+            print("videUrlString :: \(videUrlString)")
+            
+            getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
+                if (error == nil) {
+                    DispatchQueue.main.async {
+                        let size = "\(size) KB"
+                        self.dataArray[i].videoFileSize = size
+                        self.collectioView.reloadData()
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    func getDownloadSize(url: URL, completion: @escaping (Int64, Error?) -> Void) {
+        let timeoutInterval = 5.0
+        var request = URLRequest(url: url,
+                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                                 timeoutInterval: timeoutInterval)
+        request.httpMethod = "HEAD"
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            var contentLength = response?.expectedContentLength ?? NSURLSessionTransferSizeUnknown
+            contentLength = contentLength/Int64(1000.0)
+            completion(contentLength, error)
+            }.resume()
+    }
     
     
     func loadAllVideoImagesForDataArray() {
@@ -231,6 +265,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 if (image != nil) {
                     self.dataArray[i].user.videoImage = image!
                     self.dataArray[i].user.duration = String(durationTime)
+                    self.dataArray[i].fileName = videoName
                     DispatchQueue.main.async {
                         print("****Loaded image at index :: \(i)")
                         self.collectioView.reloadData()

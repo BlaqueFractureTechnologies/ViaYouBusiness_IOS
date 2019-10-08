@@ -20,6 +20,8 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
     
     @IBOutlet weak var infoPopUpHeight: NSLayoutConstraint!
     
+    var cellDataDict: FeedDataArrayObject = FeedDataArrayObject([:])
+    
     override func awakeFromNib() {
         infoTableView.delegate = self
         infoTableView.dataSource = self
@@ -38,6 +40,8 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         self.videoImageView.image = dataDict.user.videoImage
         self.videoTitleLabel.text = dataDict.title
         self.durationLabel.text = dataDict.user.duration
+        cellDataDict = dataDict
+        infoTableView.reloadData()
         
     }
     
@@ -46,12 +50,21 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = "Info \(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeInfoTableViewCell", for: indexPath) as! HomeInfoTableViewCell
+        if (indexPath.row == 0) {
+            cell.titleLabel.text = cellDataDict.fileName
+            cell.arrowIconHeightConstraint.constant = 15
+        }else if (indexPath.row == 1) {
+            cell.titleLabel.text = cellDataDict.createdDateTime.getReadableDateString()
+            cell.arrowIconHeightConstraint.constant = 15
+        }else {
+            cell.titleLabel.text = cellDataDict.videoFileSize
+            cell.arrowIconHeightConstraint.constant = 15
+        }
         return cell
     }
     
