@@ -11,12 +11,12 @@ import UIKit
 class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
     
     
-    
     @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var infoTableView: UITableView!
     @IBOutlet weak var infoSliderCloseButton: UIButton!
     @IBOutlet weak var videoImageView: UIImageView!
     @IBOutlet weak var videoTitleLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
     
     @IBOutlet weak var infoPopUpHeight: NSLayoutConstraint!
     
@@ -37,6 +37,7 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         }
         self.videoImageView.image = dataDict.user.videoImage
         self.videoTitleLabel.text = dataDict.title
+        self.durationLabel.text = dataDict.user.duration
         
     }
     

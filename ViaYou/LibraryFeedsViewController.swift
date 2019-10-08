@@ -19,14 +19,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var collectioView: UICollectionView!
     @IBOutlet weak var bottomPlusButton: UIButton!
     @IBOutlet weak var profilePicButton: UIButton!
+    @IBOutlet weak var noFeedPopUpView: UIView!
     
     var dataArray:[FeedDataArrayObject] = []
     var passedProfileImage = UIImage()
     var userId: String = ""
     var invitationUrl: URL!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.noFeedPopUpView.alpha = 0
         userId = Auth.auth().currentUser!.uid
         print(self.passedProfileImage)
         self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
@@ -57,6 +60,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(displayBottomPlusButtonCircularWave), userInfo: nil, repeats: false)
     }
     
@@ -65,19 +69,34 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
             if error == nil {
-                print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
-                for i in 0..<responseDict.data.count {
-                    let indexDict = responseDict.data[i]
-                    indexDict.isInfoPopUpDisplaying = false
-                    self.dataArray.append(indexDict)
-                    print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
+                print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
+                if responseDict.data.count == 0 {
+                    
+                    DispatchQueue.main.async {
+                        self.noFeedPopUpView.alpha = 1
+                        self.collectioView.reloadData()
+                        
+                    }
                 }
-                self.loadAllVideoImagesForDataArray()
-                DispatchQueue.main.async {
-                    self.collectioView.reloadData()
+                else {
+                    
+                    print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
+                    for i in 0..<responseDict.data.count {
+                        let indexDict = responseDict.data[i]
+                        indexDict.isInfoPopUpDisplaying = false
+                        self.dataArray.append(indexDict)
+                        print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
+                    }
+                    self.loadAllVideoImagesForDataArray()
+                    DispatchQueue.main.async {
+                        self.noFeedPopUpView.alpha = 0
+                        self.collectioView.reloadData()
+                        
+                    }
                     
                 }
             }
+                
             else {
                 print(error?.localizedDescription)
             }
@@ -128,19 +147,36 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelectItemAt...")
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "NoScreenCastsPopUpViewController") as! NoScreenCastsPopUpViewController
-        nextVC.modalPresentationStyle = .overCurrentContext
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.navigationController?.present(navVC, animated: false, completion: nil)
+        selectRow(selectedRow: indexPath.row)
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "NoScreenCastsPopUpViewController") as! NoScreenCastsPopUpViewController
+        //        nextVC.modalPresentationStyle = .overCurrentContext
+        //        let navVC = UINavigationController(rootViewController: nextVC)
+        //        navVC.isNavigationBarHidden = true
+        //        self.navigationController?.present(navVC, animated: false, completion: nil)
+    }
+    
+    func selectRow(selectedRow:Int) {
+        if (dataArray.count>selectedRow) {
+            let userID = dataArray[selectedRow].user._id
+            let videoName = dataArray[selectedRow].fileName
+            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+            UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+            nextVC.passedUrlLink = videUrlString
+            let navVC = UINavigationController(rootViewController: nextVC)
+            navVC.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
     
     @IBAction func plusButtonClicked() {
         print("didSelectItemAt...")
         
         
-        
+        UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let link = URL(string: "https://promptchu.page.link/?invitedby=\(uid)")
         let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: "https://promptchu.page.link")
@@ -174,7 +210,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        navVC.isNavigationBarHidden = true
         //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
-
+    
     
     func loadAllVideoImagesForDataArray() {
         for i in 0..<dataArray.count {
@@ -184,10 +220,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
             print("videUrlString :: \(videUrlString)")
             
+            //get duration time
+            let asset = AVAsset(url: URL(string: videUrlString)!)
+            let duration = asset.duration
+            let durationTime = CMTimeGetSeconds(duration)
+            print("durationTime====>\(durationTime)")
+            //get duration time ends
             DispatchQueue.global(qos: .userInitiated).async {
                 let image = self.previewImageFromVideo(url: URL(string: videUrlString)! as NSURL)
                 if (image != nil) {
                     self.dataArray[i].user.videoImage = image!
+                    self.dataArray[i].user.duration = String(durationTime)
                     DispatchQueue.main.async {
                         print("****Loaded image at index :: \(i)")
                         self.collectioView.reloadData()
@@ -235,6 +278,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         
         return image
+    }
+    
+    @IBAction func dismissPopUp(_ sender: Any) {
+        self.noFeedPopUpView.alpha = 0
+        //self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
 }

@@ -166,6 +166,7 @@ class FeedUser: NSObject {
     var updatedDateTime:String = ""
     var notifiedDateTime:String = ""
     var referrals:[FeedUserReferrals] = []
+    var duration: String = ""
     
     var videoImage:UIImage = UIImage(named: "defaultFeedCellBg")!
     
@@ -200,6 +201,7 @@ class FeedUser: NSObject {
         self._id                = dictionary["_id"] as? String ?? ""
         self.email              = dictionary["email"] as? String ?? ""
         self.name               = dictionary["name"] as? String ?? ""
+        self.duration           = dictionary["duration"] as? String ?? ""
         
         shadows = []
         let shadowsDataArray = dictionary["shadows"] as? [[String:Any]] ?? []

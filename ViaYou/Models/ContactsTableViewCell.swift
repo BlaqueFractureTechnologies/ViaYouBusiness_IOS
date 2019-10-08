@@ -22,6 +22,14 @@ class ContactsTableViewCell: UITableViewCell {
     }
     
     func configureCell(dataDict:PhoneContact) {
+        let boolVal = UserDefaults.standard.bool(forKey: "isTappedFromSingleVideo")
+        if boolVal == true {
+            inviteButton.titleLabel?.text = "Send"
+        }
+        else {
+            inviteButton.titleLabel?.text = "Invite"
+        }
+        
         nameLabel.text = dataDict.fullName
         
         var phoneNumbers = ""

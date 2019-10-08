@@ -67,10 +67,10 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         return true
     }
     func getSearchArrayContains(_ text : String) {
-//        let predicate : NSPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", text)
-//        sortedArray = (dataArray as NSArray).filtered(using: predicate) as! [PhoneContact]
-//        isSearch = true
-//        tableView.reloadData()
+        //        let predicate : NSPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", text)
+        //        sortedArray = (dataArray as NSArray).filtered(using: predicate) as! [PhoneContact]
+        //        isSearch = true
+        //        tableView.reloadData()
         
         sortedArray = dataArray.filter({ data in
             return data.fullName.contains(text)
@@ -97,7 +97,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactsTableViewCell", for: indexPath) as! ContactsTableViewCell
         if isSearch! {
-           // cell.textLabel?.text = sortedArray[indexPath.row]
+            // cell.textLabel?.text = sortedArray[indexPath.row]
             cell.configureCell(dataDict: sortedArray[indexPath.row])
             
             cell.inviteButton.tag = indexPath.row
@@ -143,6 +143,8 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         case 2:
             shareTextOnWhatsApp()
             return
+        case 3:
+            shareTextOnInstagram()
         default:
             return
         }
@@ -190,19 +192,22 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let url  = URL(string: "whatsapp://send?text=\(escapedString!)")
         
-   //     if UIApplication.shared.canOpenURL(url! as URL) {
-            UIApplication.shared.open(url! as URL, options: [:], completionHandler: nil)
-//        }else {
-//            self.displayAlert(msg: "Install Whatsapp")
-//        }
+        //     if UIApplication.shared.canOpenURL(url! as URL) {
+        UIApplication.shared.open(url! as URL, options: [:], completionHandler: nil)
+        //        }else {
+        //            self.displayAlert(msg: "Install Whatsapp")
+        //        }
     }
     
     //MARK:-- Instagram (Refer: https://medium.com/@maximbilan/ios-sharing-via-instagram-9bf9a9f7f14d) and implement
     func shareTextOnInstagram() {
+        
         let url = NSURL(string: "instagram://app")
-        if UIApplication.shared.canOpenURL(url! as URL) {
+        if UIApplication.shared.canOpenURL(url! as URL) { // has Instagram
+            print("open instagram")
             
-        }else {
+        }
+        else {
             self.displayAlert(msg: "Install Instagram")
         }
     }
