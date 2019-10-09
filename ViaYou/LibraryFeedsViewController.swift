@@ -398,4 +398,16 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        if (indexPath.row == 1) {
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
+            let navVC = UINavigationController(rootViewController: nextVC)
+            navVC.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        
+    }
+    
 }

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		35C1715EE68562856F59982F /* Pods_ViaYou.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C90EB2FB1356E9CB769BE2 /* Pods_ViaYou.framework */; };
 		9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E10ED0D234D748A00C54F84 /* ProfileDropdownTableViewCell.swift */; };
+		9E2970D6234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */; };
+		9E2970D8234E7FC6003BC282 /* UpgradeSoloHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2970D7234E7FC6003BC282 /* UpgradeSoloHostViewController.swift */; };
+		9E2970DA234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2970D9234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift */; };
+		9E2970DC234E7FF6003BC282 /* UpgradeProHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2970DB234E7FF6003BC282 /* UpgradeProHostViewController.swift */; };
+		9E2970DE234E8012003BC282 /* SubscriptionBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2970DD234E8012003BC282 /* SubscriptionBaseViewController.swift */; };
 		9E2B879A2344003C00941DF2 /* LibraryFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B87992344003C00941DF2 /* LibraryFeedsViewController.swift */; };
 		9E2B879C2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B879B2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift */; };
 		9E2B879E2344007700941DF2 /* LessSpacePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */; };
@@ -69,6 +74,11 @@
 		3DE306DBB2B381298A5B0ED6 /* Pods-ViaYou.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaYou.debug.xcconfig"; path = "Target Support Files/Pods-ViaYou/Pods-ViaYou.debug.xcconfig"; sourceTree = "<group>"; };
 		8AD4C12220E84767F923027F /* Pods-ViaYou.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaYou.release.xcconfig"; path = "Target Support Files/Pods-ViaYou/Pods-ViaYou.release.xcconfig"; sourceTree = "<group>"; };
 		9E10ED0D234D748A00C54F84 /* ProfileDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropdownTableViewCell.swift; sourceTree = "<group>"; };
+		9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeAndSubscriptionBaseViewController.swift; sourceTree = "<group>"; };
+		9E2970D7234E7FC6003BC282 /* UpgradeSoloHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeSoloHostViewController.swift; sourceTree = "<group>"; };
+		9E2970D9234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeGrowthHostViewController.swift; sourceTree = "<group>"; };
+		9E2970DB234E7FF6003BC282 /* UpgradeProHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeProHostViewController.swift; sourceTree = "<group>"; };
+		9E2970DD234E8012003BC282 /* SubscriptionBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionBaseViewController.swift; sourceTree = "<group>"; };
 		9E2B87992344003C00941DF2 /* LibraryFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryFeedsViewController.swift; sourceTree = "<group>"; };
 		9E2B879B2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoScreenCastsPopUpViewController.swift; sourceTree = "<group>"; };
 		9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessSpacePopUpViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +231,11 @@
 				9E2B87A12344020500941DF2 /* SignInViewController.swift */,
 				9E403A3F23443F34002E3749 /* InstagramSignInViewController.swift */,
 				9E3485B5234A8FC100DFADC9 /* ContactsViewController.swift */,
+				9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */,
+				9E2970D7234E7FC6003BC282 /* UpgradeSoloHostViewController.swift */,
+				9E2970D9234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift */,
+				9E2970DB234E7FF6003BC282 /* UpgradeProHostViewController.swift */,
+				9E2970DD234E8012003BC282 /* SubscriptionBaseViewController.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -485,17 +500,22 @@
 				9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */,
 				9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */,
 				9E2B87A22344020500941DF2 /* SignInViewController.swift in Sources */,
+				9E2970D6234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift in Sources */,
 				9EB6E342234592870086A131 /* LibraryFeedResponse.swift in Sources */,
+				9E2970DE234E8012003BC282 /* SubscriptionBaseViewController.swift in Sources */,
 				9E2B879C2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift in Sources */,
 				9EA55F9D233C2B24003A1EBB /* SignUpViewController.swift in Sources */,
 				9EA55F9F233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift in Sources */,
 				9E403A4423443FF5002E3749 /* InstagramUserDetailsResponse.swift in Sources */,
 				9EA55FA1233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift in Sources */,
+				9E2970D8234E7FC6003BC282 /* UpgradeSoloHostViewController.swift in Sources */,
+				9E2970DA234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift in Sources */,
 				9E2B87A0234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift in Sources */,
 				9EA55FA5233C3628003A1EBB /* ExtensionManager.swift in Sources */,
 				9E403A3C2344352B002E3749 /* RegisterResponse.swift in Sources */,
 				9E403A3E23443F0B002E3749 /* Constants.swift in Sources */,
 				9E3485BE234AE5E400DFADC9 /* ReferralResponse.swift in Sources */,
+				9E2970DC234E7FF6003BC282 /* UpgradeProHostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
