@@ -14,17 +14,34 @@ import GoogleSignIn
 import AVFoundation
 import MessageUI
 
-class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate {
+class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    
     
     @IBOutlet weak var collectioView: UICollectionView!
     @IBOutlet weak var bottomPlusButton: UIButton!
     @IBOutlet weak var profilePicButton: UIButton!
     @IBOutlet weak var noFeedPopUpView: UIView!
+    @IBOutlet weak var dropDownBaseView: UIView!
+    @IBOutlet weak var dropDownBaseViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var dropDownButtonContainerBg: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var dropdownOverlayButton: UIButton!
+    @IBOutlet weak var overlayViewWhenDropDownAppears: UIImageView!
+    @IBOutlet weak var profilePicOnDropDownList: UIImageView!
     
     var dataArray:[FeedDataArrayObject] = []
     var passedProfileImage = UIImage()
     var userId: String = ""
     var invitationUrl: URL!
+    let dropdownArray = ["Share Storage",
+                         "My Plan Or Upgrade",
+                         "Restore",
+                         "Feedback",
+                         "Feature Request",
+                         "Analytics",
+                         "Privacy Policy",
+                         "Terms And Conditions"]
     
     
     override func viewDidLoad() {
@@ -33,6 +50,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         userId = Auth.auth().currentUser!.uid
         print(self.passedProfileImage)
         self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
+        self.profilePicOnDropDownList.layer.cornerRadius = self.profilePicOnDropDownList.frame.size.width/2.0
+        self.profilePicOnDropDownList.clipsToBounds = true
+        
+        if self.profilePicOnDropDownList.image == nil {
+            self.profilePicOnDropDownList.image = UIImage(named: "defaultProfilePic")
+        }
+        else
+        {
+            print(self.profilePicOnDropDownList.image as Any)
+            self.profilePicOnDropDownList.image = self.passedProfileImage
+        }
         collectioView.reloadData()
         getResponseFromJSONFile()
     }
@@ -60,6 +88,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.dropDownBaseView.alpha = 0
+        self.dropdownOverlayButton.alpha = 0
+        overlayViewWhenDropDownAppears.alpha = 0
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(displayBottomPlusButtonCircularWave), userInfo: nil, repeats: false)
     }
@@ -88,7 +119,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
                     }
                     self.loadAllVideoImagesForDataArray()
-                  //  self.loadVideoSize()
+                    //  self.loadVideoSize()
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 0
                         self.collectioView.reloadData()
@@ -211,26 +242,26 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        navVC.isNavigationBarHidden = true
         //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
-//    func loadVideoSize() {
-//        for i in 0..<dataArray.count {
-//            let userID = dataArray[i].user._id
-//            let videoName = dataArray[i].fileName
-//            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
-//            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-//            print("videUrlString :: \(videUrlString)")
-//
-//            getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
-//                if (error == nil) {
-//                    DispatchQueue.main.async {
-//                        let size = "\(size) KB"
-//                        self.dataArray[i].videoFileSize = size
-//                        self.collectioView.reloadData()
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
+    //    func loadVideoSize() {
+    //        for i in 0..<dataArray.count {
+    //            let userID = dataArray[i].user._id
+    //            let videoName = dataArray[i].fileName
+    //            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+    //            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+    //            print("videUrlString :: \(videUrlString)")
+    //
+    //            getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
+    //                if (error == nil) {
+    //                    DispatchQueue.main.async {
+    //                        let size = "\(size) KB"
+    //                        self.dataArray[i].videoFileSize = size
+    //                        self.collectioView.reloadData()
+    //                    }
+    //                }
+    //            }
+    //
+    //        }
+    //    }
     
     func getDownloadSize(url: URL, completion: @escaping (Int64, Error?) -> Void) {
         let timeoutInterval = 5.0
@@ -274,17 +305,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             }
             
             //get video size
-                
-                getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
-                    if (error == nil) {
-                        DispatchQueue.main.async {
-                            let size = "\(size) KB"
-                            self.dataArray[i].videoFileSize = size
-                            self.collectioView.reloadData()
-                        }
+            
+            getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
+                if (error == nil) {
+                    DispatchQueue.main.async {
+                        let size = "\(size) KB"
+                        self.dataArray[i].videoFileSize = size
+                        self.collectioView.reloadData()
                     }
                 }
-
+            }
+            
             //get video size ended
         }
     }
@@ -332,6 +363,39 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBAction func dismissPopUp(_ sender: Any) {
         self.noFeedPopUpView.alpha = 0
         //self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func profilePicButtonClicked(_ sender: Any) {
+        self.dropDownBaseViewHeightConstraint.constant = 0.0001
+        self.dropdownOverlayButton.alpha = 1
+        self.dropDownBaseView.alpha = 1
+        self.overlayViewWhenDropDownAppears.alpha = 0.4
+        UIView.animate(withDuration: 0.4) {
+            self.dropDownBaseViewHeightConstraint.constant = 440
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func dropDownOverlayButtonClicked(_ sender: Any) {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.dropDownBaseViewHeightConstraint.constant = 0.0001
+            self.view.layoutIfNeeded()
+        }) { (completed) in
+            self.dropdownOverlayButton.alpha = 0
+            self.dropDownBaseView.alpha = 0
+            self.overlayViewWhenDropDownAppears.alpha = 0
+        }
+    }
+    
+    //MARK:- TableView Delegate Methods
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dropdownArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileDropdownTableViewCell", for: indexPath) as! ProfileDropdownTableViewCell
+        cell.configureCell(dataArray: dropdownArray, index: indexPath.row)
+        return cell
     }
     
 }

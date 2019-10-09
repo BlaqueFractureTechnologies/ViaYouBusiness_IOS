@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		35C1715EE68562856F59982F /* Pods_ViaYou.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C90EB2FB1356E9CB769BE2 /* Pods_ViaYou.framework */; };
+		9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E10ED0D234D748A00C54F84 /* ProfileDropdownTableViewCell.swift */; };
 		9E2B879A2344003C00941DF2 /* LibraryFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B87992344003C00941DF2 /* LibraryFeedsViewController.swift */; };
 		9E2B879C2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B879B2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift */; };
 		9E2B879E2344007700941DF2 /* LessSpacePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */; };
@@ -67,6 +68,7 @@
 		13C90EB2FB1356E9CB769BE2 /* Pods_ViaYou.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViaYou.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE306DBB2B381298A5B0ED6 /* Pods-ViaYou.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaYou.debug.xcconfig"; path = "Target Support Files/Pods-ViaYou/Pods-ViaYou.debug.xcconfig"; sourceTree = "<group>"; };
 		8AD4C12220E84767F923027F /* Pods-ViaYou.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaYou.release.xcconfig"; path = "Target Support Files/Pods-ViaYou/Pods-ViaYou.release.xcconfig"; sourceTree = "<group>"; };
+		9E10ED0D234D748A00C54F84 /* ProfileDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropdownTableViewCell.swift; sourceTree = "<group>"; };
 		9E2B87992344003C00941DF2 /* LibraryFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryFeedsViewController.swift; sourceTree = "<group>"; };
 		9E2B879B2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoScreenCastsPopUpViewController.swift; sourceTree = "<group>"; };
 		9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessSpacePopUpViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E10ED0C234D746500C54F84 /* UserProfileTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				9E10ED0D234D748A00C54F84 /* ProfileDropdownTableViewCell.swift */,
+			);
+			path = UserProfileTableViewCells;
+			sourceTree = "<group>";
+		};
 		9E2B87982343FED700941DF2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +198,7 @@
 		9EA55F69233C208D003A1EBB /* ViaYou */ = {
 			isa = PBXGroup;
 			children = (
+				9E10ED0C234D746500C54F84 /* UserProfileTableViewCells */,
 				9EF50BC52346DC1D00D255FF /* Resources */,
 				9E403A3A2344351C002E3749 /* Response Models */,
 				9E2B87982343FED700941DF2 /* Models */,
@@ -471,6 +482,7 @@
 				9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */,
 				9E3485B8234A8FEE00DFADC9 /* PhoneContact.swift in Sources */,
 				9E3485BA234A903F00DFADC9 /* ContactsTableViewCell.swift in Sources */,
+				9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */,
 				9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */,
 				9E2B87A22344020500941DF2 /* SignInViewController.swift in Sources */,
 				9EB6E342234592870086A131 /* LibraryFeedResponse.swift in Sources */,
