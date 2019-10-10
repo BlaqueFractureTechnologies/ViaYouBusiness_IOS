@@ -1655,10 +1655,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="Kmx-Tv-grt" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Og4-dr-rfh">
-                                <rect key="frame" x="97.5" y="576.5" width="180" height="30.5"/>
+                                <rect key="frame" x="97.5" y="579" width="180" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="kY5-ky-9fB"/>
                                 </constraints>
@@ -3100,9 +3100,8 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CBp-tf-L65">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CBp-tf-L65">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1h6-gn-NuB">
@@ -3234,18 +3233,22 @@
                         <constraints>
                             <constraint firstItem="fBw-BA-Xba" firstAttribute="bottom" secondItem="kiN-m4-0uy" secondAttribute="bottom" constant="10" id="1Rk-Nh-sIc"/>
                             <constraint firstItem="iTn-FT-QvW" firstAttribute="leading" secondItem="CEa-yd-80V" secondAttribute="leading" id="26l-VF-2qH"/>
+                            <constraint firstItem="CBp-tf-L65" firstAttribute="top" secondItem="CEa-yd-80V" secondAttribute="top" id="30I-PA-XHC"/>
                             <constraint firstItem="7IW-PR-7KS" firstAttribute="centerY" secondItem="CEa-yd-80V" secondAttribute="centerY" id="6Du-5Y-t8x"/>
                             <constraint firstItem="iTn-FT-QvW" firstAttribute="top" secondItem="fBw-BA-Xba" secondAttribute="top" id="HUT-f1-7Bj"/>
                             <constraint firstItem="kiN-m4-0uy" firstAttribute="leading" secondItem="CEa-yd-80V" secondAttribute="leading" constant="10" id="Hai-mY-ADb"/>
                             <constraint firstItem="xwW-Cr-o6Q" firstAttribute="top" secondItem="fBw-BA-Xba" secondAttribute="top" constant="9" id="Hk7-AV-7Gp"/>
                             <constraint firstAttribute="trailing" secondItem="kiN-m4-0uy" secondAttribute="trailing" constant="10" id="Vj2-Vm-pNK"/>
+                            <constraint firstItem="CBp-tf-L65" firstAttribute="leading" secondItem="CEa-yd-80V" secondAttribute="leading" id="Yvh-Bh-JzD"/>
                             <constraint firstItem="J8i-XL-9GR" firstAttribute="centerX" secondItem="CEa-yd-80V" secondAttribute="centerX" id="ahd-iO-L18"/>
                             <constraint firstItem="1h6-gn-NuB" firstAttribute="bottom" secondItem="fBw-BA-Xba" secondAttribute="bottom" id="dFU-wh-Kuj"/>
+                            <constraint firstAttribute="bottom" secondItem="CBp-tf-L65" secondAttribute="bottom" id="dk4-qz-Phu"/>
                             <constraint firstItem="1h6-gn-NuB" firstAttribute="top" secondItem="CEa-yd-80V" secondAttribute="top" id="fe5-im-hhU"/>
                             <constraint firstItem="7IW-PR-7KS" firstAttribute="centerX" secondItem="CEa-yd-80V" secondAttribute="centerX" id="huk-rY-eFi"/>
                             <constraint firstItem="1h6-gn-NuB" firstAttribute="leading" secondItem="fBw-BA-Xba" secondAttribute="leading" id="iXh-tT-9uf"/>
                             <constraint firstAttribute="trailing" secondItem="iTn-FT-QvW" secondAttribute="trailing" id="q4t-Kq-yKW"/>
                             <constraint firstItem="kiN-m4-0uy" firstAttribute="top" secondItem="iTn-FT-QvW" secondAttribute="bottom" constant="10" id="taL-es-SXS"/>
+                            <constraint firstAttribute="trailing" secondItem="CBp-tf-L65" secondAttribute="trailing" id="vwm-rt-6LT"/>
                             <constraint firstItem="1h6-gn-NuB" firstAttribute="trailing" secondItem="fBw-BA-Xba" secondAttribute="trailing" id="zPd-UZ-Fuv"/>
                             <constraint firstItem="fBw-BA-Xba" firstAttribute="trailing" secondItem="xwW-Cr-o6Q" secondAttribute="trailing" constant="7" id="zdN-nk-CWz"/>
                             <constraint firstItem="fBw-BA-Xba" firstAttribute="bottom" secondItem="J8i-XL-9GR" secondAttribute="bottom" constant="60" id="zfE-Nf-D9F"/>
