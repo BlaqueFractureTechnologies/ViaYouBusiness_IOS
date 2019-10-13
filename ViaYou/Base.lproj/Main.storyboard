@@ -318,10 +318,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="Dw2-pm-VJ1" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fRk-YS-V0x">
-                                <rect key="frame" x="97.5" y="579" width="180" height="28"/>
+                                <rect key="frame" x="97.5" y="576.5" width="180" height="30.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="wLb-0l-tOS"/>
                                 </constraints>
@@ -3346,12 +3346,13 @@
                                 <rect key="frame" x="47.5" y="118.5" width="280" height="430"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fkx-Zs-Hxd">
-                                        <rect key="frame" x="235" y="5" width="40" height="40"/>
-                                        <color key="backgroundColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="225" y="5" width="50" height="25"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="BTX-hF-LgJ"/>
-                                            <constraint firstAttribute="height" constant="40" id="y8R-dx-lIL"/>
+                                            <constraint firstAttribute="height" constant="25" id="Bx1-uE-G5w"/>
+                                            <constraint firstAttribute="width" constant="50" id="Gqe-Tm-NVp"/>
                                         </constraints>
+                                        <state key="normal" backgroundImage="cellCloseIcon"/>
                                         <connections>
                                             <action selector="closeButtonClicked" destination="IbK-MA-EMG" eventType="touchUpInside" id="uvM-E7-oRl"/>
                                         </connections>
@@ -3445,14 +3446,14 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Crh-ya-0iZ" secondAttribute="trailing" constant="5" id="ArD-ng-xVO"/>
                                     <constraint firstItem="u7Z-Db-6FT" firstAttribute="centerX" secondItem="wgY-0k-fPy" secondAttribute="centerX" id="B9z-o9-dOV"/>
                                     <constraint firstItem="Crh-ya-0iZ" firstAttribute="centerX" secondItem="wgY-0k-fPy" secondAttribute="centerX" id="ERa-Ch-Xbj"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fkx-Zs-Hxd" secondAttribute="trailing" constant="5" id="FlM-Cn-EBt"/>
                                     <constraint firstItem="R1k-Tp-DNo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wgY-0k-fPy" secondAttribute="leading" constant="5" id="I5I-mi-lp8"/>
                                     <constraint firstItem="3Xf-kq-yhT" firstAttribute="top" secondItem="Crh-ya-0iZ" secondAttribute="bottom" constant="2" id="N7L-ch-vDO"/>
-                                    <constraint firstItem="Fkx-Zs-Hxd" firstAttribute="top" secondItem="wgY-0k-fPy" secondAttribute="top" constant="5" id="RHv-yp-Y5x"/>
                                     <constraint firstItem="R1k-Tp-DNo" firstAttribute="centerX" secondItem="wgY-0k-fPy" secondAttribute="centerX" id="TbX-Kn-4wP"/>
                                     <constraint firstItem="5M6-GQ-CRu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wgY-0k-fPy" secondAttribute="leading" constant="5" id="YL8-yE-MnY"/>
-                                    <constraint firstAttribute="trailing" secondItem="Fkx-Zs-Hxd" secondAttribute="trailing" constant="5" id="a2e-js-a9f"/>
                                     <constraint firstItem="3Xf-kq-yhT" firstAttribute="leading" secondItem="wgY-0k-fPy" secondAttribute="leading" constant="5" id="aRt-Vl-giE"/>
                                     <constraint firstItem="5M6-GQ-CRu" firstAttribute="centerX" secondItem="wgY-0k-fPy" secondAttribute="centerX" id="bWg-gQ-FlI"/>
+                                    <constraint firstItem="Fkx-Zs-Hxd" firstAttribute="top" secondItem="wgY-0k-fPy" secondAttribute="top" constant="5" id="fPK-1k-QVi"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5M6-GQ-CRu" secondAttribute="trailing" constant="5" id="leM-OP-a4x"/>
                                     <constraint firstItem="u7Z-Db-6FT" firstAttribute="top" secondItem="wgY-0k-fPy" secondAttribute="top" constant="50" id="lkr-SW-bUr"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="R1k-Tp-DNo" secondAttribute="trailing" constant="5" id="p2a-Mn-jEL"/>
@@ -3757,7 +3758,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="hFX-Lg-86r">
-                                <rect key="frame" x="0.0" y="85" width="375" height="220.5"/>
+                                <rect key="frame" x="0.0" y="85" width="375.00000000000011" height="220.5"/>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hFX-Lg-86r" secondAttribute="height" multiplier="320:188" id="zMd-n1-sSg"/>
