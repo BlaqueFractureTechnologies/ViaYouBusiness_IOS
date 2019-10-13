@@ -135,6 +135,7 @@
 		9EF90CC62353C9BA00127322 /* SubscriptionListProTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListProTableViewCell.swift; sourceTree = "<group>"; };
 		9EF90CC82353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeGrowthHostPopUpViewController.swift; sourceTree = "<group>"; };
 		9EF90CCA2353CA9300127322 /* SubscriptionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsListViewController.swift; sourceTree = "<group>"; };
+		9EF90CCC2353DC1200127322 /* ViaYou.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViaYou.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +227,7 @@
 		9EA55F69233C208D003A1EBB /* ViaYou */ = {
 			isa = PBXGroup;
 			children = (
+				9EF90CCC2353DC1200127322 /* ViaYou.entitlements */,
 				9EF90CBE2353C90700127322 /* response.json */,
 				9E10ED0C234D746500C54F84 /* UserProfileTableViewCells */,
 				9EF50BC52346DC1D00D255FF /* Resources */,
@@ -378,6 +380,11 @@
 				TargetAttributes = {
 					9EA55F66233C208D003A1EBB = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					9EA55F7A233C208E003A1EBB = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -719,6 +726,7 @@
 			baseConfigurationReference = 3DE306DBB2B381298A5B0ED6 /* Pods-ViaYou.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ViaYou/ViaYou.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H3MR6PS3FC;
 				INFOPLIST_FILE = ViaYou/Info.plist;
@@ -738,6 +746,7 @@
 			baseConfigurationReference = 8AD4C12220E84767F923027F /* Pods-ViaYou.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ViaYou/ViaYou.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H3MR6PS3FC;
 				INFOPLIST_FILE = ViaYou/Info.plist;
