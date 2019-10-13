@@ -14,7 +14,7 @@ import GoogleSignIn
 import AVFoundation
 import MessageUI
 
-class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, BecomeGrowthHostPopUpViewControllerDelegate {
     
     
     
@@ -50,19 +50,24 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         userId = Auth.auth().currentUser!.uid
         print(self.passedProfileImage)
         self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
+        print("self.passedProfileImage===>\(self.passedProfileImage)")
+        
+        if (__CGSizeEqualToSize(self.profilePicButton.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
+            print("EMPTY IMAGE")
+            self.profilePicButton.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
+        }
+        
         self.profilePicOnDropDownList.layer.cornerRadius = self.profilePicOnDropDownList.frame.size.width/2.0
         self.profilePicOnDropDownList.clipsToBounds = true
-        
-        if self.profilePicOnDropDownList.image == nil {
+        self.profilePicOnDropDownList.image = self.passedProfileImage
+        if (__CGSizeEqualToSize(self.profilePicButton.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
+            print("EMPTY IMAGE")
             self.profilePicOnDropDownList.image = UIImage(named: "defaultProfilePic")
         }
-        else
-        {
-            print(self.profilePicOnDropDownList.image as Any)
-            self.profilePicOnDropDownList.image = self.passedProfileImage
-        }
+        
         collectioView.reloadData()
         getResponseFromJSONFile()
+
     }
     
     
@@ -93,45 +98,92 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         overlayViewWhenDropDownAppears.alpha = 0
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(displayBottomPlusButtonCircularWave), userInfo: nil, repeats: false)
+        
     }
     
     
-    func getResponseFromJSONFile() {
-        
-        ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
-            if error == nil {
-                print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
-                if responseDict.data.count == 0 {
+    func readResponseFromFileForTest() {
+        if let path = Bundle.main.path(forResource: "response", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                if let jsonResult = jsonResult as? [String:Any] {
+                    let responseDict = LibraryFeedResponse(jsonResult)
                     
-                    DispatchQueue.main.async {
-                        self.noFeedPopUpView.alpha = 1
-                        self.collectioView.reloadData()
+                    print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
+                    if responseDict.data.count == 0 {
+                        
+                        DispatchQueue.main.async {
+                            self.noFeedPopUpView.alpha = 1
+                            self.collectioView.reloadData()
+                            
+                        }
+                    }
+                    else {
+                        
+                        print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
+                        for i in 0..<responseDict.data.count {
+                            let indexDict = responseDict.data[i]
+                            indexDict.isInfoPopUpDisplaying = false
+                            self.dataArray.append(indexDict)
+                            print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
+                        }
+                        self.loadAllVideoImagesForDataArray()
+                        //  self.loadVideoSize()
+                        DispatchQueue.main.async {
+                            self.noFeedPopUpView.alpha = 0
+                            self.collectioView.reloadData()
+                            
+                        }
                         
                     }
-                }
-                else {
-                    
-                    print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
-                    for i in 0..<responseDict.data.count {
-                        let indexDict = responseDict.data[i]
-                        indexDict.isInfoPopUpDisplaying = false
-                        self.dataArray.append(indexDict)
-                        print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
-                    }
-                    self.loadAllVideoImagesForDataArray()
-                    //  self.loadVideoSize()
-                    DispatchQueue.main.async {
-                        self.noFeedPopUpView.alpha = 0
-                        self.collectioView.reloadData()
-                        
-                    }
                     
                 }
-            }
+            } catch {
                 
-            else {
-                print(error?.localizedDescription)
             }
+        }
+    }
+    
+    func getResponseFromJSONFile() {
+        readResponseFromFileForTest()
+        return
+            
+            
+            ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
+                if error == nil {
+                    print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
+                    if responseDict.data.count == 0 {
+                        
+                        DispatchQueue.main.async {
+                            self.noFeedPopUpView.alpha = 1
+                            self.collectioView.reloadData()
+                            
+                        }
+                    }
+                    else {
+                        
+                        print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
+                        for i in 0..<responseDict.data.count {
+                            let indexDict = responseDict.data[i]
+                            indexDict.isInfoPopUpDisplaying = false
+                            self.dataArray.append(indexDict)
+                            print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
+                        }
+                        self.loadAllVideoImagesForDataArray()
+                        //  self.loadVideoSize()
+                        DispatchQueue.main.async {
+                            self.noFeedPopUpView.alpha = 0
+                            self.collectioView.reloadData()
+                            
+                        }
+                        
+                    }
+                }
+                    
+                else {
+                    print(error?.localizedDescription)
+                }
         }
     }
     
@@ -173,7 +225,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (collectionView.frame.size.width/3.0)-10
+        let cellWidth = (collectionView.frame.size.width/2.0)-10
         return CGSize(width: cellWidth, height: cellWidth*1.41)
     }
     
@@ -399,15 +451,30 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        
         if (indexPath.row == 1) {
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
-            let navVC = UINavigationController(rootViewController: nextVC)
-            navVC.isNavigationBarHidden = true
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            nextVC.delegate = self
+            self.present(nextVC, animated: false, completion: nil)
         }
-        
     }
     
+    
+    func becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubscriptionBaseViewController") as! SubscriptionBaseViewController
+        let navVC = UINavigationController(rootViewController: nextVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    func becomeGrowthHostPopUpVC_UpgradeAndSubscriptionBaseViewControllerButtonClicked() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
+        let navVC = UINavigationController(rootViewController: nextVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
+

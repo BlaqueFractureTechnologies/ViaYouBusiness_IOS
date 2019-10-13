@@ -19,7 +19,7 @@ class ProfileDropdownTableViewCell: UITableViewCell {
     }
     
     func configureCell(dataArray:[String], index:Int) {
-        self.titleLabel.text = dataArray[index]
+        self.titleLabel.text = "\(dataArray[index])\n***"
         
         var iconName = "DropDown_\(dataArray[index])"
         iconName = iconName.replacingOccurrences(of: " ", with: "_")

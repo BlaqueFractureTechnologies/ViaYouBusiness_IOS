@@ -32,12 +32,12 @@ class SignUpMobileEntryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.hideKeyboardWhenTappedAround()
-        self.emailField.makeWhitePlaceholder()
-        self.countryCodeField.makeWhitePlaceholder()
-        self.phoneField.makeWhitePlaceholder()
+        self.emailField.makeDarkGrayPlaceholder()
+        self.countryCodeField.makeDarkGrayPlaceholder()
+        self.phoneField.makeDarkGrayPlaceholder()
         self.hideKeyboardWhenTappedAround()
         self.scrollView.backgroundColor = UIColor.clear
-        self.segmentButtonsContainer.layer.borderColor = self.view.themeYellowColor().cgColor
+        self.segmentButtonsContainer.layer.borderColor = self.view.themeRedColor().cgColor
         self.segmentButtonsContainer.layer.borderWidth = 1.0
         setUpView()
     }
@@ -65,21 +65,21 @@ class SignUpMobileEntryViewController: UIViewController {
     @IBAction func segmentButtonClicked(_ sender: UIButton) {
         if (sender.tag == 0) {
             segmentEmailButton.backgroundColor = self.view.themeRedColor()
-            segmentEmailButton.setTitleColor(UIColor.darkGray, for: .normal)
+            segmentEmailButton.setTitleColor(UIColor.white, for: .normal)
             segmentPhoneButton.backgroundColor = UIColor.clear
-            segmentPhoneButton.setTitleColor(UIColor.white, for: .normal)
-            UIView.animate(withDuration: 1.0) {
+            segmentPhoneButton.setTitleColor(UIColor.gray, for: .normal)
+            UIView.animate(withDuration: 0.4) {
                 self.phoneFieldContainerHeightConstraint.constant = 0
                 self.emailFieldContainerHeightConstraint.constant = 44
                 self.view.layoutIfNeeded()
             }
         }else {
             segmentEmailButton.backgroundColor = UIColor.clear
-            segmentEmailButton.setTitleColor(UIColor.white, for: .normal)
+            segmentEmailButton.setTitleColor(UIColor.gray, for: .normal)
             segmentPhoneButton.backgroundColor = self.view.themeRedColor()
-            segmentPhoneButton.setTitleColor(UIColor.darkGray, for: .normal)
+            segmentPhoneButton.setTitleColor(UIColor.white, for: .normal)
             
-            UIView.animate(withDuration: 1.0) {
+            UIView.animate(withDuration: 0.4) {
                 self.emailFieldContainerHeightConstraint.constant = 0
                 self.phoneFieldContainerHeightConstraint.constant = 44
                 self.view.layoutIfNeeded()

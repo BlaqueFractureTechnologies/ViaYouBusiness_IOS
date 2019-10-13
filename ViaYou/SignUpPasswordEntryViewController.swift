@@ -30,7 +30,7 @@ class SignUpPasswordEntryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.scrollView.backgroundColor = UIColor.clear
-        self.passwordField.makeWhitePlaceholder()
+        self.passwordField.makeDarkGrayPlaceholder()
         self.hideKeyboardWhenTappedAround()
         self.activityIndicator.isHidden = true
         setUpView()

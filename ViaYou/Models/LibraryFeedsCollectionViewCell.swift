@@ -26,6 +26,10 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         infoTableView.delegate = self
         infoTableView.dataSource = self
         videoImageView.image = nil
+        
+        infoTableView.estimatedRowHeight = 83.0
+        infoTableView.rowHeight = UITableView.automaticDimension
+        
     }
     
     func configureCell(dataDict:FeedDataArrayObject) {

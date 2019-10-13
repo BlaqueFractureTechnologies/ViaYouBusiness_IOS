@@ -50,6 +50,13 @@
 		9EF50BC92346DC3D00D255FF /* Monarcha_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EF50BC82346DC3700D255FF /* Monarcha_Bold.ttf */; };
 		9EF50BCA2346DC4000D255FF /* monarcha_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EF50BC62346DC3700D255FF /* monarcha_regular.ttf */; };
 		9EF50BCB2346DC4300D255FF /* Monarcha_SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EF50BC72346DC3700D255FF /* Monarcha_SemiBold.ttf */; };
+		9EF90CBF2353C90700127322 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 9EF90CBE2353C90700127322 /* response.json */; };
+		9EF90CC12353C95600127322 /* SubscriptionBaseViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CC02353C95600127322 /* SubscriptionBaseViewTableViewCell.swift */; };
+		9EF90CC32353C98100127322 /* SubscriptionListSoloTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CC22353C98100127322 /* SubscriptionListSoloTableViewCell.swift */; };
+		9EF90CC52353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CC42353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift */; };
+		9EF90CC72353C9BA00127322 /* SubscriptionListProTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CC62353C9BA00127322 /* SubscriptionListProTableViewCell.swift */; };
+		9EF90CC92353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CC82353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift */; };
+		9EF90CCB2353CA9300127322 /* SubscriptionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CCA2353CA9300127322 /* SubscriptionsListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +128,13 @@
 		9EF50BC62346DC3700D255FF /* monarcha_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = monarcha_regular.ttf; sourceTree = "<group>"; };
 		9EF50BC72346DC3700D255FF /* Monarcha_SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monarcha_SemiBold.ttf; sourceTree = "<group>"; };
 		9EF50BC82346DC3700D255FF /* Monarcha_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monarcha_Bold.ttf; sourceTree = "<group>"; };
+		9EF90CBE2353C90700127322 /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
+		9EF90CC02353C95600127322 /* SubscriptionBaseViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionBaseViewTableViewCell.swift; sourceTree = "<group>"; };
+		9EF90CC22353C98100127322 /* SubscriptionListSoloTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListSoloTableViewCell.swift; sourceTree = "<group>"; };
+		9EF90CC42353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListGrowthTableViewCell.swift; sourceTree = "<group>"; };
+		9EF90CC62353C9BA00127322 /* SubscriptionListProTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListProTableViewCell.swift; sourceTree = "<group>"; };
+		9EF90CC82353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeGrowthHostPopUpViewController.swift; sourceTree = "<group>"; };
+		9EF90CCA2353CA9300127322 /* SubscriptionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +181,10 @@
 				9E3485B7234A8FEE00DFADC9 /* PhoneContact.swift */,
 				9E3485B9234A903F00DFADC9 /* ContactsTableViewCell.swift */,
 				9E91AE1C234D33290044AB5C /* HomeInfoTableViewCell.swift */,
+				9EF90CC02353C95600127322 /* SubscriptionBaseViewTableViewCell.swift */,
+				9EF90CC22353C98100127322 /* SubscriptionListSoloTableViewCell.swift */,
+				9EF90CC42353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift */,
+				9EF90CC62353C9BA00127322 /* SubscriptionListProTableViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,6 +226,7 @@
 		9EA55F69233C208D003A1EBB /* ViaYou */ = {
 			isa = PBXGroup;
 			children = (
+				9EF90CBE2353C90700127322 /* response.json */,
 				9E10ED0C234D746500C54F84 /* UserProfileTableViewCells */,
 				9EF50BC52346DC1D00D255FF /* Resources */,
 				9E403A3A2344351C002E3749 /* Response Models */,
@@ -231,11 +250,13 @@
 				9E2B87A12344020500941DF2 /* SignInViewController.swift */,
 				9E403A3F23443F34002E3749 /* InstagramSignInViewController.swift */,
 				9E3485B5234A8FC100DFADC9 /* ContactsViewController.swift */,
+				9EF90CC82353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift */,
 				9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */,
 				9E2970D7234E7FC6003BC282 /* UpgradeSoloHostViewController.swift */,
 				9E2970D9234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift */,
 				9E2970DB234E7FF6003BC282 /* UpgradeProHostViewController.swift */,
 				9E2970DD234E8012003BC282 /* SubscriptionBaseViewController.swift */,
+				9EF90CCA2353CA9300127322 /* SubscriptionsListViewController.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -397,6 +418,7 @@
 				9EA55F75233C208E003A1EBB /* LaunchScreen.storyboard in Resources */,
 				9EA55FAB233C78E8003A1EBB /* GoogleService-Info.plist in Resources */,
 				9EA55F72233C208E003A1EBB /* Assets.xcassets in Resources */,
+				9EF90CBF2353C90700127322 /* response.json in Resources */,
 				9EF50BCB2346DC4300D255FF /* Monarcha_SemiBold.ttf in Resources */,
 				9EA55F70233C208D003A1EBB /* Main.storyboard in Resources */,
 				9EF50BC92346DC3D00D255FF /* Monarcha_Bold.ttf in Resources */,
@@ -483,15 +505,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EF90CCB2353CA9300127322 /* SubscriptionsListViewController.swift in Sources */,
 				9E403A39234434AE002E3749 /* ApiManager.swift in Sources */,
 				9E3485B6234A8FC100DFADC9 /* ContactsViewController.swift in Sources */,
 				9E2B879A2344003C00941DF2 /* LibraryFeedsViewController.swift in Sources */,
 				9EA55F9B233C2B04003A1EBB /* NewLaunchViewController.swift in Sources */,
 				9EA55FA7233C5099003A1EBB /* InviteFriendsViewController.swift in Sources */,
 				9E91AE1D234D332A0044AB5C /* HomeInfoTableViewCell.swift in Sources */,
+				9EF90CC12353C95600127322 /* SubscriptionBaseViewTableViewCell.swift in Sources */,
+				9EF90CC92353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift in Sources */,
 				9E2B879E2344007700941DF2 /* LessSpacePopUpViewController.swift in Sources */,
 				9EA55FA3233C2CB9003A1EBB /* NewSignInViewController.swift in Sources */,
 				9E403A4223443FDA002E3749 /* InstagramAuthResponseModel.swift in Sources */,
+				9EF90CC72353C9BA00127322 /* SubscriptionListProTableViewCell.swift in Sources */,
 				9EA55F99233C29FB003A1EBB /* SplashViewController.swift in Sources */,
 				9E403A4023443F34002E3749 /* InstagramSignInViewController.swift in Sources */,
 				9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */,
@@ -500,6 +526,7 @@
 				9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */,
 				9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */,
 				9E2B87A22344020500941DF2 /* SignInViewController.swift in Sources */,
+				9EF90CC32353C98100127322 /* SubscriptionListSoloTableViewCell.swift in Sources */,
 				9E2970D6234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift in Sources */,
 				9EB6E342234592870086A131 /* LibraryFeedResponse.swift in Sources */,
 				9E2970DE234E8012003BC282 /* SubscriptionBaseViewController.swift in Sources */,
@@ -508,6 +535,7 @@
 				9EA55F9F233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift in Sources */,
 				9E403A4423443FF5002E3749 /* InstagramUserDetailsResponse.swift in Sources */,
 				9EA55FA1233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift in Sources */,
+				9EF90CC52353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift in Sources */,
 				9E2970D8234E7FC6003BC282 /* UpgradeSoloHostViewController.swift in Sources */,
 				9E2970DA234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift in Sources */,
 				9E2B87A0234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift in Sources */,

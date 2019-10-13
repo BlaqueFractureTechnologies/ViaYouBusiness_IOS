@@ -162,8 +162,8 @@ extension UICollectionViewCell {
 }
 
 extension UITextField {
-    func makeWhitePlaceholder() {
-        self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.groupTableViewBackground])
+    func makeDarkGrayPlaceholder() {
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
 }
 
@@ -321,15 +321,17 @@ extension UIViewController  {
         for i in 0..<contacts.count {
             let firstName  = contacts[i].givenName
             let familyName = contacts[i].familyName
+            
             var phoneNumberFromContacts = contacts[i].phoneNumbers
-            
-            let phoneContact = PhoneContact()
-            phoneContact.firstName = firstName
-            phoneContact.familyName = familyName
-            phoneContact.fullName = "\(phoneContact.firstName) \(phoneContact.familyName)"
-            
-            var phoneNumbersArray:[String] = []
             for j in 0..<phoneNumberFromContacts.count {
+                
+                let phoneContact = PhoneContact()
+                phoneContact.firstName = firstName
+                phoneContact.familyName = familyName
+                phoneContact.fullName = "\(phoneContact.firstName) \(phoneContact.familyName)"
+                var phoneNumbersArray:[String] = []
+                
+                
                 if let phone = (phoneNumberFromContacts[j].value ).value(forKey: "stringValue") as? String {
                     var phoneFromContact = phone
                     phoneFromContact = phoneFromContact.replacingOccurrences(of: "(", with: "");
@@ -345,6 +347,8 @@ extension UIViewController  {
                         phoneFromContact = "\(localCountryCode)\(phoneFromContact)"
                         // If no country code is prepened on the number
                     }
+                    
+                    phoneNumbersArray = []
                     phoneNumbersArray.append(phoneFromContact)
                     
                     if contacts[i].thumbnailImageData != nil {
@@ -355,13 +359,18 @@ extension UIViewController  {
                             }
                         }
                     }
+                    
+                    phoneContact.phoneNumbers = [phoneFromContact]
+                    
+                    if (phoneContact.phoneNumbers.count > 0) {
+                        phoneContacts.append(phoneContact)
+                    }
+                    
                 }
             }
-            phoneContact.phoneNumbers = phoneNumbersArray
             
-            if (phoneContact.phoneNumbers.count > 0) {
-                phoneContacts.append(phoneContact)
-            }
+            
+            
             
         }
         print("Fetched phoneContacts contacts \(phoneContacts.count)")
@@ -636,3 +645,9 @@ extension UINavigationController {
     }
 }
 
+extension NSMutableAttributedString {
+    func setColor(color: UIColor, forText stringValue: String) {
+        let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+    }
+}

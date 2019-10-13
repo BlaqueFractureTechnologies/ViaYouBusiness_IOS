@@ -79,7 +79,7 @@ class NewSignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInD
                 }
             }
             else {
-                print(result!)
+                print("result ====> \(result!)")
                 
                 Auth.auth().currentUser?.getIDToken(completion: { (updatedToken, error) in
                     if (error == nil) {

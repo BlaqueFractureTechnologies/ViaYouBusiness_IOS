@@ -1,0 +1,213 @@
+{
+    "success": true,
+    "message": "List of post fetched successfully",
+    "data": [
+        {
+            "location": {
+                "type": "Point"
+            },
+            "title": "First upload",
+            "tags": [],
+            "notifiedTags": [],
+            "commentsCount": 0,
+            "viewCount": 0,
+            "rateCount": 0,
+            "isRatedByUser": false,
+            "isBlocked": false,
+            "isDeleted": false,
+            "isScreenCast": true,
+            "_id": "5d8c4c02c6687000175f9a58",
+            "user": {
+                "promptsCount": 0,
+                "shadowing": false,
+                "shadowCount": 3,
+                "shadowingCount": 3,
+                "storage": 3,
+                "storageExpireDate": "2020-10-01T04:34:14.648Z",
+                "_id": "nCs0nKaYaoNC7PaYHmjQEqD6a562",
+                "email": "meesalasumanth1@gmail.com",
+                "name": "Sumanth Kumar",
+                "__v": 113,
+                "createdDateTime": "2019-08-09T00:35:37.625Z",
+                "shadows": [
+                    {
+                        "shadowedDateTime": "2019-09-10T04:13:20.582Z",
+                        "_id": "5d7722e06c49600017ca60f6",
+                        "user": "xOZH1SP3X9Mio18u6iOP4zGw9bc2"
+                    },
+                    {
+                        "shadowedDateTime": "2019-09-17T04:46:28.938Z",
+                        "_id": "5d80652458639300175b46b7",
+                        "user": "vlh6YEqSCvhcO2lddj1HjuFCaUd2"
+                    },
+                    {
+                        "shadowedDateTime": "2019-09-19T21:52:48.305Z",
+                        "_id": "5d83f8b0da1b6a0017c128f8",
+                        "user": "e2l9ZB492dM9pqnaogPCSdXITME2"
+                    }
+                ],
+                "bio": "this is a good time to get the latest flash player is required for video playback",
+                "city": "Melbourne",
+                "country": "Aus",
+                "dob": "1994-05-06T00:00:00.000Z",
+                "gender": "Male",
+                "phone": 123456456,
+                "state": "vic",
+                "displayName": "@suku",
+                "updatedDateTime": "2019-08-15T22:20:16.421Z",
+                "notifiedDateTime": "2019-09-24T22:38:05.986Z",
+                "referrals": [
+                    {
+                        "referredDateTime": "2019-10-02T04:37:05.749Z",
+                        "_id": "5d942971ff4f2c0017011317",
+                        "user": "UvtLQsPbW2gxaBbZvJx1p1PlA4E2"
+                    }
+                ]
+            },
+            "fileName": "promptchu_rl5mdobk3z36.mp4",
+            "createdDateTime": "2019-09-26T05:26:26.559Z",
+            "updatedDateTime": "2019-09-26T05:26:26.559Z",
+            "ratedBy": [],
+            "viewedBy": [],
+            "__v": 0
+        },
+        {
+            "location": {
+                "type": "Point"
+            },
+            "title": "First upload",
+            "tags": [],
+            "notifiedTags": [],
+            "commentsCount": 0,
+            "viewCount": 0,
+            "rateCount": 0,
+            "isRatedByUser": false,
+            "isBlocked": false,
+            "isDeleted": false,
+            "isScreenCast": true,
+            "_id": "5d8c4c151c9d44000077c4a1",
+            "user": {
+                "promptsCount": 0,
+                "shadowing": false,
+                "shadowCount": 3,
+                "shadowingCount": 3,
+                "storage": 3,
+                "storageExpireDate": "2020-10-01T04:34:14.648Z",
+                "_id": "nCs0nKaYaoNC7PaYHmjQEqD6a562",
+                "email": "meesalasumanth1@gmail.com",
+                "name": "Sumanth Kumar",
+                "__v": 113,
+                "createdDateTime": "2019-08-09T00:35:37.625Z",
+                "shadows": [
+                    {
+                        "shadowedDateTime": "2019-09-10T04:13:20.582Z",
+                        "_id": "5d7722e06c49600017ca60f6",
+                        "user": "xOZH1SP3X9Mio18u6iOP4zGw9bc2"
+                    },
+                    {
+                        "shadowedDateTime": "2019-09-17T04:46:28.938Z",
+                        "_id": "5d80652458639300175b46b7",
+                        "user": "vlh6YEqSCvhcO2lddj1HjuFCaUd2"
+                    },
+                    {
+                        "shadowedDateTime": "2019-09-19T21:52:48.305Z",
+                        "_id": "5d83f8b0da1b6a0017c128f8",
+                        "user": "e2l9ZB492dM9pqnaogPCSdXITME2"
+                    }
+                ],
+                "bio": "this is a good time to get the latest flash player is required for video playback",
+                "city": "Melbourne",
+                "country": "Aus",
+                "dob": "1994-05-06T00:00:00.000Z",
+                "gender": "Male",
+                "phone": 123456456,
+                "state": "vic",
+                "displayName": "@suku",
+                "updatedDateTime": "2019-08-15T22:20:16.421Z",
+                "notifiedDateTime": "2019-09-24T22:38:05.986Z",
+                "referrals": [
+                    {
+                        "referredDateTime": "2019-10-02T04:37:05.749Z",
+                        "_id": "5d942971ff4f2c0017011317",
+                        "user": "UvtLQsPbW2gxaBbZvJx1p1PlA4E2"
+                    }
+                ]
+            },
+            "fileName": "promptchu_rl5mdobk3z36.mp4",
+            "createdDateTime": "2019-09-26T05:26:26.559Z",
+            "updatedDateTime": "2019-09-26T05:26:26.559Z",
+            "ratedBy": [],
+            "viewedBy": [],
+            "__v": 0
+        },
+        {
+            "location": {
+                "type": "Point"
+            },
+            "title": "First upload",
+            "tags": [],
+            "notifiedTags": [],
+            "commentsCount": 0,
+            "viewCount": 0,
+            "rateCount": 0,
+            "isRatedByUser": false,
+            "isBlocked": false,
+            "isDeleted": false,
+            "isScreenCast": true,
+            "_id": "5d8c4e381c9d44000077c4a2",
+            "user": {
+                "promptsCount": 0,
+                "shadowing": false,
+                "shadowCount": 3,
+                "shadowingCount": 3,
+                "storage": 3,
+                "storageExpireDate": "2020-10-01T04:34:14.648Z",
+                "_id": "nCs0nKaYaoNC7PaYHmjQEqD6a562",
+                "email": "meesalasumanth1@gmail.com",
+                "name": "Sumanth Kumar",
+                "__v": 113,
+                "createdDateTime": "2019-08-09T00:35:37.625Z",
+                "shadows": [
+                    {
+                        "shadowedDateTime": "2019-09-10T04:13:20.582Z",
+                        "_id": "5d7722e06c49600017ca60f6",
+                        "user": "xOZH1SP3X9Mio18u6iOP4zGw9bc2"
+                    },
+                    {
+                        "shadowedDateTime": "2019-09-17T04:46:28.938Z",
+                        "_id": "5d80652458639300175b46b7",
+                        "user": "vlh6YEqSCvhcO2lddj1HjuFCaUd2"
+                    },
+                    {
+                        "shadowedDateTime": "2019-09-19T21:52:48.305Z",
+                        "_id": "5d83f8b0da1b6a0017c128f8",
+                        "user": "e2l9ZB492dM9pqnaogPCSdXITME2"
+                    }
+                ],
+                "bio": "this is a good time to get the latest flash player is required for video playback",
+                "city": "Melbourne",
+                "country": "Aus",
+                "dob": "1994-05-06T00:00:00.000Z",
+                "gender": "Male",
+                "phone": 123456456,
+                "state": "vic",
+                "displayName": "@suku",
+                "updatedDateTime": "2019-08-15T22:20:16.421Z",
+                "notifiedDateTime": "2019-09-24T22:38:05.986Z",
+                "referrals": [
+                    {
+                        "referredDateTime": "2019-10-02T04:37:05.749Z",
+                        "_id": "5d942971ff4f2c0017011317",
+                        "user": "UvtLQsPbW2gxaBbZvJx1p1PlA4E2"
+                    }
+                ]
+            },
+            "fileName": "promptchu_rl5mdobk3z36.mp4",
+            "createdDateTime": "2019-09-26T05:26:26.559Z",
+            "updatedDateTime": "2019-09-26T05:26:26.559Z",
+            "ratedBy": [],
+            "viewedBy": [],
+            "__v": 0
+        }
+    ]
+}
