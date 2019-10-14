@@ -21,6 +21,7 @@ struct ApiManager {
     let instagramUserIdInputApiHeader = "instaAccess"
     let fetchLibraryDataHeader = "listScreenCast"
     let referralHeader = "referral"
+    let bucketSizeCalculationHeader = "subscription"
     
     
     //MARK:- Registration API
@@ -243,5 +244,53 @@ struct ApiManager {
         dataTask.resume()
     }
     
+    //calculate bucket size api
+    func getTotalBucketSize(from:String,
+                        size:String,
+                        completion: @escaping (LibraryFeedResponse, _ error:Error?) -> ()) {
+        
+        let parameters: [String: Any] = [
+            "from":from,
+            "size":size,
+            
+            ]
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
+        
+        let requestURLString = "\(headerUrl)\(bucketSizeCalculationHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue(generatedUserToken, forHTTPHeaderField: "token")
+        request.httpMethod = "POST"
+        
+        let postData = NSMutableData()
+        for key in parameters.keys {
+            let keyString = "&\(key)"
+            let valueString = parameters[key] as? String ?? ""
+            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
+        }
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(LibraryFeedResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("jsonDict====>%@",jsonDict)
+                        completion(LibraryFeedResponse(jsonDict),nil)
+                    }else {
+                        completion(LibraryFeedResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(LibraryFeedResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+
 }
 
