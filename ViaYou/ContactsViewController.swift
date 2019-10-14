@@ -19,6 +19,8 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     var fullDataArray:[PhoneContact] = []
     var dataArray:[PhoneContact] = []
     var passedUrlLink: String = ""
+    var documentController: UIDocumentInteractionController = UIDocumentInteractionController()
+    let defaultProfilePic = UIImage(named: "defaultProfilePic")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,7 +139,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     //MARK:-- FB
     func shareTextOnFaceBook() {
         let shareContent = ShareLinkContent()
-       // shareContent.contentURL = URL.init(string: "https://developers.facebook.com")! //your link
+        // shareContent.contentURL = URL.init(string: "https://developers.facebook.com")! //your link
         shareContent.contentURL = URL.init(string: passedUrlLink)! //your link
         shareContent.quote = self.passedUrlLink//"Text to be shared"
         ShareDialog(fromViewController: self, content: shareContent, delegate: self).show()
@@ -187,13 +189,32 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     //MARK:-- Instagram (Refer: https://medium.com/@maximbilan/ios-sharing-via-instagram-9bf9a9f7f14d) and implement
     func shareTextOnInstagram() {
         
-        let url = NSURL(string: "instagram://app")
-        if UIApplication.shared.canOpenURL(url! as URL) { // has Instagram
-            print("open instagram")
+        let instagramURL = NSURL(string: "instagram://app")
+        
+        if (UIApplication.shared.canOpenURL(instagramURL! as URL)) {
             
-        }
-        else {
-            self.displayAlert(msg: "Install Instagram")
+            let imageData = self.defaultProfilePic?.jpegData(compressionQuality: 0.75)//UIImageJPEGRepresentation(UIImage(named: "defaultProfilePic")!, 100)
+            
+            let captionString = self.passedUrlLink
+            
+            let writePath = (NSTemporaryDirectory() as NSString).appendingPathComponent("instagram.igo")
+            do {
+                try imageData?.write(to: URL(fileURLWithPath: writePath), options: .atomic)
+            } catch {
+                print(error)
+            }
+            let fileURL = NSURL(fileURLWithPath: writePath)
+            
+            self.documentController = UIDocumentInteractionController(url: fileURL as URL)
+            
+            self.documentController.delegate = self as? UIDocumentInteractionControllerDelegate
+            
+            self.documentController.uti = "com.instagram.exlusivegram"
+            
+            self.documentController.annotation = NSDictionary(object: captionString, forKey: "InstagramCaption" as NSCopying)
+            self.documentController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+            
+            //}
         }
     }
     
