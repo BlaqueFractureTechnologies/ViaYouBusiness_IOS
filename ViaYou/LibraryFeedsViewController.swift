@@ -32,7 +32,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var dropdownOverlayButton: UIButton!
     @IBOutlet weak var overlayViewWhenDropDownAppears: UIImageView!
     @IBOutlet weak var profilePicOnDropDownList: UIImageView!
+    @IBOutlet weak var profilePicButtonOnDropDownList: UIButton!
     
+    @IBOutlet weak var userNameOnDropDown: UILabel!
     var dataArray:[FeedDataArrayObject] = []
     var passedProfileImage = UIImage()
     var userId: String = ""
@@ -56,10 +58,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Display name is : \(String(describing: Auth.auth().currentUser?.displayName))")
+        
         self.noFeedPopUpView.alpha = 0
         userId = Auth.auth().currentUser!.uid
         print(self.passedProfileImage)
+        print("Current user name is: \(String(describing: Auth.auth().currentUser?.displayName))")
+        if let profileName = Auth.auth().currentUser?.displayName {
+            userNameOnDropDown.text = profileName
+        }
         self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
         print("self.passedProfileImage===>\(self.passedProfileImage)")
         
@@ -70,17 +76,19 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         self.profilePicOnDropDownList.layer.cornerRadius = self.profilePicOnDropDownList.frame.size.width/2.0
         self.profilePicOnDropDownList.clipsToBounds = true
-        self.profilePicOnDropDownList.image = self.passedProfileImage
-        if (__CGSizeEqualToSize(self.profilePicButton.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
+        //self.profilePicOnDropDownList.image = self.passedProfileImage
+        self.profilePicButtonOnDropDownList.setBackgroundImage(self.passedProfileImage, for: .normal)
+        if (__CGSizeEqualToSize(self.profilePicButtonOnDropDownList.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
             print("EMPTY IMAGE")
-            self.profilePicOnDropDownList.image = UIImage(named: "defaultProfilePic")
+            self.profilePicButtonOnDropDownList.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
+            
         }
         
         collectioView.reloadData()
         getResponseFromJSONFile()
         getBucketInfo()
-
-
+        
+        
     }
     
     //get aws s3 bucket info
@@ -95,8 +103,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //s3Url = AWSS3.default().configuration.endpoint.url
         //aws configuration ends
         
-//        AWSS3.register(with: configuration!, forKey: "defaultKey")
-//        let s3 = AWSS3.s3(forKey: "defaultKey")
+        //        AWSS3.register(with: configuration!, forKey: "defaultKey")
+        //        let s3 = AWSS3.s3(forKey: "defaultKey")
         let s3 = AWSS3.default()
         let getReq : AWSS3ListObjectsRequest = AWSS3ListObjectsRequest()
         getReq.bucket = self.bucketName
@@ -107,7 +115,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         s3.listObjects(getReq) { (listObjects, error) in
             print(getReq)
-         //   print(listObjects)
+            //   print(listObjects)
             var total : Int = 0
             if listObjects?.contents != nil {
                 for object in (listObjects?.contents)! {
@@ -131,20 +139,20 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 print(error.debugDescription)
             }
         }
-
-////
-//        s3.listObjects(getReq).continueWith { (task) -> AnyObject? in
-//            print("Object result = \(String(describing: task.result))")
-//
-//            print("Object contents = \(String(describing: task.result?.contents))")
-//            for object in (task.result?.contents)! {
-//
-//                print("Object key = \(object.key!)")
-//            }
-//            return nil
-//
-//        }
-//        //
+        
+        ////
+        //        s3.listObjects(getReq).continueWith { (task) -> AnyObject? in
+        //            print("Object result = \(String(describing: task.result))")
+        //
+        //            print("Object contents = \(String(describing: task.result?.contents))")
+        //            for object in (task.result?.contents)! {
+        //
+        //                print("Object key = \(object.key!)")
+        //            }
+        //            return nil
+        //
+        //        }
+        //        //
     }
     //get aws s3 bucket info ends
     
@@ -228,7 +236,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     func getResponseFromJSONFile() {
         readResponseFromFileForTest()
         return
-        
+            
             
             ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
                 if error == nil {
@@ -503,7 +511,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         self.dropDownBaseView.alpha = 1
         self.overlayViewWhenDropDownAppears.alpha = 0.4
         UIView.animate(withDuration: 0.4) {
-            self.dropDownBaseViewHeightConstraint.constant = 440
+            self.dropDownBaseViewHeightConstraint.constant = 480
             self.view.layoutIfNeeded()
         }
     }
@@ -537,6 +545,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             nextVC.modalPresentationStyle = .overCurrentContext
             nextVC.delegate = self
             self.present(nextVC, animated: false, completion: nil)
+        }
+        else if (indexPath.row == 5) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
     
