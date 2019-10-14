@@ -66,6 +66,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         if let profileName = Auth.auth().currentUser?.displayName {
             userNameOnDropDown.text = profileName
         }
+        else
+        {
+            userNameOnDropDown.text = "ViaYou User"
+        }
         self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
         print("self.passedProfileImage===>\(self.passedProfileImage)")
         
@@ -539,7 +543,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.row == 1) {
+        if (indexPath.row == 2) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
             nextVC.modalPresentationStyle = .overCurrentContext
