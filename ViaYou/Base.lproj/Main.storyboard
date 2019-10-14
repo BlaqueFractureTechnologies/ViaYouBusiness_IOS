@@ -746,22 +746,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcd-EG-gMJ">
-                                <rect key="frame" x="132" y="120" width="111.5" height="31.5"/>
+                                <rect key="frame" x="124.5" y="120" width="126" height="35"/>
                                 <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="27"/>
                                 <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Your Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohc-KR-Bgq">
-                                <rect key="frame" x="20" y="161.5" width="335" height="23.5"/>
+                                <rect key="frame" x="20" y="165" width="335" height="26"/>
                                 <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="20"/>
                                 <color key="textColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLi-sG-F2o">
-                                <rect key="frame" x="0.0" y="219" width="375" height="398"/>
+                                <rect key="frame" x="0.0" y="225" width="375" height="392"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRa-Ez-6GN">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="398"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGB-4U-L7B">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
@@ -1329,13 +1329,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmu-G9-oBS">
-                                <rect key="frame" x="97.5" y="160" width="180.5" height="31.5"/>
+                                <rect key="frame" x="88" y="160" width="199.5" height="35"/>
                                 <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="27"/>
                                 <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="up2-Pr-Hy1">
-                                <rect key="frame" x="147.5" y="191.5" width="80.5" height="30.5"/>
+                                <rect key="frame" x="144.5" y="195" width="86" height="33"/>
                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="26"/>
                                 <color key="textColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1547,7 +1547,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up below for free to record your screen and yourself at the same time. Share socially - Stored securely." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YdX-Kp-FB0">
-                                <rect key="frame" x="87.5" y="148.5" width="200" height="49"/>
+                                <rect key="frame" x="87.5" y="148.5" width="200" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="1Az-Cu-FyJ"/>
                                 </constraints>
@@ -1556,10 +1556,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QrT-zO-amO">
-                                <rect key="frame" x="20" y="217.5" width="335" height="44"/>
+                                <rect key="frame" x="20" y="221.5" width="335" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log-In with Instagram" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laQ-Pk-RgO">
-                                        <rect key="frame" x="10" y="13" width="315" height="17.5"/>
+                                        <rect key="frame" x="10" y="12" width="315" height="19.5"/>
                                         <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
                                         <color key="textColor" red="0.2156862745" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1591,10 +1591,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghF-RT-NTv">
-                                <rect key="frame" x="20" y="281.5" width="335" height="44"/>
+                                <rect key="frame" x="20" y="285.5" width="335" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log-In with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wk7-zV-7UG">
-                                        <rect key="frame" x="10" y="13" width="315" height="17.5"/>
+                                        <rect key="frame" x="10" y="12" width="315" height="19.5"/>
                                         <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
                                         <color key="textColor" red="0.2156862745" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1629,10 +1629,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyn-f5-eXx">
-                                <rect key="frame" x="20" y="345.5" width="335" height="44"/>
+                                <rect key="frame" x="20" y="349.5" width="335" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log-In with Google" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5T-C8-2oF">
-                                        <rect key="frame" x="10" y="13" width="315" height="17.5"/>
+                                        <rect key="frame" x="10" y="12" width="315" height="19.5"/>
                                         <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
                                         <color key="textColor" red="0.2156862745" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1667,7 +1667,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dE-Qj-trb">
-                                <rect key="frame" x="176.5" y="426" width="22" height="22"/>
+                                <rect key="frame" x="176" y="430" width="23" height="22"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="6q8-E1-ltJ"/>
@@ -1677,21 +1677,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VWM-cK-beG">
-                                <rect key="frame" x="20" y="436.5" width="151.5" height="1"/>
+                                <rect key="frame" x="20" y="440.5" width="151" height="1"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="GIK-xt-2BS"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qnq-0R-YF7">
-                                <rect key="frame" x="203.5" y="436.5" width="151.5" height="1"/>
+                                <rect key="frame" x="204" y="440.5" width="151" height="1"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Mxw-L0-sJc"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InD-5E-k8o">
-                                <rect key="frame" x="96.5" y="455.5" width="182" height="20"/>
+                                <rect key="frame" x="85.5" y="459.5" width="204" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="GZU-Rl-hFg"/>
                                 </constraints>
@@ -2378,13 +2378,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsi-QH-y2O">
-                                        <rect key="frame" x="10" y="70" width="85.5" height="24.5"/>
+                                        <rect key="frame" x="10" y="70" width="86.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Contacts Icon" translatesAutoresizingMaskIntoConstraints="NO" id="FLU-gR-Xv6">
-                                        <rect key="frame" x="100.5" y="70.5" width="24" height="24"/>
+                                        <rect key="frame" x="101.5" y="71.5" width="24" height="24"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="6aV-rS-LAR"/>
@@ -2392,7 +2392,7 @@
                                         </constraints>
                                     </imageView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37C-pK-wHq">
-                                        <rect key="frame" x="10" y="99.5" width="355" height="40"/>
+                                        <rect key="frame" x="10" y="101.5" width="355" height="40"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search Icon" translatesAutoresizingMaskIntoConstraints="NO" id="LfR-bj-ebh">
                                                 <rect key="frame" x="5" y="5" width="30" height="30"/>
@@ -2427,19 +2427,19 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share using:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bi6-Vt-BVT">
-                                        <rect key="frame" x="10" y="144.5" width="355" height="16.5"/>
+                                        <rect key="frame" x="10" y="146.5" width="355" height="18"/>
                                         <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxC-Hs-2lm">
-                                        <rect key="frame" x="0.0" y="166" width="375" height="59"/>
+                                        <rect key="frame" x="0.0" y="169.5" width="375" height="55.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6of-mB-avw">
-                                                <rect key="frame" x="0.0" y="0.0" width="75" height="59"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="55.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb" translatesAutoresizingMaskIntoConstraints="NO" id="x9E-cl-xVL">
-                                                        <rect key="frame" x="22.5" y="14.5" width="30" height="30"/>
+                                                        <rect key="frame" x="22.5" y="13" width="30" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="A8m-Pp-JsP"/>
@@ -2447,7 +2447,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJz-XZ-1NH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="59"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="55.5"/>
                                                         <connections>
                                                             <action selector="socialButtonsClicked:" destination="R5C-Rs-o4z" eventType="touchUpInside" id="z5n-KQ-3D1"/>
                                                         </connections>
@@ -2464,10 +2464,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZE3-7E-R7I">
-                                                <rect key="frame" x="75" y="0.0" width="75" height="59"/>
+                                                <rect key="frame" x="75" y="0.0" width="75" height="55.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter" translatesAutoresizingMaskIntoConstraints="NO" id="ZAt-Rj-kOO">
-                                                        <rect key="frame" x="22.5" y="14.5" width="30" height="30"/>
+                                                        <rect key="frame" x="22.5" y="13" width="30" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="Qde-0R-Kls"/>
@@ -2475,7 +2475,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Tc-96-BaV">
-                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="59"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="55.5"/>
                                                         <connections>
                                                             <action selector="socialButtonsClicked:" destination="R5C-Rs-o4z" eventType="touchUpInside" id="fTR-HW-C9z"/>
                                                         </connections>
@@ -2492,10 +2492,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RrD-Cq-7tq">
-                                                <rect key="frame" x="150" y="0.0" width="75" height="59"/>
+                                                <rect key="frame" x="150" y="0.0" width="75" height="55.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="nzl-Cu-cAL">
-                                                        <rect key="frame" x="22.5" y="14.5" width="30" height="30"/>
+                                                        <rect key="frame" x="22.5" y="13" width="30" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="2Rg-GT-qhG"/>
@@ -2503,7 +2503,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8t-7w-mlL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="59"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="55.5"/>
                                                         <connections>
                                                             <action selector="socialButtonsClicked:" destination="R5C-Rs-o4z" eventType="touchUpInside" id="xF6-Oz-NKA"/>
                                                         </connections>
@@ -2520,10 +2520,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPE-hf-wJq">
-                                                <rect key="frame" x="225" y="0.0" width="75" height="59"/>
+                                                <rect key="frame" x="225" y="0.0" width="75" height="55.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="gFf-cZ-eNf">
-                                                        <rect key="frame" x="22.5" y="14.5" width="30" height="30"/>
+                                                        <rect key="frame" x="22.5" y="13" width="30" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="KFi-0v-d4t"/>
@@ -2531,7 +2531,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chz-wl-pWF">
-                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="59"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="55.5"/>
                                                         <connections>
                                                             <action selector="socialButtonsClicked:" destination="R5C-Rs-o4z" eventType="touchUpInside" id="aIK-rn-65V"/>
                                                         </connections>
@@ -2548,10 +2548,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgO-SH-v0X">
-                                                <rect key="frame" x="300" y="0.0" width="75" height="59"/>
+                                                <rect key="frame" x="300" y="0.0" width="75" height="55.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XTd-wB-i3d">
-                                                        <rect key="frame" x="22.5" y="14.5" width="30" height="30"/>
+                                                        <rect key="frame" x="22.5" y="13" width="30" height="30"/>
                                                         <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="5sY-nd-P0F"/>
@@ -2559,7 +2559,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYk-d7-oMq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="59"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="55.5"/>
                                                         <connections>
                                                             <action selector="socialButtonsClicked:" destination="R5C-Rs-o4z" eventType="touchUpInside" id="agb-DF-5p6"/>
                                                         </connections>
@@ -2666,7 +2666,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUd-Fh-K63">
-                                                    <rect key="frame" x="65" y="10" width="68" height="16.5"/>
+                                                    <rect key="frame" x="65" y="10" width="69.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2684,7 +2684,7 @@
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+61 616161" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUC-az-2qr">
-                                                    <rect key="frame" x="65" y="26.5" width="64" height="14"/>
+                                                    <rect key="frame" x="65" y="28" width="57" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="12"/>
                                                     <color key="textColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -3182,7 +3182,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="230" height="40"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Promptchu_Archive" translatesAutoresizingMaskIntoConstraints="NO" id="ybk-Nh-dyN">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Promptchu_Archive" translatesAutoresizingMaskIntoConstraints="NO" id="ybk-Nh-dyN">
                                                             <rect key="frame" x="20" y="5" width="30" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="GLO-nl-KK4"/>
@@ -3797,7 +3797,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2K-d1-McS">
-                                                    <rect key="frame" x="128" y="5" width="74" height="20"/>
+                                                    <rect key="frame" x="128" y="5" width="72" height="20"/>
                                                     <color key="backgroundColor" red="0.14117647059999999" green="0.59215686270000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="RXl-Ln-Pz7"/>
@@ -3838,7 +3838,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Growth Hosts Extras" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-Y6-s9c">
-                                                    <rect key="frame" x="5" y="5" width="120.5" height="20"/>
+                                                    <rect key="frame" x="5" y="5" width="124" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Akm-ia-TB4"/>
                                                     </constraints>
@@ -3847,7 +3847,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3OQ-2b-gwC">
-                                                    <rect key="frame" x="130.5" y="5" width="74" height="20"/>
+                                                    <rect key="frame" x="134" y="5" width="72" height="20"/>
                                                     <color key="backgroundColor" red="0.14117647059999999" green="0.59215686270000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="DMu-lG-PwJ"/>
@@ -3888,7 +3888,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pro Hosts Extras" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bg5-Ag-ewM">
-                                                    <rect key="frame" x="5" y="5" width="98" height="20"/>
+                                                    <rect key="frame" x="5" y="5" width="100" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="hdG-Nr-vyU"/>
                                                     </constraints>
@@ -3897,7 +3897,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xji-6G-oj6">
-                                                    <rect key="frame" x="108" y="5" width="74" height="20"/>
+                                                    <rect key="frame" x="110" y="5" width="72" height="20"/>
                                                     <color key="backgroundColor" red="0.14117647059999999" green="0.59215686270000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="uHG-BP-C5b"/>
@@ -4602,25 +4602,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Paid plans start with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oeg-aZ-Spq">
-                                        <rect key="frame" x="81.5" y="10" width="157" height="17.5"/>
+                                        <rect key="frame" x="75.5" y="10" width="169" height="19"/>
                                         <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="15"/>
                                         <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7-day free trial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPl-7h-EKo">
-                                        <rect key="frame" x="111.5" y="27.5" width="97" height="17.5"/>
+                                        <rect key="frame" x="107.5" y="29" width="105" height="19"/>
                                         <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="15"/>
                                         <color key="textColor" red="0.34509803919999998" green="0.63529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You won’t be charged until after your trial period" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3z-r7-HTZ">
-                                        <rect key="frame" x="10" y="65" width="300" height="14"/>
+                                        <rect key="frame" x="10" y="68" width="300" height="15.5"/>
                                         <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="12"/>
                                         <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gB-JM-TWX">
-                                        <rect key="frame" x="40" y="109" width="240" height="500"/>
+                                        <rect key="frame" x="40" y="113.5" width="240" height="500"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gv-fd-OxM">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="15"/>
@@ -4630,36 +4630,36 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solo Host" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amM-cB-8sQ">
-                                                <rect key="frame" x="40.5" y="35" width="159" height="42"/>
+                                                <rect key="frame" x="40.5" y="35" width="159" height="45.5"/>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="36"/>
                                                 <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.95" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ztm-jw-UwT">
-                                                <rect key="frame" x="82" y="88" width="76" height="45.5"/>
+                                                <rect key="frame" x="82" y="91.5" width="76" height="49.5"/>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="39"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7H-Yi-Q2I">
-                                                <rect key="frame" x="64" y="97" width="13" height="28"/>
+                                                <rect key="frame" x="64" y="101" width="13" height="30.5"/>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="24"/>
                                                 <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="per month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myi-Bx-y1f">
-                                                <rect key="frame" x="81" y="134" width="78.5" height="20"/>
+                                                <rect key="frame" x="78" y="141.5" width="84.5" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="17"/>
                                                 <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9.95 USD billed Monthly" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p18-iQ-FQn">
-                                                <rect key="frame" x="40" y="164.5" width="160" height="16.5"/>
+                                                <rect key="frame" x="37.5" y="173.5" width="165.5" height="18"/>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
                                                 <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 15 GB Cloud Storage Limit — Additional   Restore Deleted Files   Access Analytics   Increase Free Data Limit 15GB" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-xJ-5vl">
-                                                <rect key="frame" x="5" y="201" width="230" height="189"/>
+                                                <rect key="frame" x="5" y="211.5" width="230" height="204"/>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="18"/>
                                                 <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4700,7 +4700,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTT-kT-Pig">
-                                        <rect key="frame" x="80" y="589" width="160" height="40"/>
+                                        <rect key="frame" x="80" y="593.5" width="160" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try Solo Host" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je0-8V-tCT">
                                                 <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
@@ -4730,7 +4730,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6C8-Rd-5yS">
-                                        <rect key="frame" x="280" y="209" width="35" height="80"/>
+                                        <rect key="frame" x="280" y="213.5" width="35" height="80"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="kC3-fS-c6K"/>
@@ -4742,7 +4742,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkv-ig-22p">
-                                        <rect key="frame" x="5" y="209" width="35" height="80"/>
+                                        <rect key="frame" x="5" y="213.5" width="35" height="80"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="8Iv-ab-EoJ"/>

@@ -16,6 +16,9 @@ pod 'Firebase/RemoteConfig'
 pod 'GoogleSignIn'
 pod 'FBSDKLoginKit'
 pod 'FacebookShare'
+pod 'AWSS3'
+pod 'AWSCore'
+pod 'AWSCognito'
 
 
 end

@@ -16,6 +16,38 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+    <key>AWS</key>
+    <dict>
+        <key>CredentialsProvider</key>
+        <dict>
+            <key>CognitoIdentity</key>
+            <dict>
+                <key>Default</key>
+                <dict>
+                    <key>PoolId</key>
+                    <string>us-east-2:3d024c5d-faba-4922-85e4-9b3d2d9581c9</string>
+                    <key>Region</key>
+                    <string>USEast2</string>
+                </dict>
+            </dict>
+        </dict>
+        <key>S3TransferManager</key>
+        <dict>
+            <key>Default</key>
+            <dict>
+                <key>Region</key>
+                <string> USEast2 </string>
+            </dict>
+        </dict>
+        <key>S3</key>
+        <dict>
+            <key>Default</key>
+            <dict>
+                <key>Region</key>
+                <string> USEast2 </string>
+            </dict>
+        </dict>
+    </dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

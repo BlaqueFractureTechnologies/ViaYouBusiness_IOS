@@ -13,6 +13,9 @@ import FBSDKLoginKit
 import GoogleSignIn
 import AVFoundation
 import MessageUI
+import AWSS3
+import AWSCore
+import AWSCognito
 
 class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, BecomeGrowthHostPopUpViewControllerDelegate {
     
@@ -34,7 +37,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var passedProfileImage = UIImage()
     var userId: String = ""
     var invitationUrl: URL!
-    let dropdownArray = ["Share Storage",
+    let dropdownArray = ["Invite",
+                         "Share Storage",
                          "My Plan Or Upgrade",
                          "Restore",
                          "Feedback",
@@ -42,10 +46,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Analytics",
                          "Privacy Policy",
                          "Terms And Conditions"]
+    //AWS setup
+    let bucketName = "dev-promptchu"
+    var contentUrl: URL!
+    var s3Url: URL!
     
+    var streetName: String = ""
+    var countryCode: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.noFeedPopUpView.alpha = 0
         userId = Auth.auth().currentUser!.uid
         print(self.passedProfileImage)
@@ -67,8 +78,77 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         collectioView.reloadData()
         getResponseFromJSONFile()
+        getBucketInfo()
+
 
     }
+    
+    //get aws s3 bucket info
+    func getBucketInfo() {
+        //aws configuration
+        let accessKey = "AKIAJ6O3XJCBVT4WJEYQ"
+        let secretKey = "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"
+        //let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2, identityPoolId:"us-east-2:3d024c5d-faba-4922-85e4-9b3d2d9581c9")
+        let credentialsProvider = AWSStaticCredentialsProvider(accessKey: accessKey, secretKey: secretKey)
+        let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast2, credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        //s3Url = AWSS3.default().configuration.endpoint.url
+        //aws configuration ends
+        
+//        AWSS3.register(with: configuration!, forKey: "defaultKey")
+//        let s3 = AWSS3.s3(forKey: "defaultKey")
+        let s3 = AWSS3.default()
+        let getReq : AWSS3ListObjectsRequest = AWSS3ListObjectsRequest()
+        getReq.bucket = self.bucketName
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        getReq.prefix = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(uid)" //Folder path to get size
+        let downloadGroup = DispatchGroup()
+        downloadGroup.enter()
+        
+        s3.listObjects(getReq) { (listObjects, error) in
+            print(getReq)
+         //   print(listObjects)
+            var total : Int = 0
+            if listObjects?.contents != nil {
+                for object in (listObjects?.contents)! {
+                    do {
+                        let s3Object : AWSS3Object = object
+                        total += (s3Object.size?.intValue)!
+                    }
+                }
+                
+                print(total)
+                
+                let byteCount = total // replace with data.count
+                let bcf = ByteCountFormatter()
+                bcf.allowedUnits = [.useMB] // optional: restricts the units to MB only
+                bcf.countStyle = .file
+                let string = bcf.string(fromByteCount: Int64(byteCount))
+                print("File size in MB : \(string)")
+            }
+            else {
+                print("contents is blank")
+                print(error.debugDescription)
+            }
+        }
+
+////
+//        s3.listObjects(getReq).continueWith { (task) -> AnyObject? in
+//            print("Object result = \(String(describing: task.result))")
+//
+//            print("Object contents = \(String(describing: task.result?.contents))")
+//            for object in (task.result?.contents)! {
+//
+//                print("Object key = \(object.key!)")
+//            }
+//            return nil
+//
+//        }
+//        //
+    }
+    //get aws s3 bucket info ends
+    
+    //get used space
     
     
     @objc func displayBottomPlusButtonCircularWave() {
@@ -148,7 +228,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     func getResponseFromJSONFile() {
         readResponseFromFileForTest()
         return
-            
+        
             
             ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
                 if error == nil {

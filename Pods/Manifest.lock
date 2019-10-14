@@ -1,4 +1,9 @@
 PODS:
+  - AWSCognito (2.10.2):
+    - AWSCore (= 2.10.2)
+  - AWSCore (2.10.2)
+  - AWSS3 (2.10.2):
+    - AWSCore (= 2.10.2)
   - FacebookCore (0.8.0):
     - FBSDKCoreKit (~> 5.0)
   - FacebookShare (0.8.0):
@@ -145,6 +150,9 @@ PODS:
   - Protobuf (3.9.0)
 
 DEPENDENCIES:
+  - AWSCognito
+  - AWSCore
+  - AWSS3
   - FacebookShare
   - FBSDKLoginKit
   - Firebase/Analytics
@@ -157,6 +165,9 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AWSCognito
+    - AWSCore
+    - AWSS3
     - FacebookCore
     - FacebookShare
     - FBSDKCoreKit
@@ -188,6 +199,9 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
+  AWSCognito: 7d90e1e90fd49cfa77292ae92f8c745ff854f650
+  AWSCore: 2e91f89187d1238be35ce8c57aac98c42def640f
+  AWSS3: f0f81ee725de69f631051cead12791ff5dfbba14
   FacebookCore: 563bb4cbcd7dd86cf89f3729252140bf256aacaa
   FacebookShare: e75d5e81ef7bd7aab2f865446c4c27015b43bae6
   FBSDKCoreKit: 39748deefe37a005f983722e433be2ddcdd83ae7
@@ -218,6 +232,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
 
-PODFILE CHECKSUM: 295e49e599410d04aed8a11e25c25f911116ecab
+PODFILE CHECKSUM: be0379925061fca7f4390663940f4cb4d1032beb
 
 COCOAPODS: 1.7.5
