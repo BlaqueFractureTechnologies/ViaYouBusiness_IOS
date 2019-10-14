@@ -56,7 +56,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("Display name is : \(String(describing: Auth.auth().currentUser?.displayName))")
         self.noFeedPopUpView.alpha = 0
         userId = Auth.auth().currentUser!.uid
         print(self.passedProfileImage)
