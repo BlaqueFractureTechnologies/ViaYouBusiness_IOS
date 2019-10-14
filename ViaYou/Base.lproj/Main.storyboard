@@ -732,7 +732,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2NL-I6-KVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2236" y="996.25187406296857"/>
+            <point key="canvasLocation" x="2236" y="1752"/>
         </scene>
         <!--Sign Up Mobile Entry View Controller-->
         <scene sceneID="ZVE-1b-VZS">
@@ -1575,6 +1575,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qlH-ys-nwX">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <segue destination="jgf-6Q-4qN" kind="show" id="Das-gs-1L6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1842,7 +1845,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQp-1g-rAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2236" y="1726"/>
+            <point key="canvasLocation" x="2236" y="995"/>
         </scene>
         <!--No Screen Casts Pop Up View Controller-->
         <scene sceneID="bQh-cB-KlP">
@@ -5328,4 +5331,7 @@
         <image name="twitter" width="32" height="32"/>
         <image name="whatsapp" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Das-gs-1L6"/>
+    </inferredMetricsTieBreakers>
 </document>

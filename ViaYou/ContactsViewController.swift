@@ -137,7 +137,8 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     //MARK:-- FB
     func shareTextOnFaceBook() {
         let shareContent = ShareLinkContent()
-        shareContent.contentURL = URL.init(string: "https://developers.facebook.com")! //your link
+       // shareContent.contentURL = URL.init(string: "https://developers.facebook.com")! //your link
+        shareContent.contentURL = URL.init(string: passedUrlLink)! //your link
         shareContent.quote = self.passedUrlLink//"Text to be shared"
         ShareDialog(fromViewController: self, content: shareContent, delegate: self).show()
     }

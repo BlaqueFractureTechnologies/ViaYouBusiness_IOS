@@ -68,6 +68,9 @@ class InstagramSignInViewController: UIViewController {
                                     self.navigationController?.present(navVC, animated: true, completion: nil)
                                 }
                             }
+                            else{
+                                print("Instagram sign in error: \(error.debugDescription)")
+                            }
                         })
                     }
                     else {
