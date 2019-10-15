@@ -548,18 +548,41 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if (indexPath.row == 2) {
+        if (indexPath.row == 1) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
             nextVC.modalPresentationStyle = .overCurrentContext
             nextVC.delegate = self
             self.present(nextVC, animated: false, completion: nil)
         }
+        else if (indexPath.row == 2) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            nextVC.delegate = self
+            self.present(nextVC, animated: false, completion: nil)
+            
+        }
+        else if (indexPath.row == 3) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            nextVC.delegate = self
+            self.present(nextVC, animated: false, completion: nil)
+            
+        }
         else if (indexPath.row == 5) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
             nextVC.modalPresentationStyle = .overCurrentContext
             self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        else if (indexPath.row == 6) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            nextVC.delegate = self
+            self.present(nextVC, animated: false, completion: nil)            
         }
         
         dropDownOverlayButtonClicked((Any).self)

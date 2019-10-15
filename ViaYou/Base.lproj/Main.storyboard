@@ -2961,10 +2961,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="576.5" width="180" height="30.5"/>
+                                <rect key="frame" x="97.5" y="579" width="180" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -5187,7 +5187,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="rc9-lb-1J2">
-                                <rect key="frame" x="0.0" y="85" width="375.00000000000011" height="220.5"/>
+                                <rect key="frame" x="0.0" y="85" width="375" height="220.5"/>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="rc9-lb-1J2" secondAttribute="height" multiplier="320:188" id="qAN-Sd-Prf"/>
