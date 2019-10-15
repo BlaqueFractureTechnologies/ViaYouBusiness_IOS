@@ -17,6 +17,7 @@ class NewSignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInD
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
     
     var isEmailVerified: Bool = false
     var isPasswordFieldTypeIsSecure: Bool = true
@@ -33,6 +34,10 @@ class NewSignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.loginButton.addAppGradient()
+        }
         
         //        GIDSignIn.sharedInstance().uiDelegate = self
         //        GIDSignIn.sharedInstance().delegate = self

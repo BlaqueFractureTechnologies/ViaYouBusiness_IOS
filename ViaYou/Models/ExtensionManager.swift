@@ -10,6 +10,36 @@ import CoreLocation
 import Contacts
 
 extension UIView {
+    
+    func addAppGradient() {
+        // Gradient
+        var gradientLayer = CAGradientLayer()
+        gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [#colorLiteral(red: 0.8392156863, green: 0.3333333333, blue: 0.4196078431, alpha: 1).cgColor, #colorLiteral(red: 0.9882352941, green: 0.2666666667, blue: 0.3921568627, alpha: 1).cgColor]
+        self.layer.insertSublayer(gradientLayer, at: 0)
+        
+        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
+        gradientLayer.endPoint   = CGPoint(x: 0, y: 0)
+        gradientLayer.frame = self.bounds
+    }
+    
+    func addAppGradientAndGetIt()->CAGradientLayer {
+        // Gradient
+        var gradientLayer = CAGradientLayer()
+        gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [#colorLiteral(red: 0.8392156863, green: 0.3333333333, blue: 0.4196078431, alpha: 1).cgColor, #colorLiteral(red: 0.9882352941, green: 0.2666666667, blue: 0.3921568627, alpha: 1).cgColor]
+        self.layer.insertSublayer(gradientLayer, at: 0)
+        
+        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
+        gradientLayer.endPoint   = CGPoint(x: 0, y: 0)
+        gradientLayer.frame = self.bounds
+        
+        return gradientLayer
+    }
+    
+    
     func applySignUpButtonTheme() {
         self.backgroundColor = UIColor.white
         self.layer.borderColor = UIColor.darkGray.cgColor

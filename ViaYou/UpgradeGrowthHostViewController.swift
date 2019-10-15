@@ -10,8 +10,19 @@ import UIKit
 
 class UpgradeGrowthHostViewController: UIViewController {
     
+    @IBOutlet weak var mostPopularLabelContainer: UIView!
+    @IBOutlet weak var tryGrowthHostButton: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.mostPopularLabelContainer.addAppGradient()
+            self.tryGrowthHostButton.addAppGradient()
+        }
     }
     
     @IBAction func prevButtonClicked(_ sender: UIButton) {

@@ -17,6 +17,7 @@ class SignUpPasswordEntryViewController: UIViewController {
     @IBOutlet weak var nextButtonContainer: UIView!
     @IBOutlet weak var passwordFieldContainerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var signUpButton: UIButton!
     
     var isPasswordFieldTypeIsSecure: Bool = true
     var topMargin: CGFloat = 0.0
@@ -34,6 +35,10 @@ class SignUpPasswordEntryViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         self.activityIndicator.isHidden = true
         setUpView()
+        
+        DispatchQueue.main.async {
+            self.signUpButton.addAppGradient()
+        }
     }
     
     

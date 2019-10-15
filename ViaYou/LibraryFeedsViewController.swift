@@ -33,6 +33,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var overlayViewWhenDropDownAppears: UIImageView!
     @IBOutlet weak var profilePicOnDropDownList: UIImageView!
     @IBOutlet weak var profilePicButtonOnDropDownList: UIButton!
+    @IBOutlet weak var popUpDontBeShhyButton: UIButton!
     
     @IBOutlet weak var userNameOnDropDown: UILabel!
     var dataArray:[FeedDataArrayObject] = []
@@ -92,6 +93,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         getResponseFromJSONFile()
         getBucketInfo()
         
+        DispatchQueue.main.async {
+            self.popUpDontBeShhyButton.addAppGradient()
+        }
         
     }
     
@@ -238,9 +242,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func getResponseFromJSONFile() {
-        readResponseFromFileForTest()
-        return
-            
+//        readResponseFromFileForTest()
+//        return
+//            
             
             ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
                 if error == nil {
@@ -543,6 +547,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if (indexPath.row == 2) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
@@ -556,6 +561,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             nextVC.modalPresentationStyle = .overCurrentContext
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
+        
+        dropDownOverlayButtonClicked((Any).self)
     }
     
     

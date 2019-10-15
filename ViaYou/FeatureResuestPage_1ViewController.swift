@@ -12,13 +12,22 @@ class FeatureResuestPage_1ViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var textViewBg: UIView!
+    @IBOutlet weak var inviteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.addDoneButtonToKeyboard(myAction: #selector(self.dismissTextViewKeyboard))
         textViewBg.layer.cornerRadius = 5
         textViewBg.layer.borderColor = UIColor.gray.cgColor
         textViewBg.layer.borderWidth = 1.0
+        textView.addDoneButtonToKeyboard(myAction:  #selector(textView.resignFirstResponder))
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.inviteButton.addAppGradient()
+        }
     }
     
     @objc func  dismissTextViewKeyboard() {

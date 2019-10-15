@@ -17,6 +17,7 @@ class BecomeGrowthHostPopUpViewController: UIViewController {
     
     @IBOutlet weak var crownButton: UIButton!
     var delegate:BecomeGrowthHostPopUpViewControllerDelegate?
+    @IBOutlet weak var tryGrowthButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,10 @@ class BecomeGrowthHostPopUpViewController: UIViewController {
         super.viewWillAppear(animated)
         crownButton.layer.borderColor = UIColor.white.cgColor
         crownButton.layer.borderWidth = 5.0
+        
+        DispatchQueue.main.async {
+            self.tryGrowthButton.addAppGradient()
+        }
     }
     
     

@@ -10,8 +10,17 @@ import UIKit
 
 class FeatureResuestPage_2ViewController: UIViewController {
     
+    @IBOutlet weak var homeButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.homeButton.addAppGradient()
+        }
     }
     
     @IBAction func homeButtonClicked() {

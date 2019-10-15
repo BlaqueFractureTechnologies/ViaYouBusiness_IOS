@@ -18,6 +18,7 @@ class NewLaunchViewController: UIViewController {
     @IBOutlet weak var baseButtonsContainersBg: UIView!
     @IBOutlet weak var baseButtonsContainer: UIView!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var bottomButtonGradientBg: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,9 @@ class NewLaunchViewController: UIViewController {
             
         }
         
-        
+        DispatchQueue.main.async {
+            self.bottomButtonGradientBg.addAppGradient()
+        }
     }
     
     

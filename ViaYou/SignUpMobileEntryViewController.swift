@@ -22,6 +22,10 @@ class SignUpMobileEntryViewController: UIViewController {
     @IBOutlet weak var segmentButonsContainerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var nextButtonContainer: UIView!
+    @IBOutlet weak var nextButton: UIButton!
+    
+    var emailButtonGradient:CAGradientLayer = CAGradientLayer()
+    var phoneButtonGradient:CAGradientLayer = CAGradientLayer()
     
     var topMargin: CGFloat = 0.0
     
@@ -39,6 +43,11 @@ class SignUpMobileEntryViewController: UIViewController {
         self.scrollView.backgroundColor = UIColor.clear
         self.segmentButtonsContainer.layer.borderColor = self.view.themeRedColor().cgColor
         self.segmentButtonsContainer.layer.borderWidth = 1.0
+        
+        DispatchQueue.main.async {
+            self.nextButton.addAppGradient()
+            self.phoneButtonGradient = self.segmentPhoneButton.addAppGradientAndGetIt()
+        }
         setUpView()
     }
     
@@ -64,7 +73,12 @@ class SignUpMobileEntryViewController: UIViewController {
     
     @IBAction func segmentButtonClicked(_ sender: UIButton) {
         if (sender.tag == 0) {
-            segmentEmailButton.backgroundColor = self.view.themeRedColor()
+            //segmentEmailButton.backgroundColor = self.view.themeRedColor()
+            DispatchQueue.main.async {
+                self.phoneButtonGradient.removeFromSuperlayer()
+                self.emailButtonGradient = self.segmentEmailButton.addAppGradientAndGetIt()
+            }
+            
             segmentEmailButton.setTitleColor(UIColor.white, for: .normal)
             segmentPhoneButton.backgroundColor = UIColor.clear
             segmentPhoneButton.setTitleColor(UIColor.gray, for: .normal)
@@ -76,7 +90,12 @@ class SignUpMobileEntryViewController: UIViewController {
         }else {
             segmentEmailButton.backgroundColor = UIColor.clear
             segmentEmailButton.setTitleColor(UIColor.gray, for: .normal)
-            segmentPhoneButton.backgroundColor = self.view.themeRedColor()
+            //segmentPhoneButton.backgroundColor = self.view.themeRedColor()
+            DispatchQueue.main.async {
+                self.emailButtonGradient.removeFromSuperlayer()
+                self.phoneButtonGradient = self.segmentPhoneButton.addAppGradientAndGetIt()
+            }
+            
             segmentPhoneButton.setTitleColor(UIColor.white, for: .normal)
             
             UIView.animate(withDuration: 0.4) {
