@@ -2961,10 +2961,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="576.5" width="180" height="30.5"/>
+                                <rect key="frame" x="97.5" y="579" width="180" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -4879,9 +4879,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUs-Dv-9j8">
                                                 <rect key="frame" x="300" y="0.0" width="75" height="34"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iXd-lV-LB2">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="iXd-lV-LB2">
                                                         <rect key="frame" x="22.5" y="2" width="30" height="30"/>
-                                                        <color key="backgroundColor" red="0.73725490199999999" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="7kR-vZ-dnW"/>
                                                             <constraint firstAttribute="height" constant="30" id="KR8-HQ-jti"/>
@@ -5187,7 +5187,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="rc9-lb-1J2">
-                                <rect key="frame" x="0.0" y="85" width="375.00000000000011" height="220.5"/>
+                                <rect key="frame" x="0.0" y="85" width="375" height="220.5"/>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="rc9-lb-1J2" secondAttribute="height" multiplier="320:188" id="qAN-Sd-Prf"/>
@@ -5415,6 +5415,7 @@
         <image name="kidProfilePic" width="164" height="164"/>
         <image name="loginBg" width="750" height="1334"/>
         <image name="logo" width="870" height="246"/>
+        <image name="more" width="32" height="32"/>
         <image name="playIconWhite" width="100" height="100"/>
         <image name="popUpProfilePicBorder" width="215" height="215"/>
         <image name="popUpProfilePicBorderForLessSpacePopUp" width="497" height="319"/>

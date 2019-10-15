@@ -131,6 +131,8 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
             return
         case 3:
             shareTextOnInstagram()
+        case 4:
+            shareTextOnAllOtherApps()
         default:
             return
         }
@@ -245,6 +247,30 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
 //            print(" Instagram isn't installed ")
 //        }
         ///END OF VIDEO POSTING CODE
+    }
+    
+    func shareTextOnAllOtherApps() {
+
+        let firstActivityItem = "ViaYou"
+        let secondActivityItem : NSURL = NSURL(string: self.passedUrlLink)!
+        
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: [firstActivityItem, secondActivityItem], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+        
+        // Anything you want to exclude
+        activityViewController.excludedActivityTypes = [
+            UIActivity.ActivityType.postToWeibo,
+            UIActivity.ActivityType.print,
+            UIActivity.ActivityType.assignToContact,
+            UIActivity.ActivityType.saveToCameraRoll,
+            UIActivity.ActivityType.addToReadingList,
+            UIActivity.ActivityType.postToFlickr,
+            UIActivity.ActivityType.postToVimeo,
+            UIActivity.ActivityType.postToTencentWeibo
+        ]
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     @IBAction func backButtonClicked(_ sender: Any) {
