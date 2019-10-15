@@ -406,10 +406,10 @@
                                     <constraint firstAttribute="trailing" secondItem="V3w-Li-iP2" secondAttribute="trailing" id="nrc-Ca-W4w"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFy-hg-Aoi">
+                            <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="cFy-hg-Aoi">
                                 <rect key="frame" x="37.5" y="283.5" width="300" height="100"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchPageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bep-ml-KNx">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="bep-ml-KNx">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
                                     </imageView>
                                 </subviews>
@@ -5315,7 +5315,6 @@
         <image name="featureRequestTitlebarIcon" width="200" height="200"/>
         <image name="google" width="60" height="61"/>
         <image name="instagram" width="60" height="61"/>
-        <image name="launchPageLogo" width="987" height="328"/>
         <image name="loginBg" width="750" height="1334"/>
         <image name="logo" width="870" height="246"/>
         <image name="playIconWhite" width="100" height="100"/>
