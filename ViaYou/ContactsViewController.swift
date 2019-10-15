@@ -216,6 +216,35 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             //}
         }
+        
+        
+        ///FOR VIDEO POSTING USE THIS LINK AND COMMENT THE ABOVE
+//        let instagramURL = URL(string: "instagram://app")!
+//        if (UIApplication.shared.canOpenURL(instagramURL)) {
+//
+//            let imageData = self.passedUrlLink
+//            let writePath = (NSTemporaryDirectory() as NSString).appendingPathComponent("instagram.igo")
+//            do {
+//                try imageData.write(to: URL(fileURLWithPath: writePath), atomically: true, encoding: String.Encoding.init(rawValue: 1))
+//            } catch {
+//                print(error)
+//            }
+//
+//            let fileURL = NSURL(fileURLWithPath: writePath)
+//            print(fileURL)
+//
+//            self.documentController = UIDocumentInteractionController(url: fileURL as URL)
+//
+//            self.documentController.delegate = self as? UIDocumentInteractionControllerDelegate
+//
+//            self.documentController.uti = "com.instagram.exlusivegram"
+//
+//            self.documentController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+//
+//        } else {
+//            print(" Instagram isn't installed ")
+//        }
+        ///END OF VIDEO POSTING CODE
     }
     
     @IBAction func backButtonClicked(_ sender: Any) {
