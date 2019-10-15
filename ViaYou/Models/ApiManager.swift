@@ -245,15 +245,9 @@ struct ApiManager {
     }
     
     //calculate bucket size api
-    func getTotalBucketSize(from:String,
-                        size:String,
-                        completion: @escaping (LibraryFeedResponse, _ error:Error?) -> ()) {
+    func getTotalBucketSize(
+                        completion: @escaping (BucketSizeResponse, _ error:Error?) -> ()) {
         
-        let parameters: [String: Any] = [
-            "from":from,
-            "size":size,
-            
-            ]
         let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
         
         let requestURLString = "\(headerUrl)\(bucketSizeCalculationHeader)"
@@ -263,29 +257,24 @@ struct ApiManager {
         request.httpMethod = "POST"
         
         let postData = NSMutableData()
-        for key in parameters.keys {
-            let keyString = "&\(key)"
-            let valueString = parameters[key] as? String ?? ""
-            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
-        }
         request.httpBody = postData as Data
         
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 print(error ?? "")
-                completion(LibraryFeedResponse([:]),error)
+                completion(BucketSizeResponse([:]),error)
             } else {
                 do {
                     if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
                         print("jsonDict====>%@",jsonDict)
-                        completion(LibraryFeedResponse(jsonDict),nil)
+                        completion(BucketSizeResponse(jsonDict),nil)
                     }else {
-                        completion(LibraryFeedResponse([:]),nil)
+                        completion(BucketSizeResponse([:]),nil)
                     }
                 } catch let parsingError {
                     print("parsingError=\(parsingError)")
-                    completion(LibraryFeedResponse([:]),parsingError)
+                    completion(BucketSizeResponse([:]),parsingError)
                 }
             }
         })

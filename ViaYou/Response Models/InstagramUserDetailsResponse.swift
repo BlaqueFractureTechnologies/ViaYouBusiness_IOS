@@ -17,7 +17,7 @@ struct InstagramUserDetailsResponse {
     init(_ dictionary: [String: Any]) {
         self.success    = dictionary["success"] as? Bool ?? false
         self.message    = dictionary["message"] as? String ?? "Incorrect Message"
-        self.message    = dictionary["accessToken"] as? String ?? "Incorrect Token"
+        self.accessToken    = dictionary["accessToken"] as? String ?? "Incorrect Token"
         
     }
 }

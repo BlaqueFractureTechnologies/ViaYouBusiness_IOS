@@ -37,6 +37,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     @IBOutlet weak var userNameOnDropDown: UILabel!
     var dataArray:[FeedDataArrayObject] = []
+    var bucketDataArray:BucketDataObject = BucketDataObject([:])
     var passedProfileImage = UIImage()
     var userId: String = ""
     var invitationUrl: URL!
@@ -92,7 +93,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         collectioView.reloadData()
         getResponseFromJSONFile()
         getBucketInfo()
-        
+        getTotalStorageSpace()
         DispatchQueue.main.async {
             self.popUpDontBeShhyButton.addAppGradient()
         }
@@ -108,22 +109,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let credentialsProvider = AWSStaticCredentialsProvider(accessKey: accessKey, secretKey: secretKey)
         let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast2, credentialsProvider: credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
-        //s3Url = AWSS3.default().configuration.endpoint.url
-        //aws configuration ends
-        
-        //        AWSS3.register(with: configuration!, forKey: "defaultKey")
-        //        let s3 = AWSS3.s3(forKey: "defaultKey")
         let s3 = AWSS3.default()
         let getReq : AWSS3ListObjectsRequest = AWSS3ListObjectsRequest()
         getReq.bucket = self.bucketName
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        getReq.prefix = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(uid)" //Folder path to get size
+        getReq.prefix = "posts/\(uid)" //Folder path to get size
         let downloadGroup = DispatchGroup()
         downloadGroup.enter()
         
         s3.listObjects(getReq) { (listObjects, error) in
             print(getReq)
-            //   print(listObjects)
+               print(listObjects)
             var total : Int = 0
             if listObjects?.contents != nil {
                 for object in (listObjects?.contents)! {
@@ -147,24 +143,23 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 print(error.debugDescription)
             }
         }
-        
-        ////
-        //        s3.listObjects(getReq).continueWith { (task) -> AnyObject? in
-        //            print("Object result = \(String(describing: task.result))")
-        //
-        //            print("Object contents = \(String(describing: task.result?.contents))")
-        //            for object in (task.result?.contents)! {
-        //
-        //                print("Object key = \(object.key!)")
-        //            }
-        //            return nil
-        //
-        //        }
-        //        //
     }
     //get aws s3 bucket info ends
     
-    //get used space
+    //get total bucket size
+    func getTotalStorageSpace() {
+        ApiManager().getTotalBucketSize { (response, error) in
+            if error == nil {
+                print(response.message)
+                self.bucketDataArray = response.data
+                print("Total storage space = \(self.bucketDataArray.storage)")
+            }
+            else {
+                print(error.debugDescription)
+            }
+        }
+    }
+    //get total bucket size ends
     
     
     @objc func displayBottomPlusButtonCircularWave() {
@@ -582,7 +577,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
             nextVC.modalPresentationStyle = .overCurrentContext
             nextVC.delegate = self
-            self.present(nextVC, animated: false, completion: nil)            
+            self.present(nextVC, animated: false, completion: nil)
         }
         
         dropDownOverlayButtonClicked((Any).self)
