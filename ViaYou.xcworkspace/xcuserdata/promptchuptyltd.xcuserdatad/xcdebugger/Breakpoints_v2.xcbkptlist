@@ -10,59 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "592787269.175372"
+            timestampString = "592877643.2221659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "fetchAuthResponseFromAPI()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ViaYou.InstagramSignInViewController.fetchAuthResponseFromAPI() -&gt; ()"
-                  moduleName = "ViaYou"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "592876168.4037549"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "632">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (ViaYou.InstagramAuthResponseModel, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ViaYou.InstagramSignInViewController.fetchAuthResponseFromAPI() -&gt; ()"
-                  moduleName = "ViaYou"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "592876168.4051419"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "284">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "592787269.175403"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,59 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "592787269.175432"
+            timestampString = "592877643.222522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "fetchAuthResponseFromAPI()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (ViaYou.InstagramUserDetailsResponse, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #2 (ViaYou.InstagramAuthResponseModel, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ViaYou.InstagramSignInViewController.fetchAuthResponseFromAPI() -&gt; ()"
-                  moduleName = "ViaYou"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "592876168.527104"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "1552">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (ViaYou.InstagramUserDetailsResponse, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #2 (ViaYou.InstagramAuthResponseModel, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ViaYou.InstagramSignInViewController.fetchAuthResponseFromAPI() -&gt; ()"
-                  moduleName = "ViaYou"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "592876168.5281349"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "188">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "592787269.175462"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "592787269.175491"
+            timestampString = "592877643.2227401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "592787269.175519"
+            timestampString = "592877643.2229199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -169,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ViaYou/Models/ApiManager.swift"
-            timestampString = "592876168.36683"
+            filePath = "ViaYou/InstagramSignInViewController.swift"
+            timestampString = "592877643.223092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "postInstagramUserIdAPI(userId:name:completion:)"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,45 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ViaYou/Models/ApiManager.swift"
-            timestampString = "592876168.366907"
+            filePath = "ViaYou/InstagramSignInViewController.swift"
+            timestampString = "592877643.223251"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "postInstagramUserIdAPI(userId:name:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViaYou/Models/ApiManager.swift"
-            timestampString = "592876168.366941"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "postInstagramUserIdAPI(userId:name:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViaYou/Models/ApiManager.swift"
-            timestampString = "592876168.366972"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "postInstagramUserIdAPI(userId:name:completion:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

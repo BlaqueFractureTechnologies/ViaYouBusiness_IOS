@@ -14,6 +14,10 @@ class InstagramSignInViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var webView: UIWebView!
+    var generatedUserToken: String = ""
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.isHidden = true
@@ -50,7 +54,7 @@ class InstagramSignInViewController: UIViewController {
                 ApiManager().postInstagramUserIdAPI(userId: userId, name: userName, completion: { (response, error) in
                     if (error == nil) {
                         
-                        let customTokenGenerated = response.message
+                        let customTokenGenerated = response.accessToken
                         print("Response result: \(response.success)")
                         print("access token: \(response.accessToken)")
                         print("Response message: \(response.message)")
@@ -58,6 +62,8 @@ class InstagramSignInViewController: UIViewController {
                         Auth.auth().signIn(withCustomToken: customTokenGenerated, completion: { (result, error) in
                             if (error == nil) {
                                 print("authorised successfully!")
+                                self.generatedUserToken = response.accessToken
+                                UserDefaults.standard.set(self.generatedUserToken, forKey: "GeneratedUserToken")
                                 DispatchQueue.main.async {
                                     self.activityIndicator.stopAnimating()
                                     self.activityIndicator.isHidden = true
