@@ -34,8 +34,16 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var profilePicOnDropDownList: UIImageView!
     @IBOutlet weak var profilePicButtonOnDropDownList: UIButton!
     @IBOutlet weak var popUpDontBeShhyButton: UIButton!
-    
+    @IBOutlet weak var inviteFriendsPopUpView: UIView!
     @IBOutlet weak var userNameOnDropDown: UILabel!
+    @IBOutlet weak var dismissInvitePopUpButton: UIButton!
+    @IBOutlet weak var popUpOverlayButton: UIButton!
+    @IBOutlet weak var storageIndicatorGreen: UIView!
+    @IBOutlet weak var storageIndicatorRed: UIView!
+    @IBOutlet weak var storageIndicatorRedWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var storageIndicatorLabel: UILabel!
+    
+    
     var dataArray:[FeedDataArrayObject] = []
     var bucketDataArray:BucketDataObject = BucketDataObject([:])
     var passedProfileImage = UIImage()
@@ -57,11 +65,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     var streetName: String = ""
     var countryCode: String = ""
+    var totalBucketSpace = ""
+    var usedBucketSpace = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.noFeedPopUpView.alpha = 0
+        self.inviteFriendsPopUpView.alpha = 0
         userId = Auth.auth().currentUser!.uid
         print(self.passedProfileImage)
         print("Current user name is: \(String(describing: Auth.auth().currentUser?.displayName))")
@@ -119,7 +130,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         s3.listObjects(getReq) { (listObjects, error) in
             print(getReq)
-               print(listObjects)
+            print(listObjects)
             var total : Int = 0
             if listObjects?.contents != nil {
                 for object in (listObjects?.contents)! {
@@ -137,6 +148,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 bcf.countStyle = .file
                 let string = bcf.string(fromByteCount: Int64(byteCount))
                 print("File size in MB : \(string)")
+                
+                self.usedBucketSpace = "\(string)"
+                if (self.usedBucketSpace.contains(" ")) {
+                    self.usedBucketSpace = self.usedBucketSpace.components(separatedBy: " ").first ?? ""
+                }
+                self.setBucketSizeGraph()
             }
             else {
                 print("contents is blank")
@@ -153,6 +170,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 print(response.message)
                 self.bucketDataArray = response.data
                 print("Total storage space = \(self.bucketDataArray.storage)")
+                self.totalBucketSpace = "\((Float(self.bucketDataArray.storage) ?? 0.0)*1000.0)"
+                print("self.totalBucketSpace = \(self.totalBucketSpace)")
+                
+                self.setBucketSizeGraph()
+                
             }
             else {
                 print(error.debugDescription)
@@ -160,6 +182,43 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     //get total bucket size ends
+    
+    func setBucketSizeGraph() {
+        print("self.usedBucketSpace** = \(self.usedBucketSpace)")
+        print("self.totalBucketSpace** = \(self.totalBucketSpace)")
+        
+        if (self.totalBucketSpace.count > 0 && self.usedBucketSpace.count > 0) {
+            let usedBucketSpaceValue  = Float(self.usedBucketSpace) ?? 0.0
+            let totalBucketSpaceValue = Float(self.totalBucketSpace) ?? 0.0
+            print("usedBucketSpaceValue = \(usedBucketSpaceValue)")
+            print("totalBucketSpaceValue = \(totalBucketSpaceValue)")
+            
+            if (totalBucketSpaceValue > 0) {
+                let percentage = (usedBucketSpaceValue/totalBucketSpaceValue)*100
+                print("percentage = \(percentage)")
+                
+                DispatchQueue.main.async {
+                    let storageIndicatorGreenWidth = self.storageIndicatorGreen.frame.size.width
+                    let storageIndicatorRedWidth   = self.storageIndicatorRed.frame.size.width
+                    
+                    print("storageIndicatorGreenWidth = \(storageIndicatorGreenWidth)")
+                    print("storageIndicatorRedWidth = \(storageIndicatorRedWidth)")
+                    
+                    self.storageIndicatorRedWidthConstraint.constant = CGFloat(percentage)
+                    
+                }
+            }
+            
+            let remainingSpace = totalBucketSpaceValue - usedBucketSpaceValue
+            print("remainingSpace = \(remainingSpace)")
+            
+            let remainingSpaceInMB = Float(remainingSpace) //1000.0
+            
+            DispatchQueue.main.async {
+                self.storageIndicatorLabel.text = "\(remainingSpaceInMB) MB Free"
+            }
+        }
+    }
     
     
     @objc func displayBottomPlusButtonCircularWave() {
@@ -186,6 +245,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         super.viewWillAppear(animated)
         self.dropDownBaseView.alpha = 0
         self.dropdownOverlayButton.alpha = 0
+        self.popUpOverlayButton.alpha = 0
+        
         overlayViewWhenDropDownAppears.alpha = 0
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(displayBottomPlusButtonCircularWave), userInfo: nil, repeats: false)
@@ -237,44 +298,44 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func getResponseFromJSONFile() {
-//        readResponseFromFileForTest()
-//        return
-//            
-            
-            ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
-                if error == nil {
-                    print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
-                    if responseDict.data.count == 0 {
-                        
-                        DispatchQueue.main.async {
-                            self.noFeedPopUpView.alpha = 1
-                            self.collectioView.reloadData()
-                            
-                        }
-                    }
-                    else {
-                        
-                        print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
-                        for i in 0..<responseDict.data.count {
-                            let indexDict = responseDict.data[i]
-                            indexDict.isInfoPopUpDisplaying = false
-                            self.dataArray.append(indexDict)
-                            print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
-                        }
-                        self.loadAllVideoImagesForDataArray()
-                        //  self.loadVideoSize()
-                        DispatchQueue.main.async {
-                            self.noFeedPopUpView.alpha = 0
-                            self.collectioView.reloadData()
-                            
-                        }
-                        
-                    }
-                }
+        //        readResponseFromFileForTest()
+        //        return
+        //
+        
+        ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
+            if error == nil {
+                print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
+                if responseDict.data.count == 0 {
                     
-                else {
-                    print(error?.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.noFeedPopUpView.alpha = 1
+                        self.collectioView.reloadData()
+                        
+                    }
                 }
+                else {
+                    
+                    print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
+                    for i in 0..<responseDict.data.count {
+                        let indexDict = responseDict.data[i]
+                        indexDict.isInfoPopUpDisplaying = false
+                        self.dataArray.append(indexDict)
+                        print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
+                    }
+                    self.loadAllVideoImagesForDataArray()
+                    //  self.loadVideoSize()
+                    DispatchQueue.main.async {
+                        self.noFeedPopUpView.alpha = 0
+                        self.collectioView.reloadData()
+                        
+                    }
+                    
+                }
+            }
+                
+            else {
+                print(error?.localizedDescription)
+            }
         }
     }
     
@@ -348,8 +409,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     @IBAction func plusButtonClicked() {
-        print("didSelectItemAt...")
         
+        self.inviteFriendsPopUpView.alpha = 1
+        self.popUpOverlayButton.alpha = 0.5
+//        print("didSelectItemAt...")
+//        goToContactsVCToInvite()
+        
+    }
+    
+    func goToContactsVCToInvite() {
         
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -378,13 +446,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             navVC.isNavigationBarHidden = true
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "LessSpacePopUpViewController") as! LessSpacePopUpViewController
-        //        nextVC.modalPresentationStyle = .overCurrentContext
-        //        let navVC = UINavigationController(rootViewController: nextVC)
-        //        navVC.isNavigationBarHidden = true
-        //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
+    
+    //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+    //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "LessSpacePopUpViewController") as! LessSpacePopUpViewController
+    //        nextVC.modalPresentationStyle = .overCurrentContext
+    //        let navVC = UINavigationController(rootViewController: nextVC)
+    //        navVC.isNavigationBarHidden = true
+    //        self.navigationController?.present(navVC, animated: false, completion: nil)
+    
     //    func loadVideoSize() {
     //        for i in 0..<dataArray.count {
     //            let userID = dataArray[i].user._id
@@ -507,6 +577,18 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         self.noFeedPopUpView.alpha = 0
         //self.navigationController?.dismiss(animated: true, completion: nil)
     }
+    @IBAction func dismissInvitePopUp(_ sender: Any) {
+        self.inviteFriendsPopUpView.alpha = 0
+        self.popUpOverlayButton.alpha = 0
+    }
+    
+    @IBAction func inviteFriendsButtonClicked(_ sender: Any) {
+        self.inviteFriendsPopUpView.alpha = 0
+        self.popUpOverlayButton.alpha = 0
+        goToContactsVCToInvite()
+    }
+    
+    
     
     @IBAction func profilePicButtonClicked(_ sender: Any) {
         self.dropDownBaseViewHeightConstraint.constant = 0.0001
@@ -543,7 +625,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if (indexPath.row == 1) {
+        dropDownOverlayButtonClicked((Any).self)
+        
+        if(indexPath.row == 0) {
+            self.inviteFriendsPopUpView.alpha = 1
+            self.popUpOverlayButton.alpha = 0.5
+        }
+        else if (indexPath.row == 1) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
             nextVC.modalPresentationStyle = .overCurrentContext
@@ -580,7 +668,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.present(nextVC, animated: false, completion: nil)
         }
         
-        dropDownOverlayButtonClicked((Any).self)
+        
+        
     }
     
     
