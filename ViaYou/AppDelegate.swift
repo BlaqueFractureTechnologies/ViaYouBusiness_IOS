@@ -11,6 +11,7 @@ import Firebase
 import FBSDKCoreKit
 import GoogleSignIn
 import Firebase
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {

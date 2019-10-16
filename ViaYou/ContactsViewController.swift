@@ -15,6 +15,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var inviteAFriendLabel: UILabel!
     
     var fullDataArray:[PhoneContact] = []
     var dataArray:[PhoneContact] = []
@@ -29,6 +30,13 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        let boolVal = UserDefaults.standard.bool(forKey: "isTappedFromSingleVideo")
+        if boolVal == true {
+            inviteAFriendLabel.text = "Send To"
+        }
+        else {
+            inviteAFriendLabel.text = "Invite A Friend"
+        }
         
         self.getContacts { (status,contactsArray) in
             if (status == true) {

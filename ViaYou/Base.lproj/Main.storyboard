@@ -4105,7 +4105,7 @@
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jra-gc-pn3">
-                                                                                <rect key="frame" x="22" y="2" width="31" height="20.5"/>
+                                                                                <rect key="frame" x="22" y="2" width="31" height="21"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
@@ -5059,6 +5059,7 @@
                         <viewLayoutGuide key="safeArea" id="Ihg-bN-5PS"/>
                     </view>
                     <connections>
+                        <outlet property="inviteAFriendLabel" destination="8dk-2A-dxP" id="ZHX-0D-Ogn"/>
                         <outlet property="searchField" destination="JIn-C1-Wy3" id="weX-LT-TPw"/>
                         <outlet property="tableView" destination="p8y-jo-am7" id="Ozb-7Z-stJ"/>
                     </connections>
@@ -5396,7 +5397,7 @@
         <image name="arrow_Left" width="70" height="160"/>
         <image name="arrow_Right" width="70" height="160"/>
         <image name="backArrow_white" width="16" height="16"/>
-        <image name="bottomPlusButton" width="195" height="195"/>
+        <image name="bottomPlusButton" width="174" height="180"/>
         <image name="bottomRedButton" width="195" height="195"/>
         <image name="cellArrowSmall" width="50" height="50"/>
         <image name="cellCloseIcon" width="200" height="100"/>
@@ -5415,7 +5416,7 @@
         <image name="kidProfilePic" width="164" height="164"/>
         <image name="loginBg" width="750" height="1334"/>
         <image name="logo" width="870" height="246"/>
-        <image name="more" width="32" height="32"/>
+        <image name="more" width="64" height="64"/>
         <image name="playIconWhite" width="100" height="100"/>
         <image name="popUpProfilePicBorder" width="215" height="215"/>
         <image name="popUpProfilePicBorderForLessSpacePopUp" width="497" height="319"/>

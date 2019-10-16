@@ -148,6 +148,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.9.0)
+  - Stripe (16.0.5)
 
 DEPENDENCIES:
   - AWSCognito
@@ -162,6 +163,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/RemoteConfig
   - GoogleSignIn
+  - Stripe
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -197,6 +199,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - Stripe
 
 SPEC CHECKSUMS:
   AWSCognito: 7d90e1e90fd49cfa77292ae92f8c745ff854f650
@@ -231,7 +234,8 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
+  Stripe: a1f053d9288fcab2df49260fe1b816536a75f1ac
 
-PODFILE CHECKSUM: be0379925061fca7f4390663940f4cb4d1032beb
+PODFILE CHECKSUM: 02d96debc8d89db66dcd817240d482e28f36f8c0
 
 COCOAPODS: 1.7.5

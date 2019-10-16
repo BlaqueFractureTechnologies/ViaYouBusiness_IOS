@@ -19,6 +19,6 @@ pod 'FacebookShare'
 pod 'AWSS3'
 pod 'AWSCore'
 pod 'AWSCognito'
-
+pod 'Stripe'
 
 end
