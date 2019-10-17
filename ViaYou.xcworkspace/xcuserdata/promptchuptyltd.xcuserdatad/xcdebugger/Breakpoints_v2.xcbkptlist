@@ -118,15 +118,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/StripePaymentViewController.swift"
-            timestampString = "592970281.260695"
+            timestampString = "592977079.933532"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "buyButtonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/StripePaymentViewController.swift"
-            timestampString = "592970404.042128"
+            timestampString = "592977079.933576"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
@@ -154,7 +154,7 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou/ViaYou/StripePaymentViewController.swift"
-                  timestampString = "592970404.049626"
+                  timestampString = "592977080.261251"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "75"
@@ -169,11 +169,11 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou/ViaYou/StripePaymentViewController.swift"
-                  timestampString = "592970404.050681"
+                  timestampString = "592977080.262237"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
                   offsetFromSymbolStart = "228">
                </Location>
             </Locations>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/StripePaymentViewController.swift"
-            timestampString = "592970405.290724"
+            timestampString = "592977079.933609"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "buyButtonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -201,13 +201,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ViaYou/StripePaymentViewController.swift"
-            timestampString = "592970406.111931"
+            filePath = "ViaYou/Models/ApiManager.swift"
+            timestampString = "592977079.933641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "buyButtonClicked(_:)"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
+            landmarkName = "confirmPaymentAPI(stripeToken:type:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

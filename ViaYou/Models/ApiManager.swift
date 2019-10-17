@@ -286,19 +286,18 @@ struct ApiManager {
     
     //Payment Confirmation API
     func confirmPaymentAPI(stripeToken:String,
-                           type:String,
-                           completion: @escaping (SubscriptionResponse, _ error:Error?) -> ()) {
+                        type:String,
+                        completion: @escaping (SubscriptionResponse, _ error:Error?) -> ()) {
         
         let parameters: [String: Any] = [
             "stripeToken":stripeToken,
             "type":type,
-            
             ]
         let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
         
         let requestURLString = "\(mainHeader)\(createChargesHeader)"
         let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
-        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+       // request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
         request.setValue(generatedUserToken, forHTTPHeaderField: "token")
         request.httpMethod = "POST"
         

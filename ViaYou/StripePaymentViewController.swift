@@ -16,6 +16,7 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
     var cardField = STPPaymentCardTextField()
     var theme = STPTheme.default()
     
+    let tokenGot: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -65,15 +66,13 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
         
         
         STPAPIClient.shared().createToken(withCard: cardParams) { token, error in
-            guard let token = token else {
-                // Handle the error
+            guard let token = token else {                // Handle the error
                 return
             }
             print("token == \(token)")
             let stringToken = String(describing: token)
             // Use the token in the next step
             ApiManager().confirmPaymentAPI(stripeToken: stringToken, type: self.passedTypeOfPayment, completion: { (response, error) in
-                
                 print(self.passedTypeOfPayment)
                 print(stringToken)
                 if error == nil {
@@ -85,7 +84,6 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
                     self.displayAlert(msg: "Sorry! Payment Failed! Please try again later!")
                     print(error.debugDescription)
                 }
-                
             })
         }
     }
