@@ -212,10 +212,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let remainingSpace = totalBucketSpaceValue - usedBucketSpaceValue
             print("remainingSpace = \(remainingSpace)")
             
-            let remainingSpaceInMB = Float(remainingSpace) //1000.0
+            let remainingSpaceInMB = Float(remainingSpace) / 1000.0
             
             DispatchQueue.main.async {
-                self.storageIndicatorLabel.text = "\(remainingSpaceInMB) MB Free"
+                self.storageIndicatorLabel.text = "\(remainingSpaceInMB) GB Free"
             }
         }
     }
