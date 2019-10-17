@@ -14,6 +14,7 @@ struct ApiManager {
     let POSTSHEADER     = "https://promptchu-api.herokuapp.com/post/"
     let COMPANY_HEADER  = "https://promptchu-api.herokuapp.com/company/"
     let COMMENT_HEADER  = "https://promptchu-api.herokuapp.com/comment/"
+    let mainHeader = "https://promptchu-api.herokuapp.com/"
     
     let instagramHeader = "https://api.instagram.com/v1/users/self/?access_token="
     let instagramAuthenticationToken = UserDefaults.standard.value(forKey: "InstagramAccessToken")
@@ -22,6 +23,7 @@ struct ApiManager {
     let fetchLibraryDataHeader = "listScreenCast"
     let referralHeader = "referral"
     let bucketSizeCalculationHeader = "subscription"
+    let createChargesHeader = "subscription/createCharges"
     
     
     //MARK:- Registration API
@@ -246,7 +248,7 @@ struct ApiManager {
     
     //calculate bucket size api
     func getTotalBucketSize(
-                        completion: @escaping (BucketSizeResponse, _ error:Error?) -> ()) {
+        completion: @escaping (BucketSizeResponse, _ error:Error?) -> ()) {
         
         let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
         
@@ -280,6 +282,55 @@ struct ApiManager {
         })
         dataTask.resume()
     }
-
+    
+    
+    //Payment Confirmation API
+    func confirmPaymentAPI(stripeToken:String,
+                           type:String,
+                           completion: @escaping (SubscriptionResponse, _ error:Error?) -> ()) {
+        
+        let parameters: [String: Any] = [
+            "stripeToken":stripeToken,
+            "type":type,
+            
+            ]
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
+        
+        let requestURLString = "\(mainHeader)\(createChargesHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue(generatedUserToken, forHTTPHeaderField: "token")
+        request.httpMethod = "POST"
+        
+        let postData = NSMutableData()
+        for key in parameters.keys {
+            let keyString = "&\(key)"
+            let valueString = parameters[key] as? String ?? ""
+            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
+        }
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(SubscriptionResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("jsonDict====>%@",jsonDict)
+                        completion(SubscriptionResponse(jsonDict),nil)
+                    }else {
+                        completion(SubscriptionResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(SubscriptionResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
 }
 

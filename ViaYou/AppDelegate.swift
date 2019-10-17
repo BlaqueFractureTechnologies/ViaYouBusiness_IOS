@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+        
+        Stripe.setDefaultPublishableKey("pk_test_kjt2etOhS9X6czAJxzLbEuM5007kPQdweC")
         return true
     }
     

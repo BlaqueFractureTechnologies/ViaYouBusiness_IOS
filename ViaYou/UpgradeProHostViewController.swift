@@ -24,4 +24,14 @@ class UpgradeProHostViewController: UIViewController {
         parentVC.proVCNextAndPrevButtonsClicked(index: 1)
     }
     
+    @IBAction func tryProHostButtonClicked(_ sender: Any) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
+        homeVC.passedTypeOfPayment = "PRO"
+        let navVC = UINavigationController(rootViewController: homeVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.present(navVC, animated: true, completion: nil)
+    }
+    
+    
 }

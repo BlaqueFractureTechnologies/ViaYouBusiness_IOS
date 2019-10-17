@@ -25,6 +25,8 @@
 		9E3485B8234A8FEE00DFADC9 /* PhoneContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485B7234A8FEE00DFADC9 /* PhoneContact.swift */; };
 		9E3485BA234A903F00DFADC9 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485B9234A903F00DFADC9 /* ContactsTableViewCell.swift */; };
 		9E3485BE234AE5E400DFADC9 /* ReferralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485BD234AE5E400DFADC9 /* ReferralResponse.swift */; };
+		9E34D01D2357FDF40085ABAA /* StripePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34D01C2357FDF40085ABAA /* StripePaymentViewController.swift */; };
+		9E34D01F2357FE1E0085ABAA /* SubscriptionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34D01E2357FE1E0085ABAA /* SubscriptionResponse.swift */; };
 		9E403A39234434AE002E3749 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A38234434AE002E3749 /* ApiManager.swift */; };
 		9E403A3C2344352B002E3749 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3B2344352B002E3749 /* RegisterResponse.swift */; };
 		9E403A3E23443F0B002E3749 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3D23443F0B002E3749 /* Constants.swift */; };
@@ -100,6 +102,8 @@
 		9E3485B7234A8FEE00DFADC9 /* PhoneContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneContact.swift; sourceTree = "<group>"; };
 		9E3485B9234A903F00DFADC9 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		9E3485BD234AE5E400DFADC9 /* ReferralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralResponse.swift; sourceTree = "<group>"; };
+		9E34D01C2357FDF40085ABAA /* StripePaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripePaymentViewController.swift; sourceTree = "<group>"; };
+		9E34D01E2357FE1E0085ABAA /* SubscriptionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionResponse.swift; sourceTree = "<group>"; };
 		9E403A38234434AE002E3749 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		9E403A3B2344352B002E3749 /* RegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
 		9E403A3D23443F0B002E3749 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				9EB6E341234592870086A131 /* LibraryFeedResponse.swift */,
 				9E3485BD234AE5E400DFADC9 /* ReferralResponse.swift */,
 				9ECDE2EA2356891F009D0BBE /* BucketSizeResponse.swift */,
+				9E34D01E2357FE1E0085ABAA /* SubscriptionResponse.swift */,
 			);
 			path = "Response Models";
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 				9E2970D7234E7FC6003BC282 /* UpgradeSoloHostViewController.swift */,
 				9E2970D9234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift */,
 				9E2970DB234E7FF6003BC282 /* UpgradeProHostViewController.swift */,
+				9E34D01C2357FDF40085ABAA /* StripePaymentViewController.swift */,
 				9E2970DD234E8012003BC282 /* SubscriptionBaseViewController.swift */,
 				9EF90CCA2353CA9300127322 /* SubscriptionsListViewController.swift */,
 				9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */,
@@ -538,6 +544,8 @@
 				9EF90CC72353C9BA00127322 /* SubscriptionListProTableViewCell.swift in Sources */,
 				9EA55F99233C29FB003A1EBB /* SplashViewController.swift in Sources */,
 				9E403A4023443F34002E3749 /* InstagramSignInViewController.swift in Sources */,
+				9E34D01F2357FE1E0085ABAA /* SubscriptionResponse.swift in Sources */,
+				9E34D01D2357FDF40085ABAA /* StripePaymentViewController.swift in Sources */,
 				9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */,
 				9E3485B8234A8FEE00DFADC9 /* PhoneContact.swift in Sources */,
 				9E3485BA234A903F00DFADC9 /* ContactsTableViewCell.swift in Sources */,

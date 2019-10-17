@@ -34,5 +34,14 @@ class UpgradeGrowthHostViewController: UIViewController {
         let parentVC = parent as! UpgradeAndSubscriptionBaseViewController
         parentVC.growthVCNextAndPrevButtonsClicked(index: 1)
     }
+    @IBAction func tryGrowthHostButtonClicked(_ sender: Any) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
+        homeVC.passedTypeOfPayment = "GROWTH"
+        let navVC = UINavigationController(rootViewController: homeVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.present(navVC, animated: true, completion: nil)
+    }
+    
     
 }
