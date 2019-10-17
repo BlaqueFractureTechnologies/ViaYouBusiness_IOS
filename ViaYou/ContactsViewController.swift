@@ -199,66 +199,140 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     //MARK:-- Instagram (Refer: https://medium.com/@maximbilan/ios-sharing-via-instagram-9bf9a9f7f14d) and implement
     func shareTextOnInstagram() {
         
-        let instagramURL = NSURL(string: "instagram://app")
+        /*
+         let instagramURL = NSURL(string: "instagram://app")
+         
+         if (UIApplication.shared.canOpenURL(instagramURL! as URL)) {
+         
+         
+         let imageData = self.defaultProfilePic?.jpegData(compressionQuality: 0.75)//UIImageJPEGRepresentation(UIImage(named: "defaultProfilePic")!, 100)
+         
+         let captionString = self.passedUrlLink
+         
+         let writePath = (NSTemporaryDirectory() as NSString).appendingPathComponent("instagram.igo")
+         do {
+         try imageData?.write(to: URL(fileURLWithPath: writePath), options: .atomic)
+         } catch {
+         print(error)
+         }
+         let fileURL = NSURL(fileURLWithPath: writePath)
+         
+         self.documentController = UIDocumentInteractionController(url: fileURL as URL)
+         
+         self.documentController.delegate = self as? UIDocumentInteractionControllerDelegate
+         
+         self.documentController.uti = "com.instagram.exlusivegram"
+         
+         self.documentController.annotation = NSDictionary(object: captionString, forKey: "InstagramCaption" as NSCopying)
+         self.documentController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+         
+         //}
+         }
+         */
         
-        if (UIApplication.shared.canOpenURL(instagramURL! as URL)) {
-            
-            let imageData = self.defaultProfilePic?.jpegData(compressionQuality: 0.75)//UIImageJPEGRepresentation(UIImage(named: "defaultProfilePic")!, 100)
-            
-            let captionString = self.passedUrlLink
-            
-            let writePath = (NSTemporaryDirectory() as NSString).appendingPathComponent("instagram.igo")
-            do {
-                try imageData?.write(to: URL(fileURLWithPath: writePath), options: .atomic)
-            } catch {
-                print(error)
+        
+        let videoUrlString = "https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
+        
+        DispatchQueue.global(qos: .background).async {
+            if let url = URL(string: videoUrlString),
+                let urlData = NSData(contentsOf: url) {
+                //let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
+                //let filePath ="\(documentsPath)/tempFile.mp4"
+                let filePath = getDocumentsDirectoryFileUrl().absoluteString
+                print("Video filePath = \(filePath)")
+                
+                DispatchQueue.main.async {
+                    urlData.write(toFile: filePath, atomically: true)
+                    print("Video filePath = \(filePath)")
+                    
+                    print("Video is saved!")
+                    
+                    let instagramURL = URL(string: "instagram://app")!
+                    if (UIApplication.shared.canOpenURL(instagramURL)) {
+                        let fileManager = FileManager.default
+                        
+                        
+                        self.documentController = UIDocumentInteractionController(url: getDocumentsDirectoryFileUrl())
+                        self.documentController.delegate = self as? UIDocumentInteractionControllerDelegate
+                        self.documentController.uti = "com.instagram.exlusivegram"
+                        self.documentController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+                    }else {
+                        print(" Instagram isn't installed ")
+                    }
+                    
+                    /*
+                     PHPhotoLibrary.shared().performChanges({
+                     PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: URL(fileURLWithPath: filePath))
+                     }) { completed, error in
+                     if completed {
+                     print("Video is saved!")
+                     print("Video is completed = \(completed)")
+                     print("Video is error = \(error?.localizedDescription)")
+                     
+                     let instagramURL = URL(string: "instagram://app")!
+                     if (UIApplication.shared.canOpenURL(instagramURL)) {
+                     let fileManager = FileManager.default
+                     
+                     
+                     self.documentController = UIDocumentInteractionController(url: getDocumentsDirectoryFileUrl())
+                     self.documentController.delegate = self as? UIDocumentInteractionControllerDelegate
+                     self.documentController.uti = "com.instagram.exlusivegram"
+                     self.documentController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+                     }else {
+                     print(" Instagram isn't installed ")
+                     }
+                     }
+                     }
+                     */
+                }
             }
-            let fileURL = NSURL(fileURLWithPath: writePath)
-            
-            self.documentController = UIDocumentInteractionController(url: fileURL as URL)
-            
-            self.documentController.delegate = self as? UIDocumentInteractionControllerDelegate
-            
-            self.documentController.uti = "com.instagram.exlusivegram"
-            
-            self.documentController.annotation = NSDictionary(object: captionString, forKey: "InstagramCaption" as NSCopying)
-            self.documentController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
-            
-            //}
         }
         
+        func getDocumentsDirectoryFileUrl() -> URL {
+            let filename = "tempFile.mp4"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentsDirectory = paths[0]
+            let filePath = documentsDirectory.appendingPathComponent(filename)
+            return filePath
+        }
         
-        ///FOR VIDEO POSTING USE THIS LINK AND COMMENT THE ABOVE
-//        let instagramURL = URL(string: "instagram://app")!
-//        if (UIApplication.shared.canOpenURL(instagramURL)) {
-//
-//            let imageData = self.passedUrlLink
-//            let writePath = (NSTemporaryDirectory() as NSString).appendingPathComponent("instagram.igo")
-//            do {
-//                try imageData.write(to: URL(fileURLWithPath: writePath), atomically: true, encoding: String.Encoding.init(rawValue: 1))
-//            } catch {
-//                print(error)
-//            }
-//
-//            let fileURL = NSURL(fileURLWithPath: writePath)
-//            print(fileURL)
-//
-//            self.documentController = UIDocumentInteractionController(url: fileURL as URL)
-//
-//            self.documentController.delegate = self as? UIDocumentInteractionControllerDelegate
-//
-//            self.documentController.uti = "com.instagram.exlusivegram"
-//
-//            self.documentController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
-//
-//        } else {
-//            print(" Instagram isn't installed ")
-//        }
-        ///END OF VIDEO POSTING CODE
+        /*
+         ///FOR VIDEO POSTING USE THIS LINK AND COMMENT THE ABOVE
+         let instagramURL = URL(string: "instagram://app")!
+         if (UIApplication.shared.canOpenURL(instagramURL)) {
+         
+         let imageData = self.passedUrlLink
+         let writePath = (NSTemporaryDirectory() as NSString).appendingPathComponent("instagram.igo")
+         do {
+         try imageData.write(to: URL(fileURLWithPath: writePath), atomically: true, encoding: String.Encoding.init(rawValue: 1))
+         } catch {
+         print(error)
+         }
+         
+         let fileURL = NSURL(fileURLWithPath: writePath)
+         print(fileURL)
+         
+         self.documentController = UIDocumentInteractionController(url: fileURL as URL)
+         
+         self.documentController.delegate = self as? UIDocumentInteractionControllerDelegate
+         
+         self.documentController.uti = "com.instagram.exlusivegram"
+         
+         self.documentController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+         
+         } else {
+         print(" Instagram isn't installed ")
+         }
+         ///END OF VIDEO POSTING CODE
+         */
     }
     
+    
+    
+    
+    
     func shareTextOnAllOtherApps() {
-
+        
         let firstActivityItem = "ViaYou"
         let secondActivityItem : NSURL = NSURL(string: self.passedUrlLink)!
         
