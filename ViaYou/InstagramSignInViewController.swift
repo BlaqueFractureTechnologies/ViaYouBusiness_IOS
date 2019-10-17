@@ -15,7 +15,8 @@ class InstagramSignInViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var webView: UIWebView!
     var generatedUserToken: String = ""
-
+    var passingProfileImage = UIImage()
+    
     
     
     override func viewDidLoad() {
@@ -64,15 +65,29 @@ class InstagramSignInViewController: UIViewController {
                                 print("authorised successfully!")
                                 self.generatedUserToken = response.accessToken
                                 UserDefaults.standard.set(self.generatedUserToken, forKey: "GeneratedUserToken")
-                                DispatchQueue.main.async {
-                                    self.activityIndicator.stopAnimating()
-                                    self.activityIndicator.isHidden = true
-                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                    let navVC = UINavigationController(rootViewController: homeVC)
-                                    navVC.isNavigationBarHidden = true
-                                    self.navigationController?.present(navVC, animated: true, completion: nil)
+                                let instagramAuthenticationToken = UserDefaults.standard.value(forKey: "InstagramAccessToken")
+                                ApiManager().getInstaUserDetails(access_token: instagramAuthenticationToken as! String) { (responseDict, error) in
+                                    if (error == nil) {
+                                        print(responseDict.data)
+                                        print("getInstaUserDetails :: profile_picture ====> \(responseDict.data.profile_picture)")
+                                        JMImageCache.shared()?.image(for: URL(string: responseDict.data.profile_picture), completionBlock: { (image) in
+                                            self.passingProfileImage = image!
+                                        }, failureBlock: { (request, response, error) in
+                                        })
+                                        
+                                        DispatchQueue.main.async {
+                                            self.activityIndicator.stopAnimating()
+                                            self.activityIndicator.isHidden = true
+                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                            homeVC.passedProfileImage = self.passingProfileImage
+                                            let navVC = UINavigationController(rootViewController: homeVC)
+                                            navVC.isNavigationBarHidden = true
+                                            self.navigationController?.present(navVC, animated: true, completion: nil)
+                                        }
+                                    }
                                 }
+                                
                             }
                             else{
                                 print("Instagram sign in error: \(error.debugDescription)")
@@ -96,6 +111,9 @@ class InstagramSignInViewController: UIViewController {
         print("Instagram authentication token ==", authToken)
         let instagramAccessToken = authToken
         UserDefaults.standard.set(instagramAccessToken, forKey: "InstagramAccessToken")
+        
+        
+        
     }
     
 }

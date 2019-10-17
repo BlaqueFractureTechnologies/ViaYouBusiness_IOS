@@ -15,6 +15,8 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     let redTitles = ["save 15%", "save 10%", "save 25%", "save 30%"]
     var openedSection = -1
     
+    var isFromViewAllButtonClickAndFromUpgradePage:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -132,16 +134,25 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     @IBAction func upgrageButtonClicked() {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.navigationController?.pushViewController(nextVC, animated: false)
+        if (isFromViewAllButtonClickAndFromUpgradePage == true) {
+            self.navigationController?.popViewController(animated: false)
+        }else {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
+            let navVC = UINavigationController(rootViewController: nextVC)
+            navVC.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(nextVC, animated: false)
+        }
+        
     }
     
     
     @IBAction func backButtonClicked(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        if (isFromViewAllButtonClickAndFromUpgradePage == true) {
+            self.navigationController?.popViewControllers(viewsToPop: 2)
+        }else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

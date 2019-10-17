@@ -12,6 +12,8 @@ class UpgradeAndSubscriptionBaseViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    var isFromViewAllButtonClick:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,15 +56,25 @@ class UpgradeAndSubscriptionBaseViewController: UIViewController {
     }
     
     @IBAction func subscriptionButtonClicked() {
-        self.navigationController?.popViewController(animated: false)
-        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubscriptionBaseViewController") as! SubscriptionBaseViewController
-        //        let navVC = UINavigationController(rootViewController: nextVC)
-        //        navVC.isNavigationBarHidden = true
-        //        self.navigationController?.pushViewController(nextVC, animated: false)
+        if (isFromViewAllButtonClick == true) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubscriptionsListViewController") as! SubscriptionsListViewController
+            nextVC.isFromViewAllButtonClickAndFromUpgradePage = true
+            let navVC = UINavigationController(rootViewController: nextVC)
+            navVC.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(nextVC, animated: false)
+        }else {
+            self.navigationController?.popViewController(animated: false)
+        }
+        
+        
     }
     
     @IBAction func backButtonClicked(_ sender: Any) {
-        self.navigationController?.popViewControllers(viewsToPop: 2)
+        if (isFromViewAllButtonClick == true) {
+            self.navigationController?.popViewController(animated: true)
+        }else {
+            self.navigationController?.popViewControllers(viewsToPop: 2)
+        }
     }
 }

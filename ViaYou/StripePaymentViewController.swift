@@ -48,8 +48,13 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let padding: CGFloat = 15
+        //        cardField.frame = CGRect(x: padding,
+        //                                 y: padding,
+        //                                 width: view.bounds.width - (padding * 2),
+        //                                 height: 50)
+        
         cardField.frame = CGRect(x: padding,
-                                 y: padding,
+                                 y: 100,
                                  width: view.bounds.width - (padding * 2),
                                  height: 50)
     }

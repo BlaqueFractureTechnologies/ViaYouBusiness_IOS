@@ -286,18 +286,18 @@ struct ApiManager {
     
     //Payment Confirmation API
     func confirmPaymentAPI(stripeToken:String,
-                        type:String,
-                        completion: @escaping (SubscriptionResponse, _ error:Error?) -> ()) {
+                           type:String,
+                           completion: @escaping (SubscriptionResponse, _ error:Error?) -> ()) {
         
         let parameters: [String: Any] = [
             "stripeToken":stripeToken,
             "type":type,
-            ]
+        ]
         let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
         
         let requestURLString = "\(mainHeader)\(createChargesHeader)"
         let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
-       // request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        // request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
         request.setValue(generatedUserToken, forHTTPHeaderField: "token")
         request.httpMethod = "POST"
         
@@ -325,6 +325,39 @@ struct ApiManager {
                 } catch let parsingError {
                     print("parsingError=\(parsingError)")
                     completion(SubscriptionResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
+    
+    let instaUserDetailsUrl:String = "https://api.instagram.com/v1/users/self/?access_token="
+    
+    func getInstaUserDetails(access_token:String,
+                             completion: @escaping (InstagramUserResponse, _ error:Error?) -> ()) {
+        
+        
+        let requestURLString = "\(instaUserDetailsUrl)\(access_token)"
+        print(requestURLString)
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(InstagramUserResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("getInstaUserDetails :: jsonDict====>%@",jsonDict)
+                        completion(InstagramUserResponse(jsonDict),nil)
+                    }else {
+                        completion(InstagramUserResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(InstagramUserResponse([:]),parsingError)
                 }
             }
         })

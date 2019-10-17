@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		35C1715EE68562856F59982F /* Pods_ViaYou.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C90EB2FB1356E9CB769BE2 /* Pods_ViaYou.framework */; };
 		9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E10ED0D234D748A00C54F84 /* ProfileDropdownTableViewCell.swift */; };
+		9E14A44223591F2400F56891 /* InstagramUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A44123591F2400F56891 /* InstagramUserResponse.swift */; };
+		9E14A44A2359205A00F56891 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A4462359205900F56891 /* JMImageCache.m */; };
+		9E14A44B2359205A00F56891 /* UIImageView+JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A4492359205A00F56891 /* UIImageView+JMImageCache.m */; };
 		9E27E558235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */; };
 		9E27E55A235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */; };
 		9E2970D6234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */; };
@@ -86,6 +89,12 @@
 		3DE306DBB2B381298A5B0ED6 /* Pods-ViaYou.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaYou.debug.xcconfig"; path = "Target Support Files/Pods-ViaYou/Pods-ViaYou.debug.xcconfig"; sourceTree = "<group>"; };
 		8AD4C12220E84767F923027F /* Pods-ViaYou.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaYou.release.xcconfig"; path = "Target Support Files/Pods-ViaYou/Pods-ViaYou.release.xcconfig"; sourceTree = "<group>"; };
 		9E10ED0D234D748A00C54F84 /* ProfileDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropdownTableViewCell.swift; sourceTree = "<group>"; };
+		9E14A44123591F2400F56891 /* InstagramUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUserResponse.swift; sourceTree = "<group>"; };
+		9E14A4452359205900F56891 /* ViaYou-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViaYou-Bridging-Header.h"; sourceTree = "<group>"; };
+		9E14A4462359205900F56891 /* JMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMImageCache.m; sourceTree = "<group>"; };
+		9E14A4472359205900F56891 /* JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMImageCache.h; sourceTree = "<group>"; };
+		9E14A4482359205A00F56891 /* UIImageView+JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+JMImageCache.h"; sourceTree = "<group>"; };
+		9E14A4492359205A00F56891 /* UIImageView+JMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+JMImageCache.m"; sourceTree = "<group>"; };
 		9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_1ViewController.swift; sourceTree = "<group>"; };
 		9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_2ViewController.swift; sourceTree = "<group>"; };
 		9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeAndSubscriptionBaseViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +191,26 @@
 			path = UserProfileTableViewCells;
 			sourceTree = "<group>";
 		};
+		9E14A4432359202F00F56891 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				9E14A4442359204000F56891 /* JMImageCache */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		9E14A4442359204000F56891 /* JMImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				9E14A4472359205900F56891 /* JMImageCache.h */,
+				9E14A4462359205900F56891 /* JMImageCache.m */,
+				9E14A4482359205A00F56891 /* UIImageView+JMImageCache.h */,
+				9E14A4492359205A00F56891 /* UIImageView+JMImageCache.m */,
+				9E14A4452359205900F56891 /* ViaYou-Bridging-Header.h */,
+			);
+			path = JMImageCache;
+			sourceTree = "<group>";
+		};
 		9E2B87982343FED700941DF2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +239,7 @@
 				9E3485BD234AE5E400DFADC9 /* ReferralResponse.swift */,
 				9ECDE2EA2356891F009D0BBE /* BucketSizeResponse.swift */,
 				9E34D01E2357FE1E0085ABAA /* SubscriptionResponse.swift */,
+				9E14A44123591F2400F56891 /* InstagramUserResponse.swift */,
 			);
 			path = "Response Models";
 			sourceTree = "<group>";
@@ -239,6 +269,7 @@
 		9EA55F69233C208D003A1EBB /* ViaYou */ = {
 			isa = PBXGroup;
 			children = (
+				9E14A4432359202F00F56891 /* Libraries */,
 				9EF90CCC2353DC1200127322 /* ViaYou.entitlements */,
 				9EF90CBE2353C90700127322 /* response.json */,
 				9E10ED0C234D746500C54F84 /* UserProfileTableViewCells */,
@@ -395,6 +426,7 @@
 				TargetAttributes = {
 					9EA55F66233C208D003A1EBB = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.SafariKeychain = {
 								enabled = 1;
@@ -531,6 +563,7 @@
 				9E403A39234434AE002E3749 /* ApiManager.swift in Sources */,
 				9E3485B6234A8FC100DFADC9 /* ContactsViewController.swift in Sources */,
 				9ECDE2EB2356891F009D0BBE /* BucketSizeResponse.swift in Sources */,
+				9E14A44B2359205A00F56891 /* UIImageView+JMImageCache.m in Sources */,
 				9E2B879A2344003C00941DF2 /* LibraryFeedsViewController.swift in Sources */,
 				9EA55F9B233C2B04003A1EBB /* NewLaunchViewController.swift in Sources */,
 				9EA55FA7233C5099003A1EBB /* InviteFriendsViewController.swift in Sources */,
@@ -547,6 +580,7 @@
 				9E34D01F2357FE1E0085ABAA /* SubscriptionResponse.swift in Sources */,
 				9E34D01D2357FDF40085ABAA /* StripePaymentViewController.swift in Sources */,
 				9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */,
+				9E14A44223591F2400F56891 /* InstagramUserResponse.swift in Sources */,
 				9E3485B8234A8FEE00DFADC9 /* PhoneContact.swift in Sources */,
 				9E3485BA234A903F00DFADC9 /* ContactsTableViewCell.swift in Sources */,
 				9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */,
@@ -563,6 +597,7 @@
 				9E403A4423443FF5002E3749 /* InstagramUserDetailsResponse.swift in Sources */,
 				9EA55FA1233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift in Sources */,
 				9EF90CC52353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift in Sources */,
+				9E14A44A2359205A00F56891 /* JMImageCache.m in Sources */,
 				9E2970D8234E7FC6003BC282 /* UpgradeSoloHostViewController.swift in Sources */,
 				9E2970DA234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift in Sources */,
 				9E2B87A0234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift in Sources */,
@@ -746,6 +781,7 @@
 			baseConfigurationReference = 3DE306DBB2B381298A5B0ED6 /* Pods-ViaYou.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ViaYou/ViaYou.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -758,6 +794,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.viayou.ViaYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ViaYou/Libraries/JMImageCache/ViaYou-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -768,6 +806,7 @@
 			baseConfigurationReference = 8AD4C12220E84767F923027F /* Pods-ViaYou.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ViaYou/ViaYou.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -780,6 +819,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.viayou.ViaYouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ViaYou/Libraries/JMImageCache/ViaYou-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

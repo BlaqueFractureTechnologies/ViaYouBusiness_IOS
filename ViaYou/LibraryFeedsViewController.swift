@@ -412,8 +412,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         self.inviteFriendsPopUpView.alpha = 1
         self.popUpOverlayButton.alpha = 0.5
-//        print("didSelectItemAt...")
-//        goToContactsVCToInvite()
+        //        print("didSelectItemAt...")
+        //        goToContactsVCToInvite()
         
     }
     
@@ -684,6 +684,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     func becomeGrowthHostPopUpVC_UpgradeAndSubscriptionBaseViewControllerButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
+        nextVC.isFromViewAllButtonClick = true
         let navVC = UINavigationController(rootViewController: nextVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.pushViewController(nextVC, animated: true)
