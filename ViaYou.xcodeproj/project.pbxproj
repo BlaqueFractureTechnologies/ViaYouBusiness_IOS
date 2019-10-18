@@ -37,6 +37,7 @@
 		9E403A4023443F34002E3749 /* InstagramSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3F23443F34002E3749 /* InstagramSignInViewController.swift */; };
 		9E403A4223443FDA002E3749 /* InstagramAuthResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A4123443FDA002E3749 /* InstagramAuthResponseModel.swift */; };
 		9E403A4423443FF5002E3749 /* InstagramUserDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A4323443FF5002E3749 /* InstagramUserDetailsResponse.swift */; };
+		9E5085B623595AC700857277 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5085B523595AC700857277 /* VideoViewController.swift */; };
 		9E91AE1D234D332A0044AB5C /* HomeInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E91AE1C234D33290044AB5C /* HomeInfoTableViewCell.swift */; };
 		9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F6A233C208D003A1EBB /* AppDelegate.swift */; };
 		9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55F6C233C208D003A1EBB /* ViewController.swift */; };
@@ -121,6 +122,7 @@
 		9E403A3F23443F34002E3749 /* InstagramSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramSignInViewController.swift; sourceTree = "<group>"; };
 		9E403A4123443FDA002E3749 /* InstagramAuthResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAuthResponseModel.swift; sourceTree = "<group>"; };
 		9E403A4323443FF5002E3749 /* InstagramUserDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUserDetailsResponse.swift; sourceTree = "<group>"; };
+		9E5085B523595AC700857277 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9E91AE1C234D33290044AB5C /* HomeInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9EA55F67233C208D003A1EBB /* ViaYou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaYou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA55F6A233C208D003A1EBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				9EA55FA2233C2CB9003A1EBB /* NewSignInViewController.swift */,
 				9EA55FA6233C5099003A1EBB /* InviteFriendsViewController.swift */,
 				9E2B87992344003C00941DF2 /* LibraryFeedsViewController.swift */,
+				9E5085B523595AC700857277 /* VideoViewController.swift */,
 				9E2B879B2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift */,
 				9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */,
 				9E2B87A12344020500941DF2 /* SignInViewController.swift */,
@@ -605,6 +608,7 @@
 				9E2970D8234E7FC6003BC282 /* UpgradeSoloHostViewController.swift in Sources */,
 				9E2970DA234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift in Sources */,
 				9E2B87A0234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift in Sources */,
+				9E5085B623595AC700857277 /* VideoViewController.swift in Sources */,
 				9EA55FA5233C3628003A1EBB /* ExtensionManager.swift in Sources */,
 				9E403A3C2344352B002E3749 /* RegisterResponse.swift in Sources */,
 				9E403A3E23443F0B002E3749 /* Constants.swift in Sources */,

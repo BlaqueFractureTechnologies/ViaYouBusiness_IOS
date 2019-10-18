@@ -19,6 +19,7 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var infoPopUpHeight: NSLayoutConstraint!
     @IBOutlet weak var deleteVideoButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     
     
     var cellDataDict: FeedDataArrayObject = FeedDataArrayObject([:])

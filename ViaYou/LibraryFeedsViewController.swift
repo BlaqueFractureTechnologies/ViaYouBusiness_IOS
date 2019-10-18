@@ -353,6 +353,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         cell.deleteVideoButton.tag = indexPath.row
         cell.deleteVideoButton.addTarget(self, action: #selector(deleteVideoButtonClicked), for: UIControl.Event.touchUpInside)
         
+        cell.shareButton.tag = indexPath.row
+        cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: UIControl.Event.touchUpInside)
+        
         cell.infoSliderCloseButton.tag = indexPath.row
         cell.infoSliderCloseButton.addTarget(self, action: #selector(infoSliderCloseButtonClicked), for: UIControl.Event.touchUpInside)
         
@@ -377,6 +380,24 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 print(error.debugDescription)
             }
         }
+        
+    }
+    
+    @objc func shareButtonClicked(_ sender:UIButton) {
+        print(dataArray[sender.tag]._id)
+        
+                    let userID = dataArray[sender.tag].user._id
+                    let videoName = dataArray[sender.tag].fileName
+                    var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+                    videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+                    UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+                    nextVC.passedUrlLink = videUrlString
+                    let navVC = UINavigationController(rootViewController: nextVC)
+                    navVC.isNavigationBarHidden = true
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+
         
     }
     
@@ -417,19 +438,34 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func selectRow(selectedRow:Int) {
+        
         if (dataArray.count>selectedRow) {
             let userID = dataArray[selectedRow].user._id
             let videoName = dataArray[selectedRow].fileName
+            let videoId = dataArray[selectedRow]._id
             var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
             videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-            UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
-            nextVC.passedUrlLink = videUrlString
-            let navVC = UINavigationController(rootViewController: nextVC)
-            navVC.isNavigationBarHidden = true
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+            let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+            nextVC.videoUrl = videUrlString
+            nextVC.postId = videoId
+            nextVC.modalPresentationStyle = .overCurrentContext
+            self.present(nextVC, animated: true, completion: nil)
         }
+//        if (dataArray.count>selectedRow) {
+//            let userID = dataArray[selectedRow].user._id
+//            let videoName = dataArray[selectedRow].fileName
+//            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+//            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+//            UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+//            nextVC.passedUrlLink = videUrlString
+//            let navVC = UINavigationController(rootViewController: nextVC)
+//            navVC.isNavigationBarHidden = true
+//            self.navigationController?.pushViewController(nextVC, animated: true)
+//        }
     }
     
     @IBAction func plusButtonClicked() {
