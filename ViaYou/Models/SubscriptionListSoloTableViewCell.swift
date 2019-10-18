@@ -9,6 +9,7 @@
 import UIKit
 
 class SubscriptionListSoloTableViewCell: UITableViewCell {
+    @IBOutlet weak var upgradeToSoloHostButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

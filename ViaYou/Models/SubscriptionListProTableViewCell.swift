@@ -9,6 +9,7 @@
 import UIKit
 
 class SubscriptionListProTableViewCell: UITableViewCell {
+    @IBOutlet weak var upgadeToProHost: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

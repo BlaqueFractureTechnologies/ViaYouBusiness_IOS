@@ -3490,6 +3490,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="upgradeToSoloHostButton" destination="q6J-9M-rnZ" id="H6u-LZ-2NV"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SubscriptionListGrowthTableViewCell" rowHeight="194" id="Nb8-Jl-XfE" customClass="SubscriptionListGrowthTableViewCell" customModule="ViaYou">
                                         <rect key="frame" x="0.0" y="209.5" width="375" height="194"/>
@@ -3540,6 +3543,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="upgradeToGrowthHost" destination="9g6-Ce-6Nk" id="nCp-Tl-a03"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SubscriptionListProTableViewCell" rowHeight="197" id="sOR-CK-tE2" customClass="SubscriptionListProTableViewCell" customModule="ViaYou">
                                         <rect key="frame" x="0.0" y="403.5" width="375" height="197"/>
@@ -3590,6 +3596,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="upgadeToProHost" destination="O80-Eb-aZ9" id="CJm-yM-upf"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

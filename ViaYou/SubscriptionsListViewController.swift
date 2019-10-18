@@ -103,15 +103,44 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SubscriptionListSoloTableViewCell", for: indexPath) as! SubscriptionListSoloTableViewCell
+            cell.upgradeToSoloHostButton.addTarget(self, action: #selector(upgradeToSoloHostButtonClicked), for: UIControl.Event.touchUpInside)
             return cell
         }else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SubscriptionListGrowthTableViewCell", for: indexPath) as! SubscriptionListGrowthTableViewCell
+            cell.upgradeToGrowthHost.addTarget(self, action: #selector(upgradeToGrowthHostButtonClicked), for: UIControl.Event.touchUpInside)
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SubscriptionListProTableViewCell", for: indexPath) as! SubscriptionListProTableViewCell
+            cell.upgadeToProHost.addTarget(self, action: #selector(upgadeToProHostButtonClicked), for: UIControl.Event.touchUpInside)
+
             return cell
         }
     }
+    @objc func upgradeToSoloHostButtonClicked() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
+        homeVC.passedTypeOfPayment = "SOLO"
+        let navVC = UINavigationController(rootViewController: homeVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.present(navVC, animated: true, completion: nil)
+    }
+    @objc func upgradeToGrowthHostButtonClicked() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
+        homeVC.passedTypeOfPayment = "GROWTH"
+        let navVC = UINavigationController(rootViewController: homeVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.present(navVC, animated: true, completion: nil)
+    }
+    @objc func upgadeToProHostButtonClicked() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
+        homeVC.passedTypeOfPayment = "PRO"
+        let navVC = UINavigationController(rootViewController: homeVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.present(navVC, animated: true, completion: nil)
+    }
+    
     
     @objc func overlayButtonClicked(_ sender:UIButton) {
         if (sender.tag == 3) {

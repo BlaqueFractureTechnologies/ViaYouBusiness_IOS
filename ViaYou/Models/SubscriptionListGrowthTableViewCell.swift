@@ -9,6 +9,7 @@
 import UIKit
 
 class SubscriptionListGrowthTableViewCell: UITableViewCell {
+    @IBOutlet weak var upgradeToGrowthHost: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
