@@ -23,8 +23,8 @@ class VideoViewController: UIViewController {
     @IBOutlet var videoViewContainer: UIView!
     @IBOutlet var seekBar: UISlider!
     @IBOutlet var playButton: UIButton!
-    @IBOutlet var bottomButtonsContainerView: UIView!
-    @IBOutlet var bottomButtonsContainerBottomMarginConstraint: NSLayoutConstraint!
+//    @IBOutlet var bottomButtonsContainerView: UIView!
+//    @IBOutlet var bottomButtonsContainerBottomMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var previewLayer: AVCaptureVideoPreviewLayer!
@@ -89,9 +89,9 @@ class VideoViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidPlayToEndTime), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
        // pauseButton.alpha = 0
         
-        NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillShowNotification,object: nil)
-        NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillHideNotification,object: nil)
-        
+//        NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillShowNotification,object: nil)
+//        NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillHideNotification,object: nil)
+//        
         
         
         self.currentTimeCounter = 1
@@ -101,36 +101,36 @@ class VideoViewController: UIViewController {
 
 
     
-    @objc func keyboardDidShowNotification(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardOriginY = keyboardFrame.cgRectValue.origin.y
-            //print("keyboardOriginY====>\(keyboardOriginY)")
-            
-            var bottomSafeAreaheight:CGFloat = 0.0
-            if #available(iOS 11.0, *) {
-                let window = UIApplication.shared.keyWindow
-                bottomSafeAreaheight = window?.safeAreaInsets.bottom ?? 0.0
-            }
-            //print("bottomSafeAreaheight====>\(bottomSafeAreaheight)")
-            
-            let deviceHeight = UIScreen.main.bounds.size.height
-            //print("deviceHeight====>\(deviceHeight)")
-            
-            let bottomMargin = deviceHeight-keyboardOriginY
-            DispatchQueue.main.async {
-                if (keyboardOriginY>=deviceHeight) {
-                    self.bottomButtonsContainerBottomMarginConstraint.constant = bottomMargin
-                }else {
-                    self.bottomButtonsContainerBottomMarginConstraint.constant = bottomMargin-bottomSafeAreaheight
-                }
-                self.view.layoutIfNeeded()
-                self.videoViewContainer.layoutIfNeeded()
-                self.playerLayer.layoutIfNeeded()
-                self.playerLayer.frame = self.videoViewContainer.bounds
-                
-            }
-        }
-    }
+//    @objc func keyboardDidShowNotification(_ notification: Notification) {
+//        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+//            let keyboardOriginY = keyboardFrame.cgRectValue.origin.y
+//            //print("keyboardOriginY====>\(keyboardOriginY)")
+//
+//            var bottomSafeAreaheight:CGFloat = 0.0
+//            if #available(iOS 11.0, *) {
+//                let window = UIApplication.shared.keyWindow
+//                bottomSafeAreaheight = window?.safeAreaInsets.bottom ?? 0.0
+//            }
+//            //print("bottomSafeAreaheight====>\(bottomSafeAreaheight)")
+//
+//            let deviceHeight = UIScreen.main.bounds.size.height
+//            //print("deviceHeight====>\(deviceHeight)")
+//
+//            let bottomMargin = deviceHeight-keyboardOriginY
+//            DispatchQueue.main.async {
+//                if (keyboardOriginY>=deviceHeight) {
+//                    self.bottomButtonsContainerBottomMarginConstraint.constant = bottomMargin
+//                }else {
+//                    self.bottomButtonsContainerBottomMarginConstraint.constant = bottomMargin-bottomSafeAreaheight
+//                }
+//                self.view.layoutIfNeeded()
+//                self.videoViewContainer.layoutIfNeeded()
+//                self.playerLayer.layoutIfNeeded()
+//                self.playerLayer.frame = self.videoViewContainer.bounds
+//
+//            }
+//        }
+//    }
     
     @IBAction func playButtonClicked(_ sender: Any) {
         if (isPlayCompleted == true) {

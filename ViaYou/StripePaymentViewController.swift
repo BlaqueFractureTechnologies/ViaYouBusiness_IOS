@@ -11,6 +11,7 @@ import Stripe
 
 class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDelegate {
     @IBOutlet weak var buyButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     var passedTypeOfPayment: String = ""
     var cardField = STPPaymentCardTextField()
@@ -39,6 +40,12 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
     @objc func done() {
         dismiss(animated: true, completion: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        buyButton.addAppGradient()
+        cancelButton.addAppGradient()
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -84,6 +91,8 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
                     print(response.success)
                     print(response.message)
                     self.displayAlert(msg: "Success! Payment Confirmed!")
+                    self.dismiss(animated: true, completion: nil)
+
                 }
                 else {
                     self.displayAlert(msg: "Sorry! Payment Failed! Please try again later!")

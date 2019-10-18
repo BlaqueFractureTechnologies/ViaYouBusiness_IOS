@@ -112,7 +112,6 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SubscriptionListProTableViewCell", for: indexPath) as! SubscriptionListProTableViewCell
             cell.upgadeToProHost.addTarget(self, action: #selector(upgadeToProHostButtonClicked), for: UIControl.Event.touchUpInside)
-
             return cell
         }
     }
