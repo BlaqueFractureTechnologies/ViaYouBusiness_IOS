@@ -71,20 +71,24 @@ class InstagramSignInViewController: UIViewController {
                                         print(responseDict.data)
                                         print("getInstaUserDetails :: profile_picture ====> \(responseDict.data.profile_picture)")
                                         JMImageCache.shared()?.image(for: URL(string: responseDict.data.profile_picture), completionBlock: { (image) in
-                                            self.passingProfileImage = image!
+                                            if let imageRetrieved = image {
+                                                self.passingProfileImage = imageRetrieved
+                                            }
+                                            DispatchQueue.main.async {
+                                                self.activityIndicator.stopAnimating()
+                                                self.activityIndicator.isHidden = true
+                                                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                                let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                                homeVC.passedProfileImage = self.passingProfileImage
+                                                let navVC = UINavigationController(rootViewController: homeVC)
+                                                navVC.isNavigationBarHidden = true
+                                                self.navigationController?.present(navVC, animated: true, completion: nil)
+                                            }
+                                            
                                         }, failureBlock: { (request, response, error) in
                                         })
                                         
-                                        DispatchQueue.main.async {
-                                            self.activityIndicator.stopAnimating()
-                                            self.activityIndicator.isHidden = true
-                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                            homeVC.passedProfileImage = self.passingProfileImage
-                                            let navVC = UINavigationController(rootViewController: homeVC)
-                                            navVC.isNavigationBarHidden = true
-                                            self.navigationController?.present(navVC, animated: true, completion: nil)
-                                        }
+                                    
                                     }
                                 }
                                 
