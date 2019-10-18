@@ -12,6 +12,7 @@
 		9E14A44223591F2400F56891 /* InstagramUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A44123591F2400F56891 /* InstagramUserResponse.swift */; };
 		9E14A44A2359205A00F56891 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A4462359205900F56891 /* JMImageCache.m */; };
 		9E14A44B2359205A00F56891 /* UIImageView+JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A4492359205A00F56891 /* UIImageView+JMImageCache.m */; };
+		9E14A44F23593F8600F56891 /* DeleteVideoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A44E23593F8600F56891 /* DeleteVideoResponse.swift */; };
 		9E27E558235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */; };
 		9E27E55A235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */; };
 		9E2970D6234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */; };
@@ -95,6 +96,7 @@
 		9E14A4472359205900F56891 /* JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMImageCache.h; sourceTree = "<group>"; };
 		9E14A4482359205A00F56891 /* UIImageView+JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+JMImageCache.h"; sourceTree = "<group>"; };
 		9E14A4492359205A00F56891 /* UIImageView+JMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+JMImageCache.m"; sourceTree = "<group>"; };
+		9E14A44E23593F8600F56891 /* DeleteVideoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteVideoResponse.swift; sourceTree = "<group>"; };
 		9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_1ViewController.swift; sourceTree = "<group>"; };
 		9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_2ViewController.swift; sourceTree = "<group>"; };
 		9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeAndSubscriptionBaseViewController.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				9ECDE2EA2356891F009D0BBE /* BucketSizeResponse.swift */,
 				9E34D01E2357FE1E0085ABAA /* SubscriptionResponse.swift */,
 				9E14A44123591F2400F56891 /* InstagramUserResponse.swift */,
+				9E14A44E23593F8600F56891 /* DeleteVideoResponse.swift */,
 			);
 			path = "Response Models";
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 				9EF90CC12353C95600127322 /* SubscriptionBaseViewTableViewCell.swift in Sources */,
 				9EF90CC92353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift in Sources */,
 				9E2B879E2344007700941DF2 /* LessSpacePopUpViewController.swift in Sources */,
+				9E14A44F23593F8600F56891 /* DeleteVideoResponse.swift in Sources */,
 				9EA55FA3233C2CB9003A1EBB /* NewSignInViewController.swift in Sources */,
 				9E403A4223443FDA002E3749 /* InstagramAuthResponseModel.swift in Sources */,
 				9EF90CC72353C9BA00127322 /* SubscriptionListProTableViewCell.swift in Sources */,

@@ -3908,6 +3908,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="deleteVideoButton" destination="Bpa-Ah-mde" id="Z8V-ph-O2x"/>
                                             <outlet property="durationLabel" destination="WYk-yG-hXJ" id="QgB-MS-r8E"/>
                                             <outlet property="infoButton" destination="vAZ-9L-Y2Y" id="vFh-nU-oPQ"/>
                                             <outlet property="infoPopUpHeight" destination="4NX-di-Ncu" id="fNw-fd-hTr"/>

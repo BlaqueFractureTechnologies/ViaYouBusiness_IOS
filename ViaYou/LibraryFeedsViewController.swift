@@ -350,10 +350,34 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         cell.infoButton.tag = indexPath.row
         cell.infoButton.addTarget(self, action: #selector(infoButtonClicked), for: UIControl.Event.touchUpInside)
         
+        cell.deleteVideoButton.tag = indexPath.row
+        cell.deleteVideoButton.addTarget(self, action: #selector(deleteVideoButtonClicked), for: UIControl.Event.touchUpInside)
+        
         cell.infoSliderCloseButton.tag = indexPath.row
         cell.infoSliderCloseButton.addTarget(self, action: #selector(infoSliderCloseButtonClicked), for: UIControl.Event.touchUpInside)
         
         return cell
+    }
+    
+    @objc func deleteVideoButtonClicked(_ sender:UIButton) {
+        print(dataArray[sender.tag]._id)
+        let tappedPostId = dataArray[sender.tag]._id
+        ApiManager().deletePostAPI(postId: tappedPostId) { (response, error) in
+            if error == nil {
+                print(response.success)
+                print(response.message)
+                
+                DispatchQueue.main.async {
+                    self.dataArray.remove(at: sender.tag)
+                    self.collectioView.reloadData()
+                }               
+            }
+            else
+            {
+                print(error.debugDescription)
+            }
+        }
+        
     }
     
     @objc func infoButtonClicked(_ sender:UIButton) {
@@ -667,6 +691,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             nextVC.delegate = self
             self.present(nextVC, animated: false, completion: nil)
         }
+        
+        
         
     }
     

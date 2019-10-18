@@ -24,6 +24,7 @@ struct ApiManager {
     let referralHeader = "referral"
     let bucketSizeCalculationHeader = "subscription"
     let createChargesHeader = "subscription/createCharges"
+    let deleteHeader = "delete"
     
     
     //MARK:- Registration API
@@ -358,6 +359,51 @@ struct ApiManager {
                 } catch let parsingError {
                     print("parsingError=\(parsingError)")
                     completion(InstagramUserResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
+    //MARK:- Delete Post API
+    func deletePostAPI(postId:String,
+                       completion: @escaping (DeleteVideoResponse, _ error:Error?) -> ()) {
+        
+        let parameters: [String: Any] = [
+            "postId":postId,
+        ]
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
+        
+        let requestURLString = "\(POSTSHEADER)\(deleteHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        // request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue(generatedUserToken, forHTTPHeaderField: "token")
+        request.httpMethod = "POST"
+        
+        let postData = NSMutableData()
+        for key in parameters.keys {
+            let keyString = "&\(key)"
+            let valueString = parameters[key] as? String ?? ""
+            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
+        }
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(DeleteVideoResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("jsonDict====>%@",jsonDict)
+                        completion(DeleteVideoResponse(jsonDict),nil)
+                    }else {
+                        completion(DeleteVideoResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(DeleteVideoResponse([:]),parsingError)
                 }
             }
         })
