@@ -215,7 +215,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let remainingSpaceInMB = Float(remainingSpace) / 1000.0
             
             DispatchQueue.main.async {
+
                 self.storageIndicatorLabel.text = "\(remainingSpaceInMB) GB Free"
+            }
+        }
+        else
+        {
+            DispatchQueue.main.async {
+                let storageIndicatorRedWidth   = self.storageIndicatorRed.frame.size.width
+                print("storageIndicatorRedWidth = \(storageIndicatorRedWidth)")
+                self.storageIndicatorRedWidthConstraint.constant = CGFloat(0.0)
+                self.storageIndicatorLabel.text = "3 GB Free"
             }
         }
     }
