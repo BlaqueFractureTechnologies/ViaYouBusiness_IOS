@@ -727,7 +727,16 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             nextVC.delegate = self
             self.present(nextVC, animated: false, completion: nil)
         }
-        
+        else if (indexPath.row == 7) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        else if (indexPath.row == 8) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
         
         
     }
