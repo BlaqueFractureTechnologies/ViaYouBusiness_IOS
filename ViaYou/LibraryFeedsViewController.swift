@@ -42,6 +42,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var storageIndicatorRed: UIView!
     @IBOutlet weak var storageIndicatorRedWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var storageIndicatorLabel: UILabel!
+    @IBOutlet weak var profilePicOnInvitePopUp: UIImageView!
+    @IBOutlet weak var profilePicOnNoFeedPopUp: UIImageView!
     
     
     var dataArray:[FeedDataArrayObject] = []
@@ -99,6 +101,24 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         if (__CGSizeEqualToSize(self.profilePicButtonOnDropDownList.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
             print("EMPTY IMAGE")
             self.profilePicButtonOnDropDownList.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
+            
+        }
+        
+        self.profilePicOnInvitePopUp.image = self.passedProfileImage
+        self.profilePicOnInvitePopUp.layer.cornerRadius = self.profilePicOnInvitePopUp.frame.size.width/2.0
+        self.profilePicOnInvitePopUp.clipsToBounds = true
+        if (__CGSizeEqualToSize(self.profilePicOnInvitePopUp.image?.size ?? CGSize.zero, CGSize.zero)) {
+            print("EMPTY IMAGE")
+            self.profilePicOnInvitePopUp.image = UIImage(named: "defaultProfilePic")
+            
+        }
+        
+        self.profilePicOnNoFeedPopUp.image = self.passedProfileImage
+        self.profilePicOnNoFeedPopUp.layer.cornerRadius = self.profilePicOnNoFeedPopUp.frame.size.width/2.0
+        self.profilePicOnNoFeedPopUp.clipsToBounds = true
+        if (__CGSizeEqualToSize(self.profilePicOnNoFeedPopUp.image?.size ?? CGSize.zero, CGSize.zero)) {
+            print("EMPTY IMAGE")
+            self.profilePicOnInvitePopUp.image = UIImage(named: "defaultProfilePic")
             
         }
         
