@@ -116,6 +116,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                 }
                                 //edit
                                 self.getAuthenticationToken()
+                                UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                                 let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
                                 print(self.passingProfileImage)
@@ -217,6 +218,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                             }
                             
                             print("success token")
+                            UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
                             print(self.passingProfileImage)

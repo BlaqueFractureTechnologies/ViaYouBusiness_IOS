@@ -57,7 +57,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Feature Request",
                          "Analytics",
                          "Privacy Policy",
-                         "Terms And Conditions"]
+                         "Terms And Conditions",
+    "Sign Out"]
     //AWS setup
     let bucketName = "dev-promptchu"
     var contentUrl: URL!
@@ -745,6 +746,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         else if (indexPath.row == 8) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        else if (indexPath.row == 9) {
+            UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
         

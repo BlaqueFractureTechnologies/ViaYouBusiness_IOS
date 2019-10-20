@@ -74,6 +74,7 @@ class InstagramSignInViewController: UIViewController {
                                             if let imageRetrieved = image {
                                                 self.passingProfileImage = imageRetrieved
                                             }
+                                            UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                                             DispatchQueue.main.async {
                                                 self.activityIndicator.stopAnimating()
                                                 self.activityIndicator.isHidden = true

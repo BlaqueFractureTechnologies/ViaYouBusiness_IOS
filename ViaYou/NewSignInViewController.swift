@@ -127,6 +127,7 @@ class NewSignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInD
                                 //handling referral events ends
                                 
                                 print("Signed in successfully!")
+                                UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                                 DispatchQueue.main.async {
                                     self.activityIndicator.stopAnimating()
                                     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)

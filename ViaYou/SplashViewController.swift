@@ -41,12 +41,15 @@ class SplashViewController: UIViewController {
     @objc func goToLoginOrHomeVC() {
         
         // If Login
-        //        if (UserDefaults.standard.bool(forKey: "IsUserLoggedIn") == true) {
-        //            // .. GO To Inner page (Pending)
-        //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //            let homeVC = storyBoard.instantiateViewController(withIdentifier: "NewsFeedsFullGridViewController") as! NewsFeedsFullGridViewController
-        //            self.navigationController?.pushViewController(homeVC, animated: true)
-        //        }else {
+                if (UserDefaults.standard.bool(forKey: "IsUserLoggedIn") == true) {
+                    // .. GO To Inner page (Pending)
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                    //self.navigationController?.pushViewController(homeVC, animated: true)
+                    let navVC = UINavigationController(rootViewController: homeVC)
+                    navVC.isNavigationBarHidden = true
+                    self.present(navVC, animated: true, completion: nil)
+                }else {
         //Else
         // .. Go To Registration Page
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -55,7 +58,7 @@ class SplashViewController: UIViewController {
         navVC.isNavigationBarHidden = true
         self.present(navVC, animated: true, completion: nil)
         // self.navigationController?.pushViewController(nextVC, animated: true)
-        //}
+        }
     }
 }
 
