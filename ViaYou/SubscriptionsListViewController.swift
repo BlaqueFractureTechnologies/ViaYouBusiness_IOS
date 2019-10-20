@@ -63,12 +63,10 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         subTitle.attributedText = attributedString
         
         let learnMoreButton = UIButton(type: .custom)
-        learnMoreButton.frame = CGRect(x: tableView.frame.size.width-110, y: 15, width: 90, height: 30)
-        learnMoreButton.backgroundColor = #colorLiteral(red: 0.8779210448, green: 0.4265037179, blue: 0.4941398501, alpha: 1)
+        learnMoreButton.frame = CGRect(x: tableView.frame.size.width-140, y: 15, width: 130, height: 35)
         learnMoreButton.titleLabel?.font = UIFont(name: "MonarchaW01-Regular", size: 12)
         learnMoreButton.setTitle("Learn More", for: .normal)
-        learnMoreButton.layer.cornerRadius = 5
-        learnMoreButton.clipsToBounds = true
+        learnMoreButton.setBackgroundImage(UIImage(named: "Invite Button Bubble"), for: .normal)
         headerBg.addSubview(learnMoreButton)
         
         if (section == 3) {
