@@ -370,16 +370,16 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up below for free to record your screen and yourself at the same time. Share socially - Stored securely." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YdX-Kp-FB0">
-                                <rect key="frame" x="87.5" y="148.5" width="200" height="53"/>
+                                <rect key="frame" x="62.5" y="148.5" width="250" height="101.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="1Az-Cu-FyJ"/>
+                                    <constraint firstAttribute="width" constant="250" id="1Az-Cu-FyJ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="26"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QrT-zO-amO">
-                                <rect key="frame" x="20" y="221.5" width="335" height="44"/>
+                                <rect key="frame" x="20" y="270" width="335" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log-In with Instagram" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laQ-Pk-RgO">
                                         <rect key="frame" x="10" y="12" width="315" height="19.5"/>
@@ -417,7 +417,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghF-RT-NTv">
-                                <rect key="frame" x="20" y="285.5" width="335" height="44"/>
+                                <rect key="frame" x="20" y="334" width="335" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log-In with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wk7-zV-7UG">
                                         <rect key="frame" x="10" y="12" width="315" height="19.5"/>
@@ -455,7 +455,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyn-f5-eXx">
-                                <rect key="frame" x="20" y="349.5" width="335" height="44"/>
+                                <rect key="frame" x="20" y="398" width="335" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log-In with Google" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5T-C8-2oF">
                                         <rect key="frame" x="10" y="12" width="315" height="19.5"/>
@@ -493,7 +493,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dE-Qj-trb">
-                                <rect key="frame" x="176" y="430" width="23" height="22"/>
+                                <rect key="frame" x="176" y="478.5" width="23" height="22"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="6q8-E1-ltJ"/>
@@ -503,21 +503,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VWM-cK-beG">
-                                <rect key="frame" x="20" y="440.5" width="151" height="1"/>
+                                <rect key="frame" x="20" y="489" width="151" height="1"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="GIK-xt-2BS"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qnq-0R-YF7">
-                                <rect key="frame" x="204" y="440.5" width="151" height="1"/>
+                                <rect key="frame" x="204" y="489" width="151" height="1"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Mxw-L0-sJc"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InD-5E-k8o">
-                                <rect key="frame" x="85.5" y="459.5" width="204" height="20"/>
+                                <rect key="frame" x="85.5" y="508" width="204" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="GZU-Rl-hFg"/>
                                 </constraints>
@@ -1829,11 +1829,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="576.5" width="180" height="30.5"/>
+                                <rect key="frame" x="97.5" y="565.5" width="180" height="41.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="16"/>
                                 <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -4227,7 +4227,7 @@
                                         <rect key="frame" x="68" y="10" width="272" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="6KM-B9-fsw"/>
-                                            <constraint firstAttribute="width" constant="272" id="Ben-kS-m3b"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="272" id="Ben-kS-m3b"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="MonarchaW01-SemiBold" family="MonarchaW01-SemiBold" pointSize="17"/>
                                         <color key="textColor" red="0.71764705880000002" green="0.2156862745" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -4251,6 +4251,7 @@
                                     <constraint firstAttribute="bottom" secondItem="4qL-lt-FYy" secondAttribute="bottom" constant="8" id="GFl-XQ-yH8"/>
                                     <constraint firstItem="4qL-lt-FYy" firstAttribute="top" secondItem="X4t-cC-KP0" secondAttribute="top" constant="10" id="KgK-Xr-1Yp"/>
                                     <constraint firstAttribute="height" constant="65" id="NgN-cD-Pax"/>
+                                    <constraint firstItem="4qL-lt-FYy" firstAttribute="leading" secondItem="RRG-nQ-X4L" secondAttribute="trailing" constant="8" id="Qpa-9C-CcF"/>
                                     <constraint firstItem="RRG-nQ-X4L" firstAttribute="leading" secondItem="X4t-cC-KP0" secondAttribute="leading" constant="10" id="cE7-t6-XUa"/>
                                     <constraint firstAttribute="trailing" secondItem="4qL-lt-FYy" secondAttribute="trailing" constant="35" id="ex3-Xm-11b"/>
                                 </constraints>
@@ -4306,7 +4307,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVu-AZ-EYP">
                                         <rect key="frame" x="68" y="10" width="289" height="47"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="289" id="HV4-VU-mia"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="289" id="HV4-VU-mia"/>
                                             <constraint firstAttribute="height" constant="47" id="MWE-JN-v15"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="MonarchaW01-SemiBold" family="MonarchaW01-SemiBold" pointSize="17"/>
@@ -4329,6 +4330,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="B8a-GJ-CJA"/>
                                     <constraint firstItem="9N0-aX-xK0" firstAttribute="leading" secondItem="wjP-Xp-3Hj" secondAttribute="leading" constant="10" id="JEc-Aj-dVL"/>
+                                    <constraint firstItem="FVu-AZ-EYP" firstAttribute="leading" secondItem="9N0-aX-xK0" secondAttribute="trailing" constant="8" id="La9-GE-4Tl"/>
                                     <constraint firstAttribute="bottom" secondItem="FVu-AZ-EYP" secondAttribute="bottom" constant="8" id="U4e-bg-e0s"/>
                                     <constraint firstAttribute="trailing" secondItem="FVu-AZ-EYP" secondAttribute="trailing" constant="18" id="phu-it-RUB"/>
                                     <constraint firstAttribute="bottom" secondItem="9N0-aX-xK0" secondAttribute="bottom" constant="5" id="uHP-w3-gEY"/>
@@ -5222,8 +5224,8 @@
                                         </constraints>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You’re a free member!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9O8-zd-qe3">
-                                        <rect key="frame" x="116" y="26" width="143" height="18"/>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
+                                        <rect key="frame" x="87" y="23.5" width="201" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="18"/>
                                         <color key="textColor" red="0.71764705880000002" green="0.2156862745" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
