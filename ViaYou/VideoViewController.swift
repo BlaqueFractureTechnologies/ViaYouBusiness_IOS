@@ -99,38 +99,6 @@ class VideoViewController: UIViewController {
         
     }
 
-
-    
-//    @objc func keyboardDidShowNotification(_ notification: Notification) {
-//        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//            let keyboardOriginY = keyboardFrame.cgRectValue.origin.y
-//            //print("keyboardOriginY====>\(keyboardOriginY)")
-//
-//            var bottomSafeAreaheight:CGFloat = 0.0
-//            if #available(iOS 11.0, *) {
-//                let window = UIApplication.shared.keyWindow
-//                bottomSafeAreaheight = window?.safeAreaInsets.bottom ?? 0.0
-//            }
-//            //print("bottomSafeAreaheight====>\(bottomSafeAreaheight)")
-//
-//            let deviceHeight = UIScreen.main.bounds.size.height
-//            //print("deviceHeight====>\(deviceHeight)")
-//
-//            let bottomMargin = deviceHeight-keyboardOriginY
-//            DispatchQueue.main.async {
-//                if (keyboardOriginY>=deviceHeight) {
-//                    self.bottomButtonsContainerBottomMarginConstraint.constant = bottomMargin
-//                }else {
-//                    self.bottomButtonsContainerBottomMarginConstraint.constant = bottomMargin-bottomSafeAreaheight
-//                }
-//                self.view.layoutIfNeeded()
-//                self.videoViewContainer.layoutIfNeeded()
-//                self.playerLayer.layoutIfNeeded()
-//                self.playerLayer.frame = self.videoViewContainer.bounds
-//
-//            }
-//        }
-//    }
     
     @IBAction func playButtonClicked(_ sender: Any) {
         if (isPlayCompleted == true) {

@@ -35,9 +35,34 @@ class FeatureResuestPage_1ViewController: UIViewController {
     }
     
     @IBAction func nextButtonClicked() {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_2ViewController") as! FeatureResuestPage_2ViewController
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        let textToBePassed = textView.text ?? ""
+        if textToBePassed.count > 0 {
+            ApiManager().addFeatureAPI(description: textView.text) { (response, error) in
+                print(response) // minor edit
+                print(response) // minor edit
+                
+                if error == nil {
+                    print(response.message)
+                    print(response.success)
+                    DispatchQueue.main.async {
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_2ViewController") as! FeatureResuestPage_2ViewController
+                        self.navigationController?.pushViewController(nextVC, animated: true)
+                    }
+                }
+            }
+        }
+        else {
+            DispatchQueue.main.async {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_2ViewController") as! FeatureResuestPage_2ViewController
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+            
+        }
+        
+        
+        
     }
     
     @IBAction func backButtonClicked() {
