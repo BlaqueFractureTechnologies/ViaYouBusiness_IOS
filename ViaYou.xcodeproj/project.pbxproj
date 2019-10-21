@@ -17,6 +17,8 @@
 		9E14A44A2359205A00F56891 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A4462359205900F56891 /* JMImageCache.m */; };
 		9E14A44B2359205A00F56891 /* UIImageView+JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A4492359205A00F56891 /* UIImageView+JMImageCache.m */; };
 		9E14A44F23593F8600F56891 /* DeleteVideoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E14A44E23593F8600F56891 /* DeleteVideoResponse.swift */; };
+		9E159F02235E58F70033FBE6 /* DefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E159F01235E58F70033FBE6 /* DefaultWrapper.swift */; };
+		9E159F04235E59100033FBE6 /* PaymentCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E159F03235E59100033FBE6 /* PaymentCompletedViewController.swift */; };
 		9E27E558235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */; };
 		9E27E55A235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */; };
 		9E2970D6234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */; };
@@ -106,6 +108,8 @@
 		9E14A4482359205A00F56891 /* UIImageView+JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+JMImageCache.h"; sourceTree = "<group>"; };
 		9E14A4492359205A00F56891 /* UIImageView+JMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+JMImageCache.m"; sourceTree = "<group>"; };
 		9E14A44E23593F8600F56891 /* DeleteVideoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteVideoResponse.swift; sourceTree = "<group>"; };
+		9E159F01235E58F70033FBE6 /* DefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWrapper.swift; sourceTree = "<group>"; };
+		9E159F03235E59100033FBE6 /* PaymentCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCompletedViewController.swift; sourceTree = "<group>"; };
 		9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_1ViewController.swift; sourceTree = "<group>"; };
 		9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_2ViewController.swift; sourceTree = "<group>"; };
 		9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeAndSubscriptionBaseViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +241,7 @@
 				9EF90CC22353C98100127322 /* SubscriptionListSoloTableViewCell.swift */,
 				9EF90CC42353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift */,
 				9EF90CC62353C9BA00127322 /* SubscriptionListProTableViewCell.swift */,
+				9E159F01235E58F70033FBE6 /* DefaultWrapper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */,
 				9E05C4AE235D0341000F80C3 /* TermsNConditionsViewController.swift */,
 				9E05C4B0235D0358000F80C3 /* PrivacyPolicyViewController.swift */,
+				9E159F03235E59100033FBE6 /* PaymentCompletedViewController.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -582,6 +588,7 @@
 				9EF90CCB2353CA9300127322 /* SubscriptionsListViewController.swift in Sources */,
 				9E403A39234434AE002E3749 /* ApiManager.swift in Sources */,
 				9E3485B6234A8FC100DFADC9 /* ContactsViewController.swift in Sources */,
+				9E159F04235E59100033FBE6 /* PaymentCompletedViewController.swift in Sources */,
 				9ECDE2EB2356891F009D0BBE /* BucketSizeResponse.swift in Sources */,
 				9E14A44B2359205A00F56891 /* UIImageView+JMImageCache.m in Sources */,
 				9E2B879A2344003C00941DF2 /* LibraryFeedsViewController.swift in Sources */,
@@ -624,6 +631,7 @@
 				9E2970D8234E7FC6003BC282 /* UpgradeSoloHostViewController.swift in Sources */,
 				9E2970DA234E7FDE003BC282 /* UpgradeGrowthHostViewController.swift in Sources */,
 				9E2B87A0234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift in Sources */,
+				9E159F02235E58F70033FBE6 /* DefaultWrapper.swift in Sources */,
 				9E5085B623595AC700857277 /* VideoViewController.swift in Sources */,
 				9EA55FA5233C3628003A1EBB /* ExtensionManager.swift in Sources */,
 				9E403A3C2344352B002E3749 /* RegisterResponse.swift in Sources */,

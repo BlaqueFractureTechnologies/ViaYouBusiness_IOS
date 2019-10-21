@@ -9,11 +9,20 @@
 import UIKit
 import Stripe
 
+@objc protocol StripePaymentViewControllerDelegate{
+    @objc optional func transactionSuccessful(passedTypeOfPayment: String)
+    @objc optional func transactionFailed()
+}
+
 class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDelegate {
+    
+    var delegate:StripePaymentViewControllerDelegate?
+    
     @IBOutlet weak var buyButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var selectedPlanLabel: UILabel!
+    @IBOutlet weak var labelsContainer: UIView!
     
     var passedTypeOfPayment: String = ""
     var cardField = STPPaymentCardTextField()
@@ -28,6 +37,7 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
         title = "Card Field"
         view.backgroundColor = UIColor.white
         view.addSubview(cardField)
+        
         edgesForExtendedLayout = []
         view.backgroundColor = theme.primaryBackgroundColor
         cardField.backgroundColor = theme.secondaryBackgroundColor
@@ -41,6 +51,13 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
         selectedPlanLabel.text = selectedPlanName
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         navigationController?.navigationBar.stp_theme = theme
+        
+        labelsContainer.layer.borderColor = self.view.themeRedColor().cgColor
+        labelsContainer.layer.borderWidth = 2.5
+        labelsContainer.layer.cornerRadius = 5
+        labelsContainer.clipsToBounds = true
+        labelsContainer.layoutIfNeeded()
+        
     }
     
     @objc func done() {
@@ -48,8 +65,8 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        buyButton.addAppGradient()
-//        cancelButton.addAppGradient()
+        //        buyButton.addAppGradient()
+        //        cancelButton.addAppGradient()
     }
     
     
@@ -67,7 +84,7 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
         //                                 height: 50)
         
         cardField.frame = CGRect(x: padding,
-                                 y: 100,
+                                 y: 140,
                                  width: view.bounds.width - (padding * 2),
                                  height: 50)
     }
@@ -96,9 +113,18 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
                 if error == nil {
                     print(response.success)
                     print(response.message)
-                    self.displayAlert(msg: "Success! Payment Confirmed!")
-                    self.dismiss(animated: true, completion: nil)
-
+                    
+                    let alert = UIAlertController(title: "Success!", message: "Payment Confirmed!", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                        self.navigationController?.dismiss(animated: true, completion: {
+                            self.delegate?.transactionSuccessful!(passedTypeOfPayment: self.passedTypeOfPayment)
+                        })
+                    }
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                    //self.dismiss(animated: true, completion: nil)
+                    
                 }
                 else {
                     self.displayAlert(msg: "Sorry! Payment Failed! Please try again later!")

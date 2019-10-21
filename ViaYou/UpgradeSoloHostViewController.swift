@@ -9,7 +9,7 @@
 import UIKit
 import Stripe
 
-class UpgradeSoloHostViewController: UIViewController {
+class UpgradeSoloHostViewController: UIViewController,StripePaymentViewControllerDelegate {
     @IBOutlet weak var trySoloHostButton: UIButton!
     
     
@@ -22,6 +22,28 @@ class UpgradeSoloHostViewController: UIViewController {
         //  view.addSubview(paymentCardTextField)
         
     }
+    
+    let notificationName_UpgradeSoloHostViewControllerHideAfterPayment = Notification.Name("UpgradeSoloHostViewControllerHideAfterPayment")
+    
+    @objc func handleNotification(withNotification notification : NSNotification) {
+        //print("Received data in EventsCategoryFilterViewController :: notification.name = \(notification.name)")
+        if (notification.name == notificationName_UpgradeSoloHostViewControllerHideAfterPayment) {
+            print("notificationName_UpgradeSoloHostViewControllerHideAfterPayment...")
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(withNotification:)), name: notificationName_UpgradeSoloHostViewControllerHideAfterPayment, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: notificationName_UpgradeSoloHostViewControllerHideAfterPayment, object: nil)
+    }
+    
+    
     //    func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
     //        // Toggle buy button state
     //        trySoloHostButton.isEnabled = textField.isValid
@@ -42,13 +64,24 @@ class UpgradeSoloHostViewController: UIViewController {
         homeVC.passedTypeOfPayment = "SOLO"
         homeVC.selectedPlanName = "Solo Host"
         homeVC.selectedPlanCharge = "$9.95"
+        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
         
     }
     
+    func transactionSuccessful(passedTypeOfPayment: String) {
+        print("UpgradeSoloHostViewController :: transactionSuccessful... passedTypeOfPayment = \(passedTypeOfPayment)")
+        DefaultWrapper().setPaymentTypePurchased(type: 0) //0=> Solo
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "PaymentCompletedViewController") as! PaymentCompletedViewController
+        self.navigationController?.pushViewController(nextVC, animated: false)
+    }
     
+    func transactionFailed() {
+        print("UpgradeSoloHostViewController :: transactionFailed...")
+    }
     // MARK: STPAddCardViewControllerDelegate
     
     
