@@ -38,6 +38,8 @@ class UpgradeGrowthHostViewController: UIViewController {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
         homeVC.passedTypeOfPayment = "GROWTH"
+        homeVC.selectedPlanName = "Growth Host"
+        homeVC.selectedPlanCharge = "$7.75"
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)

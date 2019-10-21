@@ -12,10 +12,14 @@ import Stripe
 class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDelegate {
     @IBOutlet weak var buyButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var selectedPlanLabel: UILabel!
     
     var passedTypeOfPayment: String = ""
     var cardField = STPPaymentCardTextField()
     var theme = STPTheme.default()
+    var selectedPlanName: String = ""
+    var selectedPlanCharge: String = ""
     
     let tokenGot: String = ""
     override func viewDidLoad() {
@@ -33,6 +37,8 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
         cardField.borderWidth = 1.0
         cardField.textErrorColor = theme.errorColor
         cardField.postalCodeEntryEnabled = false
+        amountLabel.text = selectedPlanCharge
+        selectedPlanLabel.text = selectedPlanName
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         navigationController?.navigationBar.stp_theme = theme
     }
@@ -42,8 +48,8 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        buyButton.addAppGradient()
-        cancelButton.addAppGradient()
+//        buyButton.addAppGradient()
+//        cancelButton.addAppGradient()
     }
     
     

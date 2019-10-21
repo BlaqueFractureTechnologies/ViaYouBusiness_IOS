@@ -142,6 +142,11 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     @objc func overlayButtonClicked(_ sender:UIButton) {
         if (sender.tag == 3) {
             print("Contact us button clicked...")
+            if let url = URL(string: "http://www.apple.com") {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
             return
         }
         
