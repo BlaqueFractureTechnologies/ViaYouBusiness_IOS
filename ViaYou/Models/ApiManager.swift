@@ -27,6 +27,8 @@ struct ApiManager {
     let deleteHeader = "delete"
     let featureRequest = "feedback/add"
     let fetchSubscriptionHeader = "subscription/fetch"
+    let listDeletedScreenCastHeader = "listDeletedScreenCast"
+    let restoreScreencastHeader = "restore"
     
     
     //MARK:- Registration API
@@ -462,7 +464,7 @@ struct ApiManager {
         
         let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
         
-        let requestURLString = "\(headerUrl)\(bucketSizeCalculationHeader)"
+        let requestURLString = "\(mainHeader)\(fetchSubscriptionHeader)"
         let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
         request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
         request.setValue(generatedUserToken, forHTTPHeaderField: "token")
@@ -487,6 +489,88 @@ struct ApiManager {
                 } catch let parsingError {
                     print("parsingError=\(parsingError)")
                     completion(FetchSubscriptionResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
+    //MARK:- List Deleted Screencast
+    func ListDeletedScreencastAPI(
+        completion: @escaping (LibraryFeedResponse, _ error:Error?) -> ()) {
+        
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
+        
+        let requestURLString = "\(headerUrl)\(listDeletedScreenCastHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue(generatedUserToken, forHTTPHeaderField: "token")
+        request.httpMethod = "POST"
+        
+        let postData = NSMutableData()
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(LibraryFeedResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("jsonDict====>%@",jsonDict)
+                        completion(LibraryFeedResponse(jsonDict),nil)
+                    }else {
+                        completion(LibraryFeedResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(LibraryFeedResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
+    //MARK:- Restore Deleted Videos APIs
+    func restoreVideosAPI(postId:String,
+                          completion: @escaping (DeleteVideoResponse, _ error:Error?) -> ()) {
+        
+        let parameters: [String: Any] = [
+            "postId":postId,
+        ]
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
+        
+        let requestURLString = "\(POSTSHEADER)\(restoreScreencastHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue(generatedUserToken, forHTTPHeaderField: "token")
+        request.httpMethod = "POST"
+        
+        let postData = NSMutableData()
+        for key in parameters.keys {
+            let keyString = "&\(key)"
+            let valueString = parameters[key] as? String ?? ""
+            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
+        }
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(DeleteVideoResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("jsonDict====>%@",jsonDict)
+                        completion(DeleteVideoResponse(jsonDict),nil)
+                    }else {
+                        completion(DeleteVideoResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(DeleteVideoResponse([:]),parsingError)
                 }
             }
         })
