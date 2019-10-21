@@ -52,12 +52,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var userId: String = ""
     var invitationUrl: URL!
     let dropdownArray = ["Invite",
-                         "Share Storage",
+                         "Cloud Access",
                          "My Plan Or Upgrade",
                          "Restore",
                          "Feedback",
                          "Feature Request",
-                         "Analytics",
+                         "Analytics", 
                          "Privacy Policy",
                          "Terms And Conditions",
     "Sign Out"]
