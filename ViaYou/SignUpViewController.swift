@@ -70,7 +70,12 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 }
                 
                 DispatchQueue.main.async {
-                    self.getFaceookAuthenticationToken()
+                    
+                    if let user = Auth.auth().currentUser {
+                        user.link(with: credential, completion: { (user, error) in
+                            self.getFaceookAuthenticationToken()
+                        })
+                    }
                 }
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
@@ -181,7 +186,12 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                 }
-                self.getAuthenticationToken()
+                if let user = Auth.auth().currentUser {
+                    user.link(with: credentials) { (user, error) in
+                        // Complete any post sign-up tasks here.
+                        self.getAuthenticationToken()
+                    }
+                }
                 
             }
         })
