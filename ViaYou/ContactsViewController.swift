@@ -22,6 +22,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     var passedUrlLink: String = ""
     var documentController: UIDocumentInteractionController = UIDocumentInteractionController()
     let defaultProfilePic = UIImage(named: "defaultProfilePic")
+    var inviteText: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +34,11 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         let boolVal = UserDefaults.standard.bool(forKey: "isTappedFromSingleVideo")
         if boolVal == true {
             inviteAFriendLabel.text = "Send To"
+            inviteText = "Hey, Checkout this video- "
         }
         else {
             inviteAFriendLabel.text = "Invite A Friend"
+            inviteText = "Hey, Checkout this new app I'm using- We will both receive 2GB free storage. And the app is awesome!!!"
         }
         
         self.getContacts { (status,contactsArray) in
@@ -115,7 +118,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
-            controller.body = "Hey, Checked out our new App \(self.passedUrlLink)"//"Message Body"
+            controller.body = "\(inviteText) \(self.passedUrlLink)"//"Message Body"
             controller.recipients = clickedUserPhoneNumbers
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
@@ -151,7 +154,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         let shareContent = ShareLinkContent()
         // shareContent.contentURL = URL.init(string: "https://developers.facebook.com")! //your link
         shareContent.contentURL = URL.init(string: passedUrlLink)! //your link
-        shareContent.quote = self.passedUrlLink//"Text to be shared"
+        shareContent.quote = "\(inviteText) \(self.passedUrlLink)"//"Text to be shared"
         ShareDialog(fromViewController: self, content: shareContent, delegate: self).show()
     }
     
@@ -169,7 +172,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //MARK:-- Twitter
     func shareTextOnTwitter() {
-        let tweetText = self.passedUrlLink//"your text"
+        let tweetText = "\(inviteText) \(self.passedUrlLink)"//"your text"
         let tweetUrl = "http://stackoverflow.com/"
         let shareString = "https://twitter.com/intent/tweet?text=\(tweetText)&url=\(tweetUrl)"
         // encode a space to %20 for example
@@ -184,7 +187,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //MARK:-- WhatsApp
     func shareTextOnWhatsApp() {
-        let originalString = self.passedUrlLink//"First Whatsapp Share"
+        let originalString = "\(inviteText) \(self.passedUrlLink)"//"First Whatsapp Share"
         let escapedString = originalString.addingPercentEncoding(withAllowedCharacters:CharacterSet.urlQueryAllowed)
         
         let url  = URL(string: "whatsapp://send?text=\(escapedString!)")
@@ -231,7 +234,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
          */
         
         
-        let videoUrlString = "https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
+        let videoUrlString = "\(self.passedUrlLink)"
         
         DispatchQueue.global(qos: .background).async {
             if let url = URL(string: videoUrlString),
@@ -333,7 +336,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func shareTextOnAllOtherApps() {
         
-        let firstActivityItem = "ViaYou"
+        let firstActivityItem = "\(inviteText) \(self.passedUrlLink)"
         let secondActivityItem : NSURL = NSURL(string: self.passedUrlLink)!
         
         let activityViewController : UIActivityViewController = UIActivityViewController(
