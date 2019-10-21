@@ -42,13 +42,15 @@ class BecomeGrowthHostPopUpViewController: UIViewController {
     
     @IBAction func goToUpgradeAndSubscriptionBaseViewControllerButtonClicked() {
         self.dismiss(animated: true) {
-            self.delegate?.becomeGrowthHostPopUpVC_UpgradeAndSubscriptionBaseViewControllerButtonClicked!()
+            self.delegate?.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked!()
+            
         }
     }
     
     @IBAction func goToSubscriptionBaseViewControllerrButtonClicked() {
         self.dismiss(animated: true) {
-            self.delegate?.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked!()
+            self.delegate?.becomeGrowthHostPopUpVC_UpgradeAndSubscriptionBaseViewControllerButtonClicked!()
+            
         }
     }
     

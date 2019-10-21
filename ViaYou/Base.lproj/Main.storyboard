@@ -5121,7 +5121,7 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="106" id="kfr-gc-QGT"/>
                                             <constraint firstAttribute="height" constant="33" id="yrR-yr-dX8"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-SemiBold" family="MonarchaW01-SemiBold" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-SemiBold" family="MonarchaW01-SemiBold" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -5139,7 +5139,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="br9-Up-FeD"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-SemiBold" family="MonarchaW01-SemiBold" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-SemiBold" family="MonarchaW01-SemiBold" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>

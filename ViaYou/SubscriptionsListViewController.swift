@@ -117,6 +117,8 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
         homeVC.passedTypeOfPayment = "SOLO"
+        homeVC.selectedPlanName = "Solo Host"
+        homeVC.selectedPlanCharge = "$9.95"
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
@@ -125,6 +127,8 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
         homeVC.passedTypeOfPayment = "GROWTH"
+        homeVC.selectedPlanName = "Growth Host"
+        homeVC.selectedPlanCharge = "$7.75"
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
@@ -133,6 +137,8 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
         homeVC.passedTypeOfPayment = "PRO"
+        homeVC.selectedPlanName = "Pro Host"
+        homeVC.selectedPlanCharge = "$18.90"
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
@@ -185,5 +191,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
             self.navigationController?.popViewController(animated: true)
         }
     }
+    
+
 }
 

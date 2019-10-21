@@ -15,7 +15,7 @@ class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -33,10 +33,16 @@ class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, U
             cell.mainTitleLabel.text = "Upgrade To"
             cell.subTitleLabel.text = "Growth Host"
             cell.offerLabel.text = " save 10%"
-        }else {
+        }else if (indexPath.row == 2){
             cell.mainTitleLabel.text = "Upgrade To"
             cell.subTitleLabel.text = "Pro Host"
             cell.offerLabel.text = " save 25%"
+        }
+        else {
+            cell.mainTitleLabel.text = "Upgrade To"
+            cell.subTitleLabel.text = "Enterprise"
+            cell.offerLabel.text = " save 30%"
+            cell.learnMoreButton.setTitle("Contact Us", for: .normal)
         }
         
         cell.learnMoreButton.tag = indexPath.row
@@ -47,12 +53,23 @@ class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, U
     
     
     @objc func learnMoreButtonClicked(_ sender:UIButton) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubscriptionsListViewController") as! SubscriptionsListViewController
-        nextVC.openedSection = sender.tag
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        if (sender.tag == 3) {
+            print("Contact us button clicked...")
+            if let url = URL(string: "http://www.apple.com") {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
+            return
+        } else {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubscriptionsListViewController") as! SubscriptionsListViewController
+            nextVC.openedSection = sender.tag
+            let navVC = UINavigationController(rootViewController: nextVC)
+            navVC.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        
     }
     
     //    @IBAction func upgrageButtonClicked() {
