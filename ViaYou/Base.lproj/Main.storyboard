@@ -3680,8 +3680,9 @@
                                                 <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 100GB Cloud Storage Limit - Additional    Restore Deleted Files   Increase Free Data Limit 15GB   Remove Watermarks" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFE-1q-EDq">
-                                                <rect key="frame" x="5" y="211.5" width="230" height="226.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFE-1q-EDq">
+                                                <rect key="frame" x="5" y="235.5" width="230" height="249"/>
+                                                <string key="text">+ 100GB Cloud Storage Limit - Additional   Restore Deleted Files   Apply your own Logo  Increase Free Data Limit 15GB   Remove Watermarks</string>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="18"/>
                                                 <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3704,11 +3705,11 @@
                                             <constraint firstItem="Fd0-Pf-HB2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="poK-q6-vc8" secondAttribute="leading" constant="5" id="Six-NB-2BZ"/>
                                             <constraint firstItem="2mZ-wf-5p4" firstAttribute="top" secondItem="tlq-Cm-Mt2" secondAttribute="bottom" constant="20" id="Tao-wV-IjW"/>
                                             <constraint firstItem="Fd0-Pf-HB2" firstAttribute="top" secondItem="2mZ-wf-5p4" secondAttribute="bottom" constant="11" id="VYm-EU-xe0"/>
+                                            <constraint firstItem="JFE-1q-EDq" firstAttribute="top" secondItem="cRM-0q-Vrx" secondAttribute="bottom" constant="44" id="XBh-lk-2gh"/>
                                             <constraint firstItem="2mZ-wf-5p4" firstAttribute="centerX" secondItem="poK-q6-vc8" secondAttribute="centerX" id="Z8Y-NJ-dhs"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2mZ-wf-5p4" secondAttribute="trailing" constant="5" id="aIB-5B-8lP"/>
                                             <constraint firstAttribute="width" constant="240" id="fNA-RQ-27S"/>
                                             <constraint firstItem="JFE-1q-EDq" firstAttribute="leading" secondItem="poK-q6-vc8" secondAttribute="leading" constant="5" id="k7D-dB-LHz"/>
-                                            <constraint firstItem="JFE-1q-EDq" firstAttribute="top" secondItem="cRM-0q-Vrx" secondAttribute="bottom" constant="20" id="m4e-bc-vZk"/>
                                             <constraint firstItem="Fd0-Pf-HB2" firstAttribute="leading" secondItem="DIP-rv-jgN" secondAttribute="trailing" constant="5" id="mXT-lv-drn"/>
                                             <constraint firstAttribute="trailing" secondItem="JFE-1q-EDq" secondAttribute="trailing" constant="5" id="mfv-0l-Obq"/>
                                             <constraint firstItem="cRM-0q-Vrx" firstAttribute="centerX" secondItem="poK-q6-vc8" secondAttribute="centerX" id="moL-5Q-cme"/>
