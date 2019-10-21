@@ -787,38 +787,38 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.present(nextVC, animated: false, completion: nil)
             
         }
-        else if (indexPath.row == 3) {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-            nextVC.modalPresentationStyle = .overCurrentContext
-            nextVC.delegate = self
-            self.present(nextVC, animated: false, completion: nil)
-            
-        }
-        else if (indexPath.row == 5) {
+            //        else if (indexPath.row == 3) {
+            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            //            nextVC.modalPresentationStyle = .overCurrentContext
+            //            nextVC.delegate = self
+            //            self.present(nextVC, animated: false, completion: nil)
+            //
+            //        }
+        else if (indexPath.row == 4) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
             nextVC.modalPresentationStyle = .overCurrentContext
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        else if (indexPath.row == 6) {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-            nextVC.modalPresentationStyle = .overCurrentContext
-            nextVC.delegate = self
-            self.present(nextVC, animated: false, completion: nil)
-        }
-        else if (indexPath.row == 7) {
+            //        else if (indexPath.row == 6) {
+            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            //            nextVC.modalPresentationStyle = .overCurrentContext
+            //            nextVC.delegate = self
+            //            self.present(nextVC, animated: false, completion: nil)
+            //        }
+        else if (indexPath.row == 5) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        else if (indexPath.row == 8) {
+        else if (indexPath.row == 6) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        else if (indexPath.row == 9) {
+        else if (indexPath.row == 7) {
             UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
