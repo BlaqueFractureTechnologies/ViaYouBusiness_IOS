@@ -14,7 +14,10 @@ class ContactsTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var inviteButton: UIButton!
+    @IBOutlet weak var inviteButtonWidthConstraints: NSLayoutConstraint!
     var documentInteractionController: UIDocumentInteractionController = UIDocumentInteractionController()
+    @IBOutlet weak var radioButton: UIButton!
+    @IBOutlet weak var radioButtonWidthConstraints: NSLayoutConstraint!
     
     
     override func awakeFromNib() {
@@ -44,6 +47,12 @@ class ContactsTableViewCell: UITableViewCell {
         profilePicView.image = UIImage(named: "defaultProfilePic")
         if (dataDict.isProfilePicAvailable == true) {
             profilePicView.image = dataDict.profilePic
+        }
+        
+        if (dataDict.isSelectedForShare == true) {
+            radioButton.setBackgroundImage(UIImage(named: "radio_ON"), for: .normal)
+        }else {
+            radioButton.setBackgroundImage(UIImage(named: "radio_OFF"), for: .normal)
         }
     }
     

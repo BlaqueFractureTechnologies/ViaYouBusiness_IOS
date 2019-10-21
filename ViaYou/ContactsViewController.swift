@@ -10,12 +10,19 @@ import UIKit
 import MessageUI
 //import FacebookShare
 import FBSDKShareKit
+import Firebase
 
 class ContactsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,MFMessageComposeViewControllerDelegate, UINavigationControllerDelegate, SharingDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var inviteAFriendLabel: UILabel!
+    @IBOutlet weak var sendAllInvitationButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var inviteAllButton: UIButton!
+    @IBOutlet weak var inviteAllRadioButton_Right: UIButton!
+    @IBOutlet weak var inviteAllTextButton_Right: UIButton!
+    @IBOutlet weak var profilePicButton: UIButton!
     
     var fullDataArray:[PhoneContact] = []
     var dataArray:[PhoneContact] = []
@@ -23,10 +30,37 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     var documentController: UIDocumentInteractionController = UIDocumentInteractionController()
     let defaultProfilePic = UIImage(named: "defaultProfilePic")
     var inviteText: String = ""
+    var isInviteAllOptionEnabled: Bool = false
+    var isInviteAllRadioButtonHighlighted: Bool = false
+    let profileImageUrlHeader:String = "https://dev-promptchu.s3.us-east-2.amazonaws.com/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        
+        DispatchQueue.main.async {
+            self.sendAllInvitationButtonHeightConstraint.constant = 0
+            self.tableViewBottomConstraint.constant = 0
+            self.inviteAllRadioButton_Right.alpha = 0
+            self.inviteAllTextButton_Right.alpha = 0
+        }
+        
+        let profileImage = "profile.jpg"
+        if let selfUserId = Auth.auth().currentUser?.uid {
+            let profileImageOnlineUrl = "\(profileImageUrlHeader)users/\(selfUserId)/\(profileImage)"
+            print("profileImageOnlineUrl====>\(profileImageOnlineUrl)")
+            
+            JMImageCache.shared()?.image(for: URL(string: profileImageOnlineUrl), completionBlock: { (image) in
+                
+                self.profilePicButton.setBackgroundImage(image, for: .normal)
+                
+                if (__CGSizeEqualToSize(self.profilePicButton.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
+                    print("EMPTY IMAGE")
+                    self.profilePicButton.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
+                }
+            }, failureBlock: { (request, response, error) in
+            })
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +142,20 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.inviteButton.tag = indexPath.row
         cell.inviteButton.addTarget(self, action: #selector(inviteButtonClicked), for: UIControl.Event.touchUpInside)
+        
+        cell.radioButton.tag = indexPath.row
+        cell.radioButton.addTarget(self, action: #selector(radioButtonClicked), for: UIControl.Event.touchUpInside)
+        UIView.animate(withDuration: 0.4) {
+            if (self.isInviteAllOptionEnabled == false) {
+                cell.radioButtonWidthConstraints.constant = 0
+                cell.inviteButtonWidthConstraints.constant = 100
+                cell.layoutIfNeeded()
+            }else {
+                cell.radioButtonWidthConstraints.constant = 40
+                cell.inviteButtonWidthConstraints.constant = 0
+                cell.layoutIfNeeded()
+            }
+        }
         return cell
     }
     
@@ -357,6 +405,92 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.present(activityViewController, animated: true, completion: nil)
     }
+    
+    @IBAction func inviteAllButtonClicked(_ sender: UIButton) {
+        if (isInviteAllOptionEnabled == false) {
+            isInviteAllOptionEnabled = true
+            inviteAllButton.setTitleColor(#colorLiteral(red: 0.5063451777, green: 0.5063451777, blue: 0.5063451777, alpha: 1), for: .normal)
+            inviteAllRadioButton_Right.alpha = 1
+            inviteAllTextButton_Right.alpha = 1
+            UIView.animate(withDuration: 0.4) {
+                self.sendAllInvitationButtonHeightConstraint.constant = 45
+                self.tableViewBottomConstraint.constant = 10
+                self.view.layoutIfNeeded()
+            }
+        }else {
+            isInviteAllOptionEnabled = false
+            inviteAllButton.setTitleColor(#colorLiteral(red: 0.968627451, green: 0.2745098039, blue: 0.3960784314, alpha: 1), for: .normal)
+            inviteAllRadioButton_Right.alpha = 0
+            inviteAllTextButton_Right.alpha = 0
+            UIView.animate(withDuration: 0.4) {
+                self.sendAllInvitationButtonHeightConstraint.constant = 0
+                self.tableViewBottomConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    @objc func radioButtonClicked(_ sender:UIButton) {
+        print("radioButtonClicked...")
+        
+        if (dataArray[sender.tag].isSelectedForShare == false) {
+            dataArray[sender.tag].isSelectedForShare = true
+        }else {
+            dataArray[sender.tag].isSelectedForShare = false
+        }
+        tableView.reloadData()
+    }
+    
+    @IBAction func inviteAllRightButtonsClicked(_ sender:UIButton) {
+        print("inviteAllRightButtonsClicked...")
+        
+        if (isInviteAllRadioButtonHighlighted == false) {
+            isInviteAllRadioButtonHighlighted = true
+            inviteAllRadioButton_Right.setBackgroundImage(UIImage(named: "radio_ON"), for: .normal)
+            for i in 0..<dataArray.count {
+                dataArray[i].isSelectedForShare = true
+            }
+        }else {
+            isInviteAllRadioButtonHighlighted = false
+            inviteAllRadioButton_Right.setBackgroundImage(UIImage(named: "radio_OFF"), for: .normal)
+            for i in 0..<dataArray.count {
+                dataArray[i].isSelectedForShare = false
+            }
+        }
+        
+        tableView.reloadData()
+    }
+    
+    
+    @IBAction func sendInvitationToAllButtonClicked(_ sender: Any) {
+        print("sendInvitationToAllButtonClicked...")
+        
+        var allUsersContactsArray:[String] = []
+        for i in 0..<dataArray.count {
+            if (dataArray[i].isSelectedForShare == true) {
+                let clickedUserPhoneNumbers = dataArray[i].phoneNumbers
+                if (clickedUserPhoneNumbers.count > 0) {
+                    allUsersContactsArray.append(clickedUserPhoneNumbers[0])
+                }
+            }
+        }
+        print("allUsersContactsArray ====> \(allUsersContactsArray)")
+        if (allUsersContactsArray.count == 0) {
+            self.displayAlert(msg: "Please select atleast one contact")
+            return
+        }
+        
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "\(inviteText) \(self.passedUrlLink)"//"Message Body"
+            controller.recipients = allUsersContactsArray
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    
     
     @IBAction func backButtonClicked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)

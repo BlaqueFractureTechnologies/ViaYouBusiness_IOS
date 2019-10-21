@@ -15,4 +15,5 @@ class PhoneContact: NSObject {
     var profilePic: UIImage!
     var isProfilePicAvailable: Bool = false
     var phoneNumbers: [String] = []
+    var isSelectedForShare: Bool = false
 }
