@@ -16,8 +16,10 @@ import MessageUI
 import AWSS3
 import AWSCore
 import AWSCognito
+//import DTMessageHUD
 
-class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, BecomeGrowthHostPopUpViewControllerDelegate {
+
+class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BecomeGrowthHostPopUpViewControllerDelegate {
     
     
     
@@ -57,10 +59,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Restore",
                          "Feedback",
                          "Feature Request",
-                         "Analytics", 
+                         "Analytics",
                          "Privacy Policy",
                          "Terms And Conditions",
-    "Sign Out"]
+                         "Sign Out"]
     //AWS setup
     let bucketName = "dev-promptchu"
     var contentUrl: URL!
@@ -70,6 +72,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var countryCode: String = ""
     var totalBucketSpace = ""
     var usedBucketSpace = ""
+    let profileImageUrlHeader:String = "https://dev-promptchu.s3.us-east-2.amazonaws.com/"
+    let imagePickerController = UIImagePickerController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,41 +91,86 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         {
             userNameOnDropDown.text = "ViaYou User"
         }
-        self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
-        print("self.passedProfileImage===>\(self.passedProfileImage)")
+        //edit
+        let isFileDeleted = self.removeImageFromDocumentsDirectory(imageName: "profile.jpg")
+        print("isFileDeleted====>\(isFileDeleted)")
         
-        if (__CGSizeEqualToSize(self.profilePicButton.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
-            print("EMPTY IMAGE")
-            self.profilePicButton.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
-        }
+        let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(self.passedProfileImage)
+        print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
         
-        self.profilePicOnDropDownList.layer.cornerRadius = self.profilePicOnDropDownList.frame.size.width/2.0
-        self.profilePicOnDropDownList.clipsToBounds = true
-        //self.profilePicOnDropDownList.image = self.passedProfileImage
-        self.profilePicButtonOnDropDownList.setBackgroundImage(self.passedProfileImage, for: .normal)
-        if (__CGSizeEqualToSize(self.profilePicButtonOnDropDownList.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
-            print("EMPTY IMAGE")
-            self.profilePicButtonOnDropDownList.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
+        self.uploadProfilePhotoFile(with: "profile", type: "jpg", savedimagePathInDocuments: savedProfileImagePath)
+        
+        //edit ends
+        let profileImage = "profile.jpg"
+        if let selfUserId = Auth.auth().currentUser?.uid {
+            let profileImageOnlineUrl = "\(profileImageUrlHeader)users/\(selfUserId)/\(profileImage)"
+            print("profileImageOnlineUrl====>\(profileImageOnlineUrl)")
             
+            JMImageCache.shared()?.image(for: URL(string: profileImageOnlineUrl), completionBlock: { (image) in
+                
+                self.profilePicButton.setBackgroundImage(image, for: .normal)
+                
+                if (__CGSizeEqualToSize(self.profilePicButton.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
+                    print("EMPTY IMAGE")
+                    self.profilePicButton.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
+                }
+                
+                self.profilePicOnDropDownList.layer.cornerRadius = self.profilePicOnDropDownList.frame.size.width/2.0
+                self.profilePicOnDropDownList.clipsToBounds = true
+                //self.profilePicOnDropDownList.image = self.passedProfileImage
+                self.profilePicButtonOnDropDownList.setBackgroundImage(image, for: .normal)
+                if (__CGSizeEqualToSize(self.profilePicButtonOnDropDownList.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
+                    print("EMPTY IMAGE")
+                    self.profilePicButtonOnDropDownList.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
+                    
+                }
+                
+                self.profilePicOnInvitePopUp.image = image
+                self.profilePicOnInvitePopUp.layer.cornerRadius = self.profilePicOnInvitePopUp.frame.size.width/2.0
+                self.profilePicOnInvitePopUp.clipsToBounds = true
+                if (__CGSizeEqualToSize(self.profilePicOnInvitePopUp.image?.size ?? CGSize.zero, CGSize.zero)) {
+                    print("EMPTY IMAGE")
+                    self.profilePicOnInvitePopUp.image = UIImage(named: "defaultProfilePic")
+                    
+                }
+                
+                self.profilePicOnNoFeedPopUp.image = image
+                self.profilePicOnNoFeedPopUp.layer.cornerRadius = self.profilePicOnNoFeedPopUp.frame.size.width/2.0
+                self.profilePicOnNoFeedPopUp.clipsToBounds = true
+                if (__CGSizeEqualToSize(self.profilePicOnNoFeedPopUp.image?.size ?? CGSize.zero, CGSize.zero)) {
+                    print("EMPTY IMAGE")
+                    self.profilePicOnInvitePopUp.image = UIImage(named: "defaultProfilePic")
+                    
+                }
+            }, failureBlock: { (request, response, error) in
+            })
         }
         
-        self.profilePicOnInvitePopUp.image = self.passedProfileImage
-        self.profilePicOnInvitePopUp.layer.cornerRadius = self.profilePicOnInvitePopUp.frame.size.width/2.0
-        self.profilePicOnInvitePopUp.clipsToBounds = true
-        if (__CGSizeEqualToSize(self.profilePicOnInvitePopUp.image?.size ?? CGSize.zero, CGSize.zero)) {
-            print("EMPTY IMAGE")
-            self.profilePicOnInvitePopUp.image = UIImage(named: "defaultProfilePic")
-            
-        }
         
-        self.profilePicOnNoFeedPopUp.image = self.passedProfileImage
-        self.profilePicOnNoFeedPopUp.layer.cornerRadius = self.profilePicOnNoFeedPopUp.frame.size.width/2.0
-        self.profilePicOnNoFeedPopUp.clipsToBounds = true
-        if (__CGSizeEqualToSize(self.profilePicOnNoFeedPopUp.image?.size ?? CGSize.zero, CGSize.zero)) {
-            print("EMPTY IMAGE")
-            self.profilePicOnInvitePopUp.image = UIImage(named: "defaultProfilePic")
-            
-        }
+        
+        
+        
+        //        self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
+        //        print("self.passedProfileImage===>\(self.passedProfileImage)")
+        //
+        //        if (__CGSizeEqualToSize(self.profilePicButton.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
+        //            print("EMPTY IMAGE")
+        //            self.profilePicButton.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
+        //        }
+        
+        //        self.profilePicOnDropDownList.layer.cornerRadius = self.profilePicOnDropDownList.frame.size.width/2.0
+        //        self.profilePicOnDropDownList.clipsToBounds = true
+        //        //self.profilePicOnDropDownList.image = self.passedProfileImage
+        //        self.profilePicButtonOnDropDownList.setBackgroundImage(self.passedProfileImage, for: .normal)
+        //        if (__CGSizeEqualToSize(self.profilePicButtonOnDropDownList.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
+        //            print("EMPTY IMAGE")
+        //            self.profilePicButtonOnDropDownList.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
+        //
+        //        }
+        
+        
+        
+        
         
         collectioView.reloadData()
         getResponseFromJSONFile()
@@ -141,6 +191,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let credentialsProvider = AWSStaticCredentialsProvider(accessKey: accessKey, secretKey: secretKey)
         let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast2, credentialsProvider: credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
+        s3Url = AWSS3.default().configuration.endpoint.url
         let s3 = AWSS3.default()
         let getReq : AWSS3ListObjectsRequest = AWSS3ListObjectsRequest()
         getReq.bucket = self.bucketName
@@ -236,7 +287,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let remainingSpaceInMB = Float(remainingSpace) / 1000.0
             
             DispatchQueue.main.async {
-
+                
                 self.storageIndicatorLabel.text = "\(remainingSpaceInMB) GB Free"
             }
         }
@@ -277,6 +328,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         self.dropDownBaseView.alpha = 0
         self.dropdownOverlayButton.alpha = 0
         self.popUpOverlayButton.alpha = 0
+        s3Url = AWSS3.default().configuration.endpoint.url
         
         overlayViewWhenDropDownAppears.alpha = 0
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
@@ -404,7 +456,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 DispatchQueue.main.async {
                     self.dataArray.remove(at: sender.tag)
                     self.collectioView.reloadData()
-                }               
+                }
             }
             else
             {
@@ -417,18 +469,18 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @objc func shareButtonClicked(_ sender:UIButton) {
         print(dataArray[sender.tag]._id)
         
-                    let userID = dataArray[sender.tag].user._id
-                    let videoName = dataArray[sender.tag].fileName
-                    var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
-                    videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-                    UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
-                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
-                    nextVC.passedUrlLink = videUrlString
-                    let navVC = UINavigationController(rootViewController: nextVC)
-                    navVC.isNavigationBarHidden = true
-                    self.navigationController?.pushViewController(nextVC, animated: true)
-
+        let userID = dataArray[sender.tag].user._id
+        let videoName = dataArray[sender.tag].fileName
+        var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+        videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+        UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+        nextVC.passedUrlLink = videUrlString
+        let navVC = UINavigationController(rootViewController: nextVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
         
     }
     
@@ -484,19 +536,19 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             nextVC.modalPresentationStyle = .overCurrentContext
             self.present(nextVC, animated: true, completion: nil)
         }
-//        if (dataArray.count>selectedRow) {
-//            let userID = dataArray[selectedRow].user._id
-//            let videoName = dataArray[selectedRow].fileName
-//            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
-//            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-//            UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
-//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
-//            nextVC.passedUrlLink = videUrlString
-//            let navVC = UINavigationController(rootViewController: nextVC)
-//            navVC.isNavigationBarHidden = true
-//            self.navigationController?.pushViewController(nextVC, animated: true)
-//        }
+        //        if (dataArray.count>selectedRow) {
+        //            let userID = dataArray[selectedRow].user._id
+        //            let videoName = dataArray[selectedRow].fileName
+        //            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+        //            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+        //            UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
+        //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+        //            nextVC.passedUrlLink = videUrlString
+        //            let navVC = UINavigationController(rootViewController: nextVC)
+        //            navVC.isNavigationBarHidden = true
+        //            self.navigationController?.pushViewController(nextVC, animated: true)
+        //        }
     }
     
     @IBAction func plusButtonClicked() {
@@ -795,5 +847,170 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         navVC.isNavigationBarHidden = true
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    //MARK:- Select profile picture
+    @IBAction func dropdownProfilePicButtonClicked(_ sender: Any) {
+        let alert = UIAlertController(title: "Choose your option", message: "", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { action in
+            DispatchQueue.main.async {
+                self.chooseImage(source: .camera)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { action in
+            DispatchQueue.main.async {
+                self.chooseImage(source: .photoLibrary)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func chooseImage(source:UIImagePickerController.SourceType) {
+        let pickerController = UIImagePickerController()
+        pickerController.mediaTypes = ["public.image"]
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.sourceType = source
+        self.navigationController?.present(pickerController, animated: true, completion: nil)
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var selectedImage:UIImage!
+        if let image = info[.editedImage] as? UIImage {
+            selectedImage = image
+        }else if let image = info[.originalImage] as? UIImage {
+            selectedImage = image
+        }
+        
+        self.dismiss(animated: true, completion: {
+            let isFileDeleted = self.removeImageFromDocumentsDirectory(imageName: "profile.jpg")
+            print("isFileDeleted====>\(isFileDeleted)")
+            
+            let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage)
+            print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
+            
+            self.uploadProfilePhotoFile(with: "profile", type: "jpg", savedimagePathInDocuments: savedProfileImagePath)
+            
+        })
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func removeImageFromDocumentsDirectory(imageName:String)->Bool {
+        var isFileDeleted:Bool = false
+        let filemanager = FileManager.default
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask,true)[0] as NSString
+        let destinationPath = documentsPath.appendingPathComponent(imageName)
+        if filemanager.fileExists(atPath: destinationPath) {
+            do {
+                try filemanager.removeItem(atPath: destinationPath)
+                print("Deleted \(imageName) from documents directory")
+                isFileDeleted = true
+            }
+            catch let error {
+                print("Not deleted \(imageName) from documents directory :: \(error.localizedDescription)")
+                isFileDeleted = false
+            }
+        }
+        return isFileDeleted
+    }
+    
+    func saveprofilePicToDocumentDirectory(_ chosenImage: UIImage) -> URL {
+        let directoryPath =  NSHomeDirectory().appending("/Documents/")
+        if !FileManager.default.fileExists(atPath: directoryPath) {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directoryPath), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+        
+        let filename = "profile.jpg"
+        let filepath = directoryPath.appending(filename)
+        let url = NSURL.fileURL(withPath: filepath)
+        do {
+            try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
+            return url
+            
+        } catch {
+            print(error)
+            print("file cant not be save at path \(filepath), with error : \(error)");
+            return url
+        }
+    }
+    
+    func uploadProfilePhotoFile(with resource: String, type: String, savedimagePathInDocuments: URL)
+    {
+        
+        autoreleasepool{
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    //DTMessageHUD.hud()
+                    
+                    let key = "\(resource).\(type)"
+                    print("key====>\(key)")
+                    let request = AWSS3TransferManagerUploadRequest()!
+                    request.bucket = self.bucketName
+                    self.userId = Auth.auth().currentUser!.uid
+                    request.key = "users/"+"\(String(describing: self.userId))"+"/"+key
+                    print("self.userID====>\(self.userId)")
+                    print("request.key====>\(request.key ?? "No request.key")")
+                    
+                    request.body = savedimagePathInDocuments
+                    request.acl = .publicReadWrite
+                    print("savedimagePathInDocuments====>\(savedimagePathInDocuments)")
+                    
+                    let transferManager = AWSS3TransferManager.default()
+                    transferManager.upload(request).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in
+                        DispatchQueue.main.async {
+                            //  DTMessageHUD.dismiss()
+                        }
+                        if let error = task.error {
+                            print("Upload error occurred :: error ====> \(error.localizedDescription)")
+                            // DTMessageHUD.dismiss()
+                        }
+                        if task.result != nil {
+                            //  DTMessageHUD.dismiss()
+                            
+                            let profileImageOnlineUrl = "\(self.profileImageUrlHeader)users/\(self.userId)/\(key)"
+                            print("profileImageOnlineUrl====>\(profileImageOnlineUrl)")
+                            
+                            
+                            JMImageCache.shared()?.removeImage(for: URL(string: profileImageOnlineUrl))
+                            DispatchQueue.main.async {
+                                JMImageCache.shared()?.image(for: URL(string: profileImageOnlineUrl), completionBlock: { (image) in
+                                    
+                                    self.profilePicButton.setBackgroundImage(image, for: .normal)
+                                    self.profilePicButtonOnDropDownList.setBackgroundImage(image, for: .normal)
+                                    self.profilePicOnInvitePopUp.image = image
+                                    self.profilePicOnNoFeedPopUp.image = image
+                                    
+                                    
+                                }, failureBlock: { (request, response, error) in
+                                })
+                                
+                            }
+                            print("Upload success \(key)")
+                            let alertController = UIAlertController(title: "ViaYou", message: ("Uploaded profile pic"), preferredStyle:.alert)
+                            let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
+                                UIAlertAction in}
+                            alertController.addAction(action)
+                            self.present(alertController, animated: true, completion:nil)
+                            let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
+                            self.contentUrl = contentUrl
+                        }
+                        return nil
+                    }
+                }
+            }
+        }
+    }
+    
 }
 

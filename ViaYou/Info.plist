@@ -16,6 +16,12 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Viayou would like to access your camera</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Viayou would like to access your gallery</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Viayou would like to access your gallery</string>
 	<key>AWS</key>
 	<dict>
 		<key>CredentialsProvider</key>
