@@ -27,7 +27,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         self.activityIndicator.isHidden = true
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().signInSilently()
+   //     GIDSignIn.sharedInstance().signInSilently()
         if (AccessToken.current != nil) {
             // User is logged in, do work such as go to next view controller.
         }
