@@ -26,6 +26,7 @@ struct ApiManager {
     let createChargesHeader = "subscription/createCharges"
     let deleteHeader = "delete"
     let featureRequest = "feedback/add"
+    let fetchSubscriptionHeader = "subscription/fetch"
     
     
     //MARK:- Registration API
@@ -449,6 +450,43 @@ struct ApiManager {
                 } catch let parsingError {
                     print("parsingError=\(parsingError)")
                     completion(DeleteVideoResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
+    //MARK:- Fetch Subscription Details
+    func getSubscriptionDetailsAPI(
+        completion: @escaping (FetchSubscriptionResponse, _ error:Error?) -> ()) {
+        
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
+        
+        let requestURLString = "\(headerUrl)\(bucketSizeCalculationHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue(generatedUserToken, forHTTPHeaderField: "token")
+        request.httpMethod = "POST"
+        
+        let postData = NSMutableData()
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(FetchSubscriptionResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("jsonDict====>%@",jsonDict)
+                        completion(FetchSubscriptionResponse(jsonDict),nil)
+                    }else {
+                        completion(FetchSubscriptionResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(FetchSubscriptionResponse([:]),parsingError)
                 }
             }
         })
