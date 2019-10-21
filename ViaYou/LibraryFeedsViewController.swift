@@ -246,7 +246,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 let storageIndicatorRedWidth   = self.storageIndicatorRed.frame.size.width
                 print("storageIndicatorRedWidth = \(storageIndicatorRedWidth)")
                 self.storageIndicatorRedWidthConstraint.constant = CGFloat(0.0)
-                self.storageIndicatorLabel.text = "3 GB Free"
+                self.storageIndicatorLabel.text = "2 GB Free"
             }
         }
     }
