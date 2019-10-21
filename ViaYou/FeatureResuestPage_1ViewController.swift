@@ -53,11 +53,7 @@ class FeatureResuestPage_1ViewController: UIViewController {
             }
         }
         else {
-            DispatchQueue.main.async {
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_2ViewController") as! FeatureResuestPage_2ViewController
-                self.navigationController?.pushViewController(nextVC, animated: true)
-            }
+           self.displayAlert(msg: "Please enter your Request")
             
         }
         
