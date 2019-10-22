@@ -29,6 +29,7 @@ class ProfileDropdownTableViewCell: UITableViewCell {
         if (index == 0) {
             
             self.titleLabel.textColor =  #colorLiteral(red: 0.7752474546, green: 0.3023262918, blue: 0.373683393, alpha: 1)
+            self.titleLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
             
         }
         
