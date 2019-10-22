@@ -76,7 +76,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(displayBottomPlusButtonCircularWave), userInfo: nil, repeats: false)
         self.noFeedPopUpView.alpha = 0
         self.inviteFriendsPopUpView.alpha = 0
         userId = Auth.auth().currentUser!.uid
@@ -143,32 +143,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             }, failureBlock: { (request, response, error) in
             })
         }
-        
-        
-        
-        
-        
-        //        self.profilePicButton.setBackgroundImage(self.passedProfileImage, for: .normal)
-        //        print("self.passedProfileImage===>\(self.passedProfileImage)")
-        //
-        //        if (__CGSizeEqualToSize(self.profilePicButton.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
-        //            print("EMPTY IMAGE")
-        //            self.profilePicButton.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
-        //        }
-        
-        //        self.profilePicOnDropDownList.layer.cornerRadius = self.profilePicOnDropDownList.frame.size.width/2.0
-        //        self.profilePicOnDropDownList.clipsToBounds = true
-        //        //self.profilePicOnDropDownList.image = self.passedProfileImage
-        //        self.profilePicButtonOnDropDownList.setBackgroundImage(self.passedProfileImage, for: .normal)
-        //        if (__CGSizeEqualToSize(self.profilePicButtonOnDropDownList.currentBackgroundImage?.size ?? CGSize.zero, CGSize.zero)) {
-        //            print("EMPTY IMAGE")
-        //            self.profilePicButtonOnDropDownList.setBackgroundImage(UIImage(named: "defaultProfilePic"), for: .normal)
-        //
-        //        }
-        
-        
-        
-        
         
         collectioView.reloadData()
         getResponseFromJSONFile()
@@ -330,7 +304,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         overlayViewWhenDropDownAppears.alpha = 0
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
-        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(displayBottomPlusButtonCircularWave), userInfo: nil, repeats: false)
         
     }
     
@@ -781,10 +754,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         else if (indexPath.row == 2) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
             nextVC.modalPresentationStyle = .overCurrentContext
-            nextVC.delegate = self
-            self.present(nextVC, animated: false, completion: nil)
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
         }
             //        else if (indexPath.row == 3) {

@@ -20,6 +20,8 @@
 		9E159F02235E58F70033FBE6 /* DefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E159F01235E58F70033FBE6 /* DefaultWrapper.swift */; };
 		9E159F04235E59100033FBE6 /* PaymentCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E159F03235E59100033FBE6 /* PaymentCompletedViewController.swift */; };
 		9E159F08235E6DE30033FBE6 /* FetchSubscriptionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E159F07235E6DE30033FBE6 /* FetchSubscriptionResponse.swift */; };
+		9E159F0E235E8A280033FBE6 /* DeletedVideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E159F0D235E8A280033FBE6 /* DeletedVideosCollectionViewCell.swift */; };
+		9E159F10235E8A4F0033FBE6 /* DeletedVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E159F0F235E8A4F0033FBE6 /* DeletedVideosViewController.swift */; };
 		9E27E558235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */; };
 		9E27E55A235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */; };
 		9E2970D6234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */; };
@@ -112,6 +114,8 @@
 		9E159F01235E58F70033FBE6 /* DefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWrapper.swift; sourceTree = "<group>"; };
 		9E159F03235E59100033FBE6 /* PaymentCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCompletedViewController.swift; sourceTree = "<group>"; };
 		9E159F07235E6DE30033FBE6 /* FetchSubscriptionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSubscriptionResponse.swift; sourceTree = "<group>"; };
+		9E159F0D235E8A280033FBE6 /* DeletedVideosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedVideosCollectionViewCell.swift; sourceTree = "<group>"; };
+		9E159F0F235E8A4F0033FBE6 /* DeletedVideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedVideosViewController.swift; sourceTree = "<group>"; };
 		9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_1ViewController.swift; sourceTree = "<group>"; };
 		9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_2ViewController.swift; sourceTree = "<group>"; };
 		9E2970D5234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeAndSubscriptionBaseViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 				9EF90CC42353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift */,
 				9EF90CC62353C9BA00127322 /* SubscriptionListProTableViewCell.swift */,
 				9E159F01235E58F70033FBE6 /* DefaultWrapper.swift */,
+				9E159F0D235E8A280033FBE6 /* DeletedVideosCollectionViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				9E05C4AE235D0341000F80C3 /* TermsNConditionsViewController.swift */,
 				9E05C4B0235D0358000F80C3 /* PrivacyPolicyViewController.swift */,
 				9E159F03235E59100033FBE6 /* PaymentCompletedViewController.swift */,
+				9E159F0F235E8A4F0033FBE6 /* DeletedVideosViewController.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -612,6 +618,7 @@
 				9E403A4023443F34002E3749 /* InstagramSignInViewController.swift in Sources */,
 				9E34D01F2357FE1E0085ABAA /* SubscriptionResponse.swift in Sources */,
 				9E34D01D2357FDF40085ABAA /* StripePaymentViewController.swift in Sources */,
+				9E159F0E235E8A280033FBE6 /* DeletedVideosCollectionViewCell.swift in Sources */,
 				9EA55F6D233C208D003A1EBB /* ViewController.swift in Sources */,
 				9E14A44223591F2400F56891 /* InstagramUserResponse.swift in Sources */,
 				9E3485B8234A8FEE00DFADC9 /* PhoneContact.swift in Sources */,
@@ -623,6 +630,7 @@
 				9E2970D6234E7FA1003BC282 /* UpgradeAndSubscriptionBaseViewController.swift in Sources */,
 				9E27E55A235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift in Sources */,
 				9EB6E342234592870086A131 /* LibraryFeedResponse.swift in Sources */,
+				9E159F10235E8A4F0033FBE6 /* DeletedVideosViewController.swift in Sources */,
 				9E2970DE234E8012003BC282 /* SubscriptionBaseViewController.swift in Sources */,
 				9E2B879C2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift in Sources */,
 				9EA55F9D233C2B24003A1EBB /* SignUpViewController.swift in Sources */,
