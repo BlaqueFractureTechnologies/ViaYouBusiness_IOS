@@ -53,7 +53,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var passedProfileImage = UIImage()
     var userId: String = ""
     var invitationUrl: URL!
-    let dropdownArray = ["Invite",
+    var dropdownArray = ["Invite",
                          "My Plan Or Upgrade",
                          "Restore",
                          "Feedback",
@@ -298,6 +298,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.dataArray.removeAll()
+        self.tableView.reloadData()
         getResponseFromJSONFile()
         self.dropDownBaseView.alpha = 0
         self.dropdownOverlayButton.alpha = 0
@@ -748,17 +749,36 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.popUpOverlayButton.alpha = 0.5
         }
         else if (indexPath.row == 1) {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-            nextVC.modalPresentationStyle = .overCurrentContext
-            nextVC.delegate = self
-            self.present(nextVC, animated: false, completion: nil)
+            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            
+            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+                self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
+            }else {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                nextVC.modalPresentationStyle = .overCurrentContext
+                nextVC.delegate = self
+                self.present(nextVC, animated: false, completion: nil)
+            }
+            
         }
         else if (indexPath.row == 2) {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
-            nextVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            // if (index == 2) {
+            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            
+            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
+                nextVC.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.pushViewController(nextVC, animated: true)
+                
+            }else {
+                print("Restore option not available...")
+            }
+            //   }
+            
             
         }
             //        else if (indexPath.row == 3) {

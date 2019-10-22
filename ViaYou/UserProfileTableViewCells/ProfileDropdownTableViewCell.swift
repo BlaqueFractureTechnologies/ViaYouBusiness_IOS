@@ -24,7 +24,7 @@ class ProfileDropdownTableViewCell: UITableViewCell {
     
     func configureCell(dataArray:[String], index:Int) {
         
-        self.titleLabel.text = "\(dataArray[index])\n***"
+        self.titleLabel.text = "\(dataArray[index])"
         
         if (index == 0) {
             
@@ -40,6 +40,15 @@ class ProfileDropdownTableViewCell: UITableViewCell {
         iconName = iconName.replacingOccurrences(of: " ", with: "_")
         
         self.iconView.image = UIImage(named: iconName)
+        
+        if (index == 2) {
+            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            
+            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+                self.iconView.image = UIImage(named: "DropDown_RestoreGrowthOrPro")
+            }
+        }
         
     }
     

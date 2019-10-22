@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StripePaymentViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     let subTitles = ["Solo Host save 15%", "Growth Host save 10%", "Pro Host save 25%", "Enterprise save 30%"]
@@ -119,6 +119,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         homeVC.passedTypeOfPayment = "SOLO"
         homeVC.selectedPlanName = "Solo Host"
         homeVC.selectedPlanCharge = "$9.95"
+        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
@@ -129,6 +130,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         homeVC.passedTypeOfPayment = "GROWTH"
         homeVC.selectedPlanName = "Growth Host"
         homeVC.selectedPlanCharge = "$7.75"
+        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
@@ -139,11 +141,31 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         homeVC.passedTypeOfPayment = "PRO"
         homeVC.selectedPlanName = "Pro Host"
         homeVC.selectedPlanCharge = "$18.90"
+        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
     }
     
+    func transactionSuccessful(passedTypeOfPayment: String) {
+        print("UpgradeSoloHostViewController :: transactionSuccessful... passedTypeOfPayment = \(passedTypeOfPayment)")
+        
+        if (passedTypeOfPayment == "SOLO") {
+            DefaultWrapper().setPaymentTypePurchased(type: 0) //0=> Solo
+        }else if (passedTypeOfPayment == "GROWTH") {
+            DefaultWrapper().setPaymentTypePurchased(type: 1) //1=> Growth
+        }else if (passedTypeOfPayment == "PRO") {
+            DefaultWrapper().setPaymentTypePurchased(type: 2) //2=> Pro
+        }
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "PaymentCompletedViewController") as! PaymentCompletedViewController
+        self.navigationController?.pushViewController(nextVC, animated: false)
+    }
+    
+    func transactionFailed() {
+        print("UpgradeSoloHostViewController :: transactionFailed...")
+    }
     
     @objc func overlayButtonClicked(_ sender:UIButton) {
         if (sender.tag == 3) {
@@ -192,6 +214,6 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         }
     }
     
-
+    
 }
 
