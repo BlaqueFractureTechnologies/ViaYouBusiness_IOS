@@ -333,7 +333,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 }
                 else {
                     print("-1")
-                    DefaultWrapper().setPaymentTypePurchased(type: 3)
+                    DefaultWrapper().setPaymentTypePurchased(type: -1)
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
