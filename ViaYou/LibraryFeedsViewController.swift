@@ -318,6 +318,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 print(responseDict.message)
                 self.subscriptionArray = responseDict.data
                 print(self.subscriptionArray.type)
+                print(self.subscriptionArray.expiry.getReadableDateString())
+
                 let type = self.subscriptionArray.type
                 if type == "SOLO" {
                     print("0")

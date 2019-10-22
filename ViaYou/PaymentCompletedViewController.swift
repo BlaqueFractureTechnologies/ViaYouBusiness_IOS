@@ -13,6 +13,7 @@ class PaymentCompletedViewController: UIViewController {
     @IBOutlet weak var profilePicView: UIImageView!
     @IBOutlet weak var planNameLabel: UILabel!
     @IBOutlet weak var ribbonImage: UIImageView!
+    @IBOutlet weak var expiryDateLabel: UILabel!
     
     let profileImageUrlHeader:String = "https://dev-promptchu.s3.us-east-2.amazonaws.com/"
     var subscriptionArray:SubscriptionArrayObject = SubscriptionArrayObject([:])
@@ -47,7 +48,9 @@ class PaymentCompletedViewController: UIViewController {
                 print(responseDict.message)
                 self.subscriptionArray = responseDict.data
                 print(self.subscriptionArray.type)
+                print(self.subscriptionArray.expiry.getReadableDateString())
                 let type = self.subscriptionArray.type
+                let date = self.subscriptionArray.expiry.getReadableDateString()
                 if type == "SOLO" {
                     print("0")
                     DefaultWrapper().setPaymentTypePurchased(type: 0)
@@ -67,6 +70,7 @@ class PaymentCompletedViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.planNameLabel.text = "You are now a \(type) HOST"
                     self.ribbonImage.image = UIImage(named: "yellowRibbon_\(type)")
+                    self.expiryDateLabel.text = "Trial Expiration Date: \(date)"
                 }
             }
             else
