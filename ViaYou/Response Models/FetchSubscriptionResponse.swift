@@ -12,18 +12,15 @@ import UIKit
 struct FetchSubscriptionResponse {
     var success:Bool = false
     var message:String = ""
-    var data:[SubscriptionArrayObject] = []
+    //var data:[SubscriptionArrayObject] = []
+    var data:SubscriptionArrayObject = SubscriptionArrayObject([:])
+    
     
     init(_ dictionary: [String: Any]) {
         self.success    = dictionary["success"] as? Bool ?? false
         self.message    = dictionary["message"] as? String ?? ""
+        self.data = SubscriptionArrayObject(dictionary["data"] as? [String:Any] ?? [:])
         
-        data = []
-        let dataArray = dictionary["data"] as? [[String:Any]] ?? []
-        for i in 0..<dataArray.count {
-            let objectAtIndex = SubscriptionArrayObject(dataArray[i])
-            data.append(objectAtIndex)
-        }
     }
 }
 

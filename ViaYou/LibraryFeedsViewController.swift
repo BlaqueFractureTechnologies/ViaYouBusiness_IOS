@@ -50,6 +50,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     var dataArray:[FeedDataArrayObject] = []
     var bucketDataArray:BucketDataObject = BucketDataObject([:])
+    var subscriptionArray:SubscriptionArrayObject = SubscriptionArrayObject([:])
     var passedProfileImage = UIImage()
     var userId: String = ""
     var invitationUrl: URL!
@@ -297,6 +298,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getSubscriptionPlanResponseFromAPI()
         self.dataArray.removeAll()
         self.tableView.reloadData()
         getResponseFromJSONFile()
@@ -310,47 +312,39 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
     }
     
-    
-    func readResponseFromFileForTest() {
-        if let path = Bundle.main.path(forResource: "response", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let jsonResult = jsonResult as? [String:Any] {
-                    let responseDict = LibraryFeedResponse(jsonResult)
-                    
-                    print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
-                    if responseDict.data.count == 0 {
-                        
-                        DispatchQueue.main.async {
-                            self.noFeedPopUpView.alpha = 1
-                            self.collectioView.reloadData()
-                            
-                        }
-                    }
-                    else {
-                        
-                        print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
-                        for i in 0..<responseDict.data.count {
-                            let indexDict = responseDict.data[i]
-                            indexDict.isInfoPopUpDisplaying = false
-                            self.dataArray.append(indexDict)
-                            print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
-                        }
-                        self.loadAllVideoImagesForDataArray()
-                        //  self.loadVideoSize()
-                        DispatchQueue.main.async {
-                            self.noFeedPopUpView.alpha = 0
-                            self.collectioView.reloadData()
-                            
-                        }
-                        
-                    }
+    func getSubscriptionPlanResponseFromAPI() {
+        ApiManager().getSubscriptionDetailsAPI { (responseDict, error) in
+            if error == nil {
+                print(responseDict.message)
+                self.subscriptionArray = responseDict.data
+                print(self.subscriptionArray.type)
+                let type = self.subscriptionArray.type
+                if type == "SOLO" {
+                    print("0")
+                    DefaultWrapper().setPaymentTypePurchased(type: 0)
+                }
+                else if type == "GROWTH" {
+                    print("1")
+                    DefaultWrapper().setPaymentTypePurchased(type: 1)
+                }
+                else if type == "PRO" {
+                    print("2")
+                    DefaultWrapper().setPaymentTypePurchased(type: 2)
+                }
+                else {
+                    print("-1")
+                    DefaultWrapper().setPaymentTypePurchased(type: 3)
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                     
                 }
-            } catch {
-                
             }
+            else
+            {
+                print(error.debugDescription)
+            }
+            
         }
     }
     
