@@ -9,9 +9,44 @@
 import UIKit
 
 class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var tableView: UITableView!
+    
+    var isPurchased: Int = 0
+    
+    let notificationName_UpgradeSoloHostViewControllerHideAfterPayment = Notification.Name("UpgradeSoloHostViewControllerHideAfterPayment")
+    let notificationName_UpgradeGrowthHostViewControllerHideAfterPayment = Notification.Name("UpgradeGrowthHostViewControllerHideAfterPayment")
+    let notificationName_UpgradeProHostViewControllerHideAfterPayment = Notification.Name("UpgradeProHostViewControllerHideAfterPayment")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        isPurchased = DefaultWrapper().getPaymentTypePurchased()
+        tableView.reloadData()
+        // Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.resetScrollViewAccordingToPayment), userInfo: nil, repeats: false)
+    }
+    
+    @objc func resetScrollViewAccordingToPayment() {
+        print("resetScrollViewAccordingToPayment...")
+        
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        print("paymentTypePurchased ====> \(paymentTypePurchased)")
+        
+        if (paymentTypePurchased == -1) {
+            DispatchQueue.main.async {
+            }
+        }else {
+            if (paymentTypePurchased == 0) {// Purchased solo
+                DispatchQueue.main.async {
+                }
+                NotificationCenter.default.post(name: self.notificationName_UpgradeGrowthHostViewControllerHideAfterPayment, object:nil)
+            }else if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {// Purchased growth OR Purchased pro
+                DispatchQueue.main.async {
+                }
+                NotificationCenter.default.post(name: self.notificationName_UpgradeProHostViewControllerHideAfterPayment, object:nil)
+            }
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -19,12 +54,17 @@ class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        
+        if indexPath.row != 3 && isPurchased >= indexPath.row {
+            return 0
+        }
+        else {
+            return 60
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubscriptionBaseViewTableViewCell", for: indexPath) as! SubscriptionBaseViewTableViewCell
-        
         if (indexPath.row == 0) {
             cell.mainTitleLabel.text = "Upgrade To"
             cell.subTitleLabel.text = "Solo Host"
