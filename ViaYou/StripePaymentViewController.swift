@@ -23,6 +23,7 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var selectedPlanLabel: UILabel!
     @IBOutlet weak var labelsContainer: UIView!
+    @IBOutlet weak var activityViewController: UIActivityIndicatorView!
     
     var passedTypeOfPayment: String = ""
     var cardField = STPPaymentCardTextField()
@@ -65,6 +66,7 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.activityViewController.isHidden = true
         //        buyButton.addAppGradient()
         //        cancelButton.addAppGradient()
     }
@@ -93,6 +95,10 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
         dismiss(animated: true, completion: nil)
     }
     @IBAction func buyButtonClicked(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.activityViewController.isHidden = false
+            self.activityViewController.startAnimating()
+        }
         let cardParams = STPCardParams()
         cardParams.number = cardField.cardNumber
         cardParams.expMonth = cardField.expirationMonth
@@ -121,13 +127,22 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
                         })
                     }
                     alert.addAction(okAction)
-                    self.present(alert, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        self.activityViewController.stopAnimating()
+                        self.activityViewController.isHidden = true
+                        self.present(alert, animated: true, completion: nil)
+
+                    }
                     
                     //self.dismiss(animated: true, completion: nil)
                     
                 }
                 else {
-                    self.displayAlert(msg: "Sorry! Payment Failed! Please try again later!")
+                    DispatchQueue.main.async {
+                        self.activityViewController.stopAnimating()
+                        self.activityViewController.isHidden = true
+                        self.displayAlert(msg: "Sorry! Payment Failed! Please try again later!")
+                    }
                     print(error.debugDescription)
                 }
             })

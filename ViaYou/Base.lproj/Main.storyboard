@@ -1829,10 +1829,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="565.5" width="180" height="41.5"/>
+                                <rect key="frame" x="97.5" y="569.5" width="180" height="37.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -3285,7 +3285,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="lTe-U2-tPY">
-                                <rect key="frame" x="0.0" y="85" width="375.00000000000011" height="342"/>
+                                <rect key="frame" x="0.0" y="85" width="375" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="m68-ut-oAu">
@@ -4906,17 +4906,23 @@
                                     <action selector="cancelButtonClicked:" destination="SsT-00-jwf" eventType="touchUpInside" id="p6N-lp-zvi"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Eii-7g-Sp0">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <color key="color" red="0.71764705880000002" green="0.2156862745" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xxq-YT-dJV" firstAttribute="centerX" secondItem="CYF-kp-9FH" secondAttribute="centerX" id="48e-9H-Emp"/>
                             <constraint firstItem="s58-Ip-io4" firstAttribute="centerX" secondItem="CYF-kp-9FH" secondAttribute="centerX" id="9pz-7e-Fok"/>
                             <constraint firstItem="s58-Ip-io4" firstAttribute="top" secondItem="A3h-Ri-YmE" secondAttribute="bottom" constant="8" id="9vQ-2O-oQg"/>
+                            <constraint firstItem="Eii-7g-Sp0" firstAttribute="centerX" secondItem="CYF-kp-9FH" secondAttribute="centerX" id="D7E-Mf-2q6"/>
                             <constraint firstItem="1PF-xy-arM" firstAttribute="centerX" secondItem="CYF-kp-9FH" secondAttribute="centerX" id="FD8-2j-KOa"/>
                             <constraint firstItem="A3h-Ri-YmE" firstAttribute="top" secondItem="1PF-xy-arM" secondAttribute="bottom" constant="20" id="HdE-Wu-bgP"/>
                             <constraint firstItem="1PF-xy-arM" firstAttribute="centerX" secondItem="CYF-kp-9FH" secondAttribute="centerX" id="Tgb-Nb-ruj"/>
                             <constraint firstItem="Bre-5f-n7l" firstAttribute="trailing" secondItem="1PF-xy-arM" secondAttribute="trailing" constant="16" id="U6I-Ij-Y3g"/>
                             <constraint firstItem="A3h-Ri-YmE" firstAttribute="centerX" secondItem="CYF-kp-9FH" secondAttribute="centerX" id="XrJ-pM-M5S"/>
+                            <constraint firstItem="Eii-7g-Sp0" firstAttribute="centerY" secondItem="CYF-kp-9FH" secondAttribute="centerY" id="Ynd-kg-8l9"/>
                             <constraint firstItem="Bre-5f-n7l" firstAttribute="bottom" secondItem="s58-Ip-io4" secondAttribute="bottom" constant="30" id="epn-yi-tBA"/>
                             <constraint firstItem="1PF-xy-arM" firstAttribute="leading" secondItem="Bre-5f-n7l" secondAttribute="leading" constant="16" id="pVV-As-TZ7"/>
                             <constraint firstItem="xxq-YT-dJV" firstAttribute="top" secondItem="Bre-5f-n7l" secondAttribute="top" constant="20" id="ufj-q1-hQZ"/>
@@ -4924,6 +4930,7 @@
                         <viewLayoutGuide key="safeArea" id="Bre-5f-n7l"/>
                     </view>
                     <connections>
+                        <outlet property="activityViewController" destination="Eii-7g-Sp0" id="89r-RM-fRo"/>
                         <outlet property="amountLabel" destination="MbK-I6-agE" id="7k5-DG-GGV"/>
                         <outlet property="buyButton" destination="A3h-Ri-YmE" id="Abl-9a-EFT"/>
                         <outlet property="cancelButton" destination="s58-Ip-io4" id="SfU-VB-y8u"/>
