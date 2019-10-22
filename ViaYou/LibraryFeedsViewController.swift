@@ -145,7 +145,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         
         collectioView.reloadData()
-        getResponseFromJSONFile()
+        //  getResponseFromJSONFile()
         getBucketInfo()
         getTotalStorageSpace()
         DispatchQueue.main.async {
@@ -297,6 +297,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.dataArray.removeAll()
+        getResponseFromJSONFile()
         self.dropDownBaseView.alpha = 0
         self.dropdownOverlayButton.alpha = 0
         self.popUpOverlayButton.alpha = 0

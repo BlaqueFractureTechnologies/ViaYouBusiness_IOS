@@ -543,7 +543,7 @@ struct ApiManager {
         
         let requestURLString = "\(POSTSHEADER)\(restoreScreencastHeader)"
         let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
-        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+       // request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
         request.setValue(generatedUserToken, forHTTPHeaderField: "token")
         request.httpMethod = "POST"
         
