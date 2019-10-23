@@ -36,7 +36,13 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
+        
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        print("paymentTypePurchased ====> \(paymentTypePurchased)")
+        
+        if section != 3 && paymentTypePurchased >= section {
+            return 0
+        }
         return 60
     }
     
@@ -88,6 +94,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         overlayButton.tag = section
         overlayButton.addTarget(self, action: #selector(overlayButtonClicked), for: UIControl.Event.touchUpInside)
         
+        headerBg.clipsToBounds = true        
         return headerBg
     }
     

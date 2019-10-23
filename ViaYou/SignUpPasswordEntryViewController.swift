@@ -88,7 +88,10 @@ class SignUpPasswordEntryViewController: UIViewController {
         let credential = EmailAuthProvider.credential(withEmail: self.passedEmailAddress, password: password)
         if password.count < 8 {
             self.displaySingleButtonAlert(message: "Password must be 8 characters!")
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
         }
+        else {
         ApiManager().callRegistrationAPI( email: self.passedEmailAddress, password: password, gender: "Female") { (responseDict, error) in
             if (error == nil) {
                 if (responseDict.success == true) {
@@ -151,6 +154,7 @@ class SignUpPasswordEntryViewController: UIViewController {
             DispatchQueue.main.async {
                 //  SVProgressHUD.dismiss()
             }
+        }
         }
         //edit ends
         

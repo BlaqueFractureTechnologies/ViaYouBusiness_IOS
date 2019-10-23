@@ -126,11 +126,16 @@ class SignUpMobileEntryViewController: UIViewController {
         if email.count == 0 {
             self.displaySingleButtonAlert(message: "Please enter your email")
         }
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SignUpPasswordEntryViewController") as! SignUpPasswordEntryViewController
-        nextVC.topMargin = self.topMargin
-        nextVC.passedEmailAddress = email
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        else {
+            self.phoneButtonGradient.removeFromSuperlayer()
+            self.emailButtonGradient.removeFromSuperlayer()
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "SignUpPasswordEntryViewController") as! SignUpPasswordEntryViewController
+            nextVC.topMargin = self.topMargin
+            nextVC.passedEmailAddress = email
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+
     }
     
     @IBAction func alreadyHaveAnAccountButtonClicked(_ sender: UIButton) {
