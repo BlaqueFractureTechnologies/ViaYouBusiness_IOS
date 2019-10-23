@@ -1417,164 +1417,6 @@
             </objects>
             <point key="canvasLocation" x="7453.6000000000004" y="536.58170914542734"/>
         </scene>
-        <!--Become Growth Host Pop Up View Controller-->
-        <scene sceneID="67U-4K-mFs">
-            <objects>
-                <viewController storyboardIdentifier="BecomeGrowthHostPopUpViewController" id="xJx-BL-Sxd" customClass="BecomeGrowthHostPopUpViewController" customModule="ViaYou" sceneMemberID="viewController">
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="S0v-2Y-GR7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Suy-23-0ix">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </button>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OwK-q5-ic1">
-                                <rect key="frame" x="47.5" y="118.5" width="280" height="430"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8n-a0-npi">
-                                        <rect key="frame" x="225" y="5" width="50" height="25"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="4dS-kg-vZx"/>
-                                            <constraint firstAttribute="height" constant="25" id="Kbw-l2-hbk"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="cellCloseIcon"/>
-                                        <connections>
-                                            <action selector="closeButtonClicked" destination="xJx-BL-Sxd" eventType="touchUpInside" id="LOp-Sx-QZw"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LcF-1N-Wfo">
-                                        <rect key="frame" x="80" y="50" width="120" height="120"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kidProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="1pZ-x8-8fA">
-                                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="60"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </imageView>
-                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbL-sM-8t2">
-                                                <rect key="frame" x="80" y="80" width="40" height="40"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="BQT-u7-YcN"/>
-                                                    <constraint firstAttribute="width" constant="40" id="KmW-61-PgG"/>
-                                                </constraints>
-                                                <state key="normal" backgroundImage="crownIcon">
-                                                    <color key="titleColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="cbL-sM-8t2" firstAttribute="trailing" secondItem="1pZ-x8-8fA" secondAttribute="trailing" id="3tf-mQ-dDe"/>
-                                            <constraint firstItem="cbL-sM-8t2" firstAttribute="bottom" secondItem="1pZ-x8-8fA" secondAttribute="bottom" id="5Nb-92-dmg"/>
-                                            <constraint firstAttribute="height" constant="120" id="9L3-Rm-g7y"/>
-                                            <constraint firstItem="1pZ-x8-8fA" firstAttribute="top" secondItem="LcF-1N-Wfo" secondAttribute="top" id="Mny-HY-hkc"/>
-                                            <constraint firstItem="1pZ-x8-8fA" firstAttribute="leading" secondItem="LcF-1N-Wfo" secondAttribute="leading" id="OxA-Wg-EOQ"/>
-                                            <constraint firstAttribute="bottom" secondItem="1pZ-x8-8fA" secondAttribute="bottom" id="ZKC-EE-cSg"/>
-                                            <constraint firstAttribute="width" constant="120" id="a4T-1o-LgB"/>
-                                            <constraint firstAttribute="trailing" secondItem="1pZ-x8-8fA" secondAttribute="trailing" id="fkJ-0i-8Ek"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Become A growth Host" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hWi-XO-Dj0">
-                                        <rect key="frame" x="13" y="217" width="254.5" height="30.5"/>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="24"/>
-                                        <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aeh-Ul-dRc">
-                                        <rect key="frame" x="5" y="252.5" width="270" height="60.5"/>
-                                        <string key="text">Upgrading to a Growth Host account gives gives you more control, storage space and insights to assist in developing and growing your personal brand.</string>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="12"/>
-                                        <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyF-kY-5Dx">
-                                        <rect key="frame" x="38" y="321" width="204" height="40"/>
-                                        <color key="backgroundColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="hOg-bc-EDR"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="17"/>
-                                        <state key="normal" title="  Try growth host for free  ">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="goToSubscriptionBaseViewControllerrButtonClicked" destination="xJx-BL-Sxd" eventType="touchUpInside" id="yhL-kU-ARM"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9S1-vv-TWu">
-                                        <rect key="frame" x="5" y="363" width="270" height="35"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="tEi-gg-z4x"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
-                                        <state key="normal" title="View all upgrades">
-                                            <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="goToUpgradeAndSubscriptionBaseViewControllerButtonClicked" destination="xJx-BL-Sxd" eventType="touchUpInside" id="9oE-sv-2ga"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="430" id="4Ac-Th-OCQ"/>
-                                    <constraint firstItem="hWi-XO-Dj0" firstAttribute="top" secondItem="LcF-1N-Wfo" secondAttribute="bottom" constant="47" id="4Vt-9P-jha"/>
-                                    <constraint firstItem="aeh-Ul-dRc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OwK-q5-ic1" secondAttribute="leading" constant="5" id="4Wi-qh-Kqt"/>
-                                    <constraint firstAttribute="trailing" secondItem="9S1-vv-TWu" secondAttribute="trailing" constant="5" id="4dr-ep-8HC"/>
-                                    <constraint firstItem="9S1-vv-TWu" firstAttribute="top" secondItem="KyF-kY-5Dx" secondAttribute="bottom" constant="2" id="5lq-HM-P6w"/>
-                                    <constraint firstItem="KyF-kY-5Dx" firstAttribute="top" secondItem="aeh-Ul-dRc" secondAttribute="bottom" constant="8" id="7gr-QM-bSl"/>
-                                    <constraint firstItem="aeh-Ul-dRc" firstAttribute="centerX" secondItem="OwK-q5-ic1" secondAttribute="centerX" id="9sK-xq-gWV"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hWi-XO-Dj0" secondAttribute="trailing" constant="5" id="DAL-q0-JFO"/>
-                                    <constraint firstAttribute="trailing" secondItem="c8n-a0-npi" secondAttribute="trailing" constant="5" id="DtI-dV-6Kp"/>
-                                    <constraint firstItem="9S1-vv-TWu" firstAttribute="leading" secondItem="OwK-q5-ic1" secondAttribute="leading" constant="5" id="GXz-8f-Ss0"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aeh-Ul-dRc" secondAttribute="trailing" constant="5" id="Kb7-0d-N0E"/>
-                                    <constraint firstItem="LcF-1N-Wfo" firstAttribute="top" secondItem="OwK-q5-ic1" secondAttribute="top" constant="50" id="VVd-AH-TLw"/>
-                                    <constraint firstItem="c8n-a0-npi" firstAttribute="top" secondItem="OwK-q5-ic1" secondAttribute="top" constant="5" id="Xgb-xn-AAo"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KyF-kY-5Dx" secondAttribute="trailing" constant="5" id="YNv-9f-Hjh"/>
-                                    <constraint firstItem="hWi-XO-Dj0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OwK-q5-ic1" secondAttribute="leading" constant="5" id="bgZ-ca-vUG"/>
-                                    <constraint firstItem="hWi-XO-Dj0" firstAttribute="centerX" secondItem="OwK-q5-ic1" secondAttribute="centerX" id="c2a-Z8-iTW"/>
-                                    <constraint firstItem="LcF-1N-Wfo" firstAttribute="centerX" secondItem="OwK-q5-ic1" secondAttribute="centerX" id="cGd-IN-IwR"/>
-                                    <constraint firstAttribute="width" constant="280" id="ca9-s3-1vX"/>
-                                    <constraint firstItem="9S1-vv-TWu" firstAttribute="centerX" secondItem="OwK-q5-ic1" secondAttribute="centerX" id="gwd-o2-4RS"/>
-                                    <constraint firstItem="KyF-kY-5Dx" firstAttribute="centerX" secondItem="OwK-q5-ic1" secondAttribute="centerX" id="hx1-Pn-0P6"/>
-                                    <constraint firstItem="KyF-kY-5Dx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OwK-q5-ic1" secondAttribute="leading" constant="5" id="sxK-TH-TCP"/>
-                                    <constraint firstItem="aeh-Ul-dRc" firstAttribute="top" secondItem="hWi-XO-Dj0" secondAttribute="bottom" constant="5" id="xVe-uU-uJC"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="OwK-q5-ic1" firstAttribute="centerX" secondItem="S0v-2Y-GR7" secondAttribute="centerX" id="Gxh-7e-CXE"/>
-                            <constraint firstAttribute="bottom" secondItem="Suy-23-0ix" secondAttribute="bottom" id="LJm-43-UFT"/>
-                            <constraint firstItem="OwK-q5-ic1" firstAttribute="centerY" secondItem="S0v-2Y-GR7" secondAttribute="centerY" id="MtU-U0-1Hd"/>
-                            <constraint firstAttribute="trailing" secondItem="Suy-23-0ix" secondAttribute="trailing" id="Xl1-Jz-vyG"/>
-                            <constraint firstItem="Suy-23-0ix" firstAttribute="top" secondItem="S0v-2Y-GR7" secondAttribute="top" id="lcO-E3-U6V"/>
-                            <constraint firstItem="Suy-23-0ix" firstAttribute="leading" secondItem="S0v-2Y-GR7" secondAttribute="leading" id="qzS-K4-1OU"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="g48-ia-zcX"/>
-                    </view>
-                    <connections>
-                        <outlet property="crownButton" destination="cbL-sM-8t2" id="GSb-Ev-rvv"/>
-                        <outlet property="tryGrowthButton" destination="KyF-kY-5Dx" id="sSb-Zv-xUn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="On6-EA-4Fx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4463" y="1300"/>
-        </scene>
         <!--Feature Resuest Page2 View Controller-->
         <scene sceneID="X16-4k-5Ge">
             <objects>
@@ -6376,6 +6218,165 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="82U-T5-j5K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4489" y="547"/>
+        </scene>
+        <!--Become Growth Host Pop Up View Controller-->
+        <scene sceneID="Uoq-vR-93A">
+            <objects>
+                <viewController storyboardIdentifier="BecomeGrowthHostPopUpViewController" id="IcO-La-1wN" customClass="BecomeGrowthHostPopUpViewController" customModule="ViaYou" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="oPF-vB-RZI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6m-0H-dzM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </button>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5u-tZ-T8W">
+                                <rect key="frame" x="37.5" y="98" width="300" height="470"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ib-J5-Vcc">
+                                        <rect key="frame" x="245" y="5" width="50" height="25"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="hDR-Fx-h19"/>
+                                            <constraint firstAttribute="height" constant="25" id="o1c-zp-b7r"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="cellCloseIcon"/>
+                                        <connections>
+                                            <action selector="closeButtonClicked" destination="IcO-La-1wN" eventType="touchUpInside" id="9lL-9L-xGg"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgG-bU-VYf">
+                                        <rect key="frame" x="90" y="50" width="120" height="120"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kidProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="P0b-fc-FGK">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="60"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NmK-li-Dud">
+                                                <rect key="frame" x="80" y="80" width="40" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Ty1-Wi-6o9"/>
+                                                    <constraint firstAttribute="width" constant="40" id="UIB-PE-nCd"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="crownIcon">
+                                                    <color key="titleColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="P0b-fc-FGK" secondAttribute="trailing" id="0dO-MU-bg9"/>
+                                            <constraint firstAttribute="bottom" secondItem="P0b-fc-FGK" secondAttribute="bottom" id="DLf-ky-kX4"/>
+                                            <constraint firstItem="P0b-fc-FGK" firstAttribute="leading" secondItem="vgG-bU-VYf" secondAttribute="leading" id="Y7r-hQ-AOW"/>
+                                            <constraint firstItem="NmK-li-Dud" firstAttribute="bottom" secondItem="P0b-fc-FGK" secondAttribute="bottom" id="Ynb-H3-YH1"/>
+                                            <constraint firstItem="NmK-li-Dud" firstAttribute="trailing" secondItem="P0b-fc-FGK" secondAttribute="trailing" id="cA5-RT-GKS"/>
+                                            <constraint firstAttribute="height" constant="120" id="gIn-ZJ-7Wq"/>
+                                            <constraint firstItem="P0b-fc-FGK" firstAttribute="top" secondItem="vgG-bU-VYf" secondAttribute="top" id="k8w-fL-jHB"/>
+                                            <constraint firstAttribute="width" constant="120" id="syk-4I-qmT"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Become A growth Host" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="L5A-6C-B49">
+                                        <rect key="frame" x="23" y="192" width="254.5" height="30.5"/>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="24"/>
+                                        <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="RBw-6Z-CDn">
+                                        <rect key="frame" x="5" y="232.5" width="290" height="107"/>
+                                        <string key="text">Upgrading to a Growth Host account gives gives you more control, storage space and insights to assist in developing and growing your personal brand.</string>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="17"/>
+                                        <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5R-sx-lGK">
+                                        <rect key="frame" x="48" y="370" width="204" height="40"/>
+                                        <color key="backgroundColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="CmS-DH-rWZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="17"/>
+                                        <state key="normal" title="  Try growth host for free  ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="goToSubscriptionBaseViewControllerrButtonClicked" destination="IcO-La-1wN" eventType="touchUpInside" id="uAi-xh-6O2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDh-4x-b3A">
+                                        <rect key="frame" x="5" y="415" width="290" height="35"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="lGa-wh-Dmk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
+                                        <state key="normal" title="View all upgrades">
+                                            <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goToUpgradeAndSubscriptionBaseViewControllerButtonClicked" destination="IcO-La-1wN" eventType="touchUpInside" id="k98-ub-lPk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="L5A-6C-B49" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="s5u-tZ-T8W" secondAttribute="leading" constant="5" id="0gi-D0-cJw"/>
+                                    <constraint firstItem="vgG-bU-VYf" firstAttribute="top" secondItem="s5u-tZ-T8W" secondAttribute="top" constant="50" id="4px-lh-nf2"/>
+                                    <constraint firstItem="RBw-6Z-CDn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="s5u-tZ-T8W" secondAttribute="leading" constant="5" id="F5d-cR-48r"/>
+                                    <constraint firstItem="jDh-4x-b3A" firstAttribute="centerX" secondItem="s5u-tZ-T8W" secondAttribute="centerX" id="Fp5-qK-3Dc"/>
+                                    <constraint firstItem="vgG-bU-VYf" firstAttribute="centerX" secondItem="s5u-tZ-T8W" secondAttribute="centerX" id="Ihe-X7-T1P"/>
+                                    <constraint firstItem="L5A-6C-B49" firstAttribute="top" secondItem="vgG-bU-VYf" secondAttribute="bottom" constant="22" id="Ng1-PY-tEy"/>
+                                    <constraint firstItem="RBw-6Z-CDn" firstAttribute="centerX" secondItem="s5u-tZ-T8W" secondAttribute="centerX" id="Qhb-GC-5eh"/>
+                                    <constraint firstAttribute="width" constant="300" id="SFo-Bf-DEv"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="b5R-sx-lGK" secondAttribute="trailing" constant="5" id="V4O-l3-48h"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RBw-6Z-CDn" secondAttribute="trailing" constant="5" id="YGf-qk-j8v"/>
+                                    <constraint firstItem="jDh-4x-b3A" firstAttribute="leading" secondItem="s5u-tZ-T8W" secondAttribute="leading" constant="5" id="YOY-66-0T1"/>
+                                    <constraint firstItem="4Ib-J5-Vcc" firstAttribute="top" secondItem="s5u-tZ-T8W" secondAttribute="top" constant="5" id="c7O-BJ-XHg"/>
+                                    <constraint firstAttribute="trailing" secondItem="jDh-4x-b3A" secondAttribute="trailing" constant="5" id="ea0-5w-4xq"/>
+                                    <constraint firstItem="RBw-6Z-CDn" firstAttribute="top" secondItem="L5A-6C-B49" secondAttribute="bottom" constant="10" id="lNK-RW-ZJa"/>
+                                    <constraint firstAttribute="trailing" secondItem="4Ib-J5-Vcc" secondAttribute="trailing" constant="5" id="pWR-Ef-VPb"/>
+                                    <constraint firstItem="L5A-6C-B49" firstAttribute="centerX" secondItem="s5u-tZ-T8W" secondAttribute="centerX" id="rKs-La-t3Z"/>
+                                    <constraint firstItem="b5R-sx-lGK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="s5u-tZ-T8W" secondAttribute="leading" constant="5" id="s0W-oY-NXY"/>
+                                    <constraint firstItem="b5R-sx-lGK" firstAttribute="centerX" secondItem="s5u-tZ-T8W" secondAttribute="centerX" id="tmd-FD-38A"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L5A-6C-B49" secondAttribute="trailing" constant="5" id="uzf-Sa-g1f"/>
+                                    <constraint firstItem="jDh-4x-b3A" firstAttribute="top" secondItem="b5R-sx-lGK" secondAttribute="bottom" constant="5" id="wNv-Yb-mTk"/>
+                                    <constraint firstAttribute="bottom" secondItem="jDh-4x-b3A" secondAttribute="bottom" constant="20" id="xmD-6u-eS4"/>
+                                    <constraint firstAttribute="height" constant="470" id="yc2-kD-1t3"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="8"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="s5u-tZ-T8W" firstAttribute="top" secondItem="N8W-Ea-zao" secondAttribute="top" constant="78" id="2fb-ap-csu"/>
+                            <constraint firstItem="n6m-0H-dzM" firstAttribute="leading" secondItem="oPF-vB-RZI" secondAttribute="leading" id="Kqf-xZ-jJo"/>
+                            <constraint firstItem="n6m-0H-dzM" firstAttribute="top" secondItem="oPF-vB-RZI" secondAttribute="top" id="M3b-PD-qIB"/>
+                            <constraint firstItem="N8W-Ea-zao" firstAttribute="bottom" secondItem="s5u-tZ-T8W" secondAttribute="bottom" constant="99" id="Ymi-YU-ugS"/>
+                            <constraint firstAttribute="trailing" secondItem="n6m-0H-dzM" secondAttribute="trailing" id="adw-ty-gbj"/>
+                            <constraint firstItem="s5u-tZ-T8W" firstAttribute="centerX" secondItem="oPF-vB-RZI" secondAttribute="centerX" id="fBk-QV-RoT"/>
+                            <constraint firstAttribute="bottom" secondItem="n6m-0H-dzM" secondAttribute="bottom" id="ueo-F9-LNr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="N8W-Ea-zao"/>
+                    </view>
+                    <connections>
+                        <outlet property="crownButton" destination="NmK-li-Dud" id="1QL-yR-jib"/>
+                        <outlet property="tryGrowthButton" destination="b5R-sx-lGK" id="BaX-Nf-hKo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7l2-wl-DOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4463" y="1300"/>
         </scene>
     </scenes>
     <resources>
