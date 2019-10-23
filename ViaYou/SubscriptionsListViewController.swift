@@ -139,7 +139,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
         homeVC.passedTypeOfPayment = "GROWTH"
         homeVC.selectedPlanName = "Growth Host"
-        homeVC.selectedPlanCharge = "$7.75"
+        homeVC.selectedPlanCharge = "$75.50"
         homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
