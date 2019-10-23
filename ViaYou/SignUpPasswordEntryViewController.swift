@@ -87,7 +87,7 @@ class SignUpPasswordEntryViewController: UIViewController {
         let password = passwordField.text ?? ""
         let credential = EmailAuthProvider.credential(withEmail: self.passedEmailAddress, password: password)
         if password.count < 8 {
-            self.displaySingleButtonAlert(message: "Please enter a valid password")
+            self.displaySingleButtonAlert(message: "Password must be 8 characters!")
         }
         ApiManager().callRegistrationAPI( email: self.passedEmailAddress, password: password, gender: "Female") { (responseDict, error) in
             if (error == nil) {
