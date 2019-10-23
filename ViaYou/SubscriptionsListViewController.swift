@@ -11,8 +11,8 @@ import UIKit
 class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StripePaymentViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    let subTitles = ["Solo Host save 15%", "Growth Host save 10%", "Pro Host save 25%", "Enterprise save 30%"]
-    let redTitles = ["save 15%", "save 10%", "save 25%", "save 30%"]
+    let subTitles = ["Solo Host save 15%", "Growth Host save 10%", "Pro Host save 25%"]
+    let redTitles = ["save 15%", "save 10%", "save 25%"]
     var openedSection = -1
     var isPurchased: Int = 0
 
@@ -32,7 +32,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

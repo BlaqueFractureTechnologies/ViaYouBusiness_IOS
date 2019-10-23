@@ -775,6 +775,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 
             }else {
                 print("Restore option not available...")
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                nextVC.modalPresentationStyle = .overCurrentContext
+                nextVC.delegate = self
+                self.present(nextVC, animated: false, completion: nil)
             }
             //   }
             

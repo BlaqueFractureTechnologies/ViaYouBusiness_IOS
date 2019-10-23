@@ -50,12 +50,12 @@ class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row != 3 && isPurchased >= indexPath.row {
+        if indexPath.row != 2 && isPurchased >= indexPath.row {
             return 0
         }
         else {
@@ -68,22 +68,22 @@ class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, U
         if (indexPath.row == 0) {
             cell.mainTitleLabel.text = "Upgrade To"
             cell.subTitleLabel.text = "Solo Host"
-            cell.offerLabel.text = " save 15%"
+            //cell.offerLabel.text = " save 15%"
         }else if (indexPath.row == 1) {
             cell.mainTitleLabel.text = "Upgrade To"
             cell.subTitleLabel.text = "Growth Host"
-            cell.offerLabel.text = " save 10%"
-        }else if (indexPath.row == 2){
+            //cell.offerLabel.text = " save 10%"
+        }else { //if (indexPath.row == 2){
             cell.mainTitleLabel.text = "Upgrade To"
             cell.subTitleLabel.text = "Pro Host"
-            cell.offerLabel.text = " save 25%"
+           // cell.offerLabel.text = " save 25%"
         }
-        else {
-            cell.mainTitleLabel.text = "Upgrade To"
-            cell.subTitleLabel.text = "Enterprise"
-            cell.offerLabel.text = " save 30%"
-            cell.learnMoreButton.setTitle("Contact Us", for: .normal)
-        }
+//        else {
+//            cell.mainTitleLabel.text = "Upgrade To"
+//            cell.subTitleLabel.text = "Enterprise"
+//           // cell.offerLabel.text = " save 30%"
+//            cell.learnMoreButton.setTitle("Contact Us", for: .normal)
+//        }
         
         cell.learnMoreButton.tag = indexPath.row
         cell.learnMoreButton.addTarget(self, action: #selector(learnMoreButtonClicked), for: UIControl.Event.touchUpInside)
