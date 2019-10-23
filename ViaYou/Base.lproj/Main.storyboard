@@ -1671,10 +1671,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="565.5" width="180" height="41.5"/>
+                                <rect key="frame" x="97.5" y="569.5" width="180" height="37.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -3127,7 +3127,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="lTe-U2-tPY">
-                                <rect key="frame" x="0.0" y="85" width="375.00000000000011" height="342"/>
+                                <rect key="frame" x="0.0" y="85" width="375" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="m68-ut-oAu">
@@ -6153,11 +6153,16 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MIT-vk-HbA">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <color key="color" red="0.71764705880000002" green="0.2156862745" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="BTL-07-UII" firstAttribute="bottom" secondItem="Lqc-ko-kRR" secondAttribute="bottom" id="1Ze-2h-tLu"/>
                             <constraint firstAttribute="trailing" secondItem="wyY-v4-pir" secondAttribute="trailing" id="2B4-HF-UpX"/>
+                            <constraint firstItem="MIT-vk-HbA" firstAttribute="centerX" secondItem="We5-eC-bcz" secondAttribute="centerX" id="2KA-dI-y4h"/>
                             <constraint firstItem="nQ0-Ty-Okk" firstAttribute="top" secondItem="Lqc-ko-kRR" secondAttribute="top" constant="9" id="2qZ-f0-O2S"/>
                             <constraint firstItem="fd9-5X-LBk" firstAttribute="centerX" secondItem="We5-eC-bcz" secondAttribute="centerX" id="4Rb-Dw-DUg"/>
                             <constraint firstAttribute="bottom" secondItem="UKg-lD-dnb" secondAttribute="bottom" id="5wP-T2-jgS"/>
@@ -6187,10 +6192,12 @@
                             <constraint firstItem="Lqc-ko-kRR" firstAttribute="bottom" secondItem="qys-ZT-q7L" secondAttribute="bottom" constant="10" id="udz-AB-VO3"/>
                             <constraint firstItem="BTL-07-UII" firstAttribute="trailing" secondItem="Lqc-ko-kRR" secondAttribute="trailing" id="ukO-Ay-V25"/>
                             <constraint firstItem="qys-ZT-q7L" firstAttribute="top" secondItem="5Iu-GS-Qzb" secondAttribute="bottom" constant="10" id="utR-7C-pcc"/>
+                            <constraint firstItem="MIT-vk-HbA" firstAttribute="centerY" secondItem="We5-eC-bcz" secondAttribute="centerY" id="zc9-Sp-GXU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Lqc-ko-kRR"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="MIT-vk-HbA" id="f8O-OD-jgj"/>
                         <outlet property="bottomPlusButton" destination="OrK-53-xMP" id="ljq-Pr-QF6"/>
                         <outlet property="collectioView" destination="qys-ZT-q7L" id="lB8-Rd-6V6"/>
                         <outlet property="dropDownBaseView" destination="nQ0-Ty-Okk" id="cmn-QR-mDc"/>

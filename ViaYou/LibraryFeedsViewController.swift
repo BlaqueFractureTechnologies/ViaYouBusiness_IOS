@@ -46,6 +46,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var storageIndicatorLabel: UILabel!
     @IBOutlet weak var profilePicOnInvitePopUp: UIImageView!
     @IBOutlet weak var profilePicOnNoFeedPopUp: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     
     var dataArray:[FeedDataArrayObject] = []
@@ -77,6 +79,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.activityIndicator.isHidden = true
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(displayBottomPlusButtonCircularWave), userInfo: nil, repeats: false)
         self.noFeedPopUpView.alpha = 0
         self.inviteFriendsPopUpView.alpha = 0
@@ -863,6 +866,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        DispatchQueue.main.async {
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
+        }
         var selectedImage:UIImage!
         if let image = info[.editedImage] as? UIImage {
             selectedImage = image
@@ -987,7 +994,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                             let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
                                 UIAlertAction in}
                             alertController.addAction(action)
-                            self.present(alertController, animated: true, completion:nil)
+                            DispatchQueue.main.async {
+                                self.activityIndicator.isHidden = true
+                                self.activityIndicator.stopAnimating()
+                                self.present(alertController, animated: true, completion:nil)
+
+                            }
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
                             self.contentUrl = contentUrl
                         }
