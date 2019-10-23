@@ -76,6 +76,7 @@
 		9EF90CC72353C9BA00127322 /* SubscriptionListProTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CC62353C9BA00127322 /* SubscriptionListProTableViewCell.swift */; };
 		9EF90CC92353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CC82353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift */; };
 		9EF90CCB2353CA9300127322 /* SubscriptionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CCA2353CA9300127322 /* SubscriptionsListViewController.swift */; };
+		9EFE669B2360F68F002CF9C8 /* AddFeedPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE669A2360F68F002CF9C8 /* AddFeedPopUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +178,7 @@
 		9EF90CC82353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeGrowthHostPopUpViewController.swift; sourceTree = "<group>"; };
 		9EF90CCA2353CA9300127322 /* SubscriptionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsListViewController.swift; sourceTree = "<group>"; };
 		9EF90CCC2353DC1200127322 /* ViaYou.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViaYou.entitlements; sourceTree = "<group>"; };
+		9EFE669A2360F68F002CF9C8 /* AddFeedPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedPopUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,6 +338,7 @@
 				9E05C4B0235D0358000F80C3 /* PrivacyPolicyViewController.swift */,
 				9E159F03235E59100033FBE6 /* PaymentCompletedViewController.swift */,
 				9E159F0F235E8A4F0033FBE6 /* DeletedVideosViewController.swift */,
+				9EFE669A2360F68F002CF9C8 /* AddFeedPopUpViewController.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				9EA55F9F233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift in Sources */,
 				9E403A4423443FF5002E3749 /* InstagramUserDetailsResponse.swift in Sources */,
 				9EA55FA1233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift in Sources */,
+				9EFE669B2360F68F002CF9C8 /* AddFeedPopUpViewController.swift in Sources */,
 				9EF90CC52353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift in Sources */,
 				9E14A44A2359205A00F56891 /* JMImageCache.m in Sources */,
 				9E2970D8234E7FC6003BC282 /* UpgradeSoloHostViewController.swift in Sources */,

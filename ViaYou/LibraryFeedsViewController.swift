@@ -19,7 +19,7 @@ import AWSCognito
 //import DTMessageHUD
 
 
-class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BecomeGrowthHostPopUpViewControllerDelegate {
+class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BecomeGrowthHostPopUpViewControllerDelegate, UIScrollViewDelegate {
     
     
     
@@ -47,6 +47,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var profilePicOnInvitePopUp: UIImageView!
     @IBOutlet weak var profilePicOnNoFeedPopUp: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var plusButtonBottomSpaceConstraint: NSLayoutConstraint!
     
     
     
@@ -75,7 +76,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var usedBucketSpace = ""
     let profileImageUrlHeader:String = "https://dev-promptchu.s3.us-east-2.amazonaws.com/"
     let imagePickerController = UIImagePickerController()
-    
+    var lastContentOffset:CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -322,7 +323,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 self.subscriptionArray = responseDict.data
                 print(self.subscriptionArray.type)
                 print(self.subscriptionArray.expiry.getReadableDateString())
-
+                
                 let type = self.subscriptionArray.type
                 if type == "SOLO" {
                     print("0")
@@ -376,6 +377,29 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         let indexDict = responseDict.data[i]
                         indexDict.isInfoPopUpDisplaying = false
                         self.dataArray.append(indexDict)
+                        
+                        /*
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         self.dataArray.append(indexDict)
+                         */
+                        
                         print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
                     }
                     self.loadAllVideoImagesForDataArray()
@@ -391,6 +415,51 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 
             else {
                 print(error?.localizedDescription)
+            }
+        }
+    }
+    
+    var isBottomButtonAnimationInProgress:Bool = false
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if ((self.lastContentOffset-scrollView.contentOffset.y) > 50) {
+            print("Scrolling Up...")
+            
+            if (isBottomButtonAnimationInProgress == false) {
+                isBottomButtonAnimationInProgress = true
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.plusButtonBottomSpaceConstraint.constant = 60
+                    self.view.layoutIfNeeded()
+                }) { (completed) in
+                    self.isBottomButtonAnimationInProgress = false
+                }
+            }
+            
+        } else if ((self.lastContentOffset-scrollView.contentOffset.y) < -50) {
+            print("Scrolling Down...")
+            if (isBottomButtonAnimationInProgress == false) {
+                isBottomButtonAnimationInProgress = true
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.plusButtonBottomSpaceConstraint.constant = -200
+                    self.view.layoutIfNeeded()
+                }) { (completed) in
+                    self.isBottomButtonAnimationInProgress = false
+                }
+            }
+        }
+        
+        if (abs(self.lastContentOffset-scrollView.contentOffset.y) > 50) {
+            self.lastContentOffset = scrollView.contentOffset.y;
+        }
+        
+        //print(" scrollView.contentOffset.y ====> \( scrollView.contentOffset.y)")
+        
+        if (scrollView.contentOffset.y == 0) {
+            isBottomButtonAnimationInProgress = true
+            UIView.animate(withDuration: 0.4, animations: {
+                self.plusButtonBottomSpaceConstraint.constant = 60
+                self.view.layoutIfNeeded()
+            }) { (completed) in
+                self.isBottomButtonAnimationInProgress = false
             }
         }
     }
@@ -525,11 +594,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     @IBAction func plusButtonClicked() {
+        /*
+         self.inviteFriendsPopUpView.alpha = 1
+         self.popUpOverlayButton.alpha = 0.5
+         */
         
-        self.inviteFriendsPopUpView.alpha = 1
-        self.popUpOverlayButton.alpha = 0.5
-        //        print("didSelectItemAt...")
-        //        goToContactsVCToInvite()
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+        nextVC.modalPresentationStyle = .overCurrentContext
+        self.present(nextVC, animated: false, completion: nil)
         
     }
     
@@ -821,7 +894,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
-        }        
+        }
         
     }
     
@@ -1003,7 +1076,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                                 self.activityIndicator.isHidden = true
                                 self.activityIndicator.stopAnimating()
                                 self.present(alertController, animated: true, completion:nil)
-
+                                
                             }
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
                             self.contentUrl = contentUrl
