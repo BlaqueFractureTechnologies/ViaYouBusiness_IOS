@@ -14,6 +14,8 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     let subTitles = ["Solo Host save 15%", "Growth Host save 10%", "Pro Host save 25%", "Enterprise save 30%"]
     let redTitles = ["save 15%", "save 10%", "save 25%", "save 30%"]
     var openedSection = -1
+    var isPurchased: Int = 0
+
     
     var isFromViewAllButtonClickAndFromUpgradePage:Bool = false
     
@@ -34,6 +36,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
         return 60
     }
     

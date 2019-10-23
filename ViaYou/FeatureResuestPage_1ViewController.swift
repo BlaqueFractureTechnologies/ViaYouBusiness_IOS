@@ -16,10 +16,13 @@ class FeatureResuestPage_1ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         textViewBg.layer.cornerRadius = 5
         textViewBg.layer.borderColor = UIColor.gray.cgColor
         textViewBg.layer.borderWidth = 1.0
         textView.addDoneButtonToKeyboard(myAction:  #selector(textView.resignFirstResponder))
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     
@@ -32,6 +35,19 @@ class FeatureResuestPage_1ViewController: UIViewController {
     
     @objc func  dismissTextViewKeyboard() {
         textView.resignFirstResponder()
+    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
     @IBAction func nextButtonClicked() {
@@ -53,12 +69,12 @@ class FeatureResuestPage_1ViewController: UIViewController {
             }
         }
         else {
-          // self.displayAlert(msg: "Please enter your Request")
-            DispatchQueue.main.async {
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_2ViewController") as! FeatureResuestPage_2ViewController
-                self.navigationController?.pushViewController(nextVC, animated: true)
-            }
+            self.displayAlert(msg: "Please enter your Request")
+            //            DispatchQueue.main.async {
+            //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_2ViewController") as! FeatureResuestPage_2ViewController
+            //                self.navigationController?.pushViewController(nextVC, animated: true)
+            //            }
             
         }
         

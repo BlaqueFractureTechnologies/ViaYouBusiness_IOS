@@ -813,11 +813,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
-        }
-        
+        }        
         
     }
-    
     
     func becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
