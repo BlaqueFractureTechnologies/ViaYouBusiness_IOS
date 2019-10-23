@@ -1671,10 +1671,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="569.5" width="180" height="37.5"/>
+                                <rect key="frame" x="97.5" y="565.5" width="180" height="41.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -3161,7 +3161,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="lTe-U2-tPY">
-                                <rect key="frame" x="0.0" y="85" width="375" height="342"/>
+                                <rect key="frame" x="0.0" y="85" width="375.00000000000011" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m68-ut-oAu">
@@ -6319,8 +6319,8 @@ Cgo
                                         <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05 Videos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrg-TV-gpg">
-                                        <rect key="frame" x="65" y="38" width="56" height="14"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrg-TV-gpg">
+                                        <rect key="frame" x="65" y="38" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="12"/>
                                         <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -6840,7 +6840,7 @@ Cgo
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHr-to-Fhv">
-                                <rect key="frame" x="37.5" y="112.5" width="300" height="454.5"/>
+                                <rect key="frame" x="37.5" y="91.5" width="300" height="454.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTf-l2-ZsL">
                                         <rect key="frame" x="30" y="20" width="240" height="154"/>
@@ -7004,11 +7004,11 @@ Cgo
                                     <constraint firstItem="GTf-l2-ZsL" firstAttribute="top" secondItem="UHr-to-Fhv" secondAttribute="top" constant="20" id="g7G-2V-8v6"/>
                                     <constraint firstAttribute="trailing" secondItem="DP2-oi-K7W" secondAttribute="trailing" constant="5" id="gaf-YG-dYz"/>
                                     <constraint firstItem="U9g-20-YhM" firstAttribute="top" secondItem="1xT-KT-qqf" secondAttribute="bottom" constant="53" id="gfg-Z9-IOg"/>
+                                    <constraint firstAttribute="height" constant="454.5" id="hvh-u7-7sb"/>
                                     <constraint firstItem="U9g-20-YhM" firstAttribute="centerX" secondItem="UHr-to-Fhv" secondAttribute="centerX" id="mei-V9-CTl"/>
                                     <constraint firstItem="4EA-sf-tOm" firstAttribute="top" secondItem="U9g-20-YhM" secondAttribute="bottom" constant="16" id="qys-1f-ltX"/>
                                     <constraint firstItem="1qv-oP-3VD" firstAttribute="top" secondItem="qRe-SX-79S" secondAttribute="bottom" constant="10" id="rUA-6L-mqa"/>
                                     <constraint firstItem="U9g-20-YhM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UHr-to-Fhv" secondAttribute="leading" constant="15" id="wmg-Ud-1n8"/>
-                                    <constraint firstAttribute="height" constant="430" id="xRj-p9-9Q0"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
@@ -7034,7 +7034,6 @@ Cgo
                             <constraint firstAttribute="bottom" secondItem="TOo-gv-Ega" secondAttribute="bottom" id="IoV-ot-wUx"/>
                             <constraint firstItem="Ye7-th-8Ee" firstAttribute="centerX" secondItem="K1e-1j-9q4" secondAttribute="centerX" id="K9r-3R-mYE"/>
                             <constraint firstItem="Jbd-ec-z3K" firstAttribute="top" secondItem="972-JT-Yd5" secondAttribute="top" constant="9" id="RNI-0H-7FX"/>
-                            <constraint firstItem="UHr-to-Fhv" firstAttribute="top" secondItem="972-JT-Yd5" secondAttribute="top" constant="92.5" id="W79-BQ-y0L"/>
                             <constraint firstItem="TOo-gv-Ega" firstAttribute="top" secondItem="K1e-1j-9q4" secondAttribute="top" id="WHA-aB-VfA"/>
                             <constraint firstItem="NLS-RQ-8Ji" firstAttribute="bottom" secondItem="O9f-Vw-71v" secondAttribute="bottom" constant="20" id="Xae-EQ-L6R"/>
                             <constraint firstItem="O9f-Vw-71v" firstAttribute="top" secondItem="aDP-Gh-74L" secondAttribute="bottom" constant="5" id="YYi-ki-Cb1"/>
@@ -7042,11 +7041,12 @@ Cgo
                             <constraint firstItem="Ye7-th-8Ee" firstAttribute="centerY" secondItem="K1e-1j-9q4" secondAttribute="centerY" id="ZsH-Ew-6qU"/>
                             <constraint firstAttribute="trailing" secondItem="TOo-gv-Ega" secondAttribute="trailing" id="aHf-Sl-mLv"/>
                             <constraint firstItem="93Z-oH-BgI" firstAttribute="leading" secondItem="K1e-1j-9q4" secondAttribute="leading" id="bsd-Jh-OJC"/>
-                            <constraint firstItem="972-JT-Yd5" firstAttribute="bottom" secondItem="UHr-to-Fhv" secondAttribute="bottom" constant="100" id="dQw-XB-c4Q"/>
+                            <constraint firstItem="UHr-to-Fhv" firstAttribute="top" secondItem="972-JT-Yd5" secondAttribute="top" constant="71.5" id="eIA-33-4Nt"/>
                             <constraint firstItem="972-JT-Yd5" firstAttribute="bottom" secondItem="O9f-Vw-71v" secondAttribute="bottom" constant="60" id="fLO-L3-1aN"/>
                             <constraint firstItem="SlF-I5-yg5" firstAttribute="top" secondItem="D89-OD-Yug" secondAttribute="bottom" constant="10" id="hlv-Ok-kUE"/>
                             <constraint firstAttribute="bottom" secondItem="93Z-oH-BgI" secondAttribute="bottom" id="hrq-oM-73C"/>
                             <constraint firstItem="972-JT-Yd5" firstAttribute="bottom" secondItem="SlF-I5-yg5" secondAttribute="bottom" constant="10" id="hya-G8-yAj"/>
+                            <constraint firstItem="972-JT-Yd5" firstAttribute="bottom" secondItem="UHr-to-Fhv" secondAttribute="bottom" constant="121" id="iKH-DO-zGd"/>
                             <constraint firstItem="O9f-Vw-71v" firstAttribute="centerX" secondItem="NLS-RQ-8Ji" secondAttribute="centerX" id="kfI-eu-OOw"/>
                             <constraint firstAttribute="trailing" secondItem="SlF-I5-yg5" secondAttribute="trailing" constant="10" id="p5d-uD-gqj"/>
                             <constraint firstItem="UHr-to-Fhv" firstAttribute="centerX" secondItem="K1e-1j-9q4" secondAttribute="centerX" id="thc-fZ-HOb"/>
@@ -7081,6 +7081,7 @@ Cgo
                         <outlet property="storageIndicatorRed" destination="nCJ-Zj-JoX" id="oPS-7u-ksc"/>
                         <outlet property="storageIndicatorRedWidthConstraint" destination="pjw-qD-VXY" id="js6-6Z-d7l"/>
                         <outlet property="tableView" destination="4GE-yN-55I" id="kbM-Fx-LS7"/>
+                        <outlet property="totalVideoCount" destination="wrg-TV-gpg" id="JwD-B6-xks"/>
                         <outlet property="userNameOnDropDown" destination="Wxu-ZC-Eh8" id="jHQ-LB-kvY"/>
                     </connections>
                 </viewController>

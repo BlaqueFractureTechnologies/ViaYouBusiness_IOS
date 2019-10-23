@@ -48,6 +48,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var profilePicOnNoFeedPopUp: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var plusButtonBottomSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var totalVideoCount: UILabel!
     
     
     
@@ -359,7 +360,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        return
         //
         
-        ApiManager().getAllPostsAPI(from: "0", size: "10") { (responseDict, error) in
+        ApiManager().getAllPostsAPI(from: "0", size: "100") { (responseDict, error) in
             if error == nil {
                 print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
                 if responseDict.data.count == 0 {
@@ -374,6 +375,16 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     
                     print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
                     for i in 0..<responseDict.data.count {
+                        print("Total video count=====> \(responseDict.data.count)")
+                        if responseDict.data.count == 1 {
+                            DispatchQueue.main.async {
+                                self.totalVideoCount.text = "\(responseDict.data.count) video"
+                            }                        }
+                        else {
+                            DispatchQueue.main.async {
+                                self.totalVideoCount.text = "\(responseDict.data.count) videos"
+                            }
+                        }
                         let indexDict = responseDict.data[i]
                         indexDict.isInfoPopUpDisplaying = false
                         self.dataArray.append(indexDict)
