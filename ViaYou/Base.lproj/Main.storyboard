@@ -7132,8 +7132,8 @@ Cgo
         <image name="shareIconWhite" width="200" height="200"/>
         <image name="sideGrayHorn" width="90" height="210"/>
         <image name="splashLogo" width="383" height="385"/>
-        <image name="subscriptionBannerForFreeMemberPage" width="411" height="372"/>
-        <image name="subscriptionInnerPageBanner" width="412" height="242"/>
+        <image name="subscriptionBannerForFreeMemberPage" width="2466" height="2232"/>
+        <image name="subscriptionInnerPageBanner" width="1854" height="1089"/>
         <image name="twitter" width="32" height="32"/>
         <image name="whatsapp" width="32" height="32"/>
         <image name="yellowRibbon_1" width="232" height="51"/>

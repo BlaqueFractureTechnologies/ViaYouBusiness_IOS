@@ -173,8 +173,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let s3 = AWSS3.default()
         let getReq : AWSS3ListObjectsRequest = AWSS3ListObjectsRequest()
         getReq.bucket = self.bucketName
+        print(getReq.bucket)
         guard let uid = Auth.auth().currentUser?.uid else { return }
         getReq.prefix = "posts/\(uid)" //Folder path to get size
+        print(getReq.prefix)
+        print(getReq)
+        
         let downloadGroup = DispatchGroup()
         downloadGroup.enter()
         
