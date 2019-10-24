@@ -138,14 +138,20 @@ class SignUpPasswordEntryViewController: UIViewController {
                     if (responseDict.message.count>0) {
                         print(responseDict.message)
                         // Registration failed (& if message.count > 0)
-                        self.activityIndicator.stopAnimating()
-                        self.activityIndicator.isHidden = true
-                        self.displaySingleButtonAlert(message: responseDict.message)
+                        DispatchQueue.main.async {
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.isHidden = true
+                            self.displaySingleButtonAlert(message: responseDict.message)
+                        }
+                        
                     }else {
                         // Registration failed (& if message.count == 0)
-                        self.activityIndicator.stopAnimating()
-                        self.activityIndicator.isHidden = true
-                        self.displaySingleButtonAlert(message: "Registration failed. Please try again later")
+                        DispatchQueue.main.async {
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.isHidden = true
+                            self.displaySingleButtonAlert(message: "Registration failed. Please try again later")
+                        }
+                     
                     }
                 }
             }else {

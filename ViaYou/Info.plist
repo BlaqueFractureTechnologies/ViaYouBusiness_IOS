@@ -2,6 +2,43 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AWS</key>
+	<dict>
+		<key>CredentialsProvider</key>
+		<dict>
+			<key>CognitoIdentity</key>
+			<dict>
+				<key>Default</key>
+				<dict>
+					<key>PoolId</key>
+					<string>us-east-2:a77b68f4-b3c1-4722-bd37-7819e7568a15</string>
+					<key>Region</key>
+					<string>USEast2</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>S3</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>Region</key>
+				<string> USEast2 </string>
+			</dict>
+		</dict>
+		<key>S3TransferManager</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>Region</key>
+				<string> USEast2 </string>
+			</dict>
+		</dict>
+	</dict>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -16,44 +53,6 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-    <key>NSCameraUsageDescription</key>
-    <string>Viayou would like to access your camera</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Viayou would like to access your gallery</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Viayou would like to access your gallery</string>
-	<key>AWS</key>
-	<dict>
-		<key>CredentialsProvider</key>
-		<dict>
-			<key>CognitoIdentity</key>
-			<dict>
-				<key>Default</key>
-				<dict>
-					<key>PoolId</key>
-					<string>us-east-2:3d024c5d-faba-4922-85e4-9b3d2d9581c9</string>
-					<key>Region</key>
-					<string>USEast2</string>
-				</dict>
-			</dict>
-		</dict>
-		<key>S3TransferManager</key>
-		<dict>
-			<key>Default</key>
-			<dict>
-				<key>Region</key>
-				<string> USEast2 </string>
-			</dict>
-		</dict>
-		<key>S3</key>
-		<dict>
-			<key>Default</key>
-			<dict>
-				<key>Region</key>
-				<string> USEast2 </string>
-			</dict>
-		</dict>
-	</dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -67,7 +66,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.775072978485-hii6kqkcmd9044lbp4n49lm3g23ivp53</string>
+				<string>com.googleusercontent.apps.695609349739-6a6705bio3ofe2a8rd97sutu7mrtfte5</string>
 			</array>
 		</dict>
 		<dict>
@@ -94,8 +93,12 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Viayou would like to access your camera</string>
 	<key>NSContactsUsageDescription</key>
 	<string>App needs to access your contacts</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Viayou would like to access your gallery</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App needs to access your galley to save the video before sharing</string>
 	<key>UIAppFonts</key>

@@ -63,7 +63,6 @@
 		9EA55FA3233C2CB9003A1EBB /* NewSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55FA2233C2CB9003A1EBB /* NewSignInViewController.swift */; };
 		9EA55FA5233C3628003A1EBB /* ExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55FA4233C3628003A1EBB /* ExtensionManager.swift */; };
 		9EA55FA7233C5099003A1EBB /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55FA6233C5099003A1EBB /* InviteFriendsViewController.swift */; };
-		9EA55FAB233C78E8003A1EBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA55FAA233C78E8003A1EBB /* GoogleService-Info.plist */; };
 		9EB6E342234592870086A131 /* LibraryFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB6E341234592870086A131 /* LibraryFeedResponse.swift */; };
 		9ECDE2EB2356891F009D0BBE /* BucketSizeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECDE2EA2356891F009D0BBE /* BucketSizeResponse.swift */; };
 		9EF50BC92346DC3D00D255FF /* Monarcha_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EF50BC82346DC3700D255FF /* Monarcha_Bold.ttf */; };
@@ -77,6 +76,7 @@
 		9EF90CC92353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CC82353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift */; };
 		9EF90CCB2353CA9300127322 /* SubscriptionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF90CCA2353CA9300127322 /* SubscriptionsListViewController.swift */; };
 		9EFE669B2360F68F002CF9C8 /* AddFeedPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE669A2360F68F002CF9C8 /* AddFeedPopUpViewController.swift */; };
+		9EFE669D23611146002CF9C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EFE669C23611146002CF9C8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,7 +164,6 @@
 		9EA55FA2233C2CB9003A1EBB /* NewSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSignInViewController.swift; sourceTree = "<group>"; };
 		9EA55FA4233C3628003A1EBB /* ExtensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionManager.swift; sourceTree = "<group>"; };
 		9EA55FA6233C5099003A1EBB /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
-		9EA55FAA233C78E8003A1EBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9EB6E341234592870086A131 /* LibraryFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryFeedResponse.swift; sourceTree = "<group>"; };
 		9ECDE2EA2356891F009D0BBE /* BucketSizeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketSizeResponse.swift; sourceTree = "<group>"; };
 		9EF50BC62346DC3700D255FF /* monarcha_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = monarcha_regular.ttf; sourceTree = "<group>"; };
@@ -179,6 +178,7 @@
 		9EF90CCA2353CA9300127322 /* SubscriptionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsListViewController.swift; sourceTree = "<group>"; };
 		9EF90CCC2353DC1200127322 /* ViaYou.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViaYou.entitlements; sourceTree = "<group>"; };
 		9EFE669A2360F68F002CF9C8 /* AddFeedPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedPopUpViewController.swift; sourceTree = "<group>"; };
+		9EFE669C23611146002CF9C8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,7 +309,6 @@
 				9EA55F6E233C208D003A1EBB /* Main.storyboard */,
 				9EA55F73233C208E003A1EBB /* LaunchScreen.storyboard */,
 				9EA55F76233C208E003A1EBB /* Info.plist */,
-				9EA55FAA233C78E8003A1EBB /* GoogleService-Info.plist */,
 				9EA55F98233C29FB003A1EBB /* SplashViewController.swift */,
 				9EA55F9A233C2B04003A1EBB /* NewLaunchViewController.swift */,
 				9EA55F9C233C2B24003A1EBB /* SignUpViewController.swift */,
@@ -370,6 +369,7 @@
 				9EF50BC62346DC3700D255FF /* monarcha_regular.ttf */,
 				9EF50BC72346DC3700D255FF /* Monarcha_SemiBold.ttf */,
 				9EA55F71233C208E003A1EBB /* Assets.xcassets */,
+				9EFE669C23611146002CF9C8 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -507,11 +507,11 @@
 				9EF50BCA2346DC4000D255FF /* monarcha_regular.ttf in Resources */,
 				9EA55F75233C208E003A1EBB /* LaunchScreen.storyboard in Resources */,
 				9E05C4AD235D02A5000F80C3 /* Privacy Policy.rtf in Resources */,
-				9EA55FAB233C78E8003A1EBB /* GoogleService-Info.plist in Resources */,
 				9EA55F72233C208E003A1EBB /* Assets.xcassets in Resources */,
 				9EF90CBF2353C90700127322 /* response.json in Resources */,
 				9EF50BCB2346DC4300D255FF /* Monarcha_SemiBold.ttf in Resources */,
 				9EA55F70233C208D003A1EBB /* Main.storyboard in Resources */,
+				9EFE669D23611146002CF9C8 /* GoogleService-Info.plist in Resources */,
 				9EF50BC92346DC3D00D255FF /* Monarcha_Bold.ttf in Resources */,
 				9E05C4AC235D02A5000F80C3 /* Mobile App T&C Conditions.rtf in Resources */,
 			);

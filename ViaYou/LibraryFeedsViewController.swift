@@ -67,7 +67,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Terms And Conditions",
                          "Sign Out"]
     //AWS setup
-    let bucketName = "dev-promptchu"
+    let bucketName = "s3.viayou.net"
     var contentUrl: URL!
     var s3Url: URL!
     
@@ -75,7 +75,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var countryCode: String = ""
     var totalBucketSpace = ""
     var usedBucketSpace = ""
-    let profileImageUrlHeader:String = "https://dev-promptchu.s3.us-east-2.amazonaws.com/"
+    let profileImageUrlHeader:String = "http://s3.viayou.net/"
     let imagePickerController = UIImagePickerController()
     var lastContentOffset:CGFloat = 0.0
     
@@ -163,8 +163,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     //get aws s3 bucket info
     func getBucketInfo() {
         //aws configuration
-        let accessKey = "AKIAJ6O3XJCBVT4WJEYQ"
-        let secretKey = "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"
+        let accessKey = "AKIA6JJLBT2ZHL52PQLQ"
+        let secretKey = "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"
         //let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2, identityPoolId:"us-east-2:3d024c5d-faba-4922-85e4-9b3d2d9581c9")
         let credentialsProvider = AWSStaticCredentialsProvider(accessKey: accessKey, secretKey: secretKey)
         let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast2, credentialsProvider: credentialsProvider)
@@ -524,7 +524,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         let userID = dataArray[sender.tag].user._id
         let videoName = dataArray[sender.tag].fileName
-        var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+        var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
         videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
         UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -579,7 +579,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let userID = dataArray[selectedRow].user._id
             let videoName = dataArray[selectedRow].fileName
             let videoId = dataArray[selectedRow]._id
-            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
             videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
             
             let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
@@ -694,7 +694,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         for i in 0..<dataArray.count {
             let userID = dataArray[i].user._id
             let videoName = dataArray[i].fileName
-            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
             videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
             print("videUrlString :: \(videUrlString)")
             

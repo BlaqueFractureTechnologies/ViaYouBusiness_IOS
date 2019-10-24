@@ -22,6 +22,9 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     //  var tokenChangeListener: IDTokenDidChangeListenerHandle?
     var generatedUserToken: String = ""
     var passingProfileImage = UIImage()
+    var currentUserId: String = ""
+    var currentUserName: String = ""
+    var currnetUserEmail: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.isHidden = true
@@ -217,17 +220,40 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                 self.passingProfileImage = profileImage
                             }
                             
-                            print("success token")
-                            UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
-                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                            print(self.passingProfileImage)
-                            homeVC.passedProfileImage = self.passingProfileImage
-                            let navVC = UINavigationController(rootViewController: homeVC)
-                            navVC.isNavigationBarHidden = true
-                            self.navigationController?.present(navVC, animated: true, completion: nil)
+                            if let userId = Auth.auth().currentUser?.uid {
+                                self.currentUserId = userId
+                                print(self.currentUserId)
+                            }
+                            if let userName = Auth.auth().currentUser?.displayName {
+                                self.currentUserName = userName
+                                print(self.currentUserName)
+                            }
+                            print(self.currnetUserEmail)
+                            ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
+                                if error == nil {
+                                    print(response.message)
+                                    print("success token")
+                                    UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
+                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                    print(self.passingProfileImage)
+                                    homeVC.passedProfileImage = self.passingProfileImage
+                                    let navVC = UINavigationController(rootViewController: homeVC)
+                                    navVC.isNavigationBarHidden = true
+                                    self.navigationController?.present(navVC, animated: true, completion: nil)
+                                }
+                                else {
+                                    print(error.debugDescription)
+                                }
+                            })
+                            
+                            //edit ends
+                            
+                            
                         }
                         //get google profile picture ends
+                        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        // appDelegate.goToHomeVC()
                     }
                 }
                 else {

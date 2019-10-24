@@ -32,7 +32,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     var inviteText: String = ""
     var isInviteAllOptionEnabled: Bool = false
     var isInviteAllRadioButtonHighlighted: Bool = false
-    let profileImageUrlHeader:String = "https://dev-promptchu.s3.us-east-2.amazonaws.com/"
+    let profileImageUrlHeader:String = "http://s3.viayou.net/"
     
     override func viewDidLoad() {
         super.viewDidLoad()

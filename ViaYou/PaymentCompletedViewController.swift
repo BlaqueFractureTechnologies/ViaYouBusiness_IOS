@@ -15,7 +15,7 @@ class PaymentCompletedViewController: UIViewController {
     @IBOutlet weak var ribbonImage: UIImageView!
     @IBOutlet weak var expiryDateLabel: UILabel!
     
-    let profileImageUrlHeader:String = "https://dev-promptchu.s3.us-east-2.amazonaws.com/"
+    let profileImageUrlHeader:String = "http://s3.viayou.net/"
     var subscriptionArray:SubscriptionArrayObject = SubscriptionArrayObject([:])
     
     override func viewDidLoad() {

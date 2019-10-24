@@ -31,13 +31,13 @@ class DeletedVideosViewController: UIViewController, UICollectionViewDelegate, U
     var bucketDataArray:BucketDataObject = BucketDataObject([:])
     var passedProfileImage = UIImage()
     var userId: String = ""
-    let bucketName = "dev-promptchu"
+    let bucketName = "s3.viayou.net"
     var contentUrl: URL!
     var s3Url: URL!
     
     var streetName: String = ""
     var countryCode: String = ""
-    let profileImageUrlHeader:String = "https://dev-promptchu.s3.us-east-2.amazonaws.com/"
+    let profileImageUrlHeader:String = "http://s3.viayou.net/"
     
     
     override func viewDidLoad() {
@@ -223,7 +223,7 @@ class DeletedVideosViewController: UIViewController, UICollectionViewDelegate, U
         for i in 0..<dataArray.count {
             let userID = dataArray[i].user._id
             let videoName = dataArray[i].fileName
-            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
+            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
             videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
             print("videUrlString :: \(videUrlString)")
             

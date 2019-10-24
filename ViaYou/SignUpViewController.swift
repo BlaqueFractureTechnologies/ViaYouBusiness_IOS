@@ -21,6 +21,9 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     @IBOutlet weak var signInWithGoogle: GIDSignInButton!
     var generatedUserToken: String = ""
     var passingProfileImage = UIImage()
+    var currentUserId: String = ""
+    var currentUserName: String = ""
+    var currnetUserEmail: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.isHidden = true
@@ -169,6 +172,8 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
         
         print(credentials)
+        print(user.profile.email)
+        self.currnetUserEmail = user.profile.email
         print(user.authentication.idToken)
         print(user.authentication.accessToken)
         DispatchQueue.main.async {
@@ -224,16 +229,37 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                 print(profileImage)
                                 self.passingProfileImage = profileImage
                             }
+                            //edit
+                            if let userId = Auth.auth().currentUser?.uid {
+                                self.currentUserId = userId
+                                print(self.currentUserId)
+                            }
+                            if let userName = Auth.auth().currentUser?.displayName {
+                                self.currentUserName = userName
+                                print(self.currentUserName)
+                            }
+                            print(self.currnetUserEmail)
+                            ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
+                                if error == nil {
+                                    print(response.message)
+                                    print("success token")
+                                    UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
+                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                    print(self.passingProfileImage)
+                                    homeVC.passedProfileImage = self.passingProfileImage
+                                    let navVC = UINavigationController(rootViewController: homeVC)
+                                    navVC.isNavigationBarHidden = true
+                                    self.navigationController?.present(navVC, animated: true, completion: nil)
+                                }
+                                else {
+                                    print(error.debugDescription)
+                                }
+                            })
+
+                            //edit ends
                             
-                            print("success token")
-                            UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
-                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                            print(self.passingProfileImage)
-                            homeVC.passedProfileImage = self.passingProfileImage
-                            let navVC = UINavigationController(rootViewController: homeVC)
-                            navVC.isNavigationBarHidden = true
-                            self.navigationController?.present(navVC, animated: true, completion: nil)
+                          
                         }
                         //get google profile picture ends
                         //let appDelegate = UIApplication.shared.delegate as! AppDelegate
