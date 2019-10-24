@@ -873,14 +873,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             
             
         }
-            //        else if (indexPath.row == 3) {
-            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-            //            nextVC.modalPresentationStyle = .overCurrentContext
-            //            nextVC.delegate = self
-            //            self.present(nextVC, animated: false, completion: nil)
-            //
-            //        }
+                    else if (indexPath.row == 3) {
+                        if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:])
+                            }
+            }
+            
+                    }
         else if (indexPath.row == 4) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
