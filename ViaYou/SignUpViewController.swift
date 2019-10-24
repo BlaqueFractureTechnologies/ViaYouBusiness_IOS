@@ -110,6 +110,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                             else{
                                 print(result!)
                                 let field = result! as? [String:Any]
+                                self.currnetUserEmail = field!["email"] as? String ?? "nil"
                                 //self.userNameLabel.text = field!["name"] as? String
                                 if let imageURL = ((field!["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
                                     print(imageURL)
@@ -124,6 +125,15 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                 //edit
                                 self.getAuthenticationToken()
                                 UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
+                                if let userId = Auth.auth().currentUser?.uid {
+                                    self.currentUserId = userId
+                                    print(self.currentUserId)
+                                }
+                                if let userName = Auth.auth().currentUser?.displayName {
+                                    self.currentUserName = userName
+                                    print(self.currentUserName)
+                                }
+                                print(self.currnetUserEmail)
                                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                                 let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
                                 print(self.passingProfileImage)
