@@ -30,6 +30,8 @@ struct ApiManager {
     let listDeletedScreenCastHeader = "listDeletedScreenCast"
     let restoreScreencastHeader = "restore"
     let firebaseRegisterHeader = "firebaseRegister"
+    let addVideoPostHeader = "add"
+
     
     
     //MARK:- Registration API
@@ -594,6 +596,57 @@ struct ApiManager {
         let requestURLString = "\(headerUrl)\(firebaseRegisterHeader)"
         let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
        // request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue(generatedUserToken, forHTTPHeaderField: "token")
+        request.httpMethod = "POST"
+        
+        let postData = NSMutableData()
+        for key in parameters.keys {
+            let keyString = "&\(key)"
+            let valueString = parameters[key] as? String ?? ""
+            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
+        }
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(SubscriptionResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("jsonDict====>%@",jsonDict)
+                        completion(SubscriptionResponse(jsonDict),nil)
+                    }else {
+                        completion(SubscriptionResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(SubscriptionResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    //MARK:- Add Video Post to Firebase
+    
+    
+    func addVideoPostToFirebase(userID:String,
+                                title:String,
+                                description:String,
+                                fileName:String,
+                                completion: @escaping (_ responseDict:SubscriptionResponse, _ error:Error?) -> ()) {
+        let parameters: [String: Any] = [
+            "userID":userID,
+            "title":title,
+            "description":description,
+            "fileName":fileName,
+        ]
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
+        
+        let requestURLString = "\(POSTSHEADER)\(addVideoPostHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(generatedUserToken, forHTTPHeaderField: "token")
         request.httpMethod = "POST"
         

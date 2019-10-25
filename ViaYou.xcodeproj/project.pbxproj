@@ -34,6 +34,15 @@
 		9E2B879E2344007700941DF2 /* LessSpacePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */; };
 		9E2B87A0234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B879F234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift */; };
 		9E2B87A22344020500941DF2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B87A12344020500941DF2 /* SignInViewController.swift */; };
+		9E31CB5723625D90003651A1 /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E31CB4E23625D8E003651A1 /* InfoVC.swift */; };
+		9E31CB5823625D90003651A1 /* MergeTagPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E31CB4F23625D8F003651A1 /* MergeTagPopUpViewController.swift */; };
+		9E31CB5923625D90003651A1 /* RecordedVideoPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E31CB5023625D8F003651A1 /* RecordedVideoPreviewVC.swift */; };
+		9E31CB5A23625D90003651A1 /* RecordFantVideoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E31CB5123625D8F003651A1 /* RecordFantVideoVC.swift */; };
+		9E31CB5B23625D90003651A1 /* MergeVideoDescriptionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E31CB5223625D8F003651A1 /* MergeVideoDescriptionPopUpViewController.swift */; };
+		9E31CB5C23625D90003651A1 /* MergeTagPopUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E31CB5323625D8F003651A1 /* MergeTagPopUpTableViewCell.swift */; };
+		9E31CB5D23625D90003651A1 /* MergeProductBrandCompanyPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E31CB5423625D90003651A1 /* MergeProductBrandCompanyPopUpViewController.swift */; };
+		9E31CB5E23625D90003651A1 /* MergeVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E31CB5523625D90003651A1 /* MergeVideo.swift */; };
+		9E31CB5F23625D90003651A1 /* VideoRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E31CB5623625D90003651A1 /* VideoRecordVC.swift */; };
 		9E3485B6234A8FC100DFADC9 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485B5234A8FC100DFADC9 /* ContactsViewController.swift */; };
 		9E3485B8234A8FEE00DFADC9 /* PhoneContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485B7234A8FEE00DFADC9 /* PhoneContact.swift */; };
 		9E3485BA234A903F00DFADC9 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485B9234A903F00DFADC9 /* ContactsTableViewCell.swift */; };
@@ -129,6 +138,15 @@
 		9E2B879D2344007700941DF2 /* LessSpacePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessSpacePopUpViewController.swift; sourceTree = "<group>"; };
 		9E2B879F234400F200941DF2 /* LibraryFeedsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryFeedsCollectionViewCell.swift; sourceTree = "<group>"; };
 		9E2B87A12344020500941DF2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		9E31CB4E23625D8E003651A1 /* InfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
+		9E31CB4F23625D8F003651A1 /* MergeTagPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeTagPopUpViewController.swift; sourceTree = "<group>"; };
+		9E31CB5023625D8F003651A1 /* RecordedVideoPreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordedVideoPreviewVC.swift; sourceTree = "<group>"; };
+		9E31CB5123625D8F003651A1 /* RecordFantVideoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordFantVideoVC.swift; sourceTree = "<group>"; };
+		9E31CB5223625D8F003651A1 /* MergeVideoDescriptionPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeVideoDescriptionPopUpViewController.swift; sourceTree = "<group>"; };
+		9E31CB5323625D8F003651A1 /* MergeTagPopUpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeTagPopUpTableViewCell.swift; sourceTree = "<group>"; };
+		9E31CB5423625D90003651A1 /* MergeProductBrandCompanyPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeProductBrandCompanyPopUpViewController.swift; sourceTree = "<group>"; };
+		9E31CB5523625D90003651A1 /* MergeVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeVideo.swift; sourceTree = "<group>"; };
+		9E31CB5623625D90003651A1 /* VideoRecordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRecordVC.swift; sourceTree = "<group>"; };
 		9E3485B5234A8FC100DFADC9 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		9E3485B7234A8FEE00DFADC9 /* PhoneContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneContact.swift; sourceTree = "<group>"; };
 		9E3485B9234A903F00DFADC9 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
@@ -255,6 +273,22 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		9E31CB4D23625D60003651A1 /* Video Merging */ = {
+			isa = PBXGroup;
+			children = (
+				9E31CB4E23625D8E003651A1 /* InfoVC.swift */,
+				9E31CB5423625D90003651A1 /* MergeProductBrandCompanyPopUpViewController.swift */,
+				9E31CB5323625D8F003651A1 /* MergeTagPopUpTableViewCell.swift */,
+				9E31CB4F23625D8F003651A1 /* MergeTagPopUpViewController.swift */,
+				9E31CB5523625D90003651A1 /* MergeVideo.swift */,
+				9E31CB5223625D8F003651A1 /* MergeVideoDescriptionPopUpViewController.swift */,
+				9E31CB5023625D8F003651A1 /* RecordedVideoPreviewVC.swift */,
+				9E31CB5123625D8F003651A1 /* RecordFantVideoVC.swift */,
+				9E31CB5623625D90003651A1 /* VideoRecordVC.swift */,
+			);
+			path = "Video Merging";
+			sourceTree = "<group>";
+		};
 		9E403A3A2344351C002E3749 /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +331,7 @@
 		9EA55F69233C208D003A1EBB /* ViaYou */ = {
 			isa = PBXGroup;
 			children = (
+				9E31CB4D23625D60003651A1 /* Video Merging */,
 				9E14A4432359202F00F56891 /* Libraries */,
 				9EF90CCC2353DC1200127322 /* ViaYou.entitlements */,
 				9EF90CBE2353C90700127322 /* response.json */,
@@ -597,18 +632,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E31CB5E23625D90003651A1 /* MergeVideo.swift in Sources */,
 				9EF90CCB2353CA9300127322 /* SubscriptionsListViewController.swift in Sources */,
 				9E403A39234434AE002E3749 /* ApiManager.swift in Sources */,
 				9E3485B6234A8FC100DFADC9 /* ContactsViewController.swift in Sources */,
 				9E159F04235E59100033FBE6 /* PaymentCompletedViewController.swift in Sources */,
+				9E31CB5823625D90003651A1 /* MergeTagPopUpViewController.swift in Sources */,
 				9ECDE2EB2356891F009D0BBE /* BucketSizeResponse.swift in Sources */,
 				9E14A44B2359205A00F56891 /* UIImageView+JMImageCache.m in Sources */,
 				9E2B879A2344003C00941DF2 /* LibraryFeedsViewController.swift in Sources */,
 				9E05C4B1235D0358000F80C3 /* PrivacyPolicyViewController.swift in Sources */,
 				9EA55F9B233C2B04003A1EBB /* NewLaunchViewController.swift in Sources */,
+				9E31CB5F23625D90003651A1 /* VideoRecordVC.swift in Sources */,
 				9EA55FA7233C5099003A1EBB /* InviteFriendsViewController.swift in Sources */,
+				9E31CB5723625D90003651A1 /* InfoVC.swift in Sources */,
 				9E27E558235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift in Sources */,
 				9E05C4AF235D0341000F80C3 /* TermsNConditionsViewController.swift in Sources */,
+				9E31CB5D23625D90003651A1 /* MergeProductBrandCompanyPopUpViewController.swift in Sources */,
 				9E91AE1D234D332A0044AB5C /* HomeInfoTableViewCell.swift in Sources */,
 				9EF90CC12353C95600127322 /* SubscriptionBaseViewTableViewCell.swift in Sources */,
 				9EF90CC92353CA4400127322 /* BecomeGrowthHostPopUpViewController.swift in Sources */,
@@ -616,6 +656,7 @@
 				9E14A44F23593F8600F56891 /* DeleteVideoResponse.swift in Sources */,
 				9EA55FA3233C2CB9003A1EBB /* NewSignInViewController.swift in Sources */,
 				9E403A4223443FDA002E3749 /* InstagramAuthResponseModel.swift in Sources */,
+				9E31CB5B23625D90003651A1 /* MergeVideoDescriptionPopUpViewController.swift in Sources */,
 				9EF90CC72353C9BA00127322 /* SubscriptionListProTableViewCell.swift in Sources */,
 				9EA55F99233C29FB003A1EBB /* SplashViewController.swift in Sources */,
 				9E403A4023443F34002E3749 /* InstagramSignInViewController.swift in Sources */,
@@ -636,9 +677,12 @@
 				9E159F10235E8A4F0033FBE6 /* DeletedVideosViewController.swift in Sources */,
 				9E2970DE234E8012003BC282 /* SubscriptionBaseViewController.swift in Sources */,
 				9E2B879C2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift in Sources */,
+				9E31CB5C23625D90003651A1 /* MergeTagPopUpTableViewCell.swift in Sources */,
+				9E31CB5923625D90003651A1 /* RecordedVideoPreviewVC.swift in Sources */,
 				9EA55F9D233C2B24003A1EBB /* SignUpViewController.swift in Sources */,
 				9EA55F9F233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift in Sources */,
 				9E403A4423443FF5002E3749 /* InstagramUserDetailsResponse.swift in Sources */,
+				9E31CB5A23625D90003651A1 /* RecordFantVideoVC.swift in Sources */,
 				9EA55FA1233C2B6A003A1EBB /* SignUpPasswordEntryViewController.swift in Sources */,
 				9EFE669B2360F68F002CF9C8 /* AddFeedPopUpViewController.swift in Sources */,
 				9EF90CC52353C9A000127322 /* SubscriptionListGrowthTableViewCell.swift in Sources */,

@@ -20,5 +20,8 @@ pod 'AWSS3'
 pod 'AWSCore'
 pod 'AWSCognito'
 pod 'Stripe'
+pod 'mobile-ffmpeg-full', '~> 4.2.2'
+pod 'DTMessageHUD'
+pod 'MediaWatermark'   
 
 end
