@@ -106,6 +106,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                             else{
                                 print(result!)
                                 let field = result! as? [String:Any]
+                                self.currnetUserEmail = field!["email"] as? String ?? "nil"
                                 //self.userNameLabel.text = field!["name"] as? String
                                 if let imageURL = ((field!["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
                                     print(imageURL)
@@ -118,15 +119,35 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                     }
                                 }
                                 //edit
-                                self.getAuthenticationToken()
+                                // self.getAuthenticationToken()
                                 UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
-                                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                print(self.passingProfileImage)
-                                homeVC.passedProfileImage = self.passingProfileImage
-                                let navVC = UINavigationController(rootViewController: homeVC)
-                                navVC.isNavigationBarHidden = true
-                                self.navigationController?.present(navVC, animated: true, completion: nil)
+                                if let userId = Auth.auth().currentUser?.uid {
+                                    self.currentUserId = userId
+                                    print(self.currentUserId)
+                                }
+                                if let userName = Auth.auth().currentUser?.displayName {
+                                    self.currentUserName = userName
+                                    print(self.currentUserName)
+                                }
+                                print(self.currnetUserEmail)
+                                //edit
+                                ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
+                                    if error == nil {
+                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                        print(self.passingProfileImage)
+                                        homeVC.passedProfileImage = self.passingProfileImage
+                                        let navVC = UINavigationController(rootViewController: homeVC)
+                                        navVC.isNavigationBarHidden = true
+                                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    }
+                                    else {
+                                        print(error.debugDescription)
+                                        self.displayAlert(msg: "Something went wrong. Please try again later!")
+                                    }
+                                })
+                                //edit ends
+                                
                                 //edit ends
                             }
                         })

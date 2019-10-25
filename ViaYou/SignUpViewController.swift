@@ -123,7 +123,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                     }
                                 }
                                 //edit
-                                self.getAuthenticationToken()
+                               // self.getAuthenticationToken()
                                 UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                                 if let userId = Auth.auth().currentUser?.uid {
                                     self.currentUserId = userId
@@ -134,13 +134,24 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                     print(self.currentUserName)
                                 }
                                 print(self.currnetUserEmail)
-                                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                print(self.passingProfileImage)
-                                homeVC.passedProfileImage = self.passingProfileImage
-                                let navVC = UINavigationController(rootViewController: homeVC)
-                                navVC.isNavigationBarHidden = true
-                                self.navigationController?.present(navVC, animated: true, completion: nil)
+                                //edit
+                                ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
+                                    if error == nil {
+                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                        print(self.passingProfileImage)
+                                        homeVC.passedProfileImage = self.passingProfileImage
+                                        let navVC = UINavigationController(rootViewController: homeVC)
+                                        navVC.isNavigationBarHidden = true
+                                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    }
+                                    else {
+                                        print(error.debugDescription)
+                                    self.displayAlert(msg: "Something went wrong. Please try again later!")
+                                    }
+                                })
+                                //edit ends
+     
                                 //edit ends
                             }
                         })
