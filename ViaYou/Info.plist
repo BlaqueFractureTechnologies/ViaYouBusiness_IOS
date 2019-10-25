@@ -34,11 +34,6 @@
 			</dict>
 		</dict>
 	</dict>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -58,7 +53,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb416149332443231</string>
+				<string>fb2262777054012195</string>
 			</array>
 		</dict>
 		<dict>
@@ -83,9 +78,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>416149332443231</string>
+	<string>2262777054012195</string>
 	<key>FacebookDisplayName</key>
-	<string>Promptchu</string>
+	<string>ViaYou</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth2</string>
@@ -93,6 +88,11 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Viayou would like to access your camera</string>
 	<key>NSContactsUsageDescription</key>

@@ -74,6 +74,7 @@
 		9EA55FA7233C5099003A1EBB /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA55FA6233C5099003A1EBB /* InviteFriendsViewController.swift */; };
 		9EB6E342234592870086A131 /* LibraryFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB6E341234592870086A131 /* LibraryFeedResponse.swift */; };
 		9ECDE2EB2356891F009D0BBE /* BucketSizeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECDE2EA2356891F009D0BBE /* BucketSizeResponse.swift */; };
+		9EE57BF623628ADE00CAC421 /* AddTwoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE57BF523628ADE00CAC421 /* AddTwoMenuViewController.swift */; };
 		9EF50BC92346DC3D00D255FF /* Monarcha_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EF50BC82346DC3700D255FF /* Monarcha_Bold.ttf */; };
 		9EF50BCA2346DC4000D255FF /* monarcha_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EF50BC62346DC3700D255FF /* monarcha_regular.ttf */; };
 		9EF50BCB2346DC4300D255FF /* Monarcha_SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EF50BC72346DC3700D255FF /* Monarcha_SemiBold.ttf */; };
@@ -184,6 +185,7 @@
 		9EA55FA6233C5099003A1EBB /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
 		9EB6E341234592870086A131 /* LibraryFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryFeedResponse.swift; sourceTree = "<group>"; };
 		9ECDE2EA2356891F009D0BBE /* BucketSizeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketSizeResponse.swift; sourceTree = "<group>"; };
+		9EE57BF523628ADE00CAC421 /* AddTwoMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTwoMenuViewController.swift; sourceTree = "<group>"; };
 		9EF50BC62346DC3700D255FF /* monarcha_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = monarcha_regular.ttf; sourceTree = "<group>"; };
 		9EF50BC72346DC3700D255FF /* Monarcha_SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monarcha_SemiBold.ttf; sourceTree = "<group>"; };
 		9EF50BC82346DC3700D255FF /* Monarcha_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monarcha_Bold.ttf; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				9E159F03235E59100033FBE6 /* PaymentCompletedViewController.swift */,
 				9E159F0F235E8A4F0033FBE6 /* DeletedVideosViewController.swift */,
 				9EFE669A2360F68F002CF9C8 /* AddFeedPopUpViewController.swift */,
+				9EE57BF523628ADE00CAC421 /* AddTwoMenuViewController.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				9E3485B6234A8FC100DFADC9 /* ContactsViewController.swift in Sources */,
 				9E159F04235E59100033FBE6 /* PaymentCompletedViewController.swift in Sources */,
 				9E31CB5823625D90003651A1 /* MergeTagPopUpViewController.swift in Sources */,
+				9EE57BF623628ADE00CAC421 /* AddTwoMenuViewController.swift in Sources */,
 				9ECDE2EB2356891F009D0BBE /* BucketSizeResponse.swift in Sources */,
 				9E14A44B2359205A00F56891 /* UIImageView+JMImageCache.m in Sources */,
 				9E2B879A2344003C00941DF2 /* LibraryFeedsViewController.swift in Sources */,
