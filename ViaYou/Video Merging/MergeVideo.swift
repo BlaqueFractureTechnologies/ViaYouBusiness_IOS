@@ -18,7 +18,6 @@ import AWSCore
 import AWSCognito
 import mobileffmpeg
 import Firebase
-import CoreLocation
 
 
 enum QUWatermarkPosition {
@@ -29,7 +28,7 @@ enum QUWatermarkPosition {
     case Default
 }
 
-class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate, MergeVideoDescriptionPopUpViewControllerDelegate { //k*
+class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPopUpViewControllerDelegate { //k*
     
     @IBOutlet weak var bigVIdeoView: UIView!
     @IBOutlet weak var smallVIdeoView: UIView!
@@ -41,9 +40,9 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
     
     @IBOutlet weak var promptTitleField: UITextField!
     //@IBOutlet weak var promptDescriptionField: UITextField!
-    @IBOutlet weak var promptDescriptionTextView: UITextView!
+   // @IBOutlet weak var promptDescriptionTextView: UITextView!
     //@IBOutlet weak var promptLocationField: UITextField!
-    @IBOutlet weak var promptLocationLabel: UILabel!
+  //  @IBOutlet weak var promptLocationLabel: UILabel!
     @IBOutlet weak var titleFieldContainer: UIView!
     @IBOutlet weak var promptRoundButtonContainer: UIView!
     
@@ -61,7 +60,7 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
     var watermarkURL:URL!
     var userID: String = ""
     //AWS SETUP
-    let bucketName = "dev-promptchu"
+    let bucketName = "s3.viayou.net"
     var contentUrl: URL!
     var s3Url: URL!
     
@@ -86,8 +85,8 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
          AWSServiceManager.default().defaultServiceConfiguration = configuration
          s3Url = AWSS3.default().configuration.endpoint.url*/
         //REAL DEVICE
-        let accessKey = "AKIAJ6O3XJCBVT4WJEYQ"
-        let secretKey = "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"
+        let accessKey = "AKIA6JJLBT2ZHL52PQLQ"
+        let secretKey = "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"
         let credentialsProvider = AWSStaticCredentialsProvider(accessKey: accessKey, secretKey: secretKey)
         let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast2, credentialsProvider: credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
@@ -112,6 +111,8 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
         dataDictToBePosted["title"] = promptTitleField.text
         dataDictToBePosted["description"] = "description...."
         dataDictToBePosted["user"] = self.userID
+        dataDictToBePosted["isScreenCast"] = true
+
         
         var locationDict:[String:Any] = [:]
         locationDict["address"] = "address...."
@@ -146,9 +147,6 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
         dataDictToBePosted["brand"] = "Brand..."
         
         print("dataDictToBePosted====>\(dataDictToBePosted)")
-        
-        getCurrentLocation()
-        
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillShowNotification,object: nil)
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillHideNotification,object: nil)
         
@@ -175,23 +173,6 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
     
     @IBAction func promptButtonClicked(_ sender: Any) {
         print("promptButtonClicked...")
-        
-//        let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "MergeProductBrandCompanyPopUpViewController") as! MergeProductBrandCompanyPopUpViewController
-//        nextVC.dataDictToBePosted = self.dataDictToBePosted
-//        nextVC.delegate = self
-//        nextVC.modalPresentationStyle = .overCurrentContext
-//        self.present(nextVC, animated: true, completion: nil)
-    }
-    
-    
-    func mergeProductBrandCompanyPopUpVCUploadButtonClicked(dataDictToBePostedModified: [String : Any]) {
-        self.dataDictToBePosted = dataDictToBePostedModified
-        
-        print("uploadButtonClicked :: dataDictToBePosted ====>\(dataDictToBePosted)")
-        
-        //edit started
-        upodateCreatedAndUpdatedTme()
         print("btnActionSaveToGallery :: dataDictToBePosted====>\(dataDictToBePosted)")
         let asset = AVURLAsset(url: urlOfSmallVideo, options: nil)
         audioURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.m4a")
@@ -236,26 +217,80 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
                 }
             }
         }
-        //edit ends
     }
+    
+//
+//    func mergeProductBrandCompanyPopUpVCUploadButtonClicked(dataDictToBePostedModified: [String : Any]) {
+//        self.dataDictToBePosted = dataDictToBePostedModified
+//
+//        print("uploadButtonClicked :: dataDictToBePosted ====>\(dataDictToBePosted)")
+//
+//        //edit started
+//   //     upodateCreatedAndUpdatedTme()
+//        print("btnActionSaveToGallery :: dataDictToBePosted====>\(dataDictToBePosted)")
+//        let asset = AVURLAsset(url: urlOfSmallVideo, options: nil)
+//        audioURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.m4a")
+//        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+//        let myDocumentPath = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("temp.m4a").absoluteString
+//        _ = NSURL(fileURLWithPath: myDocumentPath)
+//        let documentsDirectory2 = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
+//        audioURl = documentsDirectory2.appendingPathComponent("Audio.m4a")
+//        self.deleteFile(filePath: audioURl as NSURL)
+//        asset.writeAudioTrackToURL(audioURl) { (success, error) -> () in
+//            if !success
+//            {
+//                print(error as Any)
+//            }
+//            else
+//            {
+//                self.mergeVideos(firestUrl: self.urlOfSmallVideo, SecondUrl: self.bigVideoURL)
+//                if self.watermarkURL == nil
+//                {
+//                    // processVideo(url:watermarkURL )
+//                    let alertController = UIAlertController(title: "Promptchu", message: "Kindly Wait, Video is under the Process!", preferredStyle:.alert)
+//                    let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
+//                        UIAlertAction in}
+//                    alertController.addAction(action)
+//                    self.present(alertController, animated: true, completion:nil)
+//                }else
+//                {
+//                    let alertController = UIAlertController(title: "Promptchu", message: "Save video in Gallery?", preferredStyle:.alert)
+//                    let action = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) {
+//                        UIAlertAction in
+//                    }
+//                    let action1 = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+//                        UIAlertAction in
+//                        self.HideButton()
+//                        self.timerForCheckPhotoLibraryStatus.invalidate()
+//                        self.timerForCheckPhotoLibraryStatus = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.checkPhotoLibraryPermission), userInfo: nil, repeats: true)
+//                    }
+//                    alertController.addAction(action)
+//                    alertController.addAction(action1)
+//                    self.present(alertController, animated: true, completion:nil)
+//
+//                }
+//            }
+//        }
+//        //edit ends
+//    }
     
     @IBAction func descriptionOverlayButtonClicked(_ sender: Any) {
         print("descriptionOverlayButtonClicked...")
         
         let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "MergeVideoDescriptionPopUpViewController") as! MergeVideoDescriptionPopUpViewController
-        nextVC.descriptionText = promptDescriptionTextView.text ?? ""
+       // nextVC.descriptionText = promptDescriptionTextView.text ?? ""
         nextVC.delegate = self
         nextVC.modalPresentationStyle = .overCurrentContext
         self.present(nextVC, animated: true, completion: nil)
     }
-    
-    func mergeVideoDescriptionPopUpVCDescriptionTextSubmitted(descriptionString: String) {
-        print("mergeVideoDescriptionPopUpVCDescriptionTextSubmitted...")
-        
-        self.promptDescriptionTextView.text = descriptionString
-        dataDictToBePosted["description"]   = descriptionString
-    }
+//
+//    func mergeVideoDescriptionPopUpVCDescriptionTextSubmitted(descriptionString: String) {
+//        print("mergeVideoDescriptionPopUpVCDescriptionTextSubmitted...")
+//
+//     //   self.promptDescriptionTextView.text = descriptionString
+//        dataDictToBePosted["description"]   = descriptionString
+//    }
     
     @IBAction func titleFieldTextChanged(_ sender: UITextField) {
         print("titleFieldTextChanged :: \(sender.text ?? "")")
@@ -271,88 +306,6 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    //MARK:- Get User Location
-    
-    //@IBAction func getCurrentLocation(_ sender: Any) {
-    func getCurrentLocation() {
-        self.locationManager.requestAlwaysAuthorization()
-        
-        // For use in foreground
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        
-        
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
-        var locationDict:[String:Any] = [:]
-        // Add below code to get address for touch coordinates.
-        let geoCoder = CLGeocoder()
-        let location = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
-        geoCoder.reverseGeocodeLocation(location, completionHandler:
-            {
-                placemarks, error -> Void in
-                
-                // Place details
-                guard let placeMark = placemarks?.first else { return }
-                
-                
-                // Location name
-                if let locationName = placeMark.location {
-                    print(locationName)
-                }
-                // Street address
-                if let street = placeMark.thoroughfare {
-                    print(street)
-                    self.streetName = street
-                }
-                // City
-                if let city = placeMark.subAdministrativeArea {
-                    print(city)
-                }
-                // Zip code
-                if let zip = placeMark.isoCountryCode {
-                    print(zip)
-                    self.countryCode = zip
-                }
-                // Country
-                if let country = placeMark.country {
-                    print(country)
-                }
-                self.promptLocationLabel.text = "\(String(describing: self.streetName)), \(String(describing: self.countryCode))"
-                print("Print location label :: \(String(describing: self.promptLocationLabel.text))")
-                locationDict["address"] = self.promptLocationLabel.text ?? "No address"//Use: self.promptLocationLabel.text
-                locationDict["type"] = "Point"
-                
-                var coordinatesArray:[Float] = []
-                coordinatesArray.append(Float(locValue.longitude))  //Use: locValue.longitude
-                coordinatesArray.append(Float(locValue.latitude)) //Use: locValue.latitude
-                
-                locationDict["coordinates"] = coordinatesArray  //Setup coordinatesArray
-                
-                self.dataDictToBePosted["location"] = locationDict  //Setup locationDict to main Dict
-        })
-        // locationManager.stopUpdatingLocation()
-        
-        
-        // self.promptLocationLabel.text = "Mulgrave"
-        
-        
-        
-        
-        
-        locationManager.stopUpdatingLocation()
-    }
-    
-    //location ends
     
     func viewSetUPDesign()
     {
@@ -372,10 +325,10 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
         promptTitleField.clipsToBounds = true
         promptTitleField.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
         promptTitleField.layer.borderWidth = 2
-        promptDescriptionTextView.layer.cornerRadius = 8
-        promptDescriptionTextView.clipsToBounds = true
-        promptDescriptionTextView.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
-        promptDescriptionTextView.layer.borderWidth = 2
+//        promptDescriptionTextView.layer.cornerRadius = 8
+//        promptDescriptionTextView.clipsToBounds = true
+//        promptDescriptionTextView.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
+//        promptDescriptionTextView.layer.borderWidth = 2
         
         titleFieldContainer.layer.cornerRadius = 8
         titleFieldContainer.layer.borderColor = UIColor.white.cgColor
@@ -431,10 +384,10 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
     
     func SaveVideoDiscriptionDetails()
     {
-        dicDiscription.setValue(promptTitleField.text, forKey: "videoTitle")
-        dicDiscription.setValue(promptDescriptionTextView.text, forKey: "videoDescription")
-        // dicDiscription.setValue(txtTagAnyPersone.text, forKey: "videoTag")
-        dicDiscription.setValue(promptLocationLabel.text, forKey: "videotakePlace")
+//        dicDiscription.setValue(promptTitleField.text, forKey: "videoTitle")
+//        dicDiscription.setValue(promptDescriptionTextView.text, forKey: "videoDescription")
+//        // dicDiscription.setValue(txtTagAnyPersone.text, forKey: "videoTag")
+//        dicDiscription.setValue(promptLocationLabel.text, forKey: "videotakePlace")
     }
     
     
@@ -473,6 +426,7 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
                     request.body = videoURL
                     request.acl = .publicReadWrite
                     self.dataDictToBePosted["fileName"] = key
+                    
                     let transferManager = AWSS3TransferManager.default()
                     transferManager.upload(request).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in
                         DispatchQueue.main.async {
@@ -487,34 +441,34 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
                             //Post video to firebase
                             
                             //NEW
-//                            ApiManager().addVideoPostToFirebase(dataDict: self.dataDictToBePosted, completion: { (responseDict, error) in
-//                                if (error == nil) {
-//                                    if (responseDict.success == true) {
-//                                        print(responseDict)
-//                                        print("Success :: updateProfileToAPI ====> \(responseDict.message)")
-//                                    }
-//                                }else {
-//                                    self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
-//                                }
-//                            })
+                            ApiManager().addVideoPostToFirebase(dataDict: self.dataDictToBePosted, completion: { (responseDict, error) in
+                                if (error == nil) {
+                                    if (responseDict.success == true) {
+                                        print(responseDict)
+                                        print("Success :: updateProfileToAPI ====> \(responseDict.message)")
+                                    }
+                                }else {
+                                    self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
+                                }
+                            })
                             
                             
                            // /* OLD
-                             ApiManager().addVideoPostToFirebase(userID: self.userID, title: self.promptTitleField.text ?? "", description: self.promptDescriptionTextView.text ?? "", fileName: key, completion: { (responseDict, error) in
-                             if (error == nil) {
-                             if (responseDict.success == true) {
-                             print(responseDict)
-                             print("Success :: updateProfileToAPI ====> \(responseDict.message)")
-                             }
-                             }else {
-                             self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
-                             }
-                             
-                             })
+//                             ApiManager().addVideoPostToFirebase(userID: self.userID, title: self.promptTitleField.text ?? "", description: "", fileName: key, completion: { (responseDict, error) in
+//                             if (error == nil) {
+//                             if (responseDict.success == true) {
+//                             print(responseDict)
+//                             print("Success :: updateProfileToAPI ====> \(responseDict.message)")
+//                             }
+//                             }else {
+//                             self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
+//                             }
+//
+//                             })
                             // */
                             //post video to firebase ends
                             print("Uploaded \(key)")
-                            let alertController = UIAlertController(title: "Promptchu", message: ("Uploaded \(key)"), preferredStyle:.alert)
+                            let alertController = UIAlertController(title: "Viayou", message: ("Uploaded \(key)"), preferredStyle:.alert)
                             let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.default) {
                                 UIAlertAction in
                                 
@@ -532,6 +486,7 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
                 }
             }
         }
+        print("Done")
     }
     
     @IBAction func btnPressToFristVC(_ sender: Any)
@@ -597,7 +552,7 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
         
         
         let tmpDirURL = FileManager.default.temporaryDirectory
-        let strName : String = "promptchu_\(self.randomStringWithLength(len: 13))"
+        let strName : String = "viayou_\(self.randomStringWithLength(len: 13))"
         let strNameOfVideo : String = strName + ".\(tempURl.pathExtension)"
         let newURL = tmpDirURL.appendingPathComponent(strNameOfVideo)
         
@@ -689,7 +644,7 @@ class MergeVideo: UIViewController, CLLocationManagerDelegate, UITextFieldDelega
                         //                        self!.outputURL = documentsDirectory2.appendingPathComponent("video.mp4")
                         //                        self!.deleteFile(filePath: self!.outputURL as NSURL)
                         let tmpDirURL = FileManager.default.temporaryDirectory
-                        let strName : String = "promptchu_\(self!.randomStringWithLength(len: 13))"
+                        let strName : String = "viayou_\(self!.randomStringWithLength(len: 13))"
                         let strNameOfVideo : String = strName + ".\(self!.outputURL.pathExtension)"
                         let newURL = tmpDirURL.appendingPathComponent(strNameOfVideo)
                         
