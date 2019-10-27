@@ -7,8 +7,14 @@
 //
 
 import UIKit
+@objc protocol AddTwoMenuViewControllerDelegate{
+    @objc optional func AddTwoMenuViewController_screencastButtonClicked()
+    @objc optional func AddTwoMenuViewController_videomergeButtonClicked()
+}
 
 class AddTwoMenuViewController: UIViewController {
+    var delegate:AddTwoMenuViewControllerDelegate?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,5 +32,24 @@ class AddTwoMenuViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func closeButtonClicked(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    @IBAction func dualScreenCastButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true) {
+            self.delegate?.AddTwoMenuViewController_screencastButtonClicked!()
+            
+        }
+    }
+    
+    @IBAction func videoMergeButtonClicked(_ sender: Any) {
 
+        self.dismiss(animated: true) {
+            self.delegate?.AddTwoMenuViewController_videomergeButtonClicked!()
+            
+        }
+
+    }
+    
 }

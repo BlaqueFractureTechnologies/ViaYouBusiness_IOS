@@ -95,6 +95,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Viayou would like to access your camera</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>for use record voice</string>
 	<key>NSContactsUsageDescription</key>
 	<string>App needs to access your contacts</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

@@ -19,7 +19,7 @@ import AWSCognito
 //import DTMessageHUD
 
 
-class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BecomeGrowthHostPopUpViewControllerDelegate, UIScrollViewDelegate {
+class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BecomeGrowthHostPopUpViewControllerDelegate, AddTwoMenuViewControllerDelegate, UIScrollViewDelegate {
     
     
     
@@ -614,9 +614,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
          self.popUpOverlayButton.alpha = 0.5
          */
         
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+//        nextVC.modalPresentationStyle = .overCurrentContext
+//        self.present(nextVC, animated: false, completion: nil)
+
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
         nextVC.modalPresentationStyle = .overCurrentContext
+        nextVC.delegate = self
         self.present(nextVC, animated: false, completion: nil)
         
     }
@@ -916,6 +922,24 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     func becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubscriptionBaseViewController") as! SubscriptionBaseViewController
+        let navVC = UINavigationController(rootViewController: nextVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    func AddTwoMenuViewController_screencastButtonClicked() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+        nextVC.modalPresentationStyle = .overCurrentContext
+        self.present(nextVC, animated: false, completion: nil)
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+//        let navVC = UINavigationController(rootViewController: nextVC)
+//        navVC.isNavigationBarHidden = true
+//        self.navigationController?.pushViewController(nextVC, animated: false)
+    }
+    func AddTwoMenuViewController_videomergeButtonClicked() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
         let navVC = UINavigationController(rootViewController: nextVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.pushViewController(nextVC, animated: true)

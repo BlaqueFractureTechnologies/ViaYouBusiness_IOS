@@ -21,7 +21,8 @@ class AddFeedPopUpViewController: UIViewController {
     }
     
     @IBAction func closeButtonClicked() {
-        self.dismiss(animated: true, completion: nil)
+         self.dismiss(animated: true, completion: nil)
+    //    self.navigationController?.popViewController(animated: false)
     }
     
 }

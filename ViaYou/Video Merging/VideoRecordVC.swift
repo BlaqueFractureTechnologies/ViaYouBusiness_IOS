@@ -155,9 +155,18 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             print("=======video stop=========")
             print(videoRecorded)
             getVideoTime()
-            let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
+           // performSegue(withIdentifier: "goToPreview", sender: nil)
+
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let recordVC = storyBoard.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
             recordVC.videoURL = outputFileURL
+            let navVC = UINavigationController(rootViewController: recordVC)
+            navVC.isNavigationBarHidden = true
             self.navigationController?.pushViewController(recordVC, animated: true)
+            print("hi")
+//            let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
+//            recordVC.videoURL = outputFileURL
+//            self.navigationController?.pushViewController(recordVC, animated: true)
         }
     }
     
@@ -223,7 +232,13 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             timer.invalidate()
             timerforRecord.invalidate()
         }
-    } 
+    }
+    
+    override func didReceiveMemoryWarning() {
+        if (self.isViewLoaded) && (self.view.window == nil) {
+            self.view = nil
+        }
+    }
     
     func hexStringToUIColor (hex:String) -> UIColor
     {
