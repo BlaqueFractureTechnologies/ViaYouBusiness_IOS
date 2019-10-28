@@ -15,15 +15,17 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     @IBOutlet weak var captureVideoView: UIView!
     @IBOutlet weak var viewRecordBtn: UIView!
     @IBOutlet weak var viewNextVcBtn: UIView!
-    
     @IBOutlet weak var btnRecord: UIButton!
-    
     @IBOutlet weak var btnNectVc: UIButton!
-    
     @IBOutlet weak var lblRecordTime: UILabel!
+    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var topLabel: UILabel!
+    @IBOutlet weak var bottomLabel: UILabel!
+    @IBOutlet weak var redLineView: UIView!
+    
+    
     var getVideoURL: URL!
     //shoot Video
-    
     let captureSession = AVCaptureSession()
     let movieOutput = AVCaptureMovieFileOutput()
     var previewLayer: AVCaptureVideoPreviewLayer!
@@ -36,6 +38,11 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        topLabel.text = "Push the red button!"
+        let myMutableString = NSMutableAttributedString(string: topLabel.text ?? "", attributes: nil)
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: NSRange(location:0,length:8))
+        topLabel.attributedText = myMutableString
         if setupSession() {
             setupPreview()
             startSession()
@@ -232,6 +239,10 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             //EDIT2: And I forgot this
             outputURL = tempURL()
             movieOutput.startRecording(to: outputURL, recordingDelegate: self)
+            self.overlayView.isHidden = true
+            self.topLabel.alpha = 0
+            self.bottomLabel.alpha = 0
+            self.redLineView.alpha = 0
             print("=====recording Start=====")
             lableCount()
             self.currentTimeCounter = 0

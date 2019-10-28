@@ -159,16 +159,18 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             getVideoTime()
            // performSegue(withIdentifier: "goToPreview", sender: nil)
 
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let recordVC = storyBoard.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
-            recordVC.videoURL = outputFileURL
-            let navVC = UINavigationController(rootViewController: recordVC)
-            navVC.isNavigationBarHidden = true
-            self.navigationController?.pushViewController(recordVC, animated: true)
-            print("hi")
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//            let recordVC = storyBoard.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
+//            recordVC.videoURL = outputFileURL
+//            let navVC = UINavigationController(rootViewController: recordVC)
+//            navVC.isNavigationBarHidden = true
+//            self.navigationController?.pushViewController(recordVC, animated: true) RecordFantVideoVC
 //            let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
 //            recordVC.videoURL = outputFileURL
 //            self.navigationController?.pushViewController(recordVC, animated: true)
+            let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordFantVideoVC") as! RecordFantVideoVC
+            recordVC.getVideoURL = outputFileURL
+            self.navigationController?.pushViewController(recordVC, animated: true)
         }
     }
     
