@@ -10,21 +10,16 @@ import UIKit
 
 struct InstagramAuthResponseModel {
     // var result:[ListResult] = [:]
-    var result: ListResult = ListResult([:])
+    var username:String = ""
+    var user_id:String = ""
     
-    init(_ dictionary: [String:Any]) {
-        self.result = ListResult(dictionary["data"] as? [String: Any] ?? [:] )
-    }
-}
-
-struct ListResult {
-    var user_id:String           = ""
-    var access_token:String     = ""
-    
-    init(_ dictionary: [String:Any]) {
-        self.user_id         = dictionary["user_id"] as? String ?? ""
-        self.access_token   = dictionary["access_token"] as? String ?? ""
-        print(self.user_id, self.access_token)
-        
+    init(_ dictionary: [String: Any]) {
+        self.username    = dictionary["username"] as? String ?? ""
+        self.user_id    = dictionary["id"] as? String ?? ""
+        if let userIdValue = dictionary["id"] as? Int {
+            self.user_id = "\(userIdValue)"
+        }else if let userIdValue = dictionary["user_id"] as? String {
+            self.user_id = "\(userIdValue)"
+        }
     }
 }

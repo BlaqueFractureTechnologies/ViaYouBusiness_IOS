@@ -142,6 +142,7 @@ struct ApiManager {
              print(validInstagramToken)
             
             let requestURLString = "\(instagramHeader)\(validInstagramToken)"
+            print(requestURLString)
             let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
             
             let session = URLSession.shared
