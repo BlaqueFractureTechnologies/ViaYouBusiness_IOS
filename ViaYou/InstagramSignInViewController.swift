@@ -71,10 +71,10 @@ class InstagramSignInViewController: UIViewController {
         ApiManager().getInstagramAuthResponseFromAPI { (responseDict, error) in
             if (error == nil) {
                 
-                print("Response Dict: \(responseDict.result.user_id)")
-                print("Response Dict: \(responseDict.result.access_token)")
-                let userId = responseDict.result.user_id
-                let userName = responseDict.result.access_token
+                print("Response Dict: \(responseDict.user_id)")
+                print("Response Dict: \(responseDict.username)")
+                let userId = responseDict.user_id
+                let userName = responseDict.username
                 ApiManager().postInstagramUserIdAPI(userId: userId, name: userName, completion: { (response, error) in
                     if (error == nil) {
                         
