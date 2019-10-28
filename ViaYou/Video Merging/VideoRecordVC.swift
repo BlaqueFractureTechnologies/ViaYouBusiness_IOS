@@ -33,11 +33,12 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
     {
         super.viewDidLoad()
         
-        viewFrame.layer.borderWidth = 5
-        viewFrame.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
+//        viewFrame.layer.borderWidth = 5
+//        viewFrame.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
         
         recordBtnOutlet.imageView?.contentMode = .scaleAspectFit
         
+        lblShowTimer.isHidden = true
         lblShowTimer.layer.cornerRadius = self.lblShowTimer.frame.size.height / 2
         lblShowTimer.clipsToBounds = true
     }
@@ -98,6 +99,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
     func startSession()
     {
         if !captureSession.isRunning {
+           
             DispatchQueue.main.async {
                 self.captureSession.startRunning()
             }
@@ -211,6 +213,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             //EDIT2: And I forgot this
             outputURL = tempURL()
             movieOutput.startRecording(to: outputURL, recordingDelegate: self)
+             self.lblShowTimer.isHidden = false
             print("=====recording Start=====")
             timer.invalidate()
             timerforRecord.invalidate()
@@ -229,6 +232,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
         else
         {
             stopRecording()
+            self.lblShowTimer.isHidden = true
             timer.invalidate()
             timerforRecord.invalidate()
         }

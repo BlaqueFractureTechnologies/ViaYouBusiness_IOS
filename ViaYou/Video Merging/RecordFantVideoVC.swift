@@ -250,7 +250,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     
     @objc func continueRecordingAfterBackCamStopped() {
         captureVideoView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
-        previewLayer.frame = CGRect(x: 5, y: 5, width: self.view.frame.size.width, height: self.view.frame.size.height )        
+        previewLayer.frame = CGRect(x: 5, y: 5, width: self.view.frame.size.width, height: self.view.frame.size.height )
     }
     
     @objc func stopRecording() {
