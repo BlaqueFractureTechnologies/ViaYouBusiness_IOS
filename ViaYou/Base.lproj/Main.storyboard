@@ -1671,10 +1671,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="565.5" width="180" height="41.5"/>
+                                <rect key="frame" x="97.5" y="569.5" width="180" height="37.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -3161,7 +3161,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="lTe-U2-tPY">
-                                <rect key="frame" x="0.0" y="85" width="375.00000000000045" height="342"/>
+                                <rect key="frame" x="0.0" y="85" width="375" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m68-ut-oAu">
@@ -7227,7 +7227,7 @@ Cgo
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="60L-Wz-I9q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10425" y="1299"/>
+            <point key="canvasLocation" x="10327" y="240"/>
         </scene>
         <!--Merge Video Description Pop Up View Controller-->
         <scene sceneID="mLZ-pj-MK1">
@@ -7470,22 +7470,22 @@ Cgo
         <scene sceneID="2aJ-pl-4we">
             <objects>
                 <viewController restorationIdentifier="RecordedVideoPreviewVC" storyboardIdentifier="RecordedVideoPreviewVC" id="OVK-e2-xky" customClass="RecordedVideoPreviewVC" customModule="ViaYou" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Vrp-Ra-xSM">
+                    <view key="view" contentMode="scaleToFill" id="Vrp-Ra-xSM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nI7-kd-HXr">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nI7-kd-HXr">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KNp-M8-pL3">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNp-M8-pL3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jpa-5G-PVL">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jpa-5G-PVL">
                                 <rect key="frame" x="0.0" y="550" width="375" height="117"/>
                                 <subviews>
-                                    <view alpha="0.44999998807907104" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EVY-bb-vYE">
+                                    <view alpha="0.44999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVY-bb-vYE">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1w-bg-UAB">
@@ -7500,7 +7500,7 @@ Cgo
                                                     <action selector="btnBackAction:" destination="OVK-e2-xky" eventType="touchUpInside" id="IeG-rJ-LNQ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPu-Cx-1Xq">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPu-Cx-1Xq">
                                                 <rect key="frame" x="308" y="35" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="pRj-fL-FhJ"/>
@@ -7512,7 +7512,7 @@ Cgo
                                                     <action selector="btnPressToNextVc:" destination="OVK-e2-xky" eventType="touchUpInside" id="6hM-t2-C9J"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ba-UP-TCS">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ba-UP-TCS">
                                                 <rect key="frame" x="170" y="36" width="35" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="35" id="ozQ-2G-zTS"/>
@@ -7596,7 +7596,7 @@ Cgo
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJD-Zr-4fP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9769" y="1299"/>
+            <point key="canvasLocation" x="9593" y="240"/>
         </scene>
         <!--Merge Tag Pop Up View Controller-->
         <scene sceneID="jun-BS-LSK">
@@ -7878,10 +7878,10 @@ Cgo
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="po8-lm-Fo4">
                                                 <rect key="frame" x="20" y="281.5" width="335" height="35"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Give your prompt a title." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Goc-Jn-CxP">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Give your video a title." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Goc-Jn-CxP">
                                                         <rect key="frame" x="10" y="9" width="286" height="17"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
@@ -7898,7 +7898,7 @@ Cgo
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" red="1" green="0.78823529410000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="Gtq-Bm-Ce0" firstAttribute="leading" secondItem="Goc-Jn-CxP" secondAttribute="trailing" constant="5" id="3hi-gF-Ybs"/>
                                                     <constraint firstItem="Gtq-Bm-Ce0" firstAttribute="centerY" secondItem="po8-lm-Fo4" secondAttribute="centerY" id="Cdz-RO-Awj"/>
@@ -8019,7 +8019,7 @@ Cgo
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GGP-eY-tPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11903" y="1299"/>
+            <point key="canvasLocation" x="10410" y="1299"/>
         </scene>
         <!--Add Two Menu View Controller-->
         <scene sceneID="MRm-hh-B9p">
@@ -8244,7 +8244,7 @@ Cgo
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdo-nD-tVb">
                                         <rect key="frame" x="287" y="9" width="80" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.97254901959999995" green="0.80000000000000004" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -8295,7 +8295,6 @@ Cgo
                         <outlet property="recordBtnOutlet" destination="zGJ-zW-O6f" id="fr9-cz-x6R"/>
                         <outlet property="videoView" destination="tlW-FD-wrj" id="jlT-nJ-36i"/>
                         <outlet property="viewFrame" destination="HU4-9i-nTa" id="H7Z-OI-tpf"/>
-                        <segue destination="OVK-e2-xky" kind="show" identifier="goToPreview" id="Doj-Os-oWf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIK-7X-Mtb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -8404,7 +8403,7 @@ yourself.</string>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWw-Jv-Bal">
                                         <rect key="frame" x="283" y="256" width="50" height="13"/>
-                                        <color key="backgroundColor" red="0.97254901959999995" green="0.80000000000000004" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="13" id="EVV-St-p3A"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="gF4-nz-AY9"/>
@@ -8464,7 +8463,7 @@ yourself.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6e4-de-qix" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11132" y="1298.5007496251876"/>
+            <point key="canvasLocation" x="9662" y="1299"/>
         </scene>
     </scenes>
     <resources>

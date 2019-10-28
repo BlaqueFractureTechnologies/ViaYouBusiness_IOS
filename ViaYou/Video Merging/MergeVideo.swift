@@ -305,21 +305,21 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     func viewSetUPDesign()
     {
         bigVIdeoView.layer.borderWidth = 5
-        bigVIdeoView.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
+        bigVIdeoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         
         smallVIdeoView.layer.borderWidth = 5
-        smallVIdeoView.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
+        smallVIdeoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         
-        viewFrame.layer.borderWidth = 5
-        viewFrame.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
+//        viewFrame.layer.borderWidth = 5
+//        viewFrame.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
         
         lblTimer.layer.cornerRadius = self.lblTimer.frame.size.height / 2
         lblTimer.clipsToBounds = true
         
         promptTitleField.layer.cornerRadius = self.promptTitleField.frame.size.height / 2
         promptTitleField.clipsToBounds = true
-        promptTitleField.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
-        promptTitleField.layer.borderWidth = 2
+//        promptTitleField.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
+//        promptTitleField.layer.borderWidth = 2
 //        promptDescriptionTextView.layer.cornerRadius = 8
 //        promptDescriptionTextView.clipsToBounds = true
 //        promptDescriptionTextView.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
@@ -495,7 +495,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     @IBAction func btnPressToFristVC(_ sender: Any)
     {
-        self.navigationController?.popViewControllers(viewsToPop: 4)
+        self.navigationController?.popViewControllers(viewsToPop: 2)
       //  self.navigationController?.popToRootViewController(animated: true)
     }
     
