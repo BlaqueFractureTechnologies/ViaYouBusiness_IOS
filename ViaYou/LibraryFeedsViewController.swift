@@ -635,8 +635,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let link = URL(string: "https://viayou.page.link/?invitedby=\(uid)")
         let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: "https://viayou.page.link")
         
-        referralLink!.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.example.ios")
-        referralLink!.iOSParameters?.minimumAppVersion = "1.0.1"
+        referralLink!.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.viayou.ViaYouApp")
+        referralLink!.iOSParameters?.minimumAppVersion = "1.0"
         referralLink!.iOSParameters?.appStoreID = "123456789"
         
         referralLink!.androidParameters = DynamicLinkAndroidParameters(packageName: "com.example.android")
