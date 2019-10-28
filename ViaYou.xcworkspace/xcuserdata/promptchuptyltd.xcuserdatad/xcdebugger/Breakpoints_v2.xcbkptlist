@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/LibraryFeedsViewController.swift"
-            timestampString = "593916654.387675"
+            timestampString = "593927892.275488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "930"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/LibraryFeedsViewController.swift"
-            timestampString = "593916654.388013"
+            timestampString = "593927892.275566"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "923"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/AddTwoMenuViewController.swift"
-            timestampString = "593916654.388232"
+            timestampString = "593927892.275646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "dualScreenCastButtonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,43 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/Video Merging/MergeVideo.swift"
-            timestampString = "593916654.388298"
+            timestampString = "593927892.275811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
-            landmarkName = "uploadFile(with:type:videoURL:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViaYou/Video Merging/MergeVideo.swift"
-            timestampString = "593916654.388357"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
-            landmarkName = "uploadFile(with:type:videoURL:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViaYou/Video Merging/MergeVideo.swift"
-            timestampString = "593916654.388396"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "566"
-            endingLineNumber = "566"
+            startingLineNumber = "571"
+            endingLineNumber = "571"
             landmarkName = "mergeVideos(firestUrl:SecondUrl:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/Video Merging/MergeVideo.swift"
-            timestampString = "593916654.388432"
+            timestampString = "593927892.2759089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "uploadFile(with:type:videoURL:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -137,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ViaYou/Video Merging/MergeVideo.swift"
-            timestampString = "593916654.388463"
+            filePath = "ViaYou/Models/ApiManager.swift"
+            timestampString = "593927892.276013"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "448"
-            endingLineNumber = "448"
-            landmarkName = "uploadFile(with:type:videoURL:)"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "getInstagramAuthResponseFromAPI(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,46 +121,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ViaYou/Video Merging/MergeVideo.swift"
-            timestampString = "593916654.388492"
+            filePath = "ViaYou/Models/ApiManager.swift"
+            timestampString = "593927892.276114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
-            landmarkName = "uploadFile(with:type:videoURL:)"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "getInstagramAuthResponseFromAPI(completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.AWSTask&lt;Swift.AnyObject&gt;) -&gt; Swift.Optional&lt;Any&gt; in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in ViaYou.MergeVideo.uploadFile(with: Swift.String, type: Swift.String, videoURL: Foundation.URL) -&gt; ()"
-                  moduleName = "ViaYou"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/Video%20Merging/MergeVideo.swift"
-                  timestampString = "593912903.312443"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "444"
-                  endingLineNumber = "444"
-                  offsetFromSymbolStart = "1168">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (ViaYou.SubscriptionResponse, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (__C.AWSTask&lt;Swift.AnyObject&gt;) -&gt; Swift.Optional&lt;Any&gt; in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in ViaYou.MergeVideo.uploadFile(with: Swift.String, type: Swift.String, videoURL: Foundation.URL) -&gt; ()"
-                  moduleName = "ViaYou"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/Video%20Merging/MergeVideo.swift"
-                  timestampString = "593912903.31354"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "445"
-                  endingLineNumber = "445"
-                  offsetFromSymbolStart = "196">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -201,13 +137,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ViaYou/Video Merging/MergeVideo.swift"
-            timestampString = "593916654.38854"
+            filePath = "ViaYou/Models/ApiManager.swift"
+            timestampString = "593927892.276348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
-            landmarkName = "uploadFile(with:type:videoURL:)"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "getInstagramTokenAPI(app_id:app_secret:grant_type:redirect_uri:code:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/Models/ApiManager.swift"
+            timestampString = "593927892.2764241"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "getInstagramTokenAPI(app_id:app_secret:grant_type:redirect_uri:code:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -23,7 +23,7 @@ class InstagramSignInViewController: UIViewController {
         super.viewDidLoad()
         self.activityIndicator.isHidden = true
         // Do any additional setup after loading the view.
-        let authURL = String(format: "%@?client_id=%@&redirect_uri=%@&response_type=token&scope=%@&DEBUG=True", arguments: [API.INSTAGRAM_AUTHURL,API.INSTAGRAM_CLIENT_ID,API.INSTAGRAM_REDIRECT_URI, API.INSTAGRAM_SCOPE])
+        let authURL = String(format: "%@?app_id=%@&redirect_uri=%@&response_type=code&scope=%@&DEBUG=True", arguments: [API.INSTAGRAM_AUTHURL,API.APP_ID,API.INSTAGRAM_REDIRECT_URI, API.INSTAGRAM_SCOPE])
         let urlRequest = URLRequest.init(url: URL.init(string: authURL)!)
         webView.loadRequest(urlRequest)
     }
@@ -31,14 +31,29 @@ class InstagramSignInViewController: UIViewController {
     func checkRequestForCallbackURL(request: URLRequest) -> Bool {
         let requestURLString = (request.url?.absoluteString)! as String
         if requestURLString.hasPrefix(API.INSTAGRAM_REDIRECT_URI) {
-            let range: Range<String.Index> = requestURLString.range(of: "#access_token=")!
+            let range: Range<String.Index> = requestURLString.range(of: "?code=")!
             handleAuth(authToken: requestURLString.substring(from: range.upperBound))
             //instagram edit starts
-            fetchAuthResponseFromAPI()
+            fetchInstagramAuthToken()
+            //fetchAuthResponseFromAPI()
             //instagram edit ends
             return false;
         }
         return true
+    }
+    
+    func fetchInstagramAuthToken() {
+        let instagramAuthenticationCode = UserDefaults.standard.value(forKey: "InstagramAuthenticationCode")
+        if let authenticationCode = instagramAuthenticationCode {
+            let codeForToken = authenticationCode as! String
+            let newStr = codeForToken.replacingOccurrences(of: "#_", with: "")
+            ApiManager().getInstagramTokenAPI(app_id: API.APP_ID , app_secret: API.INSTAGRAM_APPSERCRET, grant_type: "authorization_code", redirect_uri: API.INSTAGRAM_REDIRECT_URI, code: newStr) { (response, error) in
+            if error == nil {
+                print(response.access_token)
+                print(response.user_id)
+            }
+        }
+        }
     }
     
     func fetchAuthResponseFromAPI() {
@@ -48,10 +63,11 @@ class InstagramSignInViewController: UIViewController {
         }
         ApiManager().getInstagramAuthResponseFromAPI { (responseDict, error) in
             if (error == nil) {
-                print("Response Dict: \(responseDict.result.id)")
-                print("Response Dict: \(responseDict.result.userName)")
-                let userId = responseDict.result.id
-                let userName = responseDict.result.userName
+                
+                print("Response Dict: \(responseDict.result.user_id)")
+                print("Response Dict: \(responseDict.result.access_token)")
+                let userId = responseDict.result.user_id
+                let userName = responseDict.result.access_token
                 ApiManager().postInstagramUserIdAPI(userId: userId, name: userName, completion: { (response, error) in
                     if (error == nil) {
                         
@@ -113,9 +129,9 @@ class InstagramSignInViewController: UIViewController {
     }
     
     func handleAuth(authToken: String) {
-        print("Instagram authentication token ==", authToken)
-        let instagramAccessToken = authToken
-        UserDefaults.standard.set(instagramAccessToken, forKey: "InstagramAccessToken")
+        print("Instagram authentication code ==", authToken)
+        let instagramAccessCode = authToken
+        UserDefaults.standard.set(instagramAccessCode, forKey: "InstagramAuthenticationCode")
         
         
         

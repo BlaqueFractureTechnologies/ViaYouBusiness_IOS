@@ -240,6 +240,11 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
         }
     }
     
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     func hexStringToUIColor (hex:String) -> UIColor
     {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()

@@ -34,18 +34,13 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     @IBOutlet weak var smallVIdeoView: UIView!
     @IBOutlet weak var viewFrame: UIView!
     @IBOutlet weak var lblTimer: UILabel!
-    //@IBOutlet var viewBtnNext: UIView!
     @IBOutlet weak var btnRedo: UIButton!
     @IBOutlet weak var btnSaveOutlet: UIButton!
     
     @IBOutlet weak var promptTitleField: UITextField!
-    //@IBOutlet weak var promptDescriptionField: UITextField!
-   // @IBOutlet weak var promptDescriptionTextView: UITextView!
-    //@IBOutlet weak var promptLocationField: UITextField!
-  //  @IBOutlet weak var promptLocationLabel: UILabel!
     @IBOutlet weak var titleFieldContainer: UIView!
     @IBOutlet weak var promptRoundButtonContainer: UIView!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var timerForCheckPhotoLibraryStatus = Timer()
     
     var bigVideoURL:URL!
@@ -70,10 +65,6 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     var dataDictToBePosted:[String:Any] = [:]
     
-    
-  //  var shadowsDataArray:[UserShadowsArrayObject] = []  //k*
-    
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -95,6 +86,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     override func viewWillAppear(_ animated: Bool)
     {
+        activityIndicator.isHidden = true
         PlaybigViewVideo()
         PlaysmallViewVideo()
         self.hideKeyboardWhenTappedAround()
@@ -174,6 +166,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     @IBAction func promptButtonClicked(_ sender: Any) {
         print("promptButtonClicked...")
         print("btnActionSaveToGallery :: dataDictToBePosted====>\(dataDictToBePosted)")
+        self.activityIndicator.isHidden = false
+        self.view.isUserInteractionEnabled = false
+        self.activityIndicator.startAnimating()
         let asset = AVURLAsset(url: urlOfSmallVideo, options: nil)
         audioURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.m4a")
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -193,14 +188,14 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                 if self.watermarkURL == nil
                 {
                     // processVideo(url:watermarkURL )
-                    let alertController = UIAlertController(title: "Promptchu", message: "Kindly Wait, Video is under the Process!", preferredStyle:.alert)
+                    let alertController = UIAlertController(title: "Viayou", message: "Kindly Wait, Video is under the Process!", preferredStyle:.alert)
                     let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
                         UIAlertAction in}
                     alertController.addAction(action)
-                    self.present(alertController, animated: true, completion:nil)
+                   // self.present(alertController, animated: true, completion:nil)
                 }else
                 {
-                    let alertController = UIAlertController(title: "Promptchu", message: "Save video in Gallery?", preferredStyle:.alert)
+                    let alertController = UIAlertController(title: "Viayou", message: "Save video in Gallery?", preferredStyle:.alert)
                     let action = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) {
                         UIAlertAction in
                     }
@@ -446,9 +441,28 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                                     if (responseDict.success == true) {
                                         print(responseDict)
                                         print("Success :: updateProfileToAPI ====> \(responseDict.message)")
+                                        print("Uploaded \(key)")
+                                        let alertController = UIAlertController(title: "Viayou", message: ("Uploaded Video"), preferredStyle:.alert)
+                                        let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.default) {
+                                            UIAlertAction in
+                                            
+                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                            self.navigationController?.pushViewController(homeVC, animated: true)
+                                        }
+                                        alertController.addAction(action)
+                                        self.activityIndicator.stopAnimating()
+                                        self.activityIndicator.isHidden = true
+                                        self.view.isUserInteractionEnabled = true
+
+                                        self.present(alertController, animated: true, completion:nil)
                                     }
                                 }else {
                                     self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
+                                    self.activityIndicator.stopAnimating()
+                                    self.activityIndicator.isHidden = true
+                                    self.view.isUserInteractionEnabled = true
+
                                 }
                             })
                             
@@ -467,17 +481,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
 //                             })
                             // */
                             //post video to firebase ends
-                            print("Uploaded \(key)")
-                            let alertController = UIAlertController(title: "Viayou", message: ("Uploaded \(key)"), preferredStyle:.alert)
-                            let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.default) {
-                                UIAlertAction in
-                                
-                                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                self.navigationController?.pushViewController(homeVC, animated: true)
-                            }
-                            alertController.addAction(action)
-                            self.present(alertController, animated: true, completion:nil)
+
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
                             self.contentUrl = contentUrl
                         }
@@ -491,14 +495,15 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     @IBAction func btnPressToFristVC(_ sender: Any)
     {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popViewControllers(viewsToPop: 4)
+      //  self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func btnActionSaveToGallery(_ sender: Any)
     {
         DispatchQueue.main.async {
-            //            self.activityIndicator.stopAnimating()
-            //            self.activityIndicator.isHidden = true
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
             self.navigationController?.pushViewController(homeVC, animated: true)

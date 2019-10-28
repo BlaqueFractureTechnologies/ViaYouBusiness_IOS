@@ -18,13 +18,13 @@ struct InstagramAuthResponseModel {
 }
 
 struct ListResult {
-    var id:String           = ""
-    var userName:String     = ""
+    var user_id:String           = ""
+    var access_token:String     = ""
     
     init(_ dictionary: [String:Any]) {
-        self.id         = dictionary["id"] as? String ?? ""
-        self.userName   = dictionary["username"] as? String ?? ""
-        print(self.id, self.userName)
+        self.user_id         = dictionary["user_id"] as? String ?? ""
+        self.access_token   = dictionary["access_token"] as? String ?? ""
+        print(self.user_id, self.access_token)
         
     }
 }

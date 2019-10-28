@@ -16,8 +16,12 @@ struct ApiManager {
     let COMMENT_HEADER  = "http://api.viayou.net/comment/"
     let mainHeader = "http://api.viayou.net/"
     
+    let instagramMainHeader = "https://api.instagram.com/oauth/access_token"
+    
     let instagramHeader = "https://api.instagram.com/v1/users/self/?access_token="
     let instagramAuthenticationToken = UserDefaults.standard.value(forKey: "InstagramAccessToken")
+    let instagramAuthenticationCode = UserDefaults.standard.value(forKey: "InstagramAuthenticationCode")
+    
     let REGISTRATION    = "register"
     let instagramUserIdInputApiHeader = "instaAccess"
     let fetchLibraryDataHeader = "listScreenCast"
@@ -80,12 +84,61 @@ struct ApiManager {
         dataTask.resume()
     }
     //MARK:- Instagram Authentication API
+    
+    func getInstagramTokenAPI(app_id:String,
+                             app_secret:String,
+                             grant_type:String,
+                             redirect_uri:String,
+                             code:String,
+                             completion: @escaping (InstagramAccessResponse, _ error:Error?) -> ()) {
+            let parameters: [String: Any] = [
+                "app_id":app_id,
+                "app_secret":app_secret,
+                "grant_type":grant_type,
+                "redirect_uri":redirect_uri,
+                "code":code
+            ]
+            
+            let requestURLString = "\(instagramMainHeader)"
+            let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+            request.httpMethod = "POST"
+            
+            let postData = NSMutableData()
+            for key in parameters.keys {
+                let keyString = "&\(key)"
+                let valueString = parameters[key] as? String ?? ""
+                postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
+            }
+            request.httpBody = postData as Data
+            
+            let session = URLSession.shared
+            let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+                if (error != nil) {
+                    print(error ?? "")
+                    completion(InstagramAccessResponse([:]),error)
+                } else {
+                    do {
+                        if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                            completion(InstagramAccessResponse(jsonDict),nil)
+                        }else {
+                            completion(InstagramAccessResponse([:]),nil)
+                        }
+                    } catch let parsingError {
+                        print("parsingError=\(parsingError)")
+                        completion(InstagramAccessResponse([:]),parsingError)
+                    }
+                }
+            })
+            dataTask.resume()
+        
+
+    }
     //instagram api starts
     func getInstagramAuthResponseFromAPI(completion: @escaping (InstagramAuthResponseModel, _ error:Error?) -> ()) {
         
         if let instagramToken = instagramAuthenticationToken {
             let validInstagramToken = instagramToken
-            // print(validInstagramToken)
+             print(validInstagramToken)
             
             let requestURLString = "\(instagramHeader)\(validInstagramToken)"
             let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)

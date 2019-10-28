@@ -15,6 +15,7 @@ import UIKit
 class AddTwoMenuViewController: UIViewController {
     @IBOutlet weak var dualScreencastButton: UIButton!
     @IBOutlet weak var videoMergeButton: UIButton!
+    
     var delegate:AddTwoMenuViewControllerDelegate?
 
 
