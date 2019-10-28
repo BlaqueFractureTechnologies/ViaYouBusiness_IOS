@@ -13,11 +13,17 @@ import UIKit
 }
 
 class AddTwoMenuViewController: UIViewController {
+    @IBOutlet weak var dualScreencastButton: UIButton!
+    @IBOutlet weak var videoMergeButton: UIButton!
     var delegate:AddTwoMenuViewControllerDelegate?
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        dualScreencastButton.layer.cornerRadius = self.dualScreencastButton.frame.size.height / 2
+        dualScreencastButton.clipsToBounds = true
+        videoMergeButton.layer.cornerRadius = self.videoMergeButton.frame.size.height / 2
+        videoMergeButton.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }

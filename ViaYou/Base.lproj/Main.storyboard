@@ -8172,12 +8172,13 @@ Cgo
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wBb-TU-wic">
                                         <rect key="frame" x="29" y="91" width="284" height="44"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dual Screencast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wi0-ug-qLa">
-                                                <rect key="frame" x="0.0" y="12" width="284" height="20"/>
-                                                <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
-                                                <color key="textColor" red="0.2156862745" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoF-GZ-FjN">
+                                                <rect key="frame" x="0.0" y="0.0" width="284" height="44"/>
+                                                <color key="backgroundColor" red="0.90244883298873901" green="0.30506700277328491" blue="0.40783008933067322" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <connections>
+                                                    <action selector="dualScreenCastButtonClicked:" destination="G7p-Jh-PGt" eventType="touchUpInside" id="sQ6-Cy-Eza"/>
+                                                </connections>
+                                            </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screencast_icon" translatesAutoresizingMaskIntoConstraints="NO" id="nfE-SE-D9L">
                                                 <rect key="frame" x="15" y="8" width="28" height="28"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -8186,12 +8187,12 @@ Cgo
                                                     <constraint firstAttribute="width" constant="28" id="hl0-Qf-d25"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoF-GZ-FjN">
-                                                <rect key="frame" x="0.0" y="0.0" width="284" height="44"/>
-                                                <connections>
-                                                    <action selector="dualScreenCastButtonClicked:" destination="G7p-Jh-PGt" eventType="touchUpInside" id="sQ6-Cy-Eza"/>
-                                                </connections>
-                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dual Screencast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wi0-ug-qLa">
+                                                <rect key="frame" x="0.0" y="12" width="284" height="20"/>
+                                                <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
@@ -8236,26 +8237,27 @@ Cgo
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOV-8g-gMY">
                                         <rect key="frame" x="29" y="217" width="284" height="44"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Merge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMA-bh-Ktk">
-                                                <rect key="frame" x="0.0" y="12" width="284" height="20"/>
-                                                <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
-                                                <color key="textColor" red="0.2156862745" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_merge_icon" translatesAutoresizingMaskIntoConstraints="NO" id="CvL-4F-kae">
-                                                <rect key="frame" x="15" y="8" width="28" height="28"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="28" id="dvT-j2-0IT"/>
-                                                    <constraint firstAttribute="width" constant="28" id="qcn-wd-Ice"/>
-                                                </constraints>
-                                            </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPB-vn-0TW">
                                                 <rect key="frame" x="0.0" y="0.0" width="284" height="44"/>
+                                                <color key="backgroundColor" red="0.22707459330558777" green="0.30051237344741821" blue="0.3960912823677063" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <connections>
                                                     <action selector="videoMergeButtonClicked:" destination="G7p-Jh-PGt" eventType="touchUpInside" id="5G7-yr-TTt"/>
                                                 </connections>
                                             </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_merge_icon" translatesAutoresizingMaskIntoConstraints="NO" id="CvL-4F-kae">
+                                                <rect key="frame" x="15" y="13" width="28" height="18"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="dvT-j2-0IT"/>
+                                                    <constraint firstAttribute="width" constant="28" id="qcn-wd-Ice"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Merge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMA-bh-Ktk">
+                                                <rect key="frame" x="0.0" y="12" width="284" height="20"/>
+                                                <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
@@ -8315,6 +8317,10 @@ Cgo
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="num-pa-era"/>
                     </view>
+                    <connections>
+                        <outlet property="dualScreencastButton" destination="ZoF-GZ-FjN" id="knd-Rl-s7w"/>
+                        <outlet property="videoMergeButton" destination="XPB-vn-0TW" id="H6T-Yq-vnb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Jf-y0-nJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

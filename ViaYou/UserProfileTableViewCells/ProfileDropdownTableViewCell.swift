@@ -10,18 +10,12 @@ class ProfileDropdownTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    
-    
-    
-    
     override func awakeFromNib() {
         
         super.awakeFromNib()
         
     }
-    
-    
-    
+
     func configureCell(dataArray:[String], index:Int) {
         
         self.titleLabel.text = "\(dataArray[index])"
