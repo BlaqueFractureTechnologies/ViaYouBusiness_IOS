@@ -18,7 +18,8 @@ struct ApiManager {
     
     let instagramMainHeader = "https://api.instagram.com/oauth/access_token"
     
-    let instagramHeader = "https://api.instagram.com/v1/users/self/?access_token="
+  //  let instagramHeader = "https://api.instagram.com/v1/users/self/?access_token="
+    let instagramHeader = "https://graph.instagram.com/me?fields=id,username&access_token="
     let instagramAuthenticationToken = UserDefaults.standard.value(forKey: "InstagramAccessToken")
     let instagramAuthenticationCode = UserDefaults.standard.value(forKey: "InstagramAuthenticationCode")
     

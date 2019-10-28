@@ -51,7 +51,14 @@ class InstagramSignInViewController: UIViewController {
             if error == nil {
                 print(response.access_token)
                 print(response.user_id)
+                let instagramAuthenticationToken = response.access_token
+                UserDefaults.standard.set(instagramAuthenticationToken, forKey: "InstagramAccessToken")
+                self.fetchAuthResponseFromAPI()
             }
+            else {
+                print(error.debugDescription)
+                self.displayAlert(msg: "Error while logging in! Please try again later!")
+                }
         }
         }
     }
