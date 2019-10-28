@@ -235,7 +235,8 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             print("=====recording Start=====")
             lableCount()
             self.currentTimeCounter = 0
-            timer = Timer.scheduledTimer(timeInterval: TimeInterval(videoTime), target: self, selector: #selector(stopRecording), userInfo: nil, repeats: false)
+          //  timer = Timer.scheduledTimer(timeInterval: TimeInterval(videoTime), target: self, selector: #selector(stopRecording), userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(videoTime), target: self, selector: #selector(continueRecordingAfterBackCamStopped), userInfo: nil, repeats: false)
         }
         else {
             stopRecording()
@@ -246,6 +247,11 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     //    {
     //        stopRecording()
     //    }
+    
+    @objc func continueRecordingAfterBackCamStopped() {
+        captureVideoView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
+        previewLayer.frame = CGRect(x: 5, y: 5, width: self.view.frame.size.width, height: self.view.frame.size.height )        
+    }
     
     @objc func stopRecording() {
         if movieOutput.isRecording == true {
