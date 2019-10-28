@@ -88,33 +88,44 @@ class InstagramSignInViewController: UIViewController {
                                 print("authorised successfully!")
                                 self.generatedUserToken = response.accessToken
                                 UserDefaults.standard.set(self.generatedUserToken, forKey: "GeneratedUserToken")
-                                let instagramAuthenticationToken = UserDefaults.standard.value(forKey: "InstagramAccessToken")
-                                ApiManager().getInstaUserDetails(access_token: instagramAuthenticationToken as! String) { (responseDict, error) in
-                                    if (error == nil) {
-                                        print(responseDict.data)
-                                        print("getInstaUserDetails :: profile_picture ====> \(responseDict.data.profile_picture)")
-                                        JMImageCache.shared()?.image(for: URL(string: responseDict.data.profile_picture), completionBlock: { (image) in
-                                            if let imageRetrieved = image {
-                                                self.passingProfileImage = imageRetrieved
-                                            }
-                                            UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
-                                            DispatchQueue.main.async {
-                                                self.activityIndicator.stopAnimating()
-                                                self.activityIndicator.isHidden = true
-                                                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                                let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                                homeVC.passedProfileImage = self.passingProfileImage
-                                                let navVC = UINavigationController(rootViewController: homeVC)
-                                                navVC.isNavigationBarHidden = true
-                                                self.navigationController?.present(navVC, animated: true, completion: nil)
-                                            }
-                                            
-                                        }, failureBlock: { (request, response, error) in
-                                        })
-                                        
-                                    
-                                    }
+                              //  let instagramAuthenticationToken = UserDefaults.standard.value(forKey: "InstagramAccessToken")
+                                UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
+                                DispatchQueue.main.async {
+                                    self.activityIndicator.stopAnimating()
+                                    self.activityIndicator.isHidden = true
+                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                    homeVC.passedProfileImage = self.passingProfileImage
+                                    let navVC = UINavigationController(rootViewController: homeVC)
+                                    navVC.isNavigationBarHidden = true
+                                    self.navigationController?.present(navVC, animated: true, completion: nil)
                                 }
+//                                ApiManager().getInstaUserDetails(access_token: instagramAuthenticationToken as! String) { (responseDict, error) in
+//                                    if (error == nil) {
+//                                        print(responseDict.data)
+//                                        print("getInstaUserDetails :: profile_picture ====> \(responseDict.data.profile_picture)")
+//                                        JMImageCache.shared()?.image(for: URL(string: responseDict.data.profile_picture), completionBlock: { (image) in
+//                                            if let imageRetrieved = image {
+//                                                self.passingProfileImage = imageRetrieved
+//                                            }
+//                                            UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
+//                                            DispatchQueue.main.async {
+//                                                self.activityIndicator.stopAnimating()
+//                                                self.activityIndicator.isHidden = true
+//                                                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//                                                let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+//                                                homeVC.passedProfileImage = self.passingProfileImage
+//                                                let navVC = UINavigationController(rootViewController: homeVC)
+//                                                navVC.isNavigationBarHidden = true
+//                                                self.navigationController?.present(navVC, animated: true, completion: nil)
+//                                            }
+//
+//                                        }, failureBlock: { (request, response, error) in
+//                                        })
+//
+//
+//                                    }
+//                                }
                                 
                             }
                             else{
