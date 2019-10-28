@@ -267,10 +267,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             print("remainingSpace = \(remainingSpace)")
             
             let remainingSpaceInMB = Float(remainingSpace) / 1000.0
+            let roundedValue = remainingSpaceInMB.rounded(.toNearestOrAwayFromZero)
             
             DispatchQueue.main.async {
                 
-                self.storageIndicatorLabel.text = "\(remainingSpaceInMB) GB Free"
+                self.storageIndicatorLabel.text = "\(roundedValue) GB Free"
             }
         }
         else
@@ -1114,7 +1115,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                             DispatchQueue.main.async {
                                 self.activityIndicator.isHidden = true
                                 self.activityIndicator.stopAnimating()
-                                self.present(alertController, animated: true, completion:nil)
+                               // self.present(alertController, animated: true, completion:nil)
                                 
                             }
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
