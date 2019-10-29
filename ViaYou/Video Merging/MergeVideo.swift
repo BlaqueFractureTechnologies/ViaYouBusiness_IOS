@@ -41,6 +41,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     @IBOutlet weak var titleFieldContainer: UIView!
     @IBOutlet weak var promptRoundButtonContainer: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var videoTimerLabel: UILabel!
     var timerForCheckPhotoLibraryStatus = Timer()
     
     var bigVideoURL:URL!
@@ -80,6 +81,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         
         let formattedString = formatter.string(from: TimeInterval(interval))!
         print(formattedString)
+        self.videoTimerLabel.text = formattedString
         //time calc ends
         self.viewSetUPDesign()
         //AWS SETUP FOR UPLOAD VIDEO ON AWS SERVER
@@ -107,8 +109,8 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         PlaysmallViewVideo()
         self.hideKeyboardWhenTappedAround()
         
-        btnRedo.isUserInteractionEnabled = true
-        btnSaveOutlet.isUserInteractionEnabled = true
+        //btnRedo.isUserInteractionEnabled = true
+       // btnSaveOutlet.isUserInteractionEnabled = true
         print("Video time = \(videoTime)")
         videoTime = UserDefaults.standard.value(forKey: "videotime") as! Int
         self.currentTimeCounter = 1
@@ -562,8 +564,8 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     func HideButton()
     {
-        btnRedo.isUserInteractionEnabled = false
-        btnSaveOutlet.isUserInteractionEnabled = false
+      //  btnRedo.isUserInteractionEnabled = false
+       // btnSaveOutlet.isUserInteractionEnabled = false
     }
     
     func mergeVideos(firestUrl : URL , SecondUrl : URL )
@@ -580,8 +582,8 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         
         print("=============SAVE===========================")
         DispatchQueue.main.async {
-            self.btnRedo.isUserInteractionEnabled = true
-            self.btnSaveOutlet.isUserInteractionEnabled = true
+           // self.btnRedo.isUserInteractionEnabled = true
+           // self.btnSaveOutlet.isUserInteractionEnabled = true
             
             do {
                 try FileManager.default.copyItem(at: tempURl, to: newURL)
@@ -677,9 +679,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                         print("=============SAVE===========================")
                         DispatchQueue.main.async {
                             //DTMessageHUD.dismiss()
-                            self!.btnRedo.isUserInteractionEnabled = true
-                            self!.btnSaveOutlet.isUserInteractionEnabled = true
-                            
+                            //self!.btnRedo.isUserInteractionEnabled = true
+                            //self!.btnSaveOutlet.isUserInteractionEnabled = true
+                           
                             do {
                                 try FileManager.default.copyItem(at: self!.outputURL, to: newURL)
                                 self!.uploadFile(with: strName, type: newURL.pathExtension, videoURL: newURL)
@@ -728,7 +730,61 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     }
     
     
+    @IBAction func reRecordButtonClicked(_ sender: Any) {
+        self.navigationController?.popViewControllers(viewsToPop: 2)
+    }
     
+    @IBAction func uploadVideoButtonClicked(_ sender: Any) {
+        
+        print("promptButtonClicked...")
+        print("btnActionSaveToGallery :: dataDictToBePosted====>\(dataDictToBePosted)")
+        self.activityIndicator.isHidden = false
+        self.view.isUserInteractionEnabled = false
+        self.activityIndicator.startAnimating()
+        let asset = AVURLAsset(url: urlOfSmallVideo, options: nil)
+        audioURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.m4a")
+        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let myDocumentPath = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("temp.m4a").absoluteString
+        _ = NSURL(fileURLWithPath: myDocumentPath)
+        let documentsDirectory2 = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
+        audioURl = documentsDirectory2.appendingPathComponent("Audio.m4a")
+        self.deleteFile(filePath: audioURl as NSURL)
+        asset.writeAudioTrackToURL(audioURl) { (success, error) -> () in
+            if !success
+            {
+                print(error as Any)
+            }
+            else
+            {
+                self.mergeVideos(firestUrl: self.urlOfSmallVideo, SecondUrl: self.bigVideoURL)
+                if self.watermarkURL == nil
+                {
+                    // processVideo(url:watermarkURL )
+                    let alertController = UIAlertController(title: "Viayou", message: "Kindly Wait, Video is under the Process!", preferredStyle:.alert)
+                    let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
+                        UIAlertAction in}
+                    alertController.addAction(action)
+                    // self.present(alertController, animated: true, completion:nil)
+                }else
+                {
+                    let alertController = UIAlertController(title: "Viayou", message: "Save video in Gallery?", preferredStyle:.alert)
+                    let action = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) {
+                        UIAlertAction in
+                    }
+                    let action1 = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+                        UIAlertAction in
+                        self.HideButton()
+                        self.timerForCheckPhotoLibraryStatus.invalidate()
+                        self.timerForCheckPhotoLibraryStatus = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.checkPhotoLibraryPermission), userInfo: nil, repeats: true)
+                    }
+                    alertController.addAction(action)
+                    alertController.addAction(action1)
+                    self.present(alertController, animated: true, completion:nil)
+                    
+                }
+            }
+        }
+    }
     
     
     //---------- //k*
