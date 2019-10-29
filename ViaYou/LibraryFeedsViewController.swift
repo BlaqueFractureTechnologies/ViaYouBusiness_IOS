@@ -139,7 +139,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 }
                 
                 self.profilePicOnNoFeedPopUp.image = image
-                self.profilePicOnNoFeedPopUp.layer.cornerRadius = self.profilePicOnNoFeedPopUp.frame.size.width/2.0
+                self.profilePicOnNoFeedPopUp.layer.cornerRadius = self.profilePicOnNoFeedPopUp.frame.size.width/3.0
                 self.profilePicOnNoFeedPopUp.clipsToBounds = true
                 if (__CGSizeEqualToSize(self.profilePicOnNoFeedPopUp.image?.size ?? CGSize.zero, CGSize.zero)) {
                     print("EMPTY IMAGE")

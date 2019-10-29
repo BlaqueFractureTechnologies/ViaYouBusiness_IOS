@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class FeatureResuestPage_1ViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var textViewBg: UIView!
     @IBOutlet weak var inviteButton: UIButton!
+    @IBOutlet weak var profilePic: UIImageView!
+    
+    let profileImageUrlHeader:String = "http://s3.viayou.net/"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +28,22 @@ class FeatureResuestPage_1ViewController: UIViewController {
         textView.addDoneButtonToKeyboard(myAction:  #selector(textView.resignFirstResponder))
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let profileImage = "profile.jpg"
+        if let selfUserId = Auth.auth().currentUser?.uid {
+            let profileImageOnlineUrl = "\(profileImageUrlHeader)users/\(selfUserId)/\(profileImage)"
+            print("profileImageOnlineUrl====>\(profileImageOnlineUrl)")
+            
+            JMImageCache.shared()?.image(for: URL(string: profileImageOnlineUrl), completionBlock: { (image) in
+                self.profilePic.image = image
+                
+                if (__CGSizeEqualToSize(self.profilePic.image?.size ?? CGSize.zero, CGSize.zero)) {
+                    print("EMPTY IMAGE")
+                    self.profilePic.image = UIImage(named: "defaultProfilePic")
+                }
+            }, failureBlock: { (request, response, error) in
+            })
+        }
         
     }
     

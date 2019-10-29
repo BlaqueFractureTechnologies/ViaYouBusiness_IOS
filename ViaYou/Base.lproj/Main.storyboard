@@ -1409,6 +1409,7 @@
                     </view>
                     <connections>
                         <outlet property="inviteButton" destination="v63-bO-cxf" id="dyM-DU-Y0o"/>
+                        <outlet property="profilePic" destination="blN-r5-GL6" id="Hm8-ou-DiZ"/>
                         <outlet property="textView" destination="wiS-6b-kiu" id="Bsu-K8-pAB"/>
                         <outlet property="textViewBg" destination="NHi-JO-xGc" id="PXg-7G-Htc"/>
                     </connections>
@@ -1443,7 +1444,7 @@
                                             <action selector="backButtonClicked" destination="fuQ-cd-WZ0" eventType="touchUpInside" id="KfW-l1-V6K"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcw-Q9-6r8">
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcw-Q9-6r8">
                                         <rect key="frame" x="320" y="10" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="2xS-i7-1dR"/>
@@ -1656,6 +1657,7 @@
                     </view>
                     <connections>
                         <outlet property="homeButton" destination="mvX-m9-ulZ" id="9AS-lC-aaa"/>
+                        <outlet property="profilePic" destination="lwV-aV-znA" id="5Ml-m8-54b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O3D-Uf-6LH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4465,14 +4467,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Paid plans start with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxa-hc-BsM">
-                                        <rect key="frame" x="75.5" y="10" width="169" height="19"/>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="15"/>
+                                        <rect key="frame" x="69" y="10" width="182" height="19"/>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
                                         <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7-day free trial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uz5-A5-po0">
-                                        <rect key="frame" x="107.5" y="29" width="105" height="19"/>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="15"/>
+                                        <rect key="frame" x="103.5" y="29" width="113.5" height="19"/>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
                                         <color key="textColor" red="0.34509803919999998" green="0.63529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -4518,7 +4520,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$18.90 USD billed Monthly" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72I-1p-Mhi">
                                                 <rect key="frame" x="33.5" y="173.5" width="173" height="18"/>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
-                                                <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 100GB Cloud Storage  Restore Deleted Files   Apply your own Logo  Increase Free Data Limit 15GB   Remove Watermarks" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6r-Di-Bko">
@@ -4699,14 +4701,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Paid plans start with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6c-gg-8Uh">
-                                        <rect key="frame" x="75.5" y="10" width="169" height="19"/>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="15"/>
+                                        <rect key="frame" x="69" y="10" width="182" height="19"/>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
                                         <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7-day free trial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1Z-AO-gUL">
-                                        <rect key="frame" x="107.5" y="29" width="105" height="19"/>
-                                        <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="15"/>
+                                        <rect key="frame" x="103.5" y="29" width="113.5" height="19"/>
+                                        <fontDescription key="fontDescription" name="MonarchaW01-Bold" family="MonarchaW01-Bold" pointSize="15"/>
                                         <color key="textColor" red="0.34509803919999998" green="0.63529411759999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -4752,10 +4754,10 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9.95 USD billed Monthly" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dR9-AQ-SxH">
                                                 <rect key="frame" x="37.5" y="173.5" width="165.5" height="18"/>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="14"/>
-                                                <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 15 GB Cloud Storage Restore Deleted Files   Remove Watermark   Increase Free Data Limit 5GB" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJL-bK-Tlx">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 15 GB Cloud Storage                           Restore Deleted Files   Remove Watermark   Increase Free Data Limit 5GB" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJL-bK-Tlx">
                                                 <rect key="frame" x="5" y="211.5" width="230" height="158.5"/>
                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="18"/>
                                                 <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5584,6 +5586,7 @@
                     </view>
                     <connections>
                         <outlet property="crownButton" destination="NmK-li-Dud" id="1QL-yR-jib"/>
+                        <outlet property="profilePic" destination="P0b-fc-FGK" id="Mpn-x1-VUu"/>
                         <outlet property="tryGrowthButton" destination="b5R-sx-lGK" id="BaX-Nf-hKo"/>
                     </connections>
                 </viewController>
@@ -5667,8 +5670,8 @@
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbC-3M-dki">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="377"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We apologise, record is currently unavailable" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BqU-zo-acI">
-                                                        <rect key="frame" x="33.5" y="5" width="233.5" height="53"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We apologise, screencast is currently unavailable" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BqU-zo-acI">
+                                                        <rect key="frame" x="29" y="5" width="242.5" height="53"/>
                                                         <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="21"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -5960,7 +5963,7 @@ Heres </string>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment>
-                                                                <string key="content">ViaYou Videos save in your storage from the app
+                                                                <string key="content">ViaYou Videos saved in your storage from the app
 
 </string>
                                                                 <attributes>
@@ -6255,6 +6258,7 @@ Cgo
                     </view>
                     <connections>
                         <outlet property="popUpHeightConstraint" destination="AZ9-ms-11h" id="JfC-7e-FQj"/>
+                        <outlet property="profilePic" destination="B8u-R2-3Pm" id="bh5-CA-N30"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUP-xB-jg1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6630,8 +6634,8 @@ Cgo
                                             <action selector="dismissPopUp:" destination="QVS-mb-0hU" eventType="touchUpInside" id="mJC-zj-rLl"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don’t have any screencast’s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2y0-Z0-jmy">
-                                        <rect key="frame" x="32" y="170" width="216" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don’t have any hosted videos Powered by you" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2y0-Z0-jmy">
+                                        <rect key="frame" x="5" y="170" width="270" height="16"/>
                                         <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
                                         <color key="textColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -6643,8 +6647,8 @@ Cgo
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record you screen and your reactions at the same time and share on any network for FREE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0m8-pW-JcM">
-                                        <rect key="frame" x="30" y="300" width="220.5" height="41.5"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                        <rect key="frame" x="35" y="300" width="210.5" height="47"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -7717,7 +7721,7 @@ Cgo
                                             <action selector="closeButtonClicked:" destination="G7p-Jh-PGt" eventType="touchUpInside" id="sc3-qr-zk4"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Screen Recording Function" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfz-aY-Gi8">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Recording Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfz-aY-Gi8">
                                         <rect key="frame" x="65" y="54.5" width="213" height="19.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="213" id="nOn-ou-bYA"/>
