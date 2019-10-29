@@ -45,7 +45,18 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         }
         self.videoImageView.image = dataDict.user.videoImage
         self.videoTitleLabel.text = dataDict.title
-        self.durationLabel.text = dataDict.user.duration
+        // time calc starts
+        let interval = dataDict.user.duration
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        
+        let formattedString = formatter.string(from: TimeInterval(interval) ?? 1.0)!
+        print(formattedString)
+        self.durationLabel.text = formattedString
+        //time calc ends
+      //  self.durationLabel.text = dataDict.user.duration
         cellDataDict = dataDict
         infoTableView.reloadData()
         

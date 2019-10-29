@@ -271,7 +271,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             
             DispatchQueue.main.async {
                 
-                self.storageIndicatorLabel.text = "\(roundedValue) GB Free"
+                self.storageIndicatorLabel.text = "\(remainingSpaceInMB) GB Free"
             }
         }
         else
