@@ -43,7 +43,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         
         topLabel.text = "Push the red button!"
         let myMutableString = NSMutableAttributedString(string: topLabel.text ?? "", attributes: nil)
-        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: NSRange(location:0,length:8))
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red:214.0/255.0, green:85.0/255.0, blue:107.0/255.0, alpha: 1.0), range: NSRange(location:0,length:8))
         topLabel.attributedText = myMutableString
         if setupSession() {
             setupPreview()
@@ -64,8 +64,8 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     }
     
     func ViewSetUp() {
-        playVideoView.layer.borderWidth = 5
-        playVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
+//        playVideoView.layer.borderWidth = 5
+//        playVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         captureVideoView.layer.borderWidth = 5
         captureVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         //        viewNextVcBtn.layer.cornerRadius = viewNextVcBtn.frame.size.height/2
@@ -83,7 +83,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         //let videoURL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
         let player = AVPlayer(url: getVideoURL!)
         let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = CGRect(x: 5, y: 5, width: self.view.frame.size.width, height: self.view.frame.size.height )
+        playerLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
         playVideoView.layer.addSublayer(playerLayer)
         player.play()
     }
