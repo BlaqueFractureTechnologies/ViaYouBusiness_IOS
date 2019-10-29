@@ -1671,10 +1671,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="565.5" width="180" height="41.5"/>
+                                <rect key="frame" x="97.5" y="569.5" width="180" height="37.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -3161,7 +3161,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="lTe-U2-tPY">
-                                <rect key="frame" x="0.0" y="85" width="375.00000000000045" height="342"/>
+                                <rect key="frame" x="0.0" y="85" width="375" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m68-ut-oAu">
@@ -8230,14 +8230,12 @@ Cgo
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORZ-zw-Krs" userLabel="ViewMain">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tlW-FD-wrj" userLabel="ViewCamera">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tlW-FD-wrj" userLabel="ViewCamera">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HU4-9i-nTa">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HU4-9i-nTa">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdo-nD-tVb">
@@ -8274,17 +8272,25 @@ Cgo
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tlW-FD-wrj" secondAttribute="trailing" id="79q-hj-QDA"/>
+                                    <constraint firstAttribute="bottom" secondItem="tlW-FD-wrj" secondAttribute="bottom" id="EYf-gw-amI"/>
+                                    <constraint firstAttribute="trailing" secondItem="HU4-9i-nTa" secondAttribute="trailing" id="YvS-Qr-ROr"/>
                                     <constraint firstItem="tZG-yJ-kPy" firstAttribute="top" secondItem="ORZ-zw-Krs" secondAttribute="top" constant="7" id="aAg-5u-0xf"/>
+                                    <constraint firstAttribute="bottom" secondItem="HU4-9i-nTa" secondAttribute="bottom" id="abb-Xf-wnJ"/>
+                                    <constraint firstItem="tlW-FD-wrj" firstAttribute="leading" secondItem="ORZ-zw-Krs" secondAttribute="leading" id="arp-Up-bc7"/>
+                                    <constraint firstItem="HU4-9i-nTa" firstAttribute="leading" secondItem="ORZ-zw-Krs" secondAttribute="leading" id="fgj-g3-BEd"/>
+                                    <constraint firstItem="tlW-FD-wrj" firstAttribute="top" secondItem="ORZ-zw-Krs" secondAttribute="top" id="htb-rT-bcs"/>
+                                    <constraint firstItem="HU4-9i-nTa" firstAttribute="top" secondItem="ORZ-zw-Krs" secondAttribute="top" id="nOk-Pc-yDX"/>
                                     <constraint firstItem="tZG-yJ-kPy" firstAttribute="leading" secondItem="ORZ-zw-Krs" secondAttribute="leading" constant="7" id="xbm-fQ-P7g"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ORZ-zw-Krs" secondAttribute="trailing" id="0Bg-Tl-1dV"/>
                             <constraint firstItem="ORZ-zw-Krs" firstAttribute="top" secondItem="crR-5f-uAq" secondAttribute="top" id="AdB-xV-EAd"/>
-                            <constraint firstItem="ORZ-zw-Krs" firstAttribute="bottom" secondItem="qFc-Un-4xN" secondAttribute="bottom" id="Bfv-L3-9jj"/>
-                            <constraint firstItem="ORZ-zw-Krs" firstAttribute="trailing" secondItem="qFc-Un-4xN" secondAttribute="trailing" id="jOI-Qq-gFA"/>
-                            <constraint firstItem="ORZ-zw-Krs" firstAttribute="leading" secondItem="qFc-Un-4xN" secondAttribute="leading" id="xau-lA-Ugz"/>
+                            <constraint firstAttribute="bottom" secondItem="ORZ-zw-Krs" secondAttribute="bottom" id="f5H-7a-r2M"/>
+                            <constraint firstItem="ORZ-zw-Krs" firstAttribute="leading" secondItem="crR-5f-uAq" secondAttribute="leading" id="sRP-NT-AT3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qFc-Un-4xN"/>
                     </view>
