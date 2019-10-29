@@ -348,10 +348,10 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         titleFieldContainer.layer.borderColor = UIColor.white.cgColor
         titleFieldContainer.layer.borderWidth = 1.5
         
-        promptRoundButtonContainer.layer.cornerRadius = promptRoundButtonContainer.frame.size.width/2.0
-        promptRoundButtonContainer.layer.borderColor = UIColor.white.cgColor
-        promptRoundButtonContainer.layer.borderWidth = 1.5
-        promptRoundButtonContainer.backgroundColor = UIColor.clear
+//        promptRoundButtonContainer.layer.cornerRadius = promptRoundButtonContainer.frame.size.width/2.0
+//        promptRoundButtonContainer.layer.borderColor = UIColor.white.cgColor
+//        promptRoundButtonContainer.layer.borderWidth = 1.5
+//        promptRoundButtonContainer.backgroundColor = UIColor.clear
     }
     
     func PlaysmallViewVideo()

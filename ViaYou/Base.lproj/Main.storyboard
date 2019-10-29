@@ -1671,10 +1671,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="569.5" width="180" height="37.5"/>
+                                <rect key="frame" x="97.5" y="565.5" width="180" height="41.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -3161,7 +3161,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="lTe-U2-tPY">
-                                <rect key="frame" x="0.0" y="85" width="375" height="342"/>
+                                <rect key="frame" x="0.0" y="85" width="375.00000000000045" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m68-ut-oAu">
@@ -7832,49 +7832,6 @@ Cgo
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pmy-RO-9ge">
-                                                <rect key="frame" x="137.5" y="173.5" width="100" height="100"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROMPT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CG-kR-2AP">
-                                                        <rect key="frame" x="20" y="30" width="60.5" height="19"/>
-                                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
-                                                        <color key="textColor" red="1" green="0.78994767610000005" blue="0.00086542638449999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-pointing-to-right" translatesAutoresizingMaskIntoConstraints="NO" id="fJt-9r-mSA">
-                                                        <rect key="frame" x="20" y="62" width="60" height="20"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="5WO-RB-HW8"/>
-                                                            <constraint firstAttribute="height" constant="20" id="iOW-Ws-DfL"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7WK-1a-1zA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                        <connections>
-                                                            <action selector="promptButtonClicked:" destination="zpV-td-kUf" eventType="touchUpInside" id="gty-sq-5XY"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="4CG-kR-2AP" firstAttribute="centerX" secondItem="Pmy-RO-9ge" secondAttribute="centerX" id="0tf-NK-PiX"/>
-                                                    <constraint firstAttribute="trailing" secondItem="7WK-1a-1zA" secondAttribute="trailing" id="1Sk-nV-3kO"/>
-                                                    <constraint firstItem="7WK-1a-1zA" firstAttribute="leading" secondItem="Pmy-RO-9ge" secondAttribute="leading" id="3m7-Ra-NeM"/>
-                                                    <constraint firstAttribute="bottom" secondItem="7WK-1a-1zA" secondAttribute="bottom" id="G61-rs-YHw"/>
-                                                    <constraint firstItem="4CG-kR-2AP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Pmy-RO-9ge" secondAttribute="leading" constant="5" id="Ntk-T1-PKH"/>
-                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4CG-kR-2AP" secondAttribute="trailing" constant="5" id="TGh-tB-WTV"/>
-                                                    <constraint firstItem="4CG-kR-2AP" firstAttribute="top" secondItem="Pmy-RO-9ge" secondAttribute="top" constant="30" id="V9g-I9-LpA"/>
-                                                    <constraint firstItem="7WK-1a-1zA" firstAttribute="top" secondItem="Pmy-RO-9ge" secondAttribute="top" id="fcX-A3-7dX"/>
-                                                    <constraint firstItem="fJt-9r-mSA" firstAttribute="centerX" secondItem="Pmy-RO-9ge" secondAttribute="centerX" id="hZQ-00-CCL"/>
-                                                    <constraint firstAttribute="height" constant="100" id="hkF-6U-CVn"/>
-                                                    <constraint firstItem="fJt-9r-mSA" firstAttribute="top" secondItem="4CG-kR-2AP" secondAttribute="bottom" constant="13" id="o3F-9v-iYa"/>
-                                                    <constraint firstAttribute="width" constant="100" id="r86-11-JFU"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="40"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="po8-lm-Fo4">
                                                 <rect key="frame" x="20" y="281.5" width="335" height="35"/>
                                                 <subviews>
@@ -7999,7 +7956,6 @@ Cgo
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="PJJ-oh-bU8" secondAttribute="trailing" constant="110" id="4M7-ZM-7qr"/>
-                                            <constraint firstItem="Pmy-RO-9ge" firstAttribute="centerY" secondItem="2iz-UH-7le" secondAttribute="centerY" constant="-100" id="5vg-lD-UOV"/>
                                             <constraint firstItem="Obj-gj-cPO" firstAttribute="top" secondItem="po8-lm-Fo4" secondAttribute="bottom" constant="8.5" id="9Gh-w9-ETO"/>
                                             <constraint firstItem="SeP-HS-Cry" firstAttribute="centerX" secondItem="2iz-UH-7le" secondAttribute="centerX" id="FDW-9d-Vxu"/>
                                             <constraint firstItem="PJJ-oh-bU8" firstAttribute="leading" secondItem="2iz-UH-7le" secondAttribute="leading" constant="109" id="Fzw-HT-Ll9"/>
@@ -8008,13 +7964,12 @@ Cgo
                                             <constraint firstAttribute="trailing" secondItem="po8-lm-Fo4" secondAttribute="trailing" constant="20" id="S6V-m0-1vY"/>
                                             <constraint firstItem="SQ6-EJ-Gip" firstAttribute="top" secondItem="2iz-UH-7le" secondAttribute="top" id="Tm7-2j-11l"/>
                                             <constraint firstItem="Obj-gj-cPO" firstAttribute="leading" secondItem="2iz-UH-7le" secondAttribute="leading" constant="109" id="Ts4-mD-vsa"/>
-                                            <constraint firstItem="Pmy-RO-9ge" firstAttribute="centerX" secondItem="2iz-UH-7le" secondAttribute="centerX" id="Vmd-Ar-WK5"/>
                                             <constraint firstItem="SQ6-EJ-Gip" firstAttribute="leading" secondItem="2iz-UH-7le" secondAttribute="leading" id="aO6-Ih-Eia"/>
                                             <constraint firstAttribute="trailing" secondItem="SQ6-EJ-Gip" secondAttribute="trailing" id="bl9-uK-Ty6"/>
                                             <constraint firstAttribute="trailing" secondItem="Obj-gj-cPO" secondAttribute="trailing" constant="110" id="djJ-aH-Hg2"/>
                                             <constraint firstItem="PJJ-oh-bU8" firstAttribute="top" secondItem="Obj-gj-cPO" secondAttribute="bottom" constant="19" id="dlq-zi-IKW"/>
                                             <constraint firstAttribute="bottom" secondItem="SQ6-EJ-Gip" secondAttribute="bottom" id="eHK-N6-ip7"/>
-                                            <constraint firstItem="po8-lm-Fo4" firstAttribute="top" secondItem="Pmy-RO-9ge" secondAttribute="bottom" constant="8" id="mv3-Oz-e65"/>
+                                            <constraint firstItem="po8-lm-Fo4" firstAttribute="top" secondItem="2iz-UH-7le" secondAttribute="top" constant="281.5" id="goM-d9-aoA"/>
                                         </constraints>
                                     </view>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ppe-5l-mhC">
@@ -8054,7 +8009,6 @@ Cgo
                         <outlet property="activityIndicator" destination="ppe-5l-mhC" id="4Zm-gz-W62"/>
                         <outlet property="bigVIdeoView" destination="dlX-pQ-PP6" id="uKM-Mu-OeM"/>
                         <outlet property="lblTimer" destination="Kk6-mW-XG6" id="8M3-TL-IlF"/>
-                        <outlet property="promptRoundButtonContainer" destination="Pmy-RO-9ge" id="YbU-j1-Sdb"/>
                         <outlet property="promptTitleField" destination="Goc-Jn-CxP" id="g16-KI-6Gh"/>
                         <outlet property="smallVIdeoView" destination="qhm-la-bMY" id="9p1-60-1zu"/>
                         <outlet property="titleFieldContainer" destination="po8-lm-Fo4" id="hoU-J1-5BY"/>
@@ -8312,7 +8266,7 @@ Cgo
                                         <rect key="frame" x="145" y="552" width="84" height="84"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                        <state key="normal" title="Button" image="record"/>
+                                        <state key="normal" title="Button" image="record_new"/>
                                         <connections>
                                             <action selector="btnRecoerVideo:" destination="kDn-aK-L7Y" eventType="touchUpInside" id="KKx-in-Ovf"/>
                                         </connections>
@@ -8419,7 +8373,7 @@ yourself.</string>
                                             <constraint firstAttribute="width" constant="50" id="pNr-1w-dTP"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" backgroundImage="record"/>
+                                        <state key="normal" backgroundImage="record_new"/>
                                         <connections>
                                             <action selector="btnShootVideo:" destination="u3d-rV-V78" eventType="touchUpInside" id="eGd-X8-WQI"/>
                                         </connections>
@@ -8441,7 +8395,7 @@ yourself.</string>
                                             <constraint firstAttribute="width" constant="50" id="qO0-1c-6SR"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" backgroundImage="next"/>
+                                        <state key="normal" backgroundImage="right-arrow"/>
                                         <connections>
                                             <action selector="btnPressToNextVC:" destination="u3d-rV-V78" eventType="touchUpInside" id="2RN-tL-UbA"/>
                                         </connections>
@@ -8520,7 +8474,6 @@ yourself.</string>
         <image name="Promptchu_Archive" width="16" height="16"/>
         <image name="Search Icon" width="17.5" height="17.5"/>
         <image name="SplashPage" width="375" height="667"/>
-        <image name="arrow-pointing-to-right" width="24" height="24"/>
         <image name="arrow_Left" width="70" height="160"/>
         <image name="arrow_Right" width="70" height="160"/>
         <image name="bottomPlusButton" width="174" height="180"/>
@@ -8558,9 +8511,11 @@ yourself.</string>
         <image name="profilePicOutline" width="200" height="200"/>
         <image name="radio_OFF" width="195" height="195"/>
         <image name="record" width="256" height="256"/>
+        <image name="record_new" width="174" height="180"/>
         <image name="redo" width="60" height="60"/>
         <image name="redo-pink" width="64" height="64"/>
         <image name="ribbons" width="298" height="172"/>
+        <image name="right-arrow" width="64" height="64"/>
         <image name="screencast_icon" width="42" height="46"/>
         <image name="shareIconWhite" width="200" height="200"/>
         <image name="sideGrayHorn" width="90" height="210"/>
