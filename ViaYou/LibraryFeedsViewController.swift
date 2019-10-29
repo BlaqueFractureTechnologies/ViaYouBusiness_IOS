@@ -348,8 +348,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     DefaultWrapper().setPaymentTypePurchased(type: -1)
                 }
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    
+                    self.tableView.reloadData()                    
                 }
             }
             else
