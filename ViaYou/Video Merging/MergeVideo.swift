@@ -76,7 +76,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .full
+        formatter.unitsStyle = .brief
         
         let formattedString = formatter.string(from: TimeInterval(interval))!
         print(formattedString)

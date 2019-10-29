@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "593999906.444901"
+            timestampString = "594000581.69461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
@@ -26,7 +26,7 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "593999906.6811531"
+                  timestampString = "594000581.96417"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "86"
@@ -41,7 +41,7 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "593999906.682282"
+                  timestampString = "594000581.965467"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "87"
@@ -49,22 +49,6 @@
                   offsetFromSymbolStart = "204">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViaYou/Video Merging/MergeVideo.swift"
-            timestampString = "593999954.620461"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
