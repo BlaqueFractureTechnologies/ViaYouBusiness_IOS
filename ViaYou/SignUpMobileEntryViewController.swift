@@ -48,6 +48,8 @@ class SignUpMobileEntryViewController: UIViewController {
         DispatchQueue.main.async {
             self.nextButton.addAppGradient()
             self.phoneButtonGradient = self.segmentPhoneButton.addAppGradientAndGetIt()
+            self.segmentEmailButton.setTitleColor(UIColor.gray, for: .normal)
+            self.segmentPhoneButton.setTitleColor(UIColor.white, for: .normal)
         }
         setUpView()
     }
@@ -121,21 +123,18 @@ class SignUpMobileEntryViewController: UIViewController {
     }
     
     @IBAction func nextButtonClicked(_ sender: Any) {
+        self.phoneButtonGradient.removeFromSuperlayer()
+        self.emailButtonGradient.removeFromSuperlayer()
         
         let email = emailField.text ?? ""
         if email.count == 0 {
             self.displaySingleButtonAlert(message: "Please enter your email")
         }
-        else {
-            self.phoneButtonGradient.removeFromSuperlayer()
-            self.emailButtonGradient.removeFromSuperlayer()
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "SignUpPasswordEntryViewController") as! SignUpPasswordEntryViewController
-            nextVC.topMargin = self.topMargin
-            nextVC.passedEmailAddress = email
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        }
-
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SignUpPasswordEntryViewController") as! SignUpPasswordEntryViewController
+        nextVC.topMargin = self.topMargin
+        nextVC.passedEmailAddress = email
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func alreadyHaveAnAccountButtonClicked(_ sender: UIButton) {
