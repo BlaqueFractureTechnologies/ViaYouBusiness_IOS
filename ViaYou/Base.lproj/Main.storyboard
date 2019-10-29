@@ -1671,10 +1671,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="569.5" width="180" height="37.5"/>
+                                <rect key="frame" x="97.5" y="565.5" width="180" height="41.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -3161,7 +3161,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="lTe-U2-tPY">
-                                <rect key="frame" x="0.0" y="85" width="375" height="342"/>
+                                <rect key="frame" x="0.0" y="85" width="375.00000000000045" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m68-ut-oAu">
@@ -8188,7 +8188,9 @@ Cgo
                                     <constraint firstAttribute="trailing" secondItem="lOV-8g-gMY" secondAttribute="trailing" constant="30" id="Vgc-Vv-TSo"/>
                                     <constraint firstItem="eA9-9v-2Ri" firstAttribute="top" secondItem="CHU-aG-9QF" secondAttribute="top" constant="8" id="Ymd-da-w1V"/>
                                     <constraint firstItem="wBb-TU-wic" firstAttribute="leading" secondItem="CHU-aG-9QF" secondAttribute="leading" constant="29" id="b3R-kr-6ZE"/>
+                                    <constraint firstAttribute="height" constant="303" id="dcz-XK-bKY"/>
                                     <constraint firstItem="wBb-TU-wic" firstAttribute="top" secondItem="nfz-aY-Gi8" secondAttribute="bottom" constant="17" id="nVC-LC-tQi"/>
+                                    <constraint firstAttribute="width" constant="343" id="or5-Sz-wEn"/>
                                     <constraint firstItem="YPs-8l-afY" firstAttribute="top" secondItem="wBb-TU-wic" secondAttribute="bottom" constant="40" id="qPT-3F-Kte"/>
                                     <constraint firstItem="lOV-8g-gMY" firstAttribute="top" secondItem="vaI-cQ-y0W" secondAttribute="bottom" constant="26" id="rTW-za-9bL"/>
                                 </constraints>
@@ -8202,7 +8204,6 @@ Cgo
                             <constraint firstAttribute="bottomMargin" secondItem="CHU-aG-9QF" secondAttribute="bottom" constant="182" id="3VU-Ji-KNS"/>
                             <constraint firstAttribute="bottom" secondItem="NQT-L2-2ed" secondAttribute="bottom" id="9RQ-jc-FoG"/>
                             <constraint firstItem="NQT-L2-2ed" firstAttribute="top" secondItem="hHw-Dp-zw1" secondAttribute="top" id="AFe-s2-Cfl"/>
-                            <constraint firstItem="CHU-aG-9QF" firstAttribute="top" secondItem="hHw-Dp-zw1" secondAttribute="topMargin" constant="162" id="BTk-jq-DCH"/>
                             <constraint firstItem="NQT-L2-2ed" firstAttribute="leading" secondItem="hHw-Dp-zw1" secondAttribute="leading" id="D25-Ae-V04"/>
                             <constraint firstAttribute="trailing" secondItem="NQT-L2-2ed" secondAttribute="trailing" id="XtY-Wc-Kkp"/>
                             <constraint firstItem="CHU-aG-9QF" firstAttribute="trailing" secondItem="hHw-Dp-zw1" secondAttribute="trailingMargin" id="edG-vr-s0C"/>
