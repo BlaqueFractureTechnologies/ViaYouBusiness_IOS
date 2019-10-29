@@ -65,9 +65,22 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     var dataDictToBePosted:[String:Any] = [:]
     
+    var totalVideoTime:Int = 0
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        // time calc starts
+        let interval = self.totalVideoTime
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .full
+        
+        let formattedString = formatter.string(from: TimeInterval(interval))!
+        print(formattedString)
+        //time calc ends
         self.viewSetUPDesign()
         //AWS SETUP FOR UPLOAD VIDEO ON AWS SERVER
         //SIMULATORE
@@ -86,6 +99,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     override func viewWillAppear(_ animated: Bool)
     {
+        
+
+        
         activityIndicator.isHidden = true
         PlaybigViewVideo()
         PlaysmallViewVideo()
@@ -93,6 +109,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         
         btnRedo.isUserInteractionEnabled = true
         btnSaveOutlet.isUserInteractionEnabled = true
+        print("Video time = \(videoTime)")
         videoTime = UserDefaults.standard.value(forKey: "videotime") as! Int
         self.currentTimeCounter = 1
         self.lableCounterTime()

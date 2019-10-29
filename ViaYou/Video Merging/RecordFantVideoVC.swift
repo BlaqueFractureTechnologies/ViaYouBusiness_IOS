@@ -36,6 +36,8 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     var currentTimeCounter = 0
     var videoTime = Int()
     
+    var totalVideoTime: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -284,7 +286,10 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             stopSession()
             btnNectVc.isHidden = false
             self.lblRecordTime.text = String(format: "00:%02i", self.currentTimeCounter)
+            print(self.currentTimeCounter)
+            self.totalVideoTime = self.currentTimeCounter
             lbltimer.invalidate()
+
         }
     }
     
@@ -297,12 +302,12 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             self.currentTimeCounter = self.currentTimeCounter + 1
             print(self.currentTimeCounter)
             print(self.videoTime)
-            
-            if self.currentTimeCounter == self.videoTime - 1
-            {
-                self.lbltimer.invalidate()
-                self.lblRecordTime.text = String(format: "00:%02i", self.currentTimeCounter)
-            }
+//
+//            if self.currentTimeCounter == self.videoTime - 1
+//            {
+//                self.lbltimer.invalidate()
+//                self.lblRecordTime.text = String(format: "00:%02i", self.currentTimeCounter)
+//            }
         }
     }
     
@@ -319,6 +324,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         //        mergeVideo.smallViewURL = outputURL
         mergeVideo.bigVideoURL = getVideoURL
         mergeVideo.urlOfSmallVideo = outputURL
+        mergeVideo.totalVideoTime = self.totalVideoTime
         self.navigationController?.pushViewController(mergeVideo, animated: true)
     }
     
