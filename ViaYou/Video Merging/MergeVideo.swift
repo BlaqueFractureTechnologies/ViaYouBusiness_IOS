@@ -292,8 +292,8 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         //        viewFrame.layer.borderWidth = 5
         //        viewFrame.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
         
-        lblTimer.layer.cornerRadius = self.lblTimer.frame.size.height / 2
-        lblTimer.clipsToBounds = true
+//        lblTimer.layer.cornerRadius = self.lblTimer.frame.size.height / 2
+//        lblTimer.clipsToBounds = true
         
         promptTitleField.layer.cornerRadius = self.promptTitleField.frame.size.height / 2
         promptTitleField.clipsToBounds = true
@@ -348,15 +348,15 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     func lableCounterTime()
     {
-        lbltimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (returnedTimer) in
-            self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
-            self.currentTimeCounter += 1
-            if self.currentTimeCounter == self.videoTime - 1
-            {
-                self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
-                self.lbltimer.invalidate()
-            }
-        }
+//        lbltimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (returnedTimer) in
+//            self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
+//            self.currentTimeCounter += 1
+//            if self.currentTimeCounter == self.videoTime - 1
+//            {
+//                self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
+//                self.lbltimer.invalidate()
+//            }
+//        }
     }
     
     func SaveVideoDiscriptionDetails()
