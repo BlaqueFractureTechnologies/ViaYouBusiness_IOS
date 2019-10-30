@@ -927,15 +927,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     func AddTwoMenuViewController_screencastButtonClicked() {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
-        nextVC.modalPresentationStyle = .overCurrentContext
-        self.present(nextVC, animated: false, completion: nil)
 //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
 //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
-//        let navVC = UINavigationController(rootViewController: nextVC)
-//        navVC.isNavigationBarHidden = true
-//        self.navigationController?.pushViewController(nextVC, animated: false)
+//        nextVC.modalPresentationStyle = .overCurrentContext
+//        self.present(nextVC, animated: false, completion: nil)
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+        let navVC = UINavigationController(rootViewController: nextVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
     func AddFeedPopUpViewController_videomergeButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
