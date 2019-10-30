@@ -26,7 +26,7 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "594093772.119025"
+                  timestampString = "594100224.000007"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "86"
@@ -41,7 +41,7 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "594093772.120219"
+                  timestampString = "594100224.0020781"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "87"
@@ -49,6 +49,38 @@
                   offsetFromSymbolStart = "204">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/LibraryFeedsViewController.swift"
+            timestampString = "594100223.874866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "940"
+            endingLineNumber = "940"
+            landmarkName = "AddFeedPopUpViewController_videomergeButtonClicked()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/LibraryFeedsViewController.swift"
+            timestampString = "594100223.875167"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "945"
+            endingLineNumber = "945"
+            landmarkName = "AddFeedPopUpViewController_videomergeButtonClicked()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

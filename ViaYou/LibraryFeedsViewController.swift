@@ -19,7 +19,7 @@ import AWSCognito
 //import DTMessageHUD
 
 
-class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BecomeGrowthHostPopUpViewControllerDelegate, AddTwoMenuViewControllerDelegate, UIScrollViewDelegate {
+class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BecomeGrowthHostPopUpViewControllerDelegate, AddTwoMenuViewControllerDelegate, AddFeedPopUpViewControllerDelegate, UIScrollViewDelegate {
     
     
     
@@ -936,6 +936,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
 //        let navVC = UINavigationController(rootViewController: nextVC)
 //        navVC.isNavigationBarHidden = true
 //        self.navigationController?.pushViewController(nextVC, animated: false)
+    }
+    func AddFeedPopUpViewController_videomergeButtonClicked() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
+        let navVC = UINavigationController(rootViewController: nextVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     func AddTwoMenuViewController_videomergeButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
