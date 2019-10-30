@@ -35,6 +35,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     var lbltimer = Timer()
     var currentTimeCounter = 0
     var videoTime = Int()
+    var isLongerThanBackVideo: Bool = false
     
     var totalVideoTime: Int = 0
     
@@ -64,8 +65,8 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     }
     
     func ViewSetUp() {
-//        playVideoView.layer.borderWidth = 5
-//        playVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
+        //        playVideoView.layer.borderWidth = 5
+        //        playVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         captureVideoView.layer.borderWidth = 5
         captureVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         //        viewNextVcBtn.layer.cornerRadius = viewNextVcBtn.frame.size.height/2
@@ -79,12 +80,14 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         btnRecord.imageView?.contentMode = .scaleAspectFit
         btnNectVc.imageView?.contentMode = .scaleAspectFit
     }
+    var playerLayer  = AVPlayerLayer()
     func PlayVideo() {
         //let videoURL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
         let player = AVPlayer(url: getVideoURL!)
-        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
         playVideoView.layer.addSublayer(playerLayer)
+        //playVideoView.backgroundColor = UIColor.red
         player.play()
     }
     func setupPreview() {
@@ -94,22 +97,22 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         captureVideoView.layer.addSublayer(previewLayer)
     }
-//    override func viewDidLayoutSubviews() {
-//        self.configureVideoOrientation()
-//    }
-//
-//    private func configureVideoOrientation() {
-//        if let previewLayer = self.previewLayer,
-//            let connection = previewLayer.connection {
-//            let orientation = UIDevice.current.orientation
-//
-//            if connection.isVideoOrientationSupported,
-//                let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) {
-//                previewLayer.frame = captureVideoView.bounds
-//                connection.videoOrientation = videoOrientation
-//            }
-//        }
-//    }
+    //    override func viewDidLayoutSubviews() {
+    //        self.configureVideoOrientation()
+    //    }
+    //
+    //    private func configureVideoOrientation() {
+    //        if let previewLayer = self.previewLayer,
+    //            let connection = previewLayer.connection {
+    //            let orientation = UIDevice.current.orientation
+    //
+    //            if connection.isVideoOrientationSupported,
+    //                let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) {
+    //                previewLayer.frame = captureVideoView.bounds
+    //                connection.videoOrientation = videoOrientation
+    //            }
+    //        }
+    //    }
     func setupSession() -> Bool {
         captureSession.sessionPreset = AVCaptureSession.Preset.high
         // Setup Camera
@@ -245,10 +248,11 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             self.topLabel.alpha = 0
             self.bottomLabel.alpha = 0
             self.redLineView.alpha = 0
+            self.btnRecord.setBackgroundImage(UIImage(named: "stop_record"), for: .normal)
             print("=====recording Start=====")
             lableCount()
             self.currentTimeCounter = 0
-          //  timer = Timer.scheduledTimer(timeInterval: TimeInterval(videoTime), target: self, selector: #selector(stopRecording), userInfo: nil, repeats: false)
+            //  timer = Timer.scheduledTimer(timeInterval: TimeInterval(videoTime), target: self, selector: #selector(stopRecording), userInfo: nil, repeats: false)
             timer = Timer.scheduledTimer(timeInterval: TimeInterval(videoTime), target: self, selector: #selector(continueRecordingAfterBackCamStopped), userInfo: nil, repeats: false)
         }
         else {
@@ -262,8 +266,9 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     //    }
     
     @objc func continueRecordingAfterBackCamStopped() {
+        self.isLongerThanBackVideo = true
         captureVideoView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
-        previewLayer.frame = CGRect(x: 5, y: 5, width: self.view.frame.size.width, height: self.view.frame.size.height )
+        previewLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
     }
     
     @objc func stopRecording() {
@@ -282,6 +287,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         } else {
             
             let videoRecorded = outputURL! as URL
+            self.btnRecord.setBackgroundImage(UIImage(named: "record_new"), for: .normal)
             print("=======video stop=========")
             stopSession()
             btnNectVc.isHidden = false
@@ -289,7 +295,15 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             print(self.currentTimeCounter)
             self.totalVideoTime = self.currentTimeCounter
             lbltimer.invalidate()
-
+            //
+            let mergeVideo = self.storyboard?.instantiateViewController(withIdentifier: "MergeVideo") as! MergeVideo
+            //        mergeVideo.smallViewURL = outputURL
+            mergeVideo.bigVideoURL = getVideoURL
+            mergeVideo.urlOfSmallVideo = outputURL
+            mergeVideo.totalVideoTime = self.totalVideoTime
+            self.navigationController?.pushViewController(mergeVideo, animated: true)
+            //
+            
         }
     }
     
@@ -302,12 +316,12 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             self.currentTimeCounter = self.currentTimeCounter + 1
             print(self.currentTimeCounter)
             print(self.videoTime)
-//
-//            if self.currentTimeCounter == self.videoTime - 1
-//            {
-//                self.lbltimer.invalidate()
-//                self.lblRecordTime.text = String(format: "00:%02i", self.currentTimeCounter)
-//            }
+            //
+            //            if self.currentTimeCounter == self.videoTime - 1
+            //            {
+            //                self.lbltimer.invalidate()
+            //                self.lblRecordTime.text = String(format: "00:%02i", self.currentTimeCounter)
+            //            }
         }
     }
     
@@ -352,5 +366,39 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+    
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        DispatchQueue.main.async {
+            //self.viewFrame.layoutIfNeeded()
+            //self.lblShowTimer.layer.cornerRadius = self.lblShowTimer.frame.size.height / 2.0
+            self.playerLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
+            if self.isLongerThanBackVideo == true {
+                self.previewLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
+                self.captureVideoView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
+            }
+            else {
+                self.previewLayer.frame = self.captureVideoView.bounds
+            }
+            
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.configureVideoOrientation()
+    }
+    
+    private func configureVideoOrientation() {
+        if let previewLayer = self.previewLayer,
+            let connection = previewLayer.connection {
+            let orientation = UIDevice.current.orientation
+            
+            if connection.isVideoOrientationSupported,
+                let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) {
+                previewLayer.frame = self.view.bounds
+                connection.videoOrientation = videoOrientation
+            }
+        }
     }
 }

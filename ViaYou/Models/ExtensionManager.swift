@@ -195,6 +195,13 @@ extension UITextField {
     func makeDarkGrayPlaceholder() {
         self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
+    func makeWhitePlaceholder() {
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.groupTableViewBackground])
+    }
+    
+    func makeBlackPlaceholder() {
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+    }
 }
 
 extension UITextView {

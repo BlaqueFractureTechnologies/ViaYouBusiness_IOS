@@ -23,18 +23,18 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
     var previewLayer: AVCaptureVideoPreviewLayer!
     var activeInput: AVCaptureDeviceInput!
     var outputURL: URL!
-
+    
     var timer = Timer()
     var timerforRecord = Timer()
     
     var currentTimeCounter = 1
-   
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-//        viewFrame.layer.borderWidth = 5
-//        viewFrame.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
+        //        viewFrame.layer.borderWidth = 5
+        //        viewFrame.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
         
         recordBtnOutlet.imageView?.contentMode = .scaleAspectFit
         
@@ -67,7 +67,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
     {
         // Configure previewLayer
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-       // previewLayer.frame = videoView.bounds
+        // previewLayer.frame = videoView.bounds
         previewLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         videoView.layer.addSublayer(previewLayer)
@@ -95,12 +95,12 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
         }
         return true
     }
- 
+    
     //MARK:- Camera Session
     func startSession()
     {
         if !captureSession.isRunning {
-           
+            
             DispatchQueue.main.async {
                 self.captureSession.startRunning()
             }
@@ -113,7 +113,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
                 self.captureSession.stopRunning()
             }
         }
-    } 
+    }
     
     func currentVideoOrientation() -> AVCaptureVideoOrientation
     {
@@ -140,7 +140,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             return URL(fileURLWithPath: path)
         }
         return nil
-    }  
+    }
     
     func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!)
     {
@@ -159,17 +159,17 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             print("=======video stop=========")
             print(videoRecorded)
             getVideoTime()
-           // performSegue(withIdentifier: "goToPreview", sender: nil)
-
-//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let recordVC = storyBoard.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
-//            recordVC.videoURL = outputFileURL
-//            let navVC = UINavigationController(rootViewController: recordVC)
-//            navVC.isNavigationBarHidden = true
-//            self.navigationController?.pushViewController(recordVC, animated: true) RecordFantVideoVC
-//            let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
-//            recordVC.videoURL = outputFileURL
-//            self.navigationController?.pushViewController(recordVC, animated: true)
+            // performSegue(withIdentifier: "goToPreview", sender: nil)
+            
+            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //            let recordVC = storyBoard.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
+            //            recordVC.videoURL = outputFileURL
+            //            let navVC = UINavigationController(rootViewController: recordVC)
+            //            navVC.isNavigationBarHidden = true
+            //            self.navigationController?.pushViewController(recordVC, animated: true) RecordFantVideoVC
+            //            let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordedVideoPreviewVC") as! RecordedVideoPreviewVC
+            //            recordVC.videoURL = outputFileURL
+            //            self.navigationController?.pushViewController(recordVC, animated: true)
             let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordFantVideoVC") as! RecordFantVideoVC
             recordVC.getVideoURL = outputFileURL
             self.navigationController?.pushViewController(recordVC, animated: true)
@@ -217,7 +217,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             //EDIT2: And I forgot this
             outputURL = tempURL()
             movieOutput.startRecording(to: outputURL, recordingDelegate: self)
-             self.lblShowTimer.isHidden = false
+            self.lblShowTimer.isHidden = false
             self.recordBtnOutlet.setBackgroundImage(UIImage(named: "stop_record"), for: .normal)
             print("=====recording Start=====")
             timer.invalidate()
@@ -274,6 +274,33 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+    
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        DispatchQueue.main.async {
+            self.viewFrame.layoutIfNeeded()
+            self.lblShowTimer.layer.cornerRadius = self.lblShowTimer.frame.size.height / 2.0
+            self.previewLayer.frame = self.videoView.bounds
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.configureVideoOrientation()
+    }
+    
+    private func configureVideoOrientation() {
+        if let previewLayer = self.previewLayer,
+            let connection = previewLayer.connection {
+            let orientation = UIDevice.current.orientation
+            
+            if connection.isVideoOrientationSupported,
+                let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) {
+                previewLayer.frame = self.view.bounds
+                connection.videoOrientation = videoOrientation
+            }
+        }
     }
 }
 

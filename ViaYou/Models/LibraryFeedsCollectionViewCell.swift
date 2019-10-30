@@ -37,7 +37,7 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
     func configureCell(dataDict:FeedDataArrayObject) {
         if (dataDict.isInfoPopUpDisplaying == false) {
             self.infoPopUpHeight.constant = 0
-        }else {
+    }else {
             UIView.animate(withDuration: 0.4) {
                 self.infoPopUpHeight.constant = 170
                 self.layoutIfNeeded()
