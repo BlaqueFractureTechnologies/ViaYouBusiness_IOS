@@ -24,17 +24,20 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
     @IBOutlet weak var selectedPlanLabel: UILabel!
     @IBOutlet weak var labelsContainer: UIView!
     @IBOutlet weak var activityViewController: UIActivityIndicatorView!
+    @IBOutlet weak var sloganLabel: UILabel!
     
     var passedTypeOfPayment: String = ""
     var cardField = STPPaymentCardTextField()
     var theme = STPTheme.default()
     var selectedPlanName: String = ""
     var selectedPlanCharge: String = ""
+    var selectedSlogan: String = ""
     
     let tokenGot: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        sloganLabel.text = selectedSlogan
         title = "Card Field"
         view.backgroundColor = UIColor.white
         view.addSubview(cardField)

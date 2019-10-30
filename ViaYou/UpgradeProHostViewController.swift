@@ -53,6 +53,7 @@ class UpgradeProHostViewController: UIViewController, StripePaymentViewControlle
         homeVC.passedTypeOfPayment = "PRO"
         homeVC.selectedPlanName = "Pro Host"
         homeVC.selectedPlanCharge = "$18.90"
+        homeVC.selectedSlogan = "Go Pro! with Pro Host"
         homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true

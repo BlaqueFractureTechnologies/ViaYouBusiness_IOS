@@ -59,6 +59,7 @@ class UpgradeGrowthHostViewController: UIViewController, StripePaymentViewContro
         homeVC.passedTypeOfPayment = "GROWTH"
         homeVC.selectedPlanName = "Growth Host"
         homeVC.selectedPlanCharge = "$75.50"
+        homeVC.selectedSlogan = "Scale Up! with Growth Host"
         homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true

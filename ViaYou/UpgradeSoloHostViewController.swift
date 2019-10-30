@@ -64,6 +64,7 @@ class UpgradeSoloHostViewController: UIViewController,StripePaymentViewControlle
         homeVC.passedTypeOfPayment = "SOLO"
         homeVC.selectedPlanName = "Solo Host"
         homeVC.selectedPlanCharge = "$9.95"
+        homeVC.selectedSlogan = "Go Solo! with Solo Host"
         homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true

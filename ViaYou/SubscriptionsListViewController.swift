@@ -129,6 +129,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         homeVC.passedTypeOfPayment = "SOLO"
         homeVC.selectedPlanName = "Solo Host"
         homeVC.selectedPlanCharge = "$9.95"
+        homeVC.selectedSlogan = "Go Solo! with Solo Host"
         homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
@@ -140,6 +141,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         homeVC.passedTypeOfPayment = "GROWTH"
         homeVC.selectedPlanName = "Growth Host"
         homeVC.selectedPlanCharge = "$75.50"
+        homeVC.selectedSlogan = "Scale Up! with Growth Host"
         homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
@@ -151,6 +153,7 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
         homeVC.passedTypeOfPayment = "PRO"
         homeVC.selectedPlanName = "Pro Host"
         homeVC.selectedPlanCharge = "$18.90"
+        homeVC.selectedSlogan = "Go Pro! with Pro Host"
         homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
