@@ -154,5 +154,17 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
         }
     }
     
+    @IBAction func termsOfPolicyButtonClicked(_ sender: Any) {
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @IBAction func backButtonClicked(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+
+    }
+    
     
 }

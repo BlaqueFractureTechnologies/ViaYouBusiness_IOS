@@ -3871,7 +3871,24 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJg-8a-Fcq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jO-I8-Wum">
+                                        <rect key="frame" x="8" y="40" width="46" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="EIy-G3-djt"/>
+                                            <constraint firstAttribute="width" constant="46" id="xZD-UN-Ao8"/>
+                                        </constraints>
+                                        <state key="normal" image="Back button Icon"/>
+                                        <connections>
+                                            <action selector="backButtonClicked:" destination="SsT-00-jwf" eventType="touchUpInside" id="xOu-9q-byT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="2jO-I8-Wum" firstAttribute="top" secondItem="jJg-8a-Fcq" secondAttribute="top" constant="40" id="V37-gQ-UJ9"/>
+                                    <constraint firstItem="2jO-I8-Wum" firstAttribute="leading" secondItem="jJg-8a-Fcq" secondAttribute="leading" constant="8" id="l6x-jA-IOd"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxq-YT-dJV">
                                 <rect key="frame" x="97" y="40" width="181.5" height="33"/>
@@ -3980,6 +3997,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                         <state key="normal" title="term of use policy"/>
+                                        <connections>
+                                            <action selector="termsOfPolicyButtonClicked:" destination="SsT-00-jwf" eventType="touchUpInside" id="joQ-Bw-iXA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
