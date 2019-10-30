@@ -937,13 +937,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     func AddTwoMenuViewController_screencastButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+        nextVC.delegate = self
         nextVC.modalPresentationStyle = .overCurrentContext
         self.present(nextVC, animated: false, completion: nil)
-        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
-        //        let navVC = UINavigationController(rootViewController: nextVC)
-        //        navVC.isNavigationBarHidden = true
-        //        self.navigationController?.pushViewController(nextVC, animated: false)
     }
     func AddTwoMenuViewController_videomergeButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
