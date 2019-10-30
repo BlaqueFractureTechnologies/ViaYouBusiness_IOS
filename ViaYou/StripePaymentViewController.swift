@@ -60,8 +60,9 @@ class StripePaymentViewController: UIViewController, STPPaymentCardTextFieldDele
         labelsContainer.layoutIfNeeded()
         
         buyButton.addAppGradient()
-        buyButton.layer.cornerRadius = self.buyButton.frame.size.height / 2
-        buyButton.clipsToBounds = true
+        
+//        buyButton.layer.cornerRadius = self.buyButton.frame.size.height / 2
+//        buyButton.clipsToBounds = true
         
     }
     
