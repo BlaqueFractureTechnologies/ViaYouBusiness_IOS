@@ -70,6 +70,10 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     
     //
+    var nameOfVideo:String = ""
+    var videoSize: String = ""
+    var dateCreated: String = ""
+    
     var strName: String = ""
     var typeString: String = ""
     var finalURL: URL!
@@ -543,9 +547,13 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
             let presentDate = currentDate
             let newDate = presentDate.toString(dateFormat: "dd-MM-YYYY")
             print(newDate)
+            self.dateCreated = newDate
            
         }
         print("\(strName).\(newURL.pathExtension)")
+        self.nameOfVideo = "\(strName).\(newURL.pathExtension)"
+        self.videoSize = "\(fileUrl.fileSizeString)"
+        
         print("file size = \(fileUrl.fileSize), \(fileUrl.fileSizeString)")
         
         print("=============SAVE===========================")
@@ -833,6 +841,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     @IBAction func videoDetailsButtonClicked(_ sender: Any) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "MergeVideoInfoViewController") as! MergeVideoInfoViewController
+        nextVC.dateCreated = self.dateCreated
+        nextVC.videoName = self.nameOfVideo
+        nextVC.sizeOfVideo = self.videoSize
         nextVC.modalPresentationStyle = .overCurrentContext
         self.present(nextVC, animated: true, completion: nil)
     }

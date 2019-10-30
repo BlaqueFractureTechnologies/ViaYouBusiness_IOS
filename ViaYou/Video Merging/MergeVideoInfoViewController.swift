@@ -12,6 +12,10 @@ class MergeVideoInfoViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBOutlet weak var tableView: UITableView!
     
+    var videoName: String = ""
+    var dateCreated: String = ""
+    var sizeOfVideo: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -26,6 +30,15 @@ class MergeVideoInfoViewController: UIViewController, UITableViewDataSource, UIT
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "Name: \(self.videoName)"
+        }
+        else if indexPath.row == 1 {
+            cell.textLabel?.text = "Date Created:  \(self.dateCreated)"
+        }
+        else {
+            cell.textLabel?.text = "Video Size:  \(self.sizeOfVideo)"
+        }
         
         return cell
     }
