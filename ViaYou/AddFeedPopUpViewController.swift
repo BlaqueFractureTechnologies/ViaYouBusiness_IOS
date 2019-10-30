@@ -48,6 +48,7 @@ class AddFeedPopUpViewController: UIViewController {
     }
     
     @IBAction func videoMergeButtonClicked(_ sender: Any) {
+        
         self.dismiss(animated: true) {
             self.delegate?.AddFeedPopUpViewController_videomergeButtonClicked!()
         }
