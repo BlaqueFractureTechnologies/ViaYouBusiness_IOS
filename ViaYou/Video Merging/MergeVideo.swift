@@ -323,8 +323,8 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     func viewSetUPDesign()
     {
-        bigVIdeoView.layer.borderWidth = 5
-        bigVIdeoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
+//        bigVIdeoView.layer.borderWidth = 5
+//        bigVIdeoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         
         smallVIdeoView.layer.borderWidth = 5
         smallVIdeoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor

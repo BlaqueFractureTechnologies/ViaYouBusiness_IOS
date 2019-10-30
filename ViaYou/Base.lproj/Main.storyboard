@@ -1673,10 +1673,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Page" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-cb-XlA" customClass="def">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.00000000000011"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and share video content hosted, by you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-hC-3s4">
-                                <rect key="frame" x="97.5" y="565.5" width="180" height="41.5"/>
+                                <rect key="frame" x="97.5" y="569.5" width="180" height="37.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FH4-Qm-Et7"/>
                                 </constraints>
@@ -3163,7 +3163,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscriptionInnerPageBanner" translatesAutoresizingMaskIntoConstraints="NO" id="lTe-U2-tPY">
-                                <rect key="frame" x="0.0" y="85" width="375.00000000000045" height="342"/>
+                                <rect key="frame" x="0.0" y="85" width="375" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m68-ut-oAu">
@@ -7954,11 +7954,14 @@ Cgo
                                             <action selector="btnBackAction:" destination="u3d-rV-V78" eventType="touchUpInside" id="QWx-kF-lOY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGJ-zW-O6f">
-                                        <rect key="frame" x="145" y="552" width="84" height="84"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGJ-zW-O6f">
+                                        <rect key="frame" x="162.5" y="604" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="bAt-iG-JZO"/>
+                                            <constraint firstAttribute="height" constant="50" id="eK2-OD-91R"/>
+                                        </constraints>
                                         <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                        <state key="normal" title="Button" image="record_new"/>
+                                        <state key="normal" backgroundImage="record_new"/>
                                         <connections>
                                             <action selector="btnRecoerVideo:" destination="kDn-aK-L7Y" eventType="touchUpInside" id="KKx-in-Ovf"/>
                                         </connections>
@@ -7966,8 +7969,10 @@ Cgo
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="zGJ-zW-O6f" secondAttribute="bottom" constant="13" id="2BN-om-NOn"/>
                                     <constraint firstAttribute="trailing" secondItem="tlW-FD-wrj" secondAttribute="trailing" id="79q-hj-QDA"/>
                                     <constraint firstAttribute="bottom" secondItem="tlW-FD-wrj" secondAttribute="bottom" id="EYf-gw-amI"/>
+                                    <constraint firstItem="zGJ-zW-O6f" firstAttribute="centerX" secondItem="ORZ-zw-Krs" secondAttribute="centerX" id="SKh-p8-GGy"/>
                                     <constraint firstAttribute="trailing" secondItem="HU4-9i-nTa" secondAttribute="trailing" id="YvS-Qr-ROr"/>
                                     <constraint firstItem="tZG-yJ-kPy" firstAttribute="top" secondItem="ORZ-zw-Krs" secondAttribute="top" constant="7" id="aAg-5u-0xf"/>
                                     <constraint firstAttribute="bottom" secondItem="HU4-9i-nTa" secondAttribute="bottom" id="abb-Xf-wnJ"/>

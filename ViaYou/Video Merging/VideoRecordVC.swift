@@ -155,6 +155,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
         } else
         {
             let videoRecorded = outputURL! as URL
+            self.recordBtnOutlet.setBackgroundImage(UIImage(named: "record_new"), for: .normal)
             print("=======video stop=========")
             print(videoRecorded)
             getVideoTime()
@@ -217,6 +218,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             outputURL = tempURL()
             movieOutput.startRecording(to: outputURL, recordingDelegate: self)
              self.lblShowTimer.isHidden = false
+            self.recordBtnOutlet.setBackgroundImage(UIImage(named: "stop_record"), for: .normal)
             print("=====recording Start=====")
             timer.invalidate()
             timerforRecord.invalidate()
