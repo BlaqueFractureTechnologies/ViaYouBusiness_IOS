@@ -13,10 +13,13 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
 {
     @IBOutlet var viewFrame: UIView!
     @IBOutlet weak var videoView: UIView!
-    
     @IBOutlet weak var recordBtnOutlet: UIButton!
-    
     @IBOutlet weak var lblShowTimer: UILabel!
+    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var topLabel: UILabel!
+    @IBOutlet weak var redLineView: UIView!
+    @IBOutlet weak var bottomLabel: UILabel!
+    
     
     let captureSession = AVCaptureSession()
     let movieOutput = AVCaptureMovieFileOutput()
@@ -191,6 +194,10 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
     
     @IBAction func btnRecoerVideo(_ sender: Any)
     {
+        self.overlayView.alpha = 0
+        self.topLabel.alpha = 0
+        self.redLineView.alpha = 0
+        self.bottomLabel.alpha = 0
         if movieOutput.isRecording == false
         {
             let connection = movieOutput.connection(with: AVMediaType.video)

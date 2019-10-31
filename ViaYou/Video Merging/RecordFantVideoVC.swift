@@ -67,7 +67,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     func ViewSetUp() {
         //        playVideoView.layer.borderWidth = 5
         //        playVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
-        captureVideoView.layer.borderWidth = 5
+        captureVideoView.layer.borderWidth = 3
         captureVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         //        viewNextVcBtn.layer.cornerRadius = viewNextVcBtn.frame.size.height/2
         //        viewNextVcBtn.clipsToBounds = true

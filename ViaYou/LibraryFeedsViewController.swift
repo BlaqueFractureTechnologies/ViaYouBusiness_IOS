@@ -67,7 +67,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Feedback",
                          "Feature Request",
                          "Privacy Policy",
-                         "Terms And Conditions",
+                         "Mobile Terms Of Use",
                          "Sign Out"]
     //AWS setup
     let bucketName = "s3.viayou.net"

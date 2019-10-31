@@ -283,10 +283,8 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     func viewSetUPDesign()
     {
-//        bigVIdeoView.layer.borderWidth = 5
-//        bigVIdeoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         
-        smallVIdeoView.layer.borderWidth = 5
+        smallVIdeoView.layer.borderWidth = 3
         smallVIdeoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         
         //        viewFrame.layer.borderWidth = 5
@@ -297,21 +295,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         
         promptTitleField.layer.cornerRadius = self.promptTitleField.frame.size.height / 2
         promptTitleField.clipsToBounds = true
-        //        promptTitleField.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
-        //        promptTitleField.layer.borderWidth = 2
-        //        promptDescriptionTextView.layer.cornerRadius = 8
-        //        promptDescriptionTextView.clipsToBounds = true
-        //        promptDescriptionTextView.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
-        //        promptDescriptionTextView.layer.borderWidth = 2
-        
-//        titleFieldContainer.layer.cornerRadius = 8
-//        titleFieldContainer.layer.borderColor = UIColor.white.cgColor
-//        titleFieldContainer.layer.borderWidth = 1.5
-        
-        //        promptRoundButtonContainer.layer.cornerRadius = promptRoundButtonContainer.frame.size.width/2.0
-        //        promptRoundButtonContainer.layer.borderColor = UIColor.white.cgColor
-        //        promptRoundButtonContainer.layer.borderWidth = 1.5
-        //        promptRoundButtonContainer.backgroundColor = UIColor.clear
+
     }
     
     var smallPlayerLayer = AVPlayerLayer()
@@ -357,14 +341,6 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
 //                self.lbltimer.invalidate()
 //            }
 //        }
-    }
-    
-    func SaveVideoDiscriptionDetails()
-    {
-        //        dicDiscription.setValue(promptTitleField.text, forKey: "videoTitle")
-        //        dicDiscription.setValue(promptDescriptionTextView.text, forKey: "videoDescription")
-        //        // dicDiscription.setValue(txtTagAnyPersone.text, forKey: "videoTag")
-        //        dicDiscription.setValue(promptLocationLabel.text, forKey: "videotakePlace")
     }
     
     
@@ -533,7 +509,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     {
         let tempURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.mp4")
         print(tempURl)
-        MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xF6CD53[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
+        MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
         
         
         let tmpDirURL = FileManager.default.temporaryDirectory
@@ -716,8 +692,12 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     @IBAction func reRecordButtonClicked(_ sender: Any) {
          self.navigationController?.popViewControllers(viewsToPop: 2)
         //self.navigationController?.popToRootViewController(animated: true)
-        
     }
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.navigationController?.popViewControllers(viewsToPop: 2)
+    }
+    
     
     func saveVideoToFile() {
         print("promptButtonClicked...")
@@ -741,31 +721,6 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
             else
             {
                 self.mergeVideos(firestUrl: self.urlOfSmallVideo, SecondUrl: self.bigVideoURL)
-//                if self.watermarkURL == nil
-//                {
-//                    // processVideo(url:watermarkURL )
-//                    let alertController = UIAlertController(title: "Viayou", message: "Kindly Wait, Video is under the Process!", preferredStyle:.alert)
-//                    let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
-//                        UIAlertAction in}
-//                    alertController.addAction(action)
-//                    // self.present(alertController, animated: true, completion:nil)
-//                }else
-//                {
-//                    let alertController = UIAlertController(title: "Viayou", message: "Save video in Gallery?", preferredStyle:.alert)
-//                    let action = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) {
-//                        UIAlertAction in
-//                    }
-//                    let action1 = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-//                        UIAlertAction in
-//                        self.HideButton()
-//                        self.timerForCheckPhotoLibraryStatus.invalidate()
-//                        self.timerForCheckPhotoLibraryStatus = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.checkPhotoLibraryPermission), userInfo: nil, repeats: true)
-//                    }
-//                    alertController.addAction(action)
-//                    alertController.addAction(action1)
-//                 //   self.present(alertController, animated: true, completion:nil)
-//
-//                }
             }
         }
     }
@@ -776,55 +731,6 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         self.view.isUserInteractionEnabled = false
         
         self.uploadFile(with: self.strName, type: self.typeString, videoURL: self.finalURL)
-        
-//        print("promptButtonClicked...")
-//        print("btnActionSaveToGallery :: dataDictToBePosted====>\(dataDictToBePosted)")
-//        self.activityIndicator.isHidden = false
-//        self.view.isUserInteractionEnabled = false
-//        self.activityIndicator.startAnimating()
-//        let asset = AVURLAsset(url: urlOfSmallVideo, options: nil)
-//        audioURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.m4a")
-//        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-//        let myDocumentPath = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("temp.m4a").absoluteString
-//        _ = NSURL(fileURLWithPath: myDocumentPath)
-//        let documentsDirectory2 = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
-//        audioURl = documentsDirectory2.appendingPathComponent("Audio.m4a")
-//        self.deleteFile(filePath: audioURl as NSURL)
-//        asset.writeAudioTrackToURL(audioURl) { (success, error) -> () in
-//            if !success
-//            {
-//                print(error as Any)
-//            }
-//            else
-//            {
-//                self.mergeVideos(firestUrl: self.urlOfSmallVideo, SecondUrl: self.bigVideoURL)
-//                if self.watermarkURL == nil
-//                {
-//                    // processVideo(url:watermarkURL )
-//                    let alertController = UIAlertController(title: "Viayou", message: "Kindly Wait, Video is under the Process!", preferredStyle:.alert)
-//                    let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
-//                        UIAlertAction in}
-//                    alertController.addAction(action)
-//                    // self.present(alertController, animated: true, completion:nil)
-//                }else
-//                {
-//                    let alertController = UIAlertController(title: "Viayou", message: "Save video in Gallery?", preferredStyle:.alert)
-//                    let action = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) {
-//                        UIAlertAction in
-//                    }
-//                    let action1 = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-//                        UIAlertAction in
-//                        self.HideButton()
-//                        self.timerForCheckPhotoLibraryStatus.invalidate()
-//                        self.timerForCheckPhotoLibraryStatus = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.checkPhotoLibraryPermission), userInfo: nil, repeats: true)
-//                    }
-//                    alertController.addAction(action)
-//                    alertController.addAction(action1)
-//                    self.present(alertController, animated: true, completion:nil)
-//
-//                }
-//            }
-//        }
     }
     
     
