@@ -77,6 +77,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     var strName: String = ""
     var typeString: String = ""
     var finalURL: URL!
+    
+    var watermarkUrlHeader = ""
+    var thirdUrl: String = ""
     //
     
     override func viewDidLoad()
@@ -86,6 +89,10 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
        // promptTitleField.makeBlackPlaceholder()
         promptTitleField.makeWhitePlaceholder()
         
+        let watermarkImage = "powered_viayou.png"
+        if let selfUserId = Auth.auth().currentUser?.uid {
+            thirdUrl = "\(watermarkUrlHeader)users/\(selfUserId)/\(watermarkImage)"
+        }
         // time calc starts
         let interval = self.totalVideoTime
         
@@ -510,8 +517,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         let tempURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.mp4")
         print(tempURl)
         MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
-        
-        
+        MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=180:h=80,[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
         let tmpDirURL = FileManager.default.temporaryDirectory
         let strName : String = "viayou_\(self.randomStringWithLength(len: 13))"
         let strNameOfVideo : String = strName + ".\(tempURl.pathExtension)"
