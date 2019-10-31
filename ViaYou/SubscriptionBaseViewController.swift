@@ -10,7 +10,7 @@ import UIKit
 
 class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     var isPurchased: Int = 0
     
     let notificationName_UpgradeSoloHostViewControllerHideAfterPayment = Notification.Name("UpgradeSoloHostViewControllerHideAfterPayment")
@@ -22,6 +22,29 @@ class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, U
     }
     override func viewWillAppear(_ animated: Bool) {
         isPurchased = DefaultWrapper().getPaymentTypePurchased()
+        
+        //isPurchased = -1 => 3 cells
+        //isPurchased = 0  => 2 cells
+        //isPurchased = 1 => 1 cells
+        //isPurchased = 2 => 0 cells
+        let isPurchasedAndCells:[String:Int] = ["-1":3,
+                                                "0":2,
+                                                "1":1,
+                                                "2":0]
+        
+        //isPurchased = 2 //For testing
+        if (isPurchased >= 0) {
+            let numberOfDisplayedCells:Int = isPurchasedAndCells["\(isPurchased)"] ?? 0
+            print(numberOfDisplayedCells)
+            DispatchQueue.main.async {
+                self.tableViewHeightConstraint.constant = CGFloat(numberOfDisplayedCells*60)
+            }
+        }
+        
+        
+        
+        
+        
         tableView.reloadData()
         // Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.resetScrollViewAccordingToPayment), userInfo: nil, repeats: false)
     }
@@ -76,14 +99,14 @@ class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, U
         }else { //if (indexPath.row == 2){
             cell.mainTitleLabel.text = "Upgrade To"
             cell.subTitleLabel.text = "Pro Host"
-           // cell.offerLabel.text = " save 25%"
+            // cell.offerLabel.text = " save 25%"
         }
-//        else {
-//            cell.mainTitleLabel.text = "Upgrade To"
-//            cell.subTitleLabel.text = "Enterprise"
-//           // cell.offerLabel.text = " save 30%"
-//            cell.learnMoreButton.setTitle("Contact Us", for: .normal)
-//        }
+        //        else {
+        //            cell.mainTitleLabel.text = "Upgrade To"
+        //            cell.subTitleLabel.text = "Enterprise"
+        //           // cell.offerLabel.text = " save 30%"
+        //            cell.learnMoreButton.setTitle("Contact Us", for: .normal)
+        //        }
         
         cell.learnMoreButton.tag = indexPath.row
         cell.learnMoreButton.addTarget(self, action: #selector(learnMoreButtonClicked), for: UIControl.Event.touchUpInside)

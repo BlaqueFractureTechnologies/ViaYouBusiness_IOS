@@ -94,4 +94,8 @@ class PaymentCompletedViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func homeButtonClicked(_ sender: Any) {
+        self.navigationController?.popViewControllers(viewsToPop: 2)
+    }
+    
 }

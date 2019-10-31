@@ -87,19 +87,45 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     {
         super.viewDidLoad()
         
-       // promptTitleField.makeBlackPlaceholder()
+        // promptTitleField.makeBlackPlaceholder()
         promptTitleField.makeWhitePlaceholder()
         
         //watermark image
         let watermarkImage = "powered_viayou.png"
         if let selfUserId = Auth.auth().currentUser?.uid {
             thirdUrl = "\(watermarkUrlHeader)users/\(selfUserId)/\(watermarkImage)"
+            print(thirdUrl)
         }
-        let selectedImage = UIImage(named: "powered")!
-        let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage)
-        print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
+        //
         
-        self.uploadProfilePhotoFile(with: "powered_viayou", type: "png", savedimagePathInDocuments: savedProfileImagePath)
+        JMImageCache.shared()?.image(for: URL(string: thirdUrl), completionBlock: { (image) in
+            print(image)
+            let selectedImage = image
+            let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage!)
+            print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
+            
+            self.uploadProfilePhotoFile(with: "powered_viayou", type: "png", savedimagePathInDocuments: savedProfileImagePath)
+            
+            if (__CGSizeEqualToSize(image?.size ?? CGSize.zero, CGSize.zero)) {
+                print("EMPTY IMAGE")
+                let selectedImage = UIImage(named: "powered")!
+                
+                let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage)
+                print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
+                
+                self.uploadProfilePhotoFile(with: "powered_viayou", type: "png", savedimagePathInDocuments: savedProfileImagePath)
+            }
+        }, failureBlock: { (request, response, error) in
+            print(error.debugDescription)
+            let selectedImage = UIImage(named: "powered")!
+            
+            let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage)
+            print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
+            
+            self.uploadProfilePhotoFile(with: "powered_viayou", type: "png", savedimagePathInDocuments: savedProfileImagePath)
+        })
+        //
+        
         
         //watermark image ends
         // time calc starts
@@ -217,7 +243,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         print("promptButtonClicked...")
         print("btnActionSaveToGallery :: dataDictToBePosted====>\(dataDictToBePosted)")
         self.activityIndicator.isHidden = false
-       // self.view.isUserInteractionEnabled = false
+        // self.view.isUserInteractionEnabled = false
         self.activityIndicator.startAnimating()
         let asset = AVURLAsset(url: urlOfSmallVideo, options: nil)
         audioURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.m4a")
@@ -251,7 +277,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                     }
                     let action1 = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                         UIAlertAction in
-                        self.HideButton()
+                        // self.HideButton()
                         self.timerForCheckPhotoLibraryStatus.invalidate()
                         self.timerForCheckPhotoLibraryStatus = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.checkPhotoLibraryPermission), userInfo: nil, repeats: true)
                     }
@@ -306,12 +332,12 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         //        viewFrame.layer.borderWidth = 5
         //        viewFrame.layer.borderColor = hexStringToUIColor(hex: "F8CC5F").cgColor
         
-//        lblTimer.layer.cornerRadius = self.lblTimer.frame.size.height / 2
-//        lblTimer.clipsToBounds = true
+        //        lblTimer.layer.cornerRadius = self.lblTimer.frame.size.height / 2
+        //        lblTimer.clipsToBounds = true
         
         promptTitleField.layer.cornerRadius = self.promptTitleField.frame.size.height / 2
         promptTitleField.clipsToBounds = true
-
+        
     }
     
     var smallPlayerLayer = AVPlayerLayer()
@@ -348,15 +374,15 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     func lableCounterTime()
     {
-//        lbltimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (returnedTimer) in
-//            self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
-//            self.currentTimeCounter += 1
-//            if self.currentTimeCounter == self.videoTime - 1
-//            {
-//                self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
-//                self.lbltimer.invalidate()
-//            }
-//        }
+        //        lbltimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (returnedTimer) in
+        //            self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
+        //            self.currentTimeCounter += 1
+        //            if self.currentTimeCounter == self.videoTime - 1
+        //            {
+        //                self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
+        //                self.lbltimer.invalidate()
+        //            }
+        //        }
     }
     
     
@@ -514,18 +540,12 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     }
     
     
-    
-    func HideButton()
-    {
- 
-    }
-    
     func mergeVideos(firestUrl : URL , SecondUrl : URL )
     {
         let tempURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.mp4")
         print(tempURl)
-        MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
-        //MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=180:h=80,[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+        //  MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
+        MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=180:h=80[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
         let tmpDirURL = FileManager.default.temporaryDirectory
         let strName : String = "viayou_\(self.randomStringWithLength(len: 13))"
         let strNameOfVideo : String = strName + ".\(tempURl.pathExtension)"
@@ -538,7 +558,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
             let newDate = presentDate.toString(dateFormat: "dd-MM-YYYY")
             print(newDate)
             self.dateCreated = newDate
-           
+            
         }
         print("\(strName).\(newURL.pathExtension)")
         self.nameOfVideo = "\(strName).\(newURL.pathExtension)"
@@ -556,7 +576,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
                 self.view.isUserInteractionEnabled = true
-               // self.uploadFile(with: strName, type: newURL.pathExtension, videoURL: newURL)
+                // self.uploadFile(with: strName, type: newURL.pathExtension, videoURL: newURL)
                 
             } catch let error {
                 DTMessageHUD.dismiss()
@@ -642,7 +662,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                         let strNameOfVideo : String = strName + ".\(self!.outputURL.pathExtension)"
                         let newURL = tmpDirURL.appendingPathComponent(strNameOfVideo)
                         
-                       
+                        
                         
                         
                         //                        let tempDirectoryURL = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
@@ -704,7 +724,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     
     @IBAction func reRecordButtonClicked(_ sender: Any) {
-         self.navigationController?.popViewControllers(viewsToPop: 2)
+        self.navigationController?.popViewControllers(viewsToPop: 2)
         //self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -834,10 +854,10 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                             DispatchQueue.main.async {
                                 JMImageCache.shared()?.image(for: URL(string: profileImageOnlineUrl), completionBlock: { (image) in
                                     
-//                                    self.profilePicButton.setBackgroundImage(image, for: .normal)
-//                                    self.profilePicButtonOnDropDownList.setBackgroundImage(image, for: .normal)
-//                                    self.profilePicOnInvitePopUp.image = image
-//                                    self.profilePicOnNoFeedPopUp.image = image
+                                    //                                    self.profilePicButton.setBackgroundImage(image, for: .normal)
+                                    //                                    self.profilePicButtonOnDropDownList.setBackgroundImage(image, for: .normal)
+                                    //                                    self.profilePicOnInvitePopUp.image = image
+                                    //                                    self.profilePicOnNoFeedPopUp.image = image
                                     
                                     
                                 }, failureBlock: { (request, response, error) in
@@ -850,9 +870,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                                 UIAlertAction in}
                             alertController.addAction(action)
                             DispatchQueue.main.async {
-//                                self.activityIndicator.isHidden = true
-//                                self.activityIndicator.stopAnimating()
-                                 self.present(alertController, animated: true, completion:nil)
+                                //                                self.activityIndicator.isHidden = true
+                                //                                self.activityIndicator.stopAnimating()
+                                //  self.present(alertController, animated: true, completion:nil)
                                 
                             }
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
@@ -925,7 +945,6 @@ extension URL {
         }
         return nil
     }
-    
     var fileSize: UInt64 {
         return attributes?[.size] as? UInt64 ?? UInt64(0)
     }

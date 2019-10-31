@@ -27,7 +27,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var bottomPlusButton: UIButton!
     @IBOutlet weak var profilePicButton: UIButton!
     @IBOutlet weak var noFeedPopUpView: UIView!
-    @IBOutlet weak var dropDownBaseView: UIView!    
+    @IBOutlet weak var dropDownBaseView: UIView!
     @IBOutlet weak var dropDownBaseViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dropDownButtonContainerBg: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -54,7 +54,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var storageIndicatorLabelOnDropDown: UILabel!
     @IBOutlet weak var storageIndicatorRedOnDropDownWidthConstraint: NSLayoutConstraint!
     
-
+    
     var dataArray:[FeedDataArrayObject] = []
     var bucketDataArray:BucketDataObject = BucketDataObject([:])
     var subscriptionArray:SubscriptionArrayObject = SubscriptionArrayObject([:])
@@ -277,13 +277,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             print("remainingSpace = \(remainingSpace)")
             
             let remainingSpaceInMB = Float(remainingSpace) / 1000.0
-         //   let roundedValue = remainingSpaceInMB.rounded(.toNearestOrAwayFromZero)
+            //   let roundedValue = remainingSpaceInMB.rounded(.toNearestOrAwayFromZero)
             
             DispatchQueue.main.async {
                 
                 self.storageIndicatorLabel.text = "\(remainingSpaceInMB) GB Free"
                 self.storageIndicatorLabelOnDropDown.text = "\(remainingSpaceInMB) GB Free"
-
+                
             }
         }
         else
@@ -526,6 +526,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 DispatchQueue.main.async {
                     self.dataArray.remove(at: sender.tag)
                     self.collectioView.reloadData()
+                    self.dataArray.removeAll()
+                    self.getResponseFromJSONFile()
                 }
             }
             else
@@ -627,16 +629,16 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
          self.popUpOverlayButton.alpha = 0.5
          */
         
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
-//        nextVC.modalPresentationStyle = .overCurrentContext
-//        self.present(nextVC, animated: false, completion: nil)
-
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
-//        nextVC.modalPresentationStyle = .overCurrentContext
-//        nextVC.delegate = self
-//        self.present(nextVC, animated: false, completion: nil)
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+        //        nextVC.modalPresentationStyle = .overCurrentContext
+        //        self.present(nextVC, animated: false, completion: nil)
+        
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+        //        nextVC.modalPresentationStyle = .overCurrentContext
+        //        nextVC.delegate = self
+        //        self.present(nextVC, animated: false, completion: nil)
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
@@ -898,14 +900,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             
             
         }
-                    else if (indexPath.row == 3) {
-                        if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
-                            if UIApplication.shared.canOpenURL(url) {
-                                UIApplication.shared.open(url, options: [:])
-                            }
+        else if (indexPath.row == 3) {
+            if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:])
+                }
             }
             
-                    }
+        }
         else if (indexPath.row == 4) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
@@ -945,7 +947,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         navVC.isNavigationBarHidden = true
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-
+    
     func AddFeedPopUpViewController_videomergeButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
@@ -963,8 +965,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     func AddTwoMenuViewController_videomergeButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
-//        let navVC = UINavigationController(rootViewController: nextVC)
-//        navVC.isNavigationBarHidden = true
+        //        let navVC = UINavigationController(rootViewController: nextVC)
+        //        navVC.isNavigationBarHidden = true
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -1137,7 +1139,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                             DispatchQueue.main.async {
                                 self.activityIndicator.isHidden = true
                                 self.activityIndicator.stopAnimating()
-                               // self.present(alertController, animated: true, completion:nil)
+                                // self.present(alertController, animated: true, completion:nil)
                                 
                             }
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
