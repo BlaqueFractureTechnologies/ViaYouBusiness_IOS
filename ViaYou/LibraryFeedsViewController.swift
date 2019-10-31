@@ -422,8 +422,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                     
                     //  self.loadVideoSize()
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.sync {
                         self.loadAllVideoImagesForDataArray()
+
+                    }
+                    DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 0
                         self.collectioView.reloadData()
                         
@@ -648,10 +651,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         referralLink!.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.viayou.ViaYouApp")
         referralLink!.iOSParameters?.minimumAppVersion = "1.0"
-        referralLink!.iOSParameters?.appStoreID = "123456789"
+       // referralLink!.iOSParameters?.appStoreID = "123456789"
         
-        referralLink!.androidParameters = DynamicLinkAndroidParameters(packageName: "com.example.android")
-        referralLink!.androidParameters?.minimumVersion = 125
+        referralLink!.androidParameters = DynamicLinkAndroidParameters(packageName: "net.viayou")
+        //referralLink!.androidParameters?.minimumVersion = 125
         
         referralLink!.shorten { (shortURL, warnings, error) in
             if let error = error {
