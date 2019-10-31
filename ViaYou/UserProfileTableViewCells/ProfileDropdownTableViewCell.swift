@@ -20,15 +20,12 @@ class ProfileDropdownTableViewCell: UITableViewCell {
         
         self.titleLabel.text = "\(dataArray[index])"
         
-        if (index == 0) {
-            
+        if (index == 0) {            
             self.titleLabel.textColor =  #colorLiteral(red: 0.7752474546, green: 0.3023262918, blue: 0.373683393, alpha: 1)
-            self.titleLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+            self.titleLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
             
         }
-        
-        
-        
+
         var iconName = "DropDown_\(dataArray[index])"
         
         iconName = iconName.replacingOccurrences(of: " ", with: "_")

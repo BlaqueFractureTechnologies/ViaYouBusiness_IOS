@@ -78,8 +78,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     var typeString: String = ""
     var finalURL: URL!
     
-    var watermarkUrlHeader = ""
+    var watermarkUrlHeader = "http://s3.viayou.net/"
     var thirdUrl: String = ""
+    var userId: String = ""
     //
     
     override func viewDidLoad()
@@ -89,10 +90,18 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
        // promptTitleField.makeBlackPlaceholder()
         promptTitleField.makeWhitePlaceholder()
         
+        //watermark image
         let watermarkImage = "powered_viayou.png"
         if let selfUserId = Auth.auth().currentUser?.uid {
             thirdUrl = "\(watermarkUrlHeader)users/\(selfUserId)/\(watermarkImage)"
         }
+        let selectedImage = UIImage(named: "powered")!
+        let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage)
+        print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
+        
+        self.uploadProfilePhotoFile(with: "powered_viayou", type: "png", savedimagePathInDocuments: savedProfileImagePath)
+        
+        //watermark image ends
         // time calc starts
         let interval = self.totalVideoTime
         
@@ -508,8 +517,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     func HideButton()
     {
-        //  btnRedo.isUserInteractionEnabled = false
-        // btnSaveOutlet.isUserInteractionEnabled = false
+ 
     }
     
     func mergeVideos(firestUrl : URL , SecondUrl : URL )
@@ -517,7 +525,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         let tempURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.mp4")
         print(tempURl)
         MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
-        MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=180:h=80,[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+        //MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=180:h=80,[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
         let tmpDirURL = FileManager.default.temporaryDirectory
         let strName : String = "viayou_\(self.randomStringWithLength(len: 13))"
         let strNameOfVideo : String = strName + ".\(tempURl.pathExtension)"
@@ -760,7 +768,109 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         self.present(nextVC, animated: true, completion: nil)
     }
     
+    //MARK:- Watermark Addition
+    func saveprofilePicToDocumentDirectory(_ chosenImage: UIImage) -> URL {
+        let directoryPath =  NSHomeDirectory().appending("/Documents/")
+        if !FileManager.default.fileExists(atPath: directoryPath) {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directoryPath), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+        
+        let filename = "powered_viayou.png"
+        let filepath = directoryPath.appending(filename)
+        let url = NSURL.fileURL(withPath: filepath)
+        do {
+            try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
+            return url
+            
+        } catch {
+            print(error)
+            print("file cant not be save at path \(filepath), with error : \(error)");
+            return url
+        }
+    }
+    
+    func uploadProfilePhotoFile(with resource: String, type: String, savedimagePathInDocuments: URL)
+    {
+        
+        autoreleasepool{
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    //DTMessageHUD.hud()
+                    
+                    let key = "\(resource).\(type)"
+                    print("key====>\(key)")
+                    let request = AWSS3TransferManagerUploadRequest()!
+                    request.bucket = self.bucketName
+                    self.userId = Auth.auth().currentUser!.uid
+                    request.key = "users/"+"\(String(describing: self.userId))"+"/"+key
+                    print("self.userID====>\(self.userId)")
+                    print("request.key====>\(request.key ?? "No request.key")")
+                    
+                    request.body = savedimagePathInDocuments
+                    request.acl = .publicReadWrite
+                    print("savedimagePathInDocuments====>\(savedimagePathInDocuments)")
+                    
+                    let transferManager = AWSS3TransferManager.default()
+                    transferManager.upload(request).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in
+                        DispatchQueue.main.async {
+                            //  DTMessageHUD.dismiss()
+                        }
+                        if let error = task.error {
+                            print("Upload error occurred :: error ====> \(error.localizedDescription)")
+                            // DTMessageHUD.dismiss()
+                        }
+                        if task.result != nil {
+                            //  DTMessageHUD.dismiss()
+                            
+                            let profileImageOnlineUrl = "\(self.watermarkUrlHeader)users/\(self.userId)/\(key)"
+                            print("profileImageOnlineUrl====>\(profileImageOnlineUrl)")
+                            
+                            
+                            JMImageCache.shared()?.removeImage(for: URL(string: profileImageOnlineUrl))
+                            DispatchQueue.main.async {
+                                JMImageCache.shared()?.image(for: URL(string: profileImageOnlineUrl), completionBlock: { (image) in
+                                    
+//                                    self.profilePicButton.setBackgroundImage(image, for: .normal)
+//                                    self.profilePicButtonOnDropDownList.setBackgroundImage(image, for: .normal)
+//                                    self.profilePicOnInvitePopUp.image = image
+//                                    self.profilePicOnNoFeedPopUp.image = image
+                                    
+                                    
+                                }, failureBlock: { (request, response, error) in
+                                })
+                                
+                            }
+                            print("Upload success \(key)")
+                            let alertController = UIAlertController(title: "ViaYou", message: ("Uploaded watermark"), preferredStyle:.alert)
+                            let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
+                                UIAlertAction in}
+                            alertController.addAction(action)
+                            DispatchQueue.main.async {
+//                                self.activityIndicator.isHidden = true
+//                                self.activityIndicator.stopAnimating()
+                                 self.present(alertController, animated: true, completion:nil)
+                                
+                            }
+                            let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
+                            self.contentUrl = contentUrl
+                        }
+                        return nil
+                    }
+                }
+            }
+        }
+    }
+    
 }
+
+
+
+
+///watermark ends
 
 extension AVAsset{
     func writeAudioTrackToURL(_ url: URL, completion: @escaping (Bool, Error?) -> ()) {

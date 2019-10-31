@@ -632,11 +632,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
 //        nextVC.modalPresentationStyle = .overCurrentContext
 //        self.present(nextVC, animated: false, completion: nil)
 
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+//        nextVC.modalPresentationStyle = .overCurrentContext
+//        nextVC.delegate = self
+//        self.present(nextVC, animated: false, completion: nil)
+        
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
-        nextVC.modalPresentationStyle = .overCurrentContext
-        nextVC.delegate = self
-        self.present(nextVC, animated: false, completion: nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
+        let navVC = UINavigationController(rootViewController: nextVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.pushViewController(nextVC, animated: true)
         
     }
     
