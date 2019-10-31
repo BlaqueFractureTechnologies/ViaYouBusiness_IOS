@@ -77,7 +77,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                                       "Feedback",
                                       "Feature Request",
                                       "Privacy Policy",
-                                      "Terms And Conditions",
+                                      "Mobile Terms Of Use",
                                       "Sign Out"]
     //AWS setup
     let bucketName = "s3.viayou.net"
@@ -1255,14 +1255,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                                 
                             }
                             print("Upload success \(key)")
-                            let alertController = UIAlertController(title: "ViaYou", message: ("Uploaded profile pic"), preferredStyle:.alert)
+                            let alertController = UIAlertController(title: "ViaYou", message: ("Uploaded Watermark"), preferredStyle:.alert)
                             let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
                                 UIAlertAction in}
                             alertController.addAction(action)
                             DispatchQueue.main.async {
                                 self.activityIndicator.isHidden = true
                                 self.activityIndicator.stopAnimating()
-                                // self.present(alertController, animated: true, completion:nil)
+                                 self.present(alertController, animated: true, completion:nil)
                                 
                             }
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)

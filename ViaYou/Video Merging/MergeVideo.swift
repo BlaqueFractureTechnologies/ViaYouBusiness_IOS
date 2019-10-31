@@ -108,7 +108,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
             
             if (__CGSizeEqualToSize(image?.size ?? CGSize.zero, CGSize.zero)) {
                 print("EMPTY IMAGE")
-                let selectedImage = UIImage(named: "powered")!
+                let selectedImage = UIImage(named: "ic_powered_viayou")!
                 
                 let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage)
                 print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
@@ -117,7 +117,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
             }
         }, failureBlock: { (request, response, error) in
             print(error.debugDescription)
-            let selectedImage = UIImage(named: "powered")!
+            let selectedImage = UIImage(named: "ic_powered_viayou")!
             
             let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage)
             print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
