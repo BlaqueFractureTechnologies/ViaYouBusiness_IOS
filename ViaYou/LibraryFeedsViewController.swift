@@ -49,9 +49,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var plusButtonBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var totalVideoCount: UILabel!
+    @IBOutlet weak var storageIndicatorGreenOnDropDown: UIView!
+    @IBOutlet weak var storageIndicatorRedOnDropDown: UIView!
+    @IBOutlet weak var storageIndicatorLabelOnDropDown: UILabel!
+    @IBOutlet weak var storageIndicatorRedOnDropDownWidthConstraint: NSLayoutConstraint!
     
-    
-    
+
     var dataArray:[FeedDataArrayObject] = []
     var bucketDataArray:BucketDataObject = BucketDataObject([:])
     var subscriptionArray:SubscriptionArrayObject = SubscriptionArrayObject([:])
@@ -255,10 +258,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     let storageIndicatorGreenWidth = self.storageIndicatorGreen.frame.size.width
                     let storageIndicatorRedWidth   = self.storageIndicatorRed.frame.size.width
                     
+                    let storageIndicatorGreenOnDropdownWidth = self.storageIndicatorGreenOnDropDown.frame.size.width
+                    let storageIndicatorRedOnDropdownWidth   = self.storageIndicatorRedOnDropDown.frame.size.width
+                    
                     print("storageIndicatorGreenWidth = \(storageIndicatorGreenWidth)")
                     print("storageIndicatorRedWidth = \(storageIndicatorRedWidth)")
                     
+                    print("storageIndicatorGreenWidth = \(storageIndicatorGreenOnDropdownWidth)")
+                    print("storageIndicatorRedWidth = \(storageIndicatorRedOnDropdownWidth)")
+                    
                     self.storageIndicatorRedWidthConstraint.constant = CGFloat(percentage)
+                    self.storageIndicatorRedOnDropDownWidthConstraint.constant = CGFloat(percentage)
                     
                 }
             }
@@ -267,11 +277,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             print("remainingSpace = \(remainingSpace)")
             
             let remainingSpaceInMB = Float(remainingSpace) / 1000.0
-            let roundedValue = remainingSpaceInMB.rounded(.toNearestOrAwayFromZero)
+         //   let roundedValue = remainingSpaceInMB.rounded(.toNearestOrAwayFromZero)
             
             DispatchQueue.main.async {
                 
                 self.storageIndicatorLabel.text = "\(remainingSpaceInMB) GB Free"
+                self.storageIndicatorLabelOnDropDown.text = "\(remainingSpaceInMB) GB Free"
+
             }
         }
         else
@@ -281,6 +293,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 print("storageIndicatorRedWidth = \(storageIndicatorRedWidth)")
                 self.storageIndicatorRedWidthConstraint.constant = CGFloat(0.0)
                 self.storageIndicatorLabel.text = "2 GB Free"
+                self.storageIndicatorLabelOnDropDown.text = "2 GB Free"
             }
         }
     }
