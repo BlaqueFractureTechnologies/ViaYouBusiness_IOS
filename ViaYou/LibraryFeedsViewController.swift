@@ -388,7 +388,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        return
         //
         
-        ApiManager().getAllPostsAPI(from: "0", size: "100") { (responseDict, error) in
+        ApiManager().getAllPostsAPI(from: "0", size: "1000") { (responseDict, error) in
             if error == nil {
                 print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
                 if responseDict.data.count == 0 {
@@ -406,6 +406,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         print("Total video count=====> \(responseDict.data.count)")
                         if responseDict.data.count == 1 {
                             DispatchQueue.main.async {
+                                
                                 self.totalVideoCount.text = "\(responseDict.data.count) video"
                             }                        }
                         else {
@@ -417,33 +418,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         indexDict.isInfoPopUpDisplaying = false
                         self.dataArray.append(indexDict)
                         
-                        /*
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         self.dataArray.append(indexDict)
-                         */
-                        
                         print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
                     }
-                    self.loadAllVideoImagesForDataArray()
+                    
                     //  self.loadVideoSize()
                     DispatchQueue.main.async {
+                        self.loadAllVideoImagesForDataArray()
                         self.noFeedPopUpView.alpha = 0
                         self.collectioView.reloadData()
                         
@@ -734,44 +714,47 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func loadAllVideoImagesForDataArray() {
         for i in 0..<dataArray.count {
-            let userID = dataArray[i].user._id
-            let videoName = dataArray[i].fileName
-            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
-            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-            print("videUrlString :: \(videUrlString)")
-            
-            //get duration time
-            let asset = AVAsset(url: URL(string: videUrlString)!)
-            let duration = asset.duration
-            let durationTime = CMTimeGetSeconds(duration)
-            print("durationTime====>\(durationTime)")
-            //get duration time ends
-            DispatchQueue.global(qos: .userInitiated).async {
-                let image = self.previewImageFromVideo(url: URL(string: videUrlString)! as NSURL)
-                if (image != nil) {
-                    self.dataArray[i].user.videoImage = image!
-                    self.dataArray[i].user.duration = String(durationTime)
-                    self.dataArray[i].fileName = videoName
-                    DispatchQueue.main.async {
-                        print("****Loaded image at index :: \(i)")
-                        self.collectioView.reloadData()
+            if dataArray.count > 0 {
+                let userID = dataArray[i].user._id
+                let videoName = dataArray[i].fileName
+                var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+                videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+                print("videUrlString :: \(videUrlString)")
+                
+                //get duration time
+                let asset = AVAsset(url: URL(string: videUrlString)!)
+                let duration = asset.duration
+                let durationTime = CMTimeGetSeconds(duration)
+                print("durationTime====>\(durationTime)")
+                //get duration time ends
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let image = self.previewImageFromVideo(url: URL(string: videUrlString)! as NSURL)
+                    if (image != nil) {
+                        self.dataArray[i].user.videoImage = image!
+                        self.dataArray[i].user.duration = String(durationTime)
+                        self.dataArray[i].fileName = videoName
+                        DispatchQueue.main.async {
+                            print("****Loaded image at index :: \(i)")
+                            self.collectioView.reloadData()
+                        }
                     }
                 }
-            }
-            
-            //get video size
-            
-            getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
-                if (error == nil) {
-                    DispatchQueue.main.async {
-                        let size = "\(size) KB"
-                        self.dataArray[i].videoFileSize = size
-                        self.collectioView.reloadData()
+                
+                //get video size
+                
+                getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
+                    if (error == nil) {
+                        DispatchQueue.main.async {
+                            let size = "\(size) KB"
+                            self.dataArray[i].videoFileSize = size
+                            self.collectioView.reloadData()
+                        }
                     }
                 }
+                
+                //get video size ended
             }
-            
-            //get video size ended
+
         }
     }
     
@@ -924,12 +907,19 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     nextVC.delegate = self
                     self.present(nextVC, animated: false, completion: nil)
                 }
-            } else if (indexPath.row == 5) {
+            }  else if (indexPath.row == 4) {
+                if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:])
+                    }
+                }
+                
+            }else if (indexPath.row == 5) {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
                 nextVC.modalPresentationStyle = .overCurrentContext
                 self.navigationController?.pushViewController(nextVC, animated: true)
-            } else if (indexPath.row == 5) {
+            } else if (indexPath.row == 6) {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
                 self.navigationController?.pushViewController(nextVC, animated: true)
@@ -980,6 +970,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     nextVC.delegate = self
                     self.present(nextVC, animated: false, completion: nil)
                 }
+            }  else if (indexPath.row == 3) {
+                if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:])
+                    }
+                }
+                
             } else if (indexPath.row == 4) {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
@@ -1255,14 +1252,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                                 
                             }
                             print("Upload success \(key)")
-                            let alertController = UIAlertController(title: "ViaYou", message: ("Uploaded Watermark"), preferredStyle:.alert)
+                            let alertController = UIAlertController(title: "ViaYou", message: ("Uploaded Profile Picture"), preferredStyle:.alert)
                             let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
                                 UIAlertAction in}
                             alertController.addAction(action)
                             DispatchQueue.main.async {
                                 self.activityIndicator.isHidden = true
                                 self.activityIndicator.stopAnimating()
-                                 self.present(alertController, animated: true, completion:nil)
+                                // self.present(alertController, animated: true, completion:nil)
                                 
                             }
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
@@ -1334,9 +1331,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                                 UIAlertAction in}
                             alertController.addAction(action)
                             DispatchQueue.main.async {
-                                //                                self.activityIndicator.isHidden = true
-                                //                                self.activityIndicator.stopAnimating()
-                                //  self.present(alertController, animated: true, completion:nil)
+                                                                self.activityIndicator.isHidden = true
+                                                                self.activityIndicator.stopAnimating()
+                                                                self.present(alertController, animated: true, completion:nil)
                                 
                             }
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)

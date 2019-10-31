@@ -32,7 +32,7 @@ class ProfileDropdownTableViewCell: UITableViewCell {
         
         self.iconView.image = UIImage(named: iconName)
         
-        if (index == 2) {
+        if (index == 3) {
             let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
             print("paymentTypePurchased ====> \(paymentTypePurchased)")
             
