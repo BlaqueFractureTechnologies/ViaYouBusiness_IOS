@@ -54,6 +54,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var storageIndicatorLabelOnDropDown: UILabel!
     @IBOutlet weak var storageIndicatorRedOnDropDownWidthConstraint: NSLayoutConstraint!
     
+    var isSelectingProfilePictureFromImagePicker:Bool = false
     
     var dataArray:[FeedDataArrayObject] = []
     var bucketDataArray:BucketDataObject = BucketDataObject([:])
@@ -69,6 +70,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Privacy Policy",
                          "Mobile Terms Of Use",
                          "Sign Out"]
+    var dropdownArrayAfterPurchase = ["Invite",
+                                      "My Plan Or Upgrade",
+                                      "Add Watermark",
+                                      "Restore",
+                                      "Feedback",
+                                      "Feature Request",
+                                      "Privacy Policy",
+                                      "Terms And Conditions",
+                                      "Sign Out"]
     //AWS setup
     let bucketName = "s3.viayou.net"
     var contentUrl: URL!
@@ -79,6 +89,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var totalBucketSpace = ""
     var usedBucketSpace = ""
     let profileImageUrlHeader:String = "http://s3.viayou.net/"
+    var watermarkUrlHeader = "http://s3.viayou.net/"
     let imagePickerController = UIImagePickerController()
     var lastContentOffset:CGFloat = 0.0
     
@@ -822,12 +833,18 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     
     @IBAction func profilePicButtonClicked(_ sender: Any) {
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        
         self.dropDownBaseViewHeightConstraint.constant = 0.0001
         self.dropdownOverlayButton.alpha = 1
         self.dropDownBaseView.alpha = 1
         self.overlayViewWhenDropDownAppears.alpha = 0.4
         UIView.animate(withDuration: 0.4) {
-            self.dropDownBaseViewHeightConstraint.constant = 480
+            if (paymentTypePurchased >= 0) {
+                self.dropDownBaseViewHeightConstraint.constant = 520
+            }else {
+                self.dropDownBaseViewHeightConstraint.constant = 480
+            }
             self.view.layoutIfNeeded()
         }
     }
@@ -845,12 +862,21 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     //MARK:- TableView Delegate Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        if (paymentTypePurchased >= 0) { //Purchased any
+            return dropdownArrayAfterPurchase.count
+        }
         return dropdownArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileDropdownTableViewCell", for: indexPath) as! ProfileDropdownTableViewCell
-        cell.configureCell(dataArray: dropdownArray, index: indexPath.row)
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        if (paymentTypePurchased >= 0) { //Purchased any
+            cell.configureCell(dataArray: dropdownArrayAfterPurchase, index: indexPath.row)
+        }else {
+            cell.configureCell(dataArray: dropdownArray, index: indexPath.row)
+        }
         return cell
     }
     
@@ -858,86 +884,142 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         tableView.deselectRow(at: indexPath, animated: true)
         dropDownOverlayButtonClicked((Any).self)
         
-        if(indexPath.row == 0) {
-            self.inviteFriendsPopUpView.alpha = 1
-            self.popUpOverlayButton.alpha = 0.5
-        }
-        else if (indexPath.row == 1) {
-            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-            print("paymentTypePurchased ====> \(paymentTypePurchased)")
-            
-            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-                self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
-            }else {
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        if (paymentTypePurchased >= 0) {
+            if(indexPath.row == 0) {
+                self.inviteFriendsPopUpView.alpha = 1
+                self.popUpOverlayButton.alpha = 0.5
+            } else if (indexPath.row == 1) {
+                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+                print("paymentTypePurchased ====> \(paymentTypePurchased)")
+                
+                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+                    self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
+                }else {
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                    nextVC.modalPresentationStyle = .overCurrentContext
+                    nextVC.delegate = self
+                    self.present(nextVC, animated: false, completion: nil)
+                }
+                
+            } else if (indexPath.row == 2) {
+                addWatermarkClicked()
+            } else if (indexPath.row == 3) {
+                // if (index == 2) {
+                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+                print("paymentTypePurchased ====> \(paymentTypePurchased)")
+                
+                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
+                    nextVC.modalPresentationStyle = .overCurrentContext
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                    
+                }else {
+                    print("Restore option not available...")
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                    nextVC.modalPresentationStyle = .overCurrentContext
+                    nextVC.delegate = self
+                    self.present(nextVC, animated: false, completion: nil)
+                }
+            } else if (indexPath.row == 5) {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-                nextVC.modalPresentationStyle = .overCurrentContext
-                nextVC.delegate = self
-                self.present(nextVC, animated: false, completion: nil)
-            }
-            
-        }
-        else if (indexPath.row == 2) {
-            // if (index == 2) {
-            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-            print("paymentTypePurchased ====> \(paymentTypePurchased)")
-            
-            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
                 nextVC.modalPresentationStyle = .overCurrentContext
                 self.navigationController?.pushViewController(nextVC, animated: true)
-                
-            }else {
-                print("Restore option not available...")
+            } else if (indexPath.row == 5) {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-                nextVC.modalPresentationStyle = .overCurrentContext
-                nextVC.delegate = self
-                self.present(nextVC, animated: false, completion: nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            } else if (indexPath.row == 7) {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            } else if (indexPath.row == 8) {
+                UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
-            //   }
-            
-            
-        }
-        else if (indexPath.row == 3) {
-            if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:])
+        }else {
+            if(indexPath.row == 0) {
+                self.inviteFriendsPopUpView.alpha = 1
+                self.popUpOverlayButton.alpha = 0.5
+            } else if (indexPath.row == 1) {
+                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+                print("paymentTypePurchased ====> \(paymentTypePurchased)")
+                
+                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+                    self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
+                }else {
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                    nextVC.modalPresentationStyle = .overCurrentContext
+                    nextVC.delegate = self
+                    self.present(nextVC, animated: false, completion: nil)
                 }
+                
+            } else if (indexPath.row == 2) {
+                // if (index == 2) {
+                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+                print("paymentTypePurchased ====> \(paymentTypePurchased)")
+                
+                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
+                    nextVC.modalPresentationStyle = .overCurrentContext
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                    
+                }else {
+                    print("Restore option not available...")
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                    nextVC.modalPresentationStyle = .overCurrentContext
+                    nextVC.delegate = self
+                    self.present(nextVC, animated: false, completion: nil)
+                }
+            } else if (indexPath.row == 4) {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
+                nextVC.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            } else if (indexPath.row == 5) {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            } else if (indexPath.row == 6) {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            } else if (indexPath.row == 7) {
+                UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
-            
-        }
-        else if (indexPath.row == 4) {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
-            nextVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        }
-            //        else if (indexPath.row == 6) {
-            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-            //            nextVC.modalPresentationStyle = .overCurrentContext
-            //            nextVC.delegate = self
-            //            self.present(nextVC, animated: false, completion: nil)
-            //        }
-        else if (indexPath.row == 5) {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        }
-        else if (indexPath.row == 6) {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        }
-        else if (indexPath.row == 7) {
-            UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
-            self.navigationController?.pushViewController(nextVC, animated: true)
         }
         
+    }
+    
+    func addWatermarkClicked() {
+        print("addWatermarkClicked...")
+        
+        isSelectingProfilePictureFromImagePicker = false
+        let alert = UIAlertController(title: "Choose your option", message: "", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { action in
+            DispatchQueue.main.async {
+                self.chooseImage(source: .camera)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { action in
+            DispatchQueue.main.async {
+                self.chooseImage(source: .photoLibrary)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked() {
@@ -981,6 +1063,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     //MARK:- Select profile picture
     @IBAction func dropdownProfilePicButtonClicked(_ sender: Any) {
+        isSelectingProfilePictureFromImagePicker = true
         let alert = UIAlertController(title: "Choose your option", message: "", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { action in
             DispatchQueue.main.async {
@@ -1012,6 +1095,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
         }
+        
         var selectedImage:UIImage!
         if let image = info[.editedImage] as? UIImage {
             selectedImage = image
@@ -1019,16 +1103,31 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             selectedImage = image
         }
         
-        self.dismiss(animated: true, completion: {
-            let isFileDeleted = self.removeImageFromDocumentsDirectory(imageName: "profile.jpg")
-            print("isFileDeleted====>\(isFileDeleted)")
+        if (isSelectingProfilePictureFromImagePicker == true) {
             
-            let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage)
-            print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
+            self.dismiss(animated: true, completion: {
+                let isFileDeleted = self.removeImageFromDocumentsDirectory(imageName: "profile.jpg")
+                print("isFileDeleted====>\(isFileDeleted)")
+                
+                let savedProfileImagePath = self.saveprofilePicToDocumentDirectory(selectedImage)
+                print("savedProfileImagePath====>\(savedProfileImagePath.absoluteString)")
+                
+                self.uploadProfilePhotoFile(with: "profile", type: "jpg", savedimagePathInDocuments: savedProfileImagePath)
+            })
+        }else {
+            print("image selected :: isSelectingProfilePictureFromImagePicker...")
+            self.dismiss(animated: true, completion: {
+                let isFileDeleted = self.removeImageFromDocumentsDirectory(imageName: "powered_viayou.png")
+                print("isFileDeleted====>\(isFileDeleted)")
+                
+                let savedWatermarkImagePath = self.saveWatermarkToDocumentDirectory(selectedImage)
+                print("savedProfileImagePath====>\(savedWatermarkImagePath.absoluteString)")
+                
+                self.uploadWatermarkPhotoFile(with: "powered_viayou", type: "png", savedimagePathInDocuments: savedWatermarkImagePath)
+            })
             
-            self.uploadProfilePhotoFile(with: "profile", type: "jpg", savedimagePathInDocuments: savedProfileImagePath)
-            
-        })
+        }
+        
     }
     
     
@@ -1067,6 +1166,30 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         
         let filename = "profile.jpg"
+        let filepath = directoryPath.appending(filename)
+        let url = NSURL.fileURL(withPath: filepath)
+        do {
+            try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
+            return url
+            
+        } catch {
+            print(error)
+            print("file cant not be save at path \(filepath), with error : \(error)");
+            return url
+        }
+    }
+    
+    func saveWatermarkToDocumentDirectory(_ chosenImage: UIImage) -> URL {
+        let directoryPath =  NSHomeDirectory().appending("/Documents/")
+        if !FileManager.default.fileExists(atPath: directoryPath) {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directoryPath), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+        
+        let filename = "powered_viayou.png"
         let filepath = directoryPath.appending(filename)
         let url = NSURL.fileURL(withPath: filepath)
         do {
@@ -1150,6 +1273,81 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 }
             }
         }
+    }
+    
+    
+    func uploadWatermarkPhotoFile(with resource: String, type: String, savedimagePathInDocuments: URL)
+    {
+        
+        // Upload file here
+        autoreleasepool{
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    //DTMessageHUD.hud()
+                    
+                    let key = "\(resource).\(type)"
+                    print("key====>\(key)")
+                    let request = AWSS3TransferManagerUploadRequest()!
+                    request.bucket = self.bucketName
+                    self.userId = Auth.auth().currentUser!.uid
+                    request.key = "users/"+"\(String(describing: self.userId))"+"/"+key
+                    print("self.userID====>\(self.userId)")
+                    print("request.key====>\(request.key ?? "No request.key")")
+                    
+                    request.body = savedimagePathInDocuments
+                    request.acl = .publicReadWrite
+                    print("savedimagePathInDocuments====>\(savedimagePathInDocuments)")
+                    
+                    let transferManager = AWSS3TransferManager.default()
+                    transferManager.upload(request).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in
+                        DispatchQueue.main.async {
+                            //  DTMessageHUD.dismiss()
+                        }
+                        if let error = task.error {
+                            print("Upload error occurred :: error ====> \(error.localizedDescription)")
+                            // DTMessageHUD.dismiss()
+                        }
+                        if task.result != nil {
+                            //  DTMessageHUD.dismiss()
+                            
+                            let profileImageOnlineUrl = "\(self.watermarkUrlHeader)users/\(self.userId)/\(key)"
+                            print("profileImageOnlineUrl====>\(profileImageOnlineUrl)")
+                            
+                            
+                            JMImageCache.shared()?.removeImage(for: URL(string: profileImageOnlineUrl))
+                            DispatchQueue.main.async {
+                                JMImageCache.shared()?.image(for: URL(string: profileImageOnlineUrl), completionBlock: { (image) in
+                                    
+                                    //                                    self.profilePicButton.setBackgroundImage(image, for: .normal)
+                                    //                                    self.profilePicButtonOnDropDownList.setBackgroundImage(image, for: .normal)
+                                    //                                    self.profilePicOnInvitePopUp.image = image
+                                    //                                    self.profilePicOnNoFeedPopUp.image = image
+                                    
+                                    
+                                }, failureBlock: { (request, response, error) in
+                                })
+                                
+                            }
+                            print("Upload success \(key)")
+                            let alertController = UIAlertController(title: "ViaYou", message: ("Uploaded watermark"), preferredStyle:.alert)
+                            let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel) {
+                                UIAlertAction in}
+                            alertController.addAction(action)
+                            DispatchQueue.main.async {
+                                //                                self.activityIndicator.isHidden = true
+                                //                                self.activityIndicator.stopAnimating()
+                                //  self.present(alertController, animated: true, completion:nil)
+                                
+                            }
+                            let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
+                            self.contentUrl = contentUrl
+                        }
+                        return nil
+                    }
+                }
+            }
+        }
+        
     }
     
 }
