@@ -32,6 +32,15 @@ class ProfileDropdownTableViewCell: UITableViewCell {
         
         self.iconView.image = UIImage(named: iconName)
         
+        if (index == 2) {
+            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            
+            if (paymentTypePurchased == 1 || paymentTypePurchased == 2 || paymentTypePurchased == 0) {
+                self.iconView.image = UIImage(named: "DropDown_Add_Watermark_unlocked")
+            }
+        }
+        
         if (index == 3) {
             let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
             print("paymentTypePurchased ====> \(paymentTypePurchased)")

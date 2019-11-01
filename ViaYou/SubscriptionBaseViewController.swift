@@ -11,6 +11,7 @@ import UIKit
 class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var memberTypeLabel: UILabel!
     var isPurchased: Int = 0
     
     let notificationName_UpgradeSoloHostViewControllerHideAfterPayment = Notification.Name("UpgradeSoloHostViewControllerHideAfterPayment")
@@ -21,7 +22,22 @@ class SubscriptionBaseViewController: UIViewController, UITableViewDataSource, U
         super.viewDidLoad()
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        
         isPurchased = DefaultWrapper().getPaymentTypePurchased()
+        
+        if isPurchased == 0 {
+            self.memberTypeLabel.text = "You are a Solo Host"
+        }
+        else if isPurchased == 1 {
+            self.memberTypeLabel.text = "You are a Growth Host"
+        }
+        else if isPurchased == 2 {
+            self.memberTypeLabel.text = "You are a Pro Host"
+        }
+        else {
+            self.memberTypeLabel.text = "You are a Free Member"
+        }
         
         //isPurchased = -1 => 3 cells
         //isPurchased = 0  => 2 cells
