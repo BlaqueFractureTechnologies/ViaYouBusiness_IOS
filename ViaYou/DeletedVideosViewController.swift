@@ -25,6 +25,7 @@ class DeletedVideosViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var collectioView: UICollectionView!
     @IBOutlet weak var profilePicButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
     var dataArray:[FeedDataArrayObject] = []
@@ -42,7 +43,7 @@ class DeletedVideosViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.activityIndicator.isHidden = true
         userId = Auth.auth().currentUser!.uid
         print(self.passedProfileImage)
         
@@ -71,55 +72,14 @@ class DeletedVideosViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        self.collectioView.isUserInteractionEnabled = false
         s3Url = AWSS3.default().configuration.endpoint.url
         
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         
     }
-    
-//
-//    func readResponseFromFileForTest() {
-//        if let path = Bundle.main.path(forResource: "response", ofType: "json") {
-//            do {
-//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-//                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-//                if let jsonResult = jsonResult as? [String:Any] {
-//                    let responseDict = LibraryFeedResponse(jsonResult)
-//
-//                    print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
-//                    if responseDict.data.count == 0 {
-//
-//                        DispatchQueue.main.async {
-//                            self.collectioView.reloadData()
-//
-//                        }
-//                    }
-//                    else {
-//
-//                        print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
-//                        for i in 0..<responseDict.data.count {
-//                            let indexDict = responseDict.data[i]
-//                            indexDict.isInfoPopUpDisplaying = false
-//                            self.dataArray.append(indexDict)
-//                            print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
-//                        }
-//                        self.loadAllVideoImagesForDataArray()
-//                        //  self.loadVideoSize()
-//                        DispatchQueue.main.async {
-//                            self.collectioView.reloadData()
-//
-//                        }
-//
-//                    }
-//
-//                }
-//            } catch {
-//
-//            }
-//        }
-//    }
-//
     func getResponseFromJSONFile() {
         
         //get deleted vdos
@@ -130,6 +90,9 @@ class DeletedVideosViewController: UIViewController, UICollectionViewDelegate, U
                     
                     DispatchQueue.main.async {
                         self.collectioView.reloadData()
+                        self.activityIndicator.isHidden = true
+                        self.activityIndicator.stopAnimating()
+                        self.collectioView.isUserInteractionEnabled = true
                         
                     }
                 }
@@ -147,6 +110,10 @@ class DeletedVideosViewController: UIViewController, UICollectionViewDelegate, U
                         self.loadAllVideoImagesForDataArray()
                         self.collectioView.reloadData()
                         
+                        self.activityIndicator.isHidden = true
+                        self.activityIndicator.stopAnimating()
+                        self.collectioView.isUserInteractionEnabled = true
+                        
                     }
                     
                 }
@@ -154,6 +121,11 @@ class DeletedVideosViewController: UIViewController, UICollectionViewDelegate, U
                 
             else {
                 print(error?.localizedDescription)
+                DispatchQueue.main.async {
+                    self.activityIndicator.isHidden = true
+                    self.activityIndicator.stopAnimating()
+                    self.collectioView.isUserInteractionEnabled = true
+                }
             }
         }
         //get deleted vdos end

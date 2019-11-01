@@ -332,6 +332,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        self.collectioView.isUserInteractionEnabled = false
+        
         getSubscriptionPlanResponseFromAPI()
         self.dataArray.removeAll()
         self.tableView.reloadData()
@@ -395,6 +400,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 1
+                            self.activityIndicator.isHidden = true
+                            self.activityIndicator.stopAnimating()
+                            self.collectioView.isUserInteractionEnabled = true
+
                         self.collectioView.reloadData()
                         
                     }
@@ -422,14 +431,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                     
                     //  self.loadVideoSize()
-                    DispatchQueue.main.sync {
-                        self.loadAllVideoImagesForDataArray()
-
-                    }
+//                    DispatchQueue.main.sync {
+//                        self.loadAllVideoImagesForDataArray()
+//                    }
+                   self.loadAllVideoImagesForDataArray()
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 0
                         self.collectioView.reloadData()
                         
+                        self.activityIndicator.isHidden = true
+                        self.activityIndicator.stopAnimating()
+                        self.collectioView.isUserInteractionEnabled = true
                     }
                     
                 }
@@ -437,6 +449,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 
             else {
                 print(error?.localizedDescription)
+                DispatchQueue.main.async {
+                    self.activityIndicator.isHidden = true
+                    self.activityIndicator.stopAnimating()
+                    self.collectioView.isUserInteractionEnabled = true
+                }
             }
         }
     }
@@ -756,6 +773,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 }
                 
                 //get video size ended
+            }
+            else
+            {
+                
             }
 
         }

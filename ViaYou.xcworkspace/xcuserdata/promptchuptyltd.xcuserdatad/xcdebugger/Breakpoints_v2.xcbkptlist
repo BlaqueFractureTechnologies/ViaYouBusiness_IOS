@@ -13,5 +13,133 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/LibraryFeedsViewController.swift"
+            timestampString = "594264218.565624"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1261"
+            endingLineNumber = "1261"
+            landmarkName = "uploadProfilePhotoFile(with:type:savedimagePathInDocuments:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/LibraryFeedsViewController.swift"
+            timestampString = "594264218.565815"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1113"
+            endingLineNumber = "1113"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/LibraryFeedsViewController.swift"
+            timestampString = "594264218.565854"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1127"
+            endingLineNumber = "1127"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/LibraryFeedsViewController.swift"
+            timestampString = "594264218.565887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1227"
+            endingLineNumber = "1227"
+            landmarkName = "uploadProfilePhotoFile(with:type:savedimagePathInDocuments:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/LibraryFeedsViewController.swift"
+            timestampString = "594264218.565919"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1266"
+            endingLineNumber = "1266"
+            landmarkName = "uploadProfilePhotoFile(with:type:savedimagePathInDocuments:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #1 (__C.AWSTask&lt;Swift.AnyObject&gt;) -&gt; Swift.Optional&lt;Any&gt; in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in ViaYou.LibraryFeedsViewController.uploadProfilePhotoFile(with: Swift.String, type: Swift.String, savedimagePathInDocuments: Foundation.URL) -&gt; ()"
+                  moduleName = "ViaYou"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/LibraryFeedsViewController.swift"
+                  timestampString = "594261973.794366"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1253"
+                  endingLineNumber = "1253"
+                  offsetFromSymbolStart = "156">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;) -&gt; () in closure #2 () -&gt; () in closure #1 (__C.AWSTask&lt;Swift.AnyObject&gt;) -&gt; Swift.Optional&lt;Any&gt; in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in ViaYou.LibraryFeedsViewController.uploadProfilePhotoFile(with: Swift.String, type: Swift.String, savedimagePathInDocuments: Foundation.URL) -&gt; ()"
+                  moduleName = "ViaYou"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/LibraryFeedsViewController.swift"
+                  timestampString = "594261973.795415"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1255"
+                  endingLineNumber = "1255"
+                  offsetFromSymbolStart = "116">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/LibraryFeedsViewController.swift"
+            timestampString = "594264218.56595"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1242"
+            endingLineNumber = "1242"
+            landmarkName = "uploadProfilePhotoFile(with:type:savedimagePathInDocuments:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
