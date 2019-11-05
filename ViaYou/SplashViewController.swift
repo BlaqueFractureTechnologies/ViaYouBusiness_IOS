@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SplashViewController: UIViewController {
     
@@ -40,25 +41,68 @@ class SplashViewController: UIViewController {
     // TODO:- (If Login - case pending)
     @objc func goToLoginOrHomeVC() {
         
-        // If Login
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user == nil {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
+                let navVC = UINavigationController(rootViewController: nextVC)
+                navVC.isNavigationBarHidden = true
+                self.present(navVC, animated: true, completion: nil)
+            }
+            else {
                 if (UserDefaults.standard.bool(forKey: "IsUserLoggedIn") == true) {
                     // .. GO To Inner page (Pending)
+                    Auth.auth().currentUser?.getIDToken(completion: { (token, error) in
+                        if error == nil {
+                            print(token)
+                            if let userToken = token {
+                                let generatedUserToken = userToken
+                                UserDefaults.standard.set(generatedUserToken, forKey: "GeneratedUserToken")
+                                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                //self.navigationController?.pushViewController(homeVC, animated: true)
+                                let navVC = UINavigationController(rootViewController: homeVC)
+                                navVC.isNavigationBarHidden = true
+                                self.present(navVC, animated: true, completion: nil)
+                            }
+                        }
+                        else {
+                            print(error.debugDescription)
+                        }
+                    })
+                    
+                }else {
+                    //Else
+                    // .. Go To Registration Page
                     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                    //self.navigationController?.pushViewController(homeVC, animated: true)
-                    let navVC = UINavigationController(rootViewController: homeVC)
+                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
+                    let navVC = UINavigationController(rootViewController: nextVC)
                     navVC.isNavigationBarHidden = true
                     self.present(navVC, animated: true, completion: nil)
-                }else {
-        //Else
-        // .. Go To Registration Page
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.present(navVC, animated: true, completion: nil)
-        // self.navigationController?.pushViewController(nextVC, animated: true)
+                    // self.navigationController?.pushViewController(nextVC, animated: true)
+                }
+            }
         }
+        
+        // If Login
+        //                if (UserDefaults.standard.bool(forKey: "IsUserLoggedIn") == true) {
+        //                    // .. GO To Inner page (Pending)
+        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+        //                    //self.navigationController?.pushViewController(homeVC, animated: true)
+        //                    let navVC = UINavigationController(rootViewController: homeVC)
+        //                    navVC.isNavigationBarHidden = true
+        //                    self.present(navVC, animated: true, completion: nil)
+        //                }else {
+        //        //Else
+        //        // .. Go To Registration Page
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
+        //        let navVC = UINavigationController(rootViewController: nextVC)
+        //        navVC.isNavigationBarHidden = true
+        //        self.present(navVC, animated: true, completion: nil)
+        //        // self.navigationController?.pushViewController(nextVC, animated: true)
+        //        }
     }
 }
 

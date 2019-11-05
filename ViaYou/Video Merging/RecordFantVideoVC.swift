@@ -93,7 +93,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     func setupPreview() {
         // Configure previewLayer
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = captureVideoView.bounds
+        previewLayer.frame = self.captureVideoView.bounds
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         captureVideoView.layer.addSublayer(previewLayer)
     }
@@ -396,7 +396,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             
             if connection.isVideoOrientationSupported,
                 let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) {
-                previewLayer.frame = self.view.bounds
+                previewLayer.frame = self.captureVideoView.bounds
                 connection.videoOrientation = videoOrientation
             }
         }

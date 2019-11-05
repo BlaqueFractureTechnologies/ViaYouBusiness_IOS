@@ -12,12 +12,8 @@ class SignUpMobileEntryViewController: UIViewController {
     
     @IBOutlet weak var segmentButtonsContainer: UIView!
     @IBOutlet weak var segmentEmailButton: UIButton!
-    @IBOutlet weak var segmentPhoneButton: UIButton!
     @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var countryCodeField: UITextField!
-    @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var emailFieldContainerHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var phoneFieldContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollContainer: UIView!
     @IBOutlet weak var segmentButonsContainerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -31,25 +27,22 @@ class SignUpMobileEntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.hideKeyboardWhenTappedAround()
         self.emailField.makeDarkGrayPlaceholder()
-        self.countryCodeField.makeDarkGrayPlaceholder()
-        self.phoneField.makeDarkGrayPlaceholder()
-        self.hideKeyboardWhenTappedAround()
         self.scrollView.backgroundColor = UIColor.clear
         self.segmentButtonsContainer.layer.borderColor = self.view.themeRedColor().cgColor
         self.segmentButtonsContainer.layer.borderWidth = 1.0
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         DispatchQueue.main.async {
             self.nextButton.addAppGradient()
-            self.phoneButtonGradient = self.segmentPhoneButton.addAppGradientAndGetIt()
-            self.segmentEmailButton.setTitleColor(UIColor.gray, for: .normal)
-            self.segmentPhoneButton.setTitleColor(UIColor.white, for: .normal)
+            self.segmentEmailButton.addAppGradient()
+            self.segmentEmailButton.setTitleColor(UIColor.white, for: .normal)
         }
         setUpView()
     }
@@ -81,45 +74,24 @@ class SignUpMobileEntryViewController: UIViewController {
         //        print("scrollView.frame.size.height====>\(scrollView.frame.size.height)")
         //        print("scrollView.frame.size.height*====>\(scrollView.frame.size.height-(nextButtonContainer.frame.origin.y+nextButtonContainer.frame.size.height+10))")
         //
-        self.emailFieldContainerHeightConstraint.constant = 0
+        self.emailFieldContainerHeightConstraint.constant = 44
         topMargin = scrollViewHeight-(nextButtonContainerOriginY+40+10)
         self.segmentButonsContainerTopMarginConstraint.constant = topMargin
         
     }
     
     @IBAction func segmentButtonClicked(_ sender: UIButton) {
-        if (sender.tag == 0) {
-            //segmentEmailButton.backgroundColor = self.view.themeRedColor()
-            DispatchQueue.main.async {
-                self.phoneButtonGradient.removeFromSuperlayer()
-                self.emailButtonGradient = self.segmentEmailButton.addAppGradientAndGetIt()
-            }
-            
-            segmentEmailButton.setTitleColor(UIColor.white, for: .normal)
-            segmentPhoneButton.backgroundColor = UIColor.clear
-            segmentPhoneButton.setTitleColor(UIColor.gray, for: .normal)
-            UIView.animate(withDuration: 0.4) {
-                self.phoneFieldContainerHeightConstraint.constant = 0
-                self.emailFieldContainerHeightConstraint.constant = 44
-                self.view.layoutIfNeeded()
-            }
-        }else {
-            segmentEmailButton.backgroundColor = UIColor.clear
-            segmentEmailButton.setTitleColor(UIColor.gray, for: .normal)
-            //segmentPhoneButton.backgroundColor = self.view.themeRedColor()
-            DispatchQueue.main.async {
-                self.emailButtonGradient.removeFromSuperlayer()
-                self.phoneButtonGradient = self.segmentPhoneButton.addAppGradientAndGetIt()
-            }
-            
-            segmentPhoneButton.setTitleColor(UIColor.white, for: .normal)
-            
-            UIView.animate(withDuration: 0.4) {
-                self.emailFieldContainerHeightConstraint.constant = 0
-                self.phoneFieldContainerHeightConstraint.constant = 44
-                self.view.layoutIfNeeded()
-            }
+        //            segmentEmailButton.addAppGradient()
+        DispatchQueue.main.async {
+            self.phoneButtonGradient.removeFromSuperlayer()
+            self.emailButtonGradient = self.segmentEmailButton.addAppGradientAndGetIt()
         }
+        
+        segmentEmailButton.setTitleColor(UIColor.white, for: .normal)
+        self.emailFieldContainerHeightConstraint.constant = 44
+        self.view.layoutIfNeeded()
+        
+        
     }
     
     @IBAction func nextButtonClicked(_ sender: Any) {
