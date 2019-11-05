@@ -28,7 +28,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var profilePicButton: UIButton!
     @IBOutlet weak var noFeedPopUpView: UIView!
     @IBOutlet weak var dropDownBaseView: UIView!
-    @IBOutlet weak var dropDownBaseViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var dropDownBaseViewHeightConstraint: NSLayoutConstraint!    
     @IBOutlet weak var dropDownButtonContainerBg: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dropdownOverlayButton: UIButton!
@@ -53,7 +53,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var storageIndicatorRedOnDropDown: UIView!
     @IBOutlet weak var storageIndicatorLabelOnDropDown: UILabel!
     @IBOutlet weak var storageIndicatorRedOnDropDownWidthConstraint: NSLayoutConstraint!
-    
     var isSelectingProfilePictureFromImagePicker:Bool = false
     
     var dataArray:[FeedDataArrayObject] = []
@@ -70,6 +69,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Feature Request",
                          "Privacy Policy",
                          "Mobile Terms Of Use",
+                         "High Resolution",
                          "Sign Out"]
     var dropdownArrayAfterPurchase = ["Invite",
                                       "My Plan Or Upgrade",
@@ -79,6 +79,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                                       "Feature Request",
                                       "Privacy Policy",
                                       "Mobile Terms Of Use",
+                                      "High Resolution",
                                       "Sign Out"]
     //AWS setup
     let bucketName = "s3.viayou.net"
@@ -919,12 +920,22 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileDropdownTableViewCell", for: indexPath) as! ProfileDropdownTableViewCell
         cell.configureCell(dataArray: dropdownArray, index: indexPath.row)
-  //      let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-//        if (paymentTypePurchased >= 0) { //Purchased any
-//            cell.configureCell(dataArray: dropdownArrayAfterPurchase, index: indexPath.row)
-//        }else {
-//            cell.configureCell(dataArray: dropdownArray, index: indexPath.row)
-//        }
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        
+            if (indexPath.row == 8) {
+                let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
+                switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
+                switchButton.isOn = false
+                switchButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
+                cell.addSubview(switchButton)
+                
+                //                    if (switchIsOpen) {
+                //                        switchButton.isOn = true
+                //                    }
+            }
+        
         return cell
     }
     
@@ -1141,6 +1152,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
 //            }
 //        }
         
+    }
+    
+    @objc func enableSwitchStateChanged(_ sender:UISwitch) {
+        print("enableSwitchStateChange...")
+        
+        //        if (switchIsOpen) {
+        //            switchIsOpen = false
+        //        }else {
+        //            switchIsOpen = true
+        //        }
+        //        tableView.reloadData()
     }
     
     func addWatermarkClicked() {
