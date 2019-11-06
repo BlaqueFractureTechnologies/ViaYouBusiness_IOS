@@ -12,11 +12,13 @@ import UIKit
     @objc optional func AddTwoMenuViewController_videomergeButtonClicked()
 }
 
-class AddTwoMenuViewController: UIViewController {
+class AddTwoMenuViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     @IBOutlet weak var dualScreencastButton: UIButton!
     @IBOutlet weak var videoMergeButton: UIButton!
     
     var delegate:AddTwoMenuViewControllerDelegate?
+    let imagePickerController = UIImagePickerController()
+    var videoURL: URL!
 
 
     override func viewDidLoad() {
@@ -46,9 +48,52 @@ class AddTwoMenuViewController: UIViewController {
     @IBAction func dualScreenCastButtonClicked(_ sender: Any) {
         self.dismiss(animated: true) {
             self.delegate?.AddTwoMenuViewController_screencastButtonClicked!()
-            
         }
+//        DispatchQueue.main.async {
+//            self.chooseImage(source: .savedPhotosAlbum)
+//        }
+//            let alert = UIAlertController(title: "Choose your option", message: "", preferredStyle: UIAlertController.Style.alert)
+//            alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { action in
+//                DispatchQueue.main.async {
+//                    self.chooseImage(source: .savedPhotosAlbum)
+//                }
+//            }))
+//            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+        
+            
+//        imagePickerController.sourceType = .photoLibrary
+//
+//        imagePickerController.delegate = self
+//
+//        imagePickerController.mediaTypes = ["public.movie"]
+//
+//        present(imagePickerController, animated: true, completion: nil)
+        
+        //}
     }
+//     func chooseImage(source:UIImagePickerController.SourceType) {
+//        imagePickerController.sourceType = .photoLibrary
+//        imagePickerController.delegate = self
+//        imagePickerController.mediaTypes = ["public.movie"]
+//
+//        present(imagePickerController, animated: true, completion: nil)
+//    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let videoURL = info[.mediaURL] as? URL
+        print(videoURL)
+        let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordFantVideoVC") as! RecordFantVideoVC
+        recordVC.getVideoURL = videoURL
+        self.navigationController?.pushViewController(recordVC, animated: true)
+//        let videoURL = info["UIImagePickerControllerReferenceURL"] as? NSURL
+//        print(videoURL!)
+//        imagePickerController.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     @IBAction func videoMergeButtonClicked(_ sender: Any) {
 

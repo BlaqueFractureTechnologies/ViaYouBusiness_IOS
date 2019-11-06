@@ -581,6 +581,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
             } catch let error {
                 DTMessageHUD.dismiss()
                 NSLog("Unable to copy file: \(error)")
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.view.isUserInteractionEnabled = true
             }
         }
     }

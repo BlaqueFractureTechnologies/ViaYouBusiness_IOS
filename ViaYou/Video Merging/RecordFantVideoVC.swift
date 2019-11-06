@@ -49,6 +49,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         if setupSession() {
             setupPreview()
             startSession()
+            print(getVideoURL)
         }
     }
     

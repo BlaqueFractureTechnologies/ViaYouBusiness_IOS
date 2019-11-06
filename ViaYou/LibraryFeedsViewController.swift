@@ -96,6 +96,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var lastContentOffset:CGFloat = 0.0
     var bucketSpace: Int = 0
     
+    var isSelectingVideo: Bool = false
+    var selectedVideo: URL!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.isHidden = true
@@ -681,22 +684,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
          self.popUpOverlayButton.alpha = 0.5
          */
         
-        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
-        //        nextVC.modalPresentationStyle = .overCurrentContext
-        //        self.present(nextVC, animated: false, completion: nil)
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+                nextVC.modalPresentationStyle = .overCurrentContext
+                nextVC.delegate = self
+                self.present(nextVC, animated: false, completion: nil)
         
-        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
-        //        nextVC.modalPresentationStyle = .overCurrentContext
-        //        nextVC.delegate = self
-        //        self.present(nextVC, animated: false, completion: nil)
-        
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.navigationController?.pushViewController(nextVC, animated: true)
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
+//        let navVC = UINavigationController(rootViewController: nextVC)
+//        navVC.isNavigationBarHidden = true
+//        self.navigationController?.pushViewController(nextVC, animated: true)
         
     }
     
@@ -1200,12 +1198,21 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     func AddTwoMenuViewController_screencastButtonClicked() {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
-        nextVC.delegate = self
-        nextVC.modalPresentationStyle = .overCurrentContext
-        self.present(nextVC, animated: false, completion: nil)
+        
+        //select videos from gallery
+        self.isSelectingVideo = true
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        imagePickerController.mediaTypes = ["public.movie"]
+        present(imagePickerController, animated: true, completion: nil)
+        //select videos from gallery ends
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+//        nextVC.delegate = self
+//        nextVC.modalPresentationStyle = .overCurrentContext
+//        self.present(nextVC, animated: false, completion: nil)
     }
+    
     func AddTwoMenuViewController_videomergeButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
@@ -1253,6 +1260,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        if let videoURL = info[.mediaURL] as? URL {
+            selectedVideo = videoURL
+        }
+        
+        
         DispatchQueue.main.async {
             self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
@@ -1265,6 +1277,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             selectedImage = image
         }
         
+        
         if (isSelectingProfilePictureFromImagePicker == true) {
             
             self.dismiss(animated: true, completion: {
@@ -1276,7 +1289,19 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 
                 self.uploadProfilePhotoFile(with: "profile", type: "jpg", savedimagePathInDocuments: savedProfileImagePath)
             })
-        }else {
+        }
+        else if (isSelectingVideo == true) {
+            print(selectedVideo)
+             self.dismiss(animated: true, completion: {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "RecordFantVideoVC") as! RecordFantVideoVC
+                nextVC.getVideoURL = self.selectedVideo
+                let navVC = UINavigationController(rootViewController: nextVC)
+                navVC.isNavigationBarHidden = true
+                self.navigationController?.pushViewController(nextVC, animated: true)
+                })
+        }
+        else {
             print("image selected :: isSelectingProfilePictureFromImagePicker...")
             self.dismiss(animated: true, completion: {
                 let isFileDeleted = self.removeImageFromDocumentsDirectory(imageName: "powered_viayou.png")
@@ -1291,7 +1316,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         
     }
-    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)

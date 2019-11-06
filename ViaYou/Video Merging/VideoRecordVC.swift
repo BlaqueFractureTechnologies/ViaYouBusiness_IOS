@@ -174,6 +174,7 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             //            recordVC.videoURL = outputFileURL
             //            self.navigationController?.pushViewController(recordVC, animated: true)
             let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordFantVideoVC") as! RecordFantVideoVC
+            print(outputFileURL)
             recordVC.getVideoURL = outputFileURL
             self.navigationController?.pushViewController(recordVC, animated: true)
         }

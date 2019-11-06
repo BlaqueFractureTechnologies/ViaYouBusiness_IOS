@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ViaYou/LibraryFeedsViewController.swift"
-            timestampString = "594680357.128289"
+            filePath = "ViaYou/Video Merging/MergeVideo.swift"
+            timestampString = "594692172.073217"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "setBucketSizeGraph()"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
+            landmarkName = "mergeVideos(firestUrl:SecondUrl:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ViaYou/LibraryFeedsViewController.swift"
-            timestampString = "594680357.1285371"
+            filePath = "ViaYou/Video Merging/MergeVideo.swift"
+            timestampString = "594692172.073457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
-            landmarkName = "setBucketSizeGraph()"
+            startingLineNumber = "552"
+            endingLineNumber = "552"
+            landmarkName = "mergeVideos(firestUrl:SecondUrl:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/Video Merging/MergeVideo.swift"
+            timestampString = "594692172.073671"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "554"
+            endingLineNumber = "554"
+            landmarkName = "mergeVideos(firestUrl:SecondUrl:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
