@@ -2109,7 +2109,7 @@
                                             <constraint firstAttribute="height" constant="1" id="PBW-T7-tJW"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asarya8@gmail.com" placeholder="Email / Phone" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vnt-4V-Y0M">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email / Phone" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vnt-4V-Y0M">
                                         <rect key="frame" x="10" y="12" width="315" height="16"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="14"/>
@@ -2140,7 +2140,7 @@
                                             <constraint firstAttribute="height" constant="1" id="HWa-O0-Lww"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GiF-Gt-Zlo">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GiF-Gt-Zlo">
                                         <rect key="frame" x="10" y="12" width="270" height="16"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="14"/>
@@ -5981,7 +5981,19 @@ yourself.</string>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" backgroundImage="right-arrow"/>
                                         <connections>
-                                            <action selector="btnPressToNextVC:" destination="u3d-rV-V78" eventType="touchUpInside" id="2RN-tL-UbA"/>
+                                            <action selector="switchCamButtonClicked:" destination="u3d-rV-V78" eventType="touchUpInside" id="6hX-VR-tnN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0F8-Bo-PuW">
+                                        <rect key="frame" x="3" y="606" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="CcG-mE-4dm"/>
+                                            <constraint firstAttribute="width" constant="50" id="LYf-zy-wvx"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" backgroundImage="record_new"/>
+                                        <connections>
+                                            <action selector="volumeButtonClicked:" destination="u3d-rV-V78" eventType="touchUpInside" id="uFX-FI-n2H"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWw-Jv-Bal">
@@ -6011,11 +6023,13 @@ yourself.</string>
                                     <constraint firstAttribute="bottom" secondItem="Amm-QI-QTx" secondAttribute="bottom" id="b3G-2L-yzd"/>
                                     <constraint firstAttribute="bottom" secondItem="1fz-j5-UR7" secondAttribute="bottom" constant="11" id="bY3-bl-yNh"/>
                                     <constraint firstAttribute="bottom" secondItem="fyN-b9-iEM" secondAttribute="bottom" id="dkf-y4-C4U"/>
+                                    <constraint firstAttribute="bottom" secondItem="0F8-Bo-PuW" secondAttribute="bottom" constant="11" id="fry-gc-l6G"/>
                                     <constraint firstAttribute="trailing" secondItem="fyN-b9-iEM" secondAttribute="trailing" id="g3m-yG-k9Z"/>
                                     <constraint firstAttribute="trailing" secondItem="vrG-SD-wwG" secondAttribute="trailing" constant="7" id="gWk-hW-8rC"/>
                                     <constraint firstItem="z7f-to-bXa" firstAttribute="centerX" secondItem="xEH-Fw-QCP" secondAttribute="centerX" id="gkF-bU-8Qd"/>
                                     <constraint firstItem="gs6-Db-IkH" firstAttribute="centerX" secondItem="xEH-Fw-QCP" secondAttribute="centerX" id="rWQ-qC-8Tb"/>
                                     <constraint firstItem="Amm-QI-QTx" firstAttribute="top" secondItem="xEH-Fw-QCP" secondAttribute="top" id="ter-VP-9d3"/>
+                                    <constraint firstItem="0F8-Bo-PuW" firstAttribute="leading" secondItem="xEH-Fw-QCP" secondAttribute="leading" constant="3" id="upb-e6-dJg"/>
                                     <constraint firstItem="VWw-Jv-Bal" firstAttribute="top" secondItem="vrG-SD-wwG" secondAttribute="bottom" constant="1" id="vpU-aB-H4J"/>
                                     <constraint firstItem="fyN-b9-iEM" firstAttribute="top" secondItem="xEH-Fw-QCP" secondAttribute="top" id="xhb-SX-8RS"/>
                                     <constraint firstItem="Xet-kb-lBa" firstAttribute="centerX" secondItem="xEH-Fw-QCP" secondAttribute="centerX" id="yR2-g4-7QW"/>
@@ -6034,14 +6048,15 @@ yourself.</string>
                     </view>
                     <connections>
                         <outlet property="bottomLabel" destination="gs6-Db-IkH" id="p6U-D4-ap7"/>
-                        <outlet property="btnNectVc" destination="1fz-j5-UR7" id="ZNr-qx-IWW"/>
                         <outlet property="btnRecord" destination="Xet-kb-lBa" id="xBg-eI-l76"/>
                         <outlet property="captureVideoView" destination="vrG-SD-wwG" id="2q3-yo-8Vj"/>
                         <outlet property="lblRecordTime" destination="VWw-Jv-Bal" id="KEX-M8-5vr"/>
                         <outlet property="overlayView" destination="fyN-b9-iEM" id="oKz-6e-xDk"/>
                         <outlet property="playVideoView" destination="Amm-QI-QTx" id="U8a-DA-Zdv"/>
                         <outlet property="redLineView" destination="z7f-to-bXa" id="FQE-o5-nrM"/>
+                        <outlet property="switchCamButton" destination="1fz-j5-UR7" id="12j-1q-koy"/>
                         <outlet property="topLabel" destination="mpY-F9-dUA" id="GNs-hi-FF0"/>
+                        <outlet property="volumeButton" destination="0F8-Bo-PuW" id="zSM-SN-yfH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6e4-de-qix" userLabel="First Responder" sceneMemberID="firstResponder"/>

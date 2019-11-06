@@ -16,12 +16,13 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     @IBOutlet weak var viewRecordBtn: UIView!
     @IBOutlet weak var viewNextVcBtn: UIView!
     @IBOutlet weak var btnRecord: UIButton!
-    @IBOutlet weak var btnNectVc: UIButton!
     @IBOutlet weak var lblRecordTime: UILabel!
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var bottomLabel: UILabel!
     @IBOutlet weak var redLineView: UIView!
+    @IBOutlet weak var switchCamButton: UIButton!
+    @IBOutlet weak var volumeButton: UIButton!
     
     
     var getVideoURL: URL!
@@ -36,6 +37,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     var currentTimeCounter = 0
     var videoTime = Int()
     var isLongerThanBackVideo: Bool = false
+    var usingFrontCamera: Bool = true
     
     var totalVideoTime: Int = 0
     
@@ -66,20 +68,12 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     }
     
     func ViewSetUp() {
-        //        playVideoView.layer.borderWidth = 5
-        //        playVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
+
         captureVideoView.layer.borderWidth = 3
         captureVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
-        //        viewNextVcBtn.layer.cornerRadius = viewNextVcBtn.frame.size.height/2
-        //        viewNextVcBtn.clipsToBounds = true
-        //        viewNextVcBtn.layer.borderWidth = 5
-        //        viewNextVcBtn.layer.borderColor = UIColor.white.cgColor
-        //  viewRecordBtn.isHidden = false
-        btnNectVc.isHidden = true
         lblRecordTime.layer.cornerRadius = self.lblRecordTime.frame.size.height / 2
         lblRecordTime.clipsToBounds = true
         btnRecord.imageView?.contentMode = .scaleAspectFit
-        btnNectVc.imageView?.contentMode = .scaleAspectFit
     }
     var playerLayer  = AVPlayerLayer()
     func PlayVideo() {
@@ -98,22 +92,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         captureVideoView.layer.addSublayer(previewLayer)
     }
-    //    override func viewDidLayoutSubviews() {
-    //        self.configureVideoOrientation()
-    //    }
-    //
-    //    private func configureVideoOrientation() {
-    //        if let previewLayer = self.previewLayer,
-    //            let connection = previewLayer.connection {
-    //            let orientation = UIDevice.current.orientation
-    //
-    //            if connection.isVideoOrientationSupported,
-    //                let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) {
-    //                previewLayer.frame = captureVideoView.bounds
-    //                connection.videoOrientation = videoOrientation
-    //            }
-    //        }
-    //    }
+
     func setupSession() -> Bool {
         captureSession.sessionPreset = AVCaptureSession.Preset.high
         // Setup Camera
@@ -208,15 +187,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         
         return nil
     }
-    
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //
-    //        let vc = segue.destination as! VideoPlaybackViewController
-    //
-    //        vc.videoURL = sender as? URL
-    //
-    //    }
-    
+
     func startRecording() {
         
         if movieOutput.isRecording == false {
@@ -291,7 +262,6 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             self.btnRecord.setBackgroundImage(UIImage(named: "record_new"), for: .normal)
             print("=======video stop=========")
             stopSession()
-            btnNectVc.isHidden = false
             self.lblRecordTime.text = String(format: "00:%02i", self.currentTimeCounter)
             print(self.currentTimeCounter)
             self.totalVideoTime = self.currentTimeCounter
@@ -402,4 +372,13 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             }
         }
     }
+    
+    @IBAction func volumeButtonClicked(_ sender: Any) {
+    }
+    
+    @IBAction func switchCamButtonClicked(_ sender: Any) {
+        //Change camera source
+       
+    }
+
 }

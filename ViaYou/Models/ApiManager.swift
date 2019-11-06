@@ -231,6 +231,7 @@ struct ApiManager {
         let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
         
         let requestURLString = "\(headerUrl)\(fetchLibraryDataHeader)"
+       // let requestURLString = "\(headerUrlForGettingAllPosts)\(fetchLibraryDataHeader)"
         let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
         request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
         request.setValue(generatedUserToken, forHTTPHeaderField: "token")
