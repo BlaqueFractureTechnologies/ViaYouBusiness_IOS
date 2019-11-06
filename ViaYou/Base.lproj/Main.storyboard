@@ -7244,8 +7244,8 @@ yourself.</string>
                                                 <color key="textColor" red="0.21176470589999999" green="0.25098039220000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8F-6T-XY0">
-                                                <rect key="frame" x="7" y="22" width="63" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Storage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8F-6T-XY0">
+                                                <rect key="frame" x="7" y="22" width="117" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="7XX-aQ-zkN"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="63" id="dsR-pE-1Hj"/>

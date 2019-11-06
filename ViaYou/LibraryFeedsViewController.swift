@@ -773,7 +773,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func loadAllVideoImagesForDataArray() {
         for i in 0..<dataArray.count {
-            if dataArray.count > 0 {
+            if (self.dataArray.count > i) {
                 let userID = dataArray[i].user._id
                 let videoName = dataArray[i].fileName
                 var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
@@ -925,7 +925,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
                 switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
                 switchButton.isOn = false
-                switchButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                switchButton.backgroundColor = UIColor.clear
                 switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
                 cell.addSubview(switchButton)
                 
