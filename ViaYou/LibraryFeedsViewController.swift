@@ -65,6 +65,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var uploadTextOverlayProgressFillBarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var progressArrowImageView: UIImageView!
     
+    
+    
     var dataArray:[FeedDataArrayObject] = []
     var bucketDataArray:BucketDataObject = BucketDataObject([:])
     var subscriptionArray:SubscriptionArrayObject = SubscriptionArrayObject([:])
@@ -624,10 +626,30 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         cell.shareButton.tag = indexPath.row
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: UIControl.Event.touchUpInside)
         
+        cell.playButton.tag = indexPath.row
+        cell.playButton.addTarget(self, action: #selector(playButtonClicked), for: UIControl.Event.touchUpInside)
+        
         cell.infoSliderCloseButton.tag = indexPath.row
         cell.infoSliderCloseButton.addTarget(self, action: #selector(infoSliderCloseButtonClicked), for: UIControl.Event.touchUpInside)
         
         return cell
+    }
+    
+    @objc func playButtonClicked(_ sender:UIButton) {
+            print(dataArray[sender.tag]._id)
+
+            let userID = dataArray[sender.tag].user._id
+            let videoName = dataArray[sender.tag].fileName
+            let videoId = dataArray[sender.tag]._id
+            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+            
+            let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+            nextVC.videoUrl = videUrlString
+            nextVC.postId = videoId
+            nextVC.modalPresentationStyle = .overCurrentContext
+            self.present(nextVC, animated: true, completion: nil)
     }
     
     @objc func deleteVideoButtonClicked(_ sender:UIButton) {
@@ -698,7 +720,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelectItemAt...")
-        selectRow(selectedRow: indexPath.row)
+        //selectRow(selectedRow: indexPath.row)
         //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "NoScreenCastsPopUpViewController") as! NoScreenCastsPopUpViewController
         //        nextVC.modalPresentationStyle = .overCurrentContext
@@ -723,19 +745,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             nextVC.modalPresentationStyle = .overCurrentContext
             self.present(nextVC, animated: true, completion: nil)
         }
-        //        if (dataArray.count>selectedRow) {
-        //            let userID = dataArray[selectedRow].user._id
-        //            let videoName = dataArray[selectedRow].fileName
-        //            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
-        //            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-        //            UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
-        //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
-        //            nextVC.passedUrlLink = videUrlString
-        //            let navVC = UINavigationController(rootViewController: nextVC)
-        //            navVC.isNavigationBarHidden = true
-        //            self.navigationController?.pushViewController(nextVC, animated: true)
-        //        }
     }
     
     @IBAction func plusButtonClicked() {
@@ -1599,6 +1608,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         
     }
+    
+
     
 }
 
