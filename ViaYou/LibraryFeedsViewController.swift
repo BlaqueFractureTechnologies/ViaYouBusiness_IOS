@@ -769,7 +769,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let link = URL(string: "https://viayou.page.link/?invitedby=\(uid)")
-        let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: "viayou.page.link")
+        let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: "https://viayou.page.link")
         
         referralLink!.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.viayou.ViaYouApp")
         referralLink!.iOSParameters?.minimumAppVersion = "1.0"

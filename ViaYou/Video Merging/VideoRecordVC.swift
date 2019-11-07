@@ -92,6 +92,19 @@ class VideoRecordVC: UIViewController,AVCaptureFileOutputRecordingDelegate
             print("Error setting device video input: \(error)")
             return false
         }
+        //capture microphone
+//        let microphone = AVCaptureDevice.default(for: AVMediaType.audio)!
+//
+//        do {
+//            let micInput = try AVCaptureDeviceInput(device: microphone)
+//            if captureSession.canAddInput(micInput) {
+//                captureSession.addInput(micInput)
+//                //print(micInput)
+//            }
+//        } catch {
+//            print("Error setting device audio input: \(error)")
+//        }
+        
         // Movie output
         if captureSession.canAddOutput(movieOutput) {
             captureSession.addOutput(movieOutput)
