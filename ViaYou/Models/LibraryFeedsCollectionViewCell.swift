@@ -51,7 +51,7 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
+        formatter.unitsStyle = .short
         
         let formattedString = formatter.string(from: TimeInterval(interval) ?? 1.0)!
         print(formattedString)
