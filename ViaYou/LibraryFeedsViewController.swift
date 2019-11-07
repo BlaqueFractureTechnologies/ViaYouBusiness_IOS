@@ -638,7 +638,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let userID = dataArray[sender.tag].user._id
             let videoName = dataArray[sender.tag].fileName
             let videoId = dataArray[sender.tag]._id
-            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+            //var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+            var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
             videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
             
             let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
@@ -677,7 +678,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         let userID = dataArray[sender.tag].user._id
         let videoName = dataArray[sender.tag].fileName
-        var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+        //var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+        var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
         videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
         UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
