@@ -28,7 +28,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var profilePicButton: UIButton!
     @IBOutlet weak var noFeedPopUpView: UIView!
     @IBOutlet weak var dropDownBaseView: UIView!
-    @IBOutlet weak var dropDownBaseViewHeightConstraint: NSLayoutConstraint!    
+    @IBOutlet weak var dropDownBaseViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dropDownButtonContainerBg: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dropdownOverlayButton: UIButton!
@@ -55,6 +55,16 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var storageIndicatorRedOnDropDownWidthConstraint: NSLayoutConstraint!
     var isSelectingProfilePictureFromImagePicker:Bool = false
     
+    
+    //k*
+    @IBOutlet weak var uploadProgressBarContainer: UIView!
+    @IBOutlet weak var uploadProgressBarHeightConstraint: NSLayoutConstraint!    
+    let uploadBarStatusNotification = Notification.Name("uploadBarStatusNotification")
+    @IBOutlet weak var uploadProgressFillBarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var uploadPercentageLabel: UILabel!
+    @IBOutlet weak var uploadTextOverlayProgressFillBarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var progressArrowImageView: UIImageView!
+    
     var dataArray:[FeedDataArrayObject] = []
     var bucketDataArray:BucketDataObject = BucketDataObject([:])
     var subscriptionArray:SubscriptionArrayObject = SubscriptionArrayObject([:])
@@ -69,7 +79,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Feature Request",
                          "Privacy Policy",
                          "Mobile Terms Of Use",
-                         "High Resolution",
                          "Sign Out"]
     var dropdownArrayAfterPurchase = ["Invite",
                                       "My Plan Or Upgrade",
@@ -98,6 +107,50 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     var isSelectingVideo: Bool = false
     var selectedVideo: URL!
+    
+    @objc func handleNotification(withNotification notification : NSNotification) {
+        if (notification.name == uploadBarStatusNotification) {
+            print("uploadBarStatusNotification...")
+            let loadingImages = (1...4).map { UIImage(named: "progress_\($0)")! }
+            progressArrowImageView.animationImages = loadingImages
+            progressArrowImageView.animationDuration = 1.0
+            progressArrowImageView.startAnimating()
+            
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.uploadProgressBarContainer.layoutIfNeeded()
+                    self.uploadProgressBarHeightConstraint.constant = 60
+                })
+            }
+            
+            let percentage = notification.object as? CGFloat ?? 0.0
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.1, animations: {
+                    print("percentage/100.0 ...  \(percentage) || \(percentage/100.0)")
+                    
+                    self.uploadProgressBarContainer.layoutIfNeeded()
+                    self.uploadProgressFillBarWidthConstraint = self.uploadProgressFillBarWidthConstraint.setMultiplier(multiplier: percentage/100.0)
+                    self.uploadTextOverlayProgressFillBarWidthConstraint = self.uploadTextOverlayProgressFillBarWidthConstraint.setMultiplier(multiplier: (100.0-percentage)/100.0)
+                })
+            }
+            
+            self.uploadPercentageLabel.text = "\(String(format: "%.2f", percentage))%"
+            
+            if (percentage >= 100) {
+                DispatchQueue.main.async {
+                    print("Upload completed... 100%...")
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.uploadProgressBarContainer.layoutIfNeeded()
+                        self.uploadProgressBarHeightConstraint.constant = 0
+                    })
+                }
+
+                
+            }
+            
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,6 +229,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         getTotalStorageSpace()
         DispatchQueue.main.async {
             self.popUpDontBeShhyButton.addAppGradient()
+            self.uploadProgressBarHeightConstraint.constant = 0
+            self.plusButtonBottomSpaceConstraint.constant = 0
+            self.uploadPercentageLabel.text = ""
         }
         
     }
@@ -256,7 +312,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     
                     self.totalBucketSpace = "\((Float(self.bucketSpace))*1000.0)"
                     print("self.totalBucketSpace = \(self.totalBucketSpace)")
-                   
+                    
                 }
                 else if (paymentTypePurchased == 1) {
                     let spaceInInt = Int(self.bucketDataArray.storage)
@@ -264,8 +320,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.bucketSpace = value + 30
                         print(self.bucketSpace)
                     }
-                
-
+                    
+                    
                     self.totalBucketSpace = "\((Float(self.bucketSpace))*1000.0)"
                     print("self.totalBucketSpace = \(self.totalBucketSpace)")
                 }
@@ -376,13 +432,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         self.collectioView.isUserInteractionEnabled = false
         
         getSubscriptionPlanResponseFromAPI()
-        self.dataArray.removeAll()
+        self.dataArray = []
         self.tableView.reloadData()
         getResponseFromJSONFile()
         self.dropDownBaseView.alpha = 0
@@ -392,7 +447,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         overlayViewWhenDropDownAppears.alpha = 0
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(withNotification:)), name: uploadBarStatusNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: uploadBarStatusNotification, object: nil)
     }
     
     func getSubscriptionPlanResponseFromAPI() {
@@ -437,17 +497,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        return
         //
         
-        ApiManager().getAllPostsAPI(from: "0", size: "1000") { (responseDict, error) in
+        ApiManager().getAllPostsAPI(from: "0", size: "100") { (responseDict, error) in
             if error == nil {
                 print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
                 if responseDict.data.count == 0 {
                     
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 1
-                            self.activityIndicator.isHidden = true
-                            self.activityIndicator.stopAnimating()
-                            self.collectioView.isUserInteractionEnabled = true
-
+                        self.activityIndicator.isHidden = true
+                        self.activityIndicator.stopAnimating()
+                        self.collectioView.isUserInteractionEnabled = true
+                        
                         self.collectioView.reloadData()
                         
                     }
@@ -475,10 +535,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                     
                     //  self.loadVideoSize()
-//                    DispatchQueue.main.sync {
-//                        self.loadAllVideoImagesForDataArray()
-//                    }
-                   self.loadAllVideoImagesForDataArray()
+                    //                    DispatchQueue.main.sync {
+                    //                        self.loadAllVideoImagesForDataArray()
+                    //                    }
+                    self.loadAllVideoImagesForDataArray()
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 0
                         self.collectioView.reloadData()
@@ -684,17 +744,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
          self.popUpOverlayButton.alpha = 0.5
          */
         
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
-                nextVC.modalPresentationStyle = .overCurrentContext
-                nextVC.delegate = self
-                self.present(nextVC, animated: false, completion: nil)
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+        nextVC.modalPresentationStyle = .overCurrentContext
+        nextVC.delegate = self
+        self.present(nextVC, animated: false, completion: nil)
         
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
-//        let navVC = UINavigationController(rootViewController: nextVC)
-//        navVC.isNavigationBarHidden = true
-//        self.navigationController?.pushViewController(nextVC, animated: true)
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
+        //        let navVC = UINavigationController(rootViewController: nextVC)
+        //        navVC.isNavigationBarHidden = true
+        //        self.navigationController?.pushViewController(nextVC, animated: true)
         
     }
     
@@ -707,7 +767,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         referralLink!.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.viayou.ViaYouApp")
         referralLink!.iOSParameters?.minimumAppVersion = "1.0"
-       // referralLink!.iOSParameters?.appStoreID = "123456789"
+        // referralLink!.iOSParameters?.appStoreID = "123456789"
         
         referralLink!.androidParameters = DynamicLinkAndroidParameters(packageName: "net.viayou")
         //referralLink!.androidParameters?.minimumVersion = 125
@@ -789,12 +849,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 DispatchQueue.global(qos: .userInitiated).async {
                     let image = self.previewImageFromVideo(url: URL(string: videUrlString)! as NSURL)
                     if (image != nil) {
-                        self.dataArray[i].user.videoImage = image!
-                        self.dataArray[i].user.duration = String(durationTime)
-                        self.dataArray[i].fileName = videoName
-                        DispatchQueue.main.async {
-                            print("****Loaded image at index :: \(i)")
-                            self.collectioView.reloadData()
+                        if (self.dataArray.count > i) {
+                            self.dataArray[i].user.videoImage = image!
+                            self.dataArray[i].user.duration = String(durationTime)
+                            self.dataArray[i].fileName = videoName
+                            DispatchQueue.main.async {
+                                print("****Loaded image at index :: \(i)")
+                                self.collectioView.reloadData()
+                            }
                         }
                     }
                 }
@@ -805,8 +867,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     if (error == nil) {
                         DispatchQueue.main.async {
                             let size = "\(size) KB"
-                            self.dataArray[i].videoFileSize = size
-                            self.collectioView.reloadData()
+                            if (self.dataArray.count > i) {
+                                self.dataArray[i].videoFileSize = size
+                                self.collectioView.reloadData()
+                            }
                         }
                     }
                 }
@@ -817,7 +881,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             {
                 
             }
-
+            
         }
     }
     
@@ -908,10 +972,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     //MARK:- TableView Delegate Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-  //      let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-//        if (paymentTypePurchased >= 0) { //Purchased any
-//            return dropdownArrayAfterPurchase.count
-//        }
+        //      let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        //        if (paymentTypePurchased >= 0) { //Purchased any
+        //            return dropdownArrayAfterPurchase.count
+        //        }
         return dropdownArray.count
     }
     
@@ -920,19 +984,19 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         cell.configureCell(dataArray: dropdownArray, index: indexPath.row)
         let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
         
-            if (indexPath.row == 8) {
-                let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
-                switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
-                switchButton.isOn = false
-                switchButton.backgroundColor = UIColor.clear
-                switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
-                cell.addSubview(switchButton)
-                
-                //                    if (switchIsOpen) {
-                //                        switchButton.isOn = true
-                //                    }
-            }
+        //            if (indexPath.row == 8) {
+        //                let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        //                switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
+        //                switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
+        //                switchButton.isOn = false
+        //                switchButton.backgroundColor = UIColor.clear
+        //                switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
+        //                cell.addSubview(switchButton)
+        //
+        //                //                    if (switchIsOpen) {
+        //                //                        switchButton.isOn = true
+        //                //                    }
+        //            }
         
         return cell
     }
@@ -964,7 +1028,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             
             if (paymentTypePurchased == 1 || paymentTypePurchased == 2 || paymentTypePurchased == 0) {
                 addWatermarkClicked()
-
+                
             }
             else {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -1019,136 +1083,136 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-//        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-//        if (paymentTypePurchased >= 0) {
-//            if(indexPath.row == 0) {
-//                self.inviteFriendsPopUpView.alpha = 1
-//                self.popUpOverlayButton.alpha = 0.5
-//            } else if (indexPath.row == 1) {
-//                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-//                print("paymentTypePurchased ====> \(paymentTypePurchased)")
-//
-//                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-//                    self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
-//                }else {
-//                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-//                    nextVC.modalPresentationStyle = .overCurrentContext
-//                    nextVC.delegate = self
-//                    self.present(nextVC, animated: false, completion: nil)
-//                }
-//
-//            } else if (indexPath.row == 2) {
-//                addWatermarkClicked()
-//            } else if (indexPath.row == 3) {
-//                // if (index == 2) {
-//                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-//                print("paymentTypePurchased ====> \(paymentTypePurchased)")
-//
-//                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-//                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
-//                    nextVC.modalPresentationStyle = .overCurrentContext
-//                    self.navigationController?.pushViewController(nextVC, animated: true)
-//
-//                }else {
-//                    print("Restore option not available...")
-//                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-//                    nextVC.modalPresentationStyle = .overCurrentContext
-//                    nextVC.delegate = self
-//                    self.present(nextVC, animated: false, completion: nil)
-//                }
-//            }  else if (indexPath.row == 4) {
-//                if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
-//                    if UIApplication.shared.canOpenURL(url) {
-//                        UIApplication.shared.open(url, options: [:])
-//                    }
-//                }
-//
-//            }else if (indexPath.row == 5) {
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
-//                nextVC.modalPresentationStyle = .overCurrentContext
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            } else if (indexPath.row == 6) {
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            } else if (indexPath.row == 7) {
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            } else if (indexPath.row == 8) {
-//                UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            }
-//        }else {
-//            if(indexPath.row == 0) {
-//                self.inviteFriendsPopUpView.alpha = 1
-//                self.popUpOverlayButton.alpha = 0.5
-//            } else if (indexPath.row == 1) {
-//                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-//                print("paymentTypePurchased ====> \(paymentTypePurchased)")
-//
-//                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-//                    self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
-//                }else {
-//                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-//                    nextVC.modalPresentationStyle = .overCurrentContext
-//                    nextVC.delegate = self
-//                    self.present(nextVC, animated: false, completion: nil)
-//                }
-//
-//            } else if (indexPath.row == 2) {
-//                // if (index == 2) {
-//                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-//                print("paymentTypePurchased ====> \(paymentTypePurchased)")
-//
-//                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-//                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
-//                    nextVC.modalPresentationStyle = .overCurrentContext
-//                    self.navigationController?.pushViewController(nextVC, animated: true)
-//
-//                }else {
-//                    print("Restore option not available...")
-//                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-//                    nextVC.modalPresentationStyle = .overCurrentContext
-//                    nextVC.delegate = self
-//                    self.present(nextVC, animated: false, completion: nil)
-//                }
-//            }  else if (indexPath.row == 3) {
-//                if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
-//                    if UIApplication.shared.canOpenURL(url) {
-//                        UIApplication.shared.open(url, options: [:])
-//                    }
-//                }
-//
-//            } else if (indexPath.row == 4) {
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
-//                nextVC.modalPresentationStyle = .overCurrentContext
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            } else if (indexPath.row == 5) {
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            } else if (indexPath.row == 6) {
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            } else if (indexPath.row == 7) {
-//                UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            }
-//        }
+        //        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        //        if (paymentTypePurchased >= 0) {
+        //            if(indexPath.row == 0) {
+        //                self.inviteFriendsPopUpView.alpha = 1
+        //                self.popUpOverlayButton.alpha = 0.5
+        //            } else if (indexPath.row == 1) {
+        //                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        //                print("paymentTypePurchased ====> \(paymentTypePurchased)")
+        //
+        //                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+        //                    self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
+        //                }else {
+        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+        //                    nextVC.modalPresentationStyle = .overCurrentContext
+        //                    nextVC.delegate = self
+        //                    self.present(nextVC, animated: false, completion: nil)
+        //                }
+        //
+        //            } else if (indexPath.row == 2) {
+        //                addWatermarkClicked()
+        //            } else if (indexPath.row == 3) {
+        //                // if (index == 2) {
+        //                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        //                print("paymentTypePurchased ====> \(paymentTypePurchased)")
+        //
+        //                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
+        //                    nextVC.modalPresentationStyle = .overCurrentContext
+        //                    self.navigationController?.pushViewController(nextVC, animated: true)
+        //
+        //                }else {
+        //                    print("Restore option not available...")
+        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+        //                    nextVC.modalPresentationStyle = .overCurrentContext
+        //                    nextVC.delegate = self
+        //                    self.present(nextVC, animated: false, completion: nil)
+        //                }
+        //            }  else if (indexPath.row == 4) {
+        //                if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
+        //                    if UIApplication.shared.canOpenURL(url) {
+        //                        UIApplication.shared.open(url, options: [:])
+        //                    }
+        //                }
+        //
+        //            }else if (indexPath.row == 5) {
+        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
+        //                nextVC.modalPresentationStyle = .overCurrentContext
+        //                self.navigationController?.pushViewController(nextVC, animated: true)
+        //            } else if (indexPath.row == 6) {
+        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
+        //                self.navigationController?.pushViewController(nextVC, animated: true)
+        //            } else if (indexPath.row == 7) {
+        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
+        //                self.navigationController?.pushViewController(nextVC, animated: true)
+        //            } else if (indexPath.row == 8) {
+        //                UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
+        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
+        //                self.navigationController?.pushViewController(nextVC, animated: true)
+        //            }
+        //        }else {
+        //            if(indexPath.row == 0) {
+        //                self.inviteFriendsPopUpView.alpha = 1
+        //                self.popUpOverlayButton.alpha = 0.5
+        //            } else if (indexPath.row == 1) {
+        //                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        //                print("paymentTypePurchased ====> \(paymentTypePurchased)")
+        //
+        //                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+        //                    self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
+        //                }else {
+        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+        //                    nextVC.modalPresentationStyle = .overCurrentContext
+        //                    nextVC.delegate = self
+        //                    self.present(nextVC, animated: false, completion: nil)
+        //                }
+        //
+        //            } else if (indexPath.row == 2) {
+        //                // if (index == 2) {
+        //                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        //                print("paymentTypePurchased ====> \(paymentTypePurchased)")
+        //
+        //                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
+        //                    nextVC.modalPresentationStyle = .overCurrentContext
+        //                    self.navigationController?.pushViewController(nextVC, animated: true)
+        //
+        //                }else {
+        //                    print("Restore option not available...")
+        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+        //                    nextVC.modalPresentationStyle = .overCurrentContext
+        //                    nextVC.delegate = self
+        //                    self.present(nextVC, animated: false, completion: nil)
+        //                }
+        //            }  else if (indexPath.row == 3) {
+        //                if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
+        //                    if UIApplication.shared.canOpenURL(url) {
+        //                        UIApplication.shared.open(url, options: [:])
+        //                    }
+        //                }
+        //
+        //            } else if (indexPath.row == 4) {
+        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
+        //                nextVC.modalPresentationStyle = .overCurrentContext
+        //                self.navigationController?.pushViewController(nextVC, animated: true)
+        //            } else if (indexPath.row == 5) {
+        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
+        //                self.navigationController?.pushViewController(nextVC, animated: true)
+        //            } else if (indexPath.row == 6) {
+        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
+        //                self.navigationController?.pushViewController(nextVC, animated: true)
+        //            } else if (indexPath.row == 7) {
+        //                UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
+        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
+        //                self.navigationController?.pushViewController(nextVC, animated: true)
+        //            }
+        //        }
         
     }
     
@@ -1206,11 +1270,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         imagePickerController.mediaTypes = ["public.movie"]
         present(imagePickerController, animated: true, completion: nil)
         //select videos from gallery ends
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
-//        nextVC.delegate = self
-//        nextVC.modalPresentationStyle = .overCurrentContext
-//        self.present(nextVC, animated: false, completion: nil)
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddFeedPopUpViewController") as! AddFeedPopUpViewController
+        //        nextVC.delegate = self
+        //        nextVC.modalPresentationStyle = .overCurrentContext
+        //        self.present(nextVC, animated: false, completion: nil)
     }
     
     func AddTwoMenuViewController_videomergeButtonClicked() {
@@ -1292,14 +1356,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         else if (isSelectingVideo == true) {
             print(selectedVideo)
-             self.dismiss(animated: true, completion: {
+            self.dismiss(animated: true, completion: {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "RecordFantVideoVC") as! RecordFantVideoVC
                 nextVC.getVideoURL = self.selectedVideo
                 let navVC = UINavigationController(rootViewController: nextVC)
                 navVC.isNavigationBarHidden = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
-                })
+            })
         }
         else {
             print("image selected :: isSelectingProfilePictureFromImagePicker...")
@@ -1520,9 +1584,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                                 UIAlertAction in}
                             alertController.addAction(action)
                             DispatchQueue.main.async {
-                                                                self.activityIndicator.isHidden = true
-                                                                self.activityIndicator.stopAnimating()
-                                                                self.present(alertController, animated: true, completion:nil)
+                                self.activityIndicator.isHidden = true
+                                self.activityIndicator.stopAnimating()
+                                self.present(alertController, animated: true, completion:nil)
                                 
                             }
                             let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)

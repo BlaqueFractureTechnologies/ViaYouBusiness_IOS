@@ -400,96 +400,207 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         
     }
     
+    /*
+     func uploadFile(with resource: String, type: String, videoURL: URL)
+     {
+     upodateCreatedAndUpdatedTme()
+     print("upodateCreatedAndUpdatedTme :: dataDictToBePosted====>\(dataDictToBePosted)")
+     autoreleasepool{
+     DispatchQueue.global(qos: .userInitiated).async {
+     DispatchQueue.main.async {
+     //DTMessageHUD.hud()
+     
+     let key = "\(resource).\(type)"
+     
+     let request = AWSS3TransferManagerUploadRequest()!
+     request.bucket = self.bucketName
+     self.userID = Auth.auth().currentUser!.uid
+     request.key = "posts/"+"\(String(describing: self.userID))"+"/"+key
+     
+     request.body = videoURL
+     request.acl = .publicReadWrite
+     self.dataDictToBePosted["fileName"] = key
+     
+     let transferManager = AWSS3TransferManager.default()
+     transferManager.upload(request).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in
+     DispatchQueue.main.async {
+     DTMessageHUD.dismiss()
+     }
+     if let error = task.error {
+     print(error)
+     DTMessageHUD.dismiss()
+     }
+     if task.result != nil {
+     DTMessageHUD.dismiss()
+     //Post video to firebase
+     
+     //NEW
+     ApiManager().addVideoPostToFirebase(dataDict: self.dataDictToBePosted, completion: { (responseDict, error) in
+     if (error == nil) {
+     if (responseDict.success == true) {
+     print(responseDict)
+     print("Success :: updateProfileToAPI ====> \(responseDict.message)")
+     print("Uploaded \(key)")
+     let alertController = UIAlertController(title: "Viayou", message: ("Uploaded Video"), preferredStyle:.alert)
+     let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.default) {
+     UIAlertAction in
+     
+     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+     let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+     self.navigationController?.pushViewController(homeVC, animated: true)
+     }
+     alertController.addAction(action)
+     self.activityIndicator.stopAnimating()
+     self.activityIndicator.isHidden = true
+     self.view.isUserInteractionEnabled = true
+     
+     self.present(alertController, animated: true, completion:nil)
+     }
+     }else {
+     self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
+     self.activityIndicator.stopAnimating()
+     self.activityIndicator.isHidden = true
+     self.view.isUserInteractionEnabled = true
+     
+     }
+     })
+     
+     
+     // /* OLD
+     //                             ApiManager().addVideoPostToFirebase(userID: self.userID, title: self.promptTitleField.text ?? "", description: "", fileName: key, completion: { (responseDict, error) in
+     //                             if (error == nil) {
+     //                             if (responseDict.success == true) {
+     //                             print(responseDict)
+     //                             print("Success :: updateProfileToAPI ====> \(responseDict.message)")
+     //                             }
+     //                             }else {
+     //                             self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
+     //                             }
+     //
+     //                             })
+     // */
+     //post video to firebase ends
+     
+     let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
+     self.contentUrl = contentUrl
+     }
+     return nil
+     }
+     }
+     }
+     }
+     print("Done")
+     }
+     */
+    
     func uploadFile(with resource: String, type: String, videoURL: URL)
     {
+        print("Entered :: uploadFile")
+        
         upodateCreatedAndUpdatedTme()
+        DTMessageHUD.dismiss()
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
         print("upodateCreatedAndUpdatedTme :: dataDictToBePosted====>\(dataDictToBePosted)")
-        autoreleasepool{
-            DispatchQueue.global(qos: .userInitiated).async {
-                DispatchQueue.main.async {
-                    //DTMessageHUD.hud()
-                    
-                    let key = "\(resource).\(type)"
-                    
-                    let request = AWSS3TransferManagerUploadRequest()!
-                    request.bucket = self.bucketName
-                    self.userID = Auth.auth().currentUser!.uid
-                    request.key = "posts/"+"\(String(describing: self.userID))"+"/"+key
-                    
-                    request.body = videoURL
-                    request.acl = .publicReadWrite
-                    self.dataDictToBePosted["fileName"] = key
-                    
-                    let transferManager = AWSS3TransferManager.default()
-                    transferManager.upload(request).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in
-                        DispatchQueue.main.async {
-                            DTMessageHUD.dismiss()
-                        }
-                        if let error = task.error {
-                            print(error)
-                            DTMessageHUD.dismiss()
-                        }
-                        if task.result != nil {
-                            DTMessageHUD.dismiss()
-                            //Post video to firebase
-                            
-                            //NEW
-                            ApiManager().addVideoPostToFirebase(dataDict: self.dataDictToBePosted, completion: { (responseDict, error) in
-                                if (error == nil) {
-                                    if (responseDict.success == true) {
-                                        print(responseDict)
-                                        print("Success :: updateProfileToAPI ====> \(responseDict.message)")
-                                        print("Uploaded \(key)")
-                                        let alertController = UIAlertController(title: "Viayou", message: ("Uploaded Video"), preferredStyle:.alert)
-                                        let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.default) {
-                                            UIAlertAction in
-                                            
-                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                            self.navigationController?.pushViewController(homeVC, animated: true)
-                                        }
-                                        alertController.addAction(action)
-                                        self.activityIndicator.stopAnimating()
-                                        self.activityIndicator.isHidden = true
-                                        self.view.isUserInteractionEnabled = true
-                                        
-                                        self.present(alertController, animated: true, completion:nil)
-                                    }
-                                }else {
-                                    self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
-                                    self.activityIndicator.stopAnimating()
-                                    self.activityIndicator.isHidden = true
-                                    self.view.isUserInteractionEnabled = true
-                                    
-                                }
-                            })
-                            
-                            
-                            // /* OLD
-                            //                             ApiManager().addVideoPostToFirebase(userID: self.userID, title: self.promptTitleField.text ?? "", description: "", fileName: key, completion: { (responseDict, error) in
-                            //                             if (error == nil) {
-                            //                             if (responseDict.success == true) {
-                            //                             print(responseDict)
-                            //                             print("Success :: updateProfileToAPI ====> \(responseDict.message)")
-                            //                             }
-                            //                             }else {
-                            //                             self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
-                            //                             }
-                            //
-                            //                             })
-                            // */
-                            //post video to firebase ends
-                            
-                            let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
-                            self.contentUrl = contentUrl
-                        }
-                        return nil
-                    }
-                }
-            }
-        }
-        print("Done")
+        
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.uploadFile(with: resource, type: type, videoURL: videoURL, passeddataDictToBePosted: dataDictToBePosted, passed_s3Url: self.s3Url)
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+        self.navigationController?.pushViewController(homeVC, animated: true)
+        
+        
+        /*
+         autoreleasepool{
+         DispatchQueue.global(qos: .userInitiated).async {
+         DispatchQueue.main.async {
+         //DTMessageHUD.hud()
+         
+         let key = "\(resource).\(type)"
+         
+         let request = AWSS3TransferManagerUploadRequest()!
+         request.bucket = self.bucketName
+         self.userID = Auth.auth().currentUser!.uid
+         request.key = "posts/"+"\(String(describing: self.userID))"+"/"+key
+         
+         request.body = videoURL
+         request.acl = .publicReadWrite
+         self.dataDictToBePosted["fileName"] = key
+         
+         let transferManager = AWSS3TransferManager.default()
+         transferManager.upload(request).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in
+         DispatchQueue.main.async {
+         DTMessageHUD.dismiss()
+         }
+         if let error = task.error {
+         print(error)
+         DTMessageHUD.dismiss()
+         }
+         if task.result != nil {
+         DTMessageHUD.dismiss()
+         //Post video to firebase
+         
+         //NEW
+         ApiManager().addVideoPostToFirebase(dataDict: self.dataDictToBePosted, completion: { (responseDict, error) in
+         if (error == nil) {
+         if (responseDict.success == true) {
+         print(responseDict)
+         print("Success :: updateProfileToAPI ====> \(responseDict.message)")
+         print("Uploaded \(key)")
+         let alertController = UIAlertController(title: "Viayou", message: ("Uploaded Video"), preferredStyle:.alert)
+         let action = UIAlertAction(title: "ok", style: UIAlertAction.Style.default) {
+         UIAlertAction in
+         
+         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+         let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+         self.navigationController?.pushViewController(homeVC, animated: true)
+         }
+         alertController.addAction(action)
+         self.activityIndicator.stopAnimating()
+         self.activityIndicator.isHidden = true
+         self.view.isUserInteractionEnabled = true
+         
+         self.present(alertController, animated: true, completion:nil)
+         }
+         }else {
+         self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
+         self.activityIndicator.stopAnimating()
+         self.activityIndicator.isHidden = true
+         self.view.isUserInteractionEnabled = true
+         
+         }
+         })
+         
+         
+         // /* OLD
+         //                             ApiManager().addVideoPostToFirebase(userID: self.userID, title: self.promptTitleField.text ?? "", description: "", fileName: key, completion: { (responseDict, error) in
+         //                             if (error == nil) {
+         //                             if (responseDict.success == true) {
+         //                             print(responseDict)
+         //                             print("Success :: updateProfileToAPI ====> \(responseDict.message)")
+         //                             }
+         //                             }else {
+         //                             self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Network Error")
+         //                             }
+         //
+         //                             })
+         // */
+         //post video to firebase ends
+         
+         let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
+         self.contentUrl = contentUrl
+         }
+         return nil
+         }
+         }
+         }
+         }
+         print("Done")
+         */
     }
+    
     
     @IBAction func btnPressToFristVC(_ sender: Any)
     {
@@ -763,6 +874,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     }
     
     @IBAction func uploadVideoButtonClicked(_ sender: Any) {
+        print("uploadVideoButtonClicked...")
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         self.view.isUserInteractionEnabled = false

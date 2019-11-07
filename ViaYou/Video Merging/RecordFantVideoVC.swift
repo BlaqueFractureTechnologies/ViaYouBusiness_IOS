@@ -37,17 +37,23 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     var currentTimeCounter = 0
     var videoTime = Int()
     var isLongerThanBackVideo: Bool = false
-    var usingFrontCamera: Bool = true
+    var currentDirection: CameraDirection = .front
     
     var totalVideoTime: Int = 0
     
+    enum CameraDirection {
+        case front
+        case back
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        switchCamButton.alpha = 1
         topLabel.text = "Push the red button!"
         let myMutableString = NSMutableAttributedString(string: topLabel.text ?? "", attributes: nil)
         myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red:214.0/255.0, green:85.0/255.0, blue:107.0/255.0, alpha: 1.0), range: NSRange(location:0,length:8))
         topLabel.attributedText = myMutableString
+        //  setupSession()
         if setupSession() {
             setupPreview()
             startSession()
@@ -68,7 +74,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     }
     
     func ViewSetUp() {
-
+        
         captureVideoView.layer.borderWidth = 3
         captureVideoView.layer.borderColor = hexStringToUIColor(hex: "D6556B").cgColor
         lblRecordTime.layer.cornerRadius = self.lblRecordTime.frame.size.height / 2
@@ -92,22 +98,40 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         captureVideoView.layer.addSublayer(previewLayer)
     }
-
+    
     func setupSession() -> Bool {
         captureSession.sessionPreset = AVCaptureSession.Preset.high
         // Setup Camera
         // var camera = AVCaptureDevice.default(for: AVMediaType.video)!
         
-        do {
-            let input = try AVCaptureDeviceInput(device: self.cameraWithPosition(position: .front)!)
-            // camera = AVCaptureDevice.Position.front
-            if captureSession.canAddInput(input) {
-                captureSession.addInput(input)
-                activeInput = input
+        if currentDirection == .front {
+            do {
+                let input = try AVCaptureDeviceInput(device: self.cameraWithPosition(position: .front)!)
+                // camera = AVCaptureDevice.Position.front
+                if captureSession.canAddInput(input) {
+                    captureSession.addInput(input)
+                    activeInput = input
+                }
+                
             }
-        } catch {
-            print("Error setting device video input: \(error)")
-            return false
+            catch {
+                print("Error setting device video input: \(error)")
+                
+            }
+        }
+        else if currentDirection == .back {
+            do {
+                let input = try AVCaptureDeviceInput(device: self.cameraWithPosition(position: .back)!)
+                // camera = AVCaptureDevice.Position.front
+                if captureSession.canAddInput(input) {
+                    captureSession.addInput(input)
+                    activeInput = input
+                }
+            } catch {
+                print("Error setting device video input: \(error)")
+                
+            }
+            
         }
         // Setup Microphone
         let microphone = AVCaptureDevice.default(for: AVMediaType.audio)!
@@ -116,17 +140,19 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             let micInput = try AVCaptureDeviceInput(device: microphone)
             if captureSession.canAddInput(micInput) {
                 captureSession.addInput(micInput)
-                print(micInput)
+                //print(micInput)
             }
         } catch {
             print("Error setting device audio input: \(error)")
-            return false
         }
         // Movie output
         if captureSession.canAddOutput(movieOutput) {
             captureSession.addOutput(movieOutput)
         }
         
+        //        setupPreview()
+        //        startSession()
+        //        print(getVideoURL)
         return true
     }
     
@@ -187,7 +213,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         
         return nil
     }
-
+    
     func startRecording() {
         
         if movieOutput.isRecording == false {
@@ -285,8 +311,8 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             
             self.lblRecordTime.text = String(format: "00:%02i", self.currentTimeCounter)
             self.currentTimeCounter = self.currentTimeCounter + 1
-            print(self.currentTimeCounter)
-            print(self.videoTime)
+            //  print(self.currentTimeCounter)
+            //  print(self.videoTime)
             //
             //            if self.currentTimeCounter == self.videoTime - 1
             //            {
@@ -298,6 +324,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     
     @IBAction func btnShootVideo(_ sender: Any)
     {
+        switchCamButton.alpha = 0
         startRecording()
         PlayVideo()
         // viewRecordBtn.isHidden = true
@@ -378,7 +405,13 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     
     @IBAction func switchCamButtonClicked(_ sender: Any) {
         //Change camera source
-       
+        if (currentDirection == .front) {
+            currentDirection = .back
+        } else {
+            currentDirection = .front
+        }
+        captureSession.removeInput(activeInput)
+        _ = setupSession()
     }
-
+    
 }

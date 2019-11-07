@@ -448,6 +448,7 @@
 				9EA55F65233C208D003A1EBB /* Resources */,
 				CB178984853CE38CD3056BB1 /* [CP] Embed Pods Frameworks */,
 				82849BD17759728A3B5F16E4 /* [CP] Copy Pods Resources */,
+				9E2D5B5F23739EC10089A0BF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -594,6 +595,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ViaYou/Pods-ViaYou-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		9E2D5B5F23739EC10089A0BF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/ViaYou/Info.plist",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		CB178984853CE38CD3056BB1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

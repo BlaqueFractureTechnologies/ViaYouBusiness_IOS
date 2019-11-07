@@ -4,7 +4,10 @@ PODS:
   - AWSCore (2.10.2)
   - AWSS3 (2.10.2):
     - AWSCore (= 2.10.2)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
   - DTMessageHUD (1.2.0)
+  - Fabric (1.10.2)
   - FacebookCore (0.8.0):
     - FBSDKCoreKit (~> 5.0)
   - FacebookShare (0.8.0):
@@ -157,7 +160,9 @@ DEPENDENCIES:
   - AWSCognito
   - AWSCore
   - AWSS3
+  - Crashlytics (~> 3.14.0)
   - DTMessageHUD
+  - Fabric (~> 1.10.2)
   - FacebookShare
   - FBSDKLoginKit
   - Firebase/Analytics
@@ -176,7 +181,9 @@ SPEC REPOS:
     - AWSCognito
     - AWSCore
     - AWSS3
+    - Crashlytics
     - DTMessageHUD
+    - Fabric
     - FacebookCore
     - FacebookShare
     - FBSDKCoreKit
@@ -214,7 +221,9 @@ SPEC CHECKSUMS:
   AWSCognito: 7d90e1e90fd49cfa77292ae92f8c745ff854f650
   AWSCore: 2e91f89187d1238be35ce8c57aac98c42def640f
   AWSS3: f0f81ee725de69f631051cead12791ff5dfbba14
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   DTMessageHUD: cc6b1dff816f05146481be4c9912002ec7882b38
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   FacebookCore: 563bb4cbcd7dd86cf89f3729252140bf256aacaa
   FacebookShare: e75d5e81ef7bd7aab2f865446c4c27015b43bae6
   FBSDKCoreKit: 39748deefe37a005f983722e433be2ddcdd83ae7
@@ -248,6 +257,6 @@ SPEC CHECKSUMS:
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   Stripe: a1f053d9288fcab2df49260fe1b816536a75f1ac
 
-PODFILE CHECKSUM: 84aa596f4a72c1e23ecfbd0b893e7253d294f6bb
+PODFILE CHECKSUM: 0eca6d236e0811f039faed075766613f0c963165
 
 COCOAPODS: 1.7.5

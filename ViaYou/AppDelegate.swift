@@ -12,12 +12,18 @@ import FBSDKCoreKit
 import GoogleSignIn
 import Firebase
 import Stripe
+import AWSS3
+import AWSCore
+import AWSCognito
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     var window: UIWindow?
-    
+    let bucketName = "s3.viayou.net"
+    var userId: String = ""
+    var s3Url: URL!
+    var contentUrl: URL!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().delegate = self
         
         Stripe.setDefaultPublishableKey("pk_test_kjt2etOhS9X6czAJxzLbEuM5007kPQdweC")
+        
+        userId = Auth.auth().currentUser!.uid
         return true
     }
     
@@ -142,6 +150,91 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    
+    let uploadBarStatusNotification = Notification.Name("uploadBarStatusNotification")
+    
+    func uploadFile(with resource: String, type: String, videoURL: URL, passeddataDictToBePosted:[String:Any], passed_s3Url: URL!) {
+        print("Appdelegate :: uploadFile..........***************")
+        var dataDictToBePosted = passeddataDictToBePosted
+        s3Url = passed_s3Url
+        
+        autoreleasepool{
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    //DTMessageHUD.hud()
+                    
+                    let key = "\(resource).\(type)"
+                    
+                    let request = AWSS3TransferManagerUploadRequest()!
+                    request.bucket = self.bucketName
+                    self.userId = Auth.auth().currentUser!.uid
+                    request.key = "posts/"+"\(String(describing: self.userId))"+"/"+key
+                    
+                    request.body = videoURL
+                    request.acl = .publicReadWrite
+                    dataDictToBePosted["fileName"] = key
+                    
+                    let transferManager = AWSS3TransferManager.default()
+                    request.uploadProgress = { (bytesSent, totalBytesSent, totalBytesExpectedToSend) -> Void in
+                        DispatchQueue.main.async(execute: {
+                            let amountUploaded = totalBytesSent // To show the updating data status in label.
+                            let fileSize = totalBytesExpectedToSend
+                            let percentage = (CGFloat(totalBytesSent)/CGFloat(totalBytesExpectedToSend))*100.0
+                            print("uploadProgress :: \(totalBytesSent)/\(totalBytesExpectedToSend) ====> \(percentage)")
+                            NotificationCenter.default.post(name: self.uploadBarStatusNotification, object:percentage)
+                        })
+                    }
+                    
+                    
+                    transferManager.upload(request).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in
+                        print("Appdelegate :: uploadFile : transferManager.upload")
+                        if let error = task.error {
+                            print("Appdelegate :: uploadFile : transferManager.upload :: error ====>> \(error.localizedDescription)")
+                            print(error)
+                        }
+                        if task.result != nil {
+                            //Post video to firebase
+                            print("Appdelegate :: uploadFile : transferManager.upload :: task.result")
+                            
+                            //NEW
+                            ApiManager().addVideoPostToFirebase(dataDict: dataDictToBePosted, completion: { (responseDict, error) in
+                                if (error == nil) {
+                                    if (responseDict.success == true) {
+                                        print(responseDict)
+                                        print("Success :: updatePostToAPI ====> \(responseDict.message)")
+                                        print("Uploaded \(key)")
+                                        
+                                        DispatchQueue.main.async {
+                                            let alertController = UIAlertController(title: "Viayou", message: ("Uploaded Video"), preferredStyle:.alert)
+                                            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                                            alertController.addAction(action)
+                                            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+                                        }
+                                    }
+                                }else {
+                                    print("Failed :: updateProfileToAPI ====> \(responseDict.message)")
+                                    let alertController = UIAlertController(title: "Viayou", message: "\(error?.localizedDescription ?? "Network Error")", preferredStyle:.alert)
+                                    let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                                    alertController.addAction(action)
+                                    DispatchQueue.main.async {
+                                        self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+                                    }
+                                    
+                                }
+                            })
+                            
+                            //post video to firebase ends
+                            
+                            let contentUrl = self.s3Url.appendingPathComponent(self.bucketName).appendingPathComponent(key)
+                            self.contentUrl = contentUrl
+                        }
+                        return nil
+                    }
+                }
+            }
+        }
+        print("Done")
+    }
     
 }
 

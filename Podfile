@@ -23,5 +23,7 @@ pod 'Stripe'
 pod 'mobile-ffmpeg-full', '~> 4.2.2'
 pod 'DTMessageHUD'
 pod 'MediaWatermark'   
+pod 'Fabric', '~> 1.10.2'
+pod 'Crashlytics', '~> 3.14.0'
 
 end
