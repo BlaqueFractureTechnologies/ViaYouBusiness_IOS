@@ -147,10 +147,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     })
                 }
 
-                
-            }
-            
-            
+            }   
         }
     }
     

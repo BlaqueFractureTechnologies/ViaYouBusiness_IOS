@@ -32,8 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-        Stripe.setDefaultPublishableKey("pk_test_kjt2etOhS9X6czAJxzLbEuM5007kPQdweC")
-        
+//        Stripe.setDefaultPublishableKey("pk_test_kjt2etOhS9X6czAJxzLbEuM5007kPQdweC")
+        Stripe.setDefaultPublishableKey("pk_live_ERcYOkG4ChP3Rpy7yzm2dh6L00xDyFrxYu")
+
         userId = Auth.auth().currentUser!.uid
         return true
     }
