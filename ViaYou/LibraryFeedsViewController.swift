@@ -1228,6 +1228,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     @objc func enableSwitchStateChanged(_ sender:UISwitch) {
         print("enableSwitchStateChange...")
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        print("paymentTypePurchased ====> \(paymentTypePurchased)")
+        
+        if (paymentTypePurchased == 1 || paymentTypePurchased == 2 || paymentTypePurchased == 0) {
+            
+        }
+        else {
+            sender.setOn(false, animated: false)
+        }
         
         //        if (switchIsOpen) {
         //            switchIsOpen = false
