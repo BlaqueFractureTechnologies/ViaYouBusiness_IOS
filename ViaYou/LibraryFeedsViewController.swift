@@ -75,12 +75,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var invitationUrl: URL!
     var dropdownArray = ["Invite",
                          "My Plan Or Upgrade",
-                         "Add Watermark",
+                         "Remove Watermark",
                          "Restore",
                          "Feedback",
                          "Feature Request",
                          "Privacy Policy",
                          "Mobile Terms Of Use",
+                         "High Resolution",
                          "Sign Out"]
     var dropdownArrayAfterPurchase = ["Invite",
                                       "My Plan Or Upgrade",
@@ -402,6 +403,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 let storageIndicatorRedWidth   = self.storageIndicatorRed.frame.size.width
                 print("storageIndicatorRedWidth = \(storageIndicatorRedWidth)")
                 self.storageIndicatorRedWidthConstraint.constant = CGFloat(0.0)
+                self.storageIndicatorRedOnDropDownWidthConstraint.constant = CGFloat(0.0)
                 self.storageIndicatorLabel.text = "2 GB Free"
                 self.storageIndicatorLabelOnDropDown.text = "2 GB Free"
             }
@@ -992,19 +994,19 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         cell.configureCell(dataArray: dropdownArray, index: indexPath.row)
         let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
         
-        //            if (indexPath.row == 8) {
-        //                let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        //                switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
-        //                switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
-        //                switchButton.isOn = false
-        //                switchButton.backgroundColor = UIColor.clear
-        //                switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
-        //                cell.addSubview(switchButton)
-        //
-        //                //                    if (switchIsOpen) {
-        //                //                        switchButton.isOn = true
-        //                //                    }
-        //            }
+                    if (indexPath.row == 8) {
+                        let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                        switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
+                        switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
+                        switchButton.isOn = false
+                        switchButton.backgroundColor = UIColor.clear
+                        switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
+                        cell.addSubview(switchButton)
+        
+                        //                    if (switchIsOpen) {
+                        //                        switchButton.isOn = true
+                        //                    }
+                    }
         
         return cell
     }
@@ -1034,8 +1036,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
             print("paymentTypePurchased ====> \(paymentTypePurchased)")
             
-            if (paymentTypePurchased == 1 || paymentTypePurchased == 2 || paymentTypePurchased == 0) {
+            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
                 addWatermarkClicked()
+                
+            }
+            else if (paymentTypePurchased == 0) {
                 
             }
             else {
@@ -1085,7 +1090,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
-        } else if (indexPath.row == 8) {
+        } else if (indexPath.row == 9) {
             UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
