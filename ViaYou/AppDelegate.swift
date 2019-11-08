@@ -153,6 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     
     let uploadBarStatusNotification = Notification.Name("uploadBarStatusNotification")
+    let uploadCompleteStatusNotification = Notification.Name("uploadCompleteStatusNotification")
     
     func uploadFile(with resource: String, type: String, videoURL: URL, passeddataDictToBePosted:[String:Any], passed_s3Url: URL!) {
         print("Appdelegate :: uploadFile..........***************")
@@ -212,6 +213,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                                             self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
                                         }
                                     }
+                                    NotificationCenter.default.post(name: self.uploadCompleteStatusNotification, object: responseDict)
                                 }else {
                                     print("Failed :: updateProfileToAPI ====> \(responseDict.message)")
                                     let alertController = UIAlertController(title: "Viayou", message: "\(error?.localizedDescription ?? "Network Error")", preferredStyle:.alert)

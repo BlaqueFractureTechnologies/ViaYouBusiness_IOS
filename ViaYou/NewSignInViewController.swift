@@ -146,16 +146,16 @@ class NewSignInViewController: UIViewController {
                                 UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                                 DispatchQueue.main.async {
                                     self.activityIndicator.stopAnimating()
-//                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "UserTipsViewController") as! UserTipsViewController
-//                                    let navVC = UINavigationController(rootViewController: homeVC)
-//                                    navVC.isNavigationBarHidden = true
-//                                    self.navigationController?.present(navVC, animated: true, completion: nil)
                                     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "UserTipsViewController") as! UserTipsViewController
                                     let navVC = UINavigationController(rootViewController: homeVC)
                                     navVC.isNavigationBarHidden = true
                                     self.navigationController?.present(navVC, animated: true, completion: nil)
+//                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+//                                    let navVC = UINavigationController(rootViewController: homeVC)
+//                                    navVC.isNavigationBarHidden = true
+//                                    self.navigationController?.present(navVC, animated: true, completion: nil)
                                 }
                             }
                         }
