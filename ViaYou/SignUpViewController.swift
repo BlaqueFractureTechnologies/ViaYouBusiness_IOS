@@ -273,6 +273,14 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     }
                 }
                 
+                guard let newUserStatus = user?.additionalUserInfo?.isNewUser else {return}
+                if newUserStatus {
+                    print("I'm a new user")
+                    UserDefaults.standard.set(true, forKey: "IsNewUser")
+                }
+                else {
+                    UserDefaults.standard.set(false, forKey: "IsNewUser")
+                }
             }
         })
     }
@@ -316,16 +324,31 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                             print(self.currnetUserEmail)
                             ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
                                 if error == nil {
-                                    print(response.message)
-                                    print("success token")
-                                    UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
-                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                    print(self.passingProfileImage)
-                                    homeVC.passedProfileImage = self.passingProfileImage
-                                    let navVC = UINavigationController(rootViewController: homeVC)
-                                    navVC.isNavigationBarHidden = true
-                                    self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
+                                    if boolValue == true {
+                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "UserTipsViewController") as! UserTipsViewController
+                                        print(self.passingProfileImage)
+                                        homeVC.passedProfileImage = self.passingProfileImage
+                                        let navVC = UINavigationController(rootViewController: homeVC)
+                                        navVC.isNavigationBarHidden = true
+                                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    }
+                                    else if boolValue == false {
+                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                        homeVC.passedProfileImage = self.passingProfileImage
+                                        let navVC = UINavigationController(rootViewController: homeVC)
+                                        navVC.isNavigationBarHidden = true
+                                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    }
+                                    //                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                    //                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                    //                                        print(self.passingProfileImage)
+                                    //                                        homeVC.passedProfileImage = self.passingProfileImage
+                                    //                                        let navVC = UINavigationController(rootViewController: homeVC)
+                                    //                                        navVC.isNavigationBarHidden = true
+                                    //                                        self.navigationController?.present(navVC, animated: true, completion: nil)
                                 }
                                 else {
                                     print(error.debugDescription)

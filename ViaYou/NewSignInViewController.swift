@@ -141,6 +141,9 @@ class NewSignInViewController: UIViewController {
                                         print(error.localizedDescription)
                                     }
                                 }
+                                else {
+                                    UserDefaults.standard.set(false, forKey: "IsNewUser")
+                                }
                                 //handling referral events ends
                                 
                                 print("Signed in successfully!")
@@ -155,7 +158,7 @@ class NewSignInViewController: UIViewController {
                                         navVC.isNavigationBarHidden = true
                                         self.navigationController?.present(navVC, animated: true, completion: nil)
                                     }
-                                    else {
+                                    else if boolValue == false {
                                                                             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                                                                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
                                                                             let navVC = UINavigationController(rootViewController: homeVC)
