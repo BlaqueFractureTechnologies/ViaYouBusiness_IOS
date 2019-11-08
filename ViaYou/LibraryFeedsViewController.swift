@@ -1040,9 +1040,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 addWatermarkClicked()
                 
             }
-            else if (paymentTypePurchased == 0) {
-                
-            }
             else {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
