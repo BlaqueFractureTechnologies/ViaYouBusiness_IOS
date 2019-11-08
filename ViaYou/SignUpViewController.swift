@@ -24,6 +24,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     var currentUserId: String = ""
     var currentUserName: String = ""
     var currnetUserEmail: String = ""
+    var ref: DatabaseReference!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.isHidden = true
@@ -72,14 +73,48 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     return
                 }
                 
+
+                
                 DispatchQueue.main.async {
                     
                     if let user = Auth.auth().currentUser {
                         user.link(with: credential, completion: { (user, error) in
                             self.getFaceookAuthenticationToken()
                         })
+                        
                     }
                 }
+                
+                
+                //handling referral events
+                guard let newUserStatus = user?.additionalUserInfo?.isNewUser else {return}
+                if newUserStatus {
+                    print("I'm a new user")
+                    UserDefaults.standard.set(true, forKey: "IsNewUser")
+                }
+                else {
+                    UserDefaults.standard.set(false, forKey: "IsNewUser")
+                }
+//                    let userID = Auth.auth().currentUser?.uid
+//                    self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+//                        // Get user value
+//                        let value = snapshot.value as? NSDictionary
+//                        let referredUserName = value?["isReferredBy"] as? String ?? ""
+//                        print(referredUserName)
+//                        // ...
+//                        ApiManager().callUserReferralAPI(referredBy: referredUserName, completion: { (response, error) in
+//                            if error == nil {
+//                                print("User signed in using referral link")
+//                            }
+//                            else {
+//                                print(error.debugDescription)
+//                            }
+//                        })
+//                    }) { (error) in
+//                        print(error.localizedDescription)
+//                    }
+               // }
+                //handling referral events ends
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
@@ -135,15 +170,34 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                 }
                                 print(self.currnetUserEmail)
                                 //edit
+                                
                                 ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
                                     if error == nil {
-                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                        print(self.passingProfileImage)
-                                        homeVC.passedProfileImage = self.passingProfileImage
-                                        let navVC = UINavigationController(rootViewController: homeVC)
-                                        navVC.isNavigationBarHidden = true
-                                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                                        let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
+                                        if boolValue == true {
+                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "UserTipsViewController") as! UserTipsViewController
+                                            print(self.passingProfileImage)
+                                            homeVC.passedProfileImage = self.passingProfileImage
+                                            let navVC = UINavigationController(rootViewController: homeVC)
+                                            navVC.isNavigationBarHidden = true
+                                            self.navigationController?.present(navVC, animated: true, completion: nil)
+                                        }
+                                        else if boolValue == false {
+                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                            homeVC.passedProfileImage = self.passingProfileImage
+                                            let navVC = UINavigationController(rootViewController: homeVC)
+                                            navVC.isNavigationBarHidden = true
+                                            self.navigationController?.present(navVC, animated: true, completion: nil)
+                                        }
+                                        //                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                        //                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                        //                                        print(self.passingProfileImage)
+                                        //                                        homeVC.passedProfileImage = self.passingProfileImage
+                                        //                                        let navVC = UINavigationController(rootViewController: homeVC)
+                                        //                                        navVC.isNavigationBarHidden = true
+                                        //                                        self.navigationController?.present(navVC, animated: true, completion: nil)
                                     }
                                     else {
                                         print(error.debugDescription)

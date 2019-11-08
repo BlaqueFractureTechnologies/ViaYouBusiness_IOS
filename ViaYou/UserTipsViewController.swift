@@ -14,11 +14,15 @@ class UserTipsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var finishButton: UIButton!
     
     var currentPage:Int = 0
+    var passedProfileImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        finishButton.alpha = 0
         prevButton.alpha = 0.65
         setUpScrollViewElements()
     }
@@ -46,9 +50,12 @@ class UserTipsViewController: UIViewController, UIScrollViewDelegate {
         prevButton.alpha = 1.0
         if (currentPage==4) {
             nextButton.alpha = 0.5
+            finishButton.alpha = 1
+            skipButton.alpha = 0
         }
         if (currentPage==0) {
             prevButton.alpha = 0.5
+            finishButton.alpha = 0
         }
     }
     
@@ -82,9 +89,24 @@ class UserTipsViewController: UIViewController, UIScrollViewDelegate {
         print("skipButtonClicked...")
                                             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                            print(self.passedProfileImage)
+                                            homeVC.passedProfileImage = self.passedProfileImage
                                             let navVC = UINavigationController(rootViewController: homeVC)
                                             navVC.isNavigationBarHidden = true
                                             self.navigationController?.present(navVC, animated: true, completion: nil)
     }
+    
+    @IBAction func finishButtonClicked(_ sender: Any) {
+        print("finishButtonClicked...")
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+        print(self.passedProfileImage)
+        homeVC.passedProfileImage = self.passedProfileImage
+        let navVC = UINavigationController(rootViewController: homeVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.present(navVC, animated: true, completion: nil)
+        
+    }
+    
 }
 

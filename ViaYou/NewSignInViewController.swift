@@ -121,6 +121,7 @@ class NewSignInViewController: UIViewController {
                                 guard let newUserStatus = result?.additionalUserInfo?.isNewUser else {return}
                                 if newUserStatus {
                                     print("I'm a new user")
+                                    UserDefaults.standard.set(true, forKey: "IsNewUser")
                                     let userID = Auth.auth().currentUser?.uid
                                     self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                                         // Get user value
@@ -143,19 +144,24 @@ class NewSignInViewController: UIViewController {
                                 //handling referral events ends
                                 
                                 print("Signed in successfully!")
-                                UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
+                               
                                 DispatchQueue.main.async {
                                     self.activityIndicator.stopAnimating()
-                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "UserTipsViewController") as! UserTipsViewController
-                                    let navVC = UINavigationController(rootViewController: homeVC)
-                                    navVC.isNavigationBarHidden = true
-                                    self.navigationController?.present(navVC, animated: true, completion: nil)
-//                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-//                                    let navVC = UINavigationController(rootViewController: homeVC)
-//                                    navVC.isNavigationBarHidden = true
-//                                    self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
+                                    if boolValue == true {
+                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "UserTipsViewController") as! UserTipsViewController
+                                        let navVC = UINavigationController(rootViewController: homeVC)
+                                        navVC.isNavigationBarHidden = true
+                                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    }
+                                    else {
+                                                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                                                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                                                            let navVC = UINavigationController(rootViewController: homeVC)
+                                                                            navVC.isNavigationBarHidden = true
+                                                                            self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    }
                                 }
                             }
                         }
