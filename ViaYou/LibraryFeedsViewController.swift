@@ -58,7 +58,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     //k*
     @IBOutlet weak var uploadProgressBarContainer: UIView!
-    @IBOutlet weak var uploadProgressBarHeightConstraint: NSLayoutConstraint!    
+    @IBOutlet weak var uploadProgressBarHeightConstraint: NSLayoutConstraint!
     let uploadBarStatusNotification = Notification.Name("uploadBarStatusNotification")
     @IBOutlet weak var uploadProgressFillBarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var uploadPercentageLabel: UILabel!
@@ -147,8 +147,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.uploadProgressBarHeightConstraint.constant = 0
                     })
                 }
-
-            }   
+                
+            }
         }
     }
     
@@ -635,21 +635,21 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     @objc func playButtonClicked(_ sender:UIButton) {
-            print(dataArray[sender.tag]._id)
-
-            let userID = dataArray[sender.tag].user._id
-            let videoName = dataArray[sender.tag].fileName
-            let videoId = dataArray[sender.tag]._id
-            //var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
-            var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
-            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-            
-            let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-            nextVC.videoUrl = videUrlString
-            nextVC.postId = videoId
-            nextVC.modalPresentationStyle = .overCurrentContext
-            self.present(nextVC, animated: true, completion: nil)
+        print(dataArray[sender.tag]._id)
+        
+        let userID = dataArray[sender.tag].user._id
+        let videoName = dataArray[sender.tag].fileName
+        let videoId = dataArray[sender.tag]._id
+        //var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+        var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
+        videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+        
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+        nextVC.videoUrl = videUrlString
+        nextVC.postId = videoId
+        nextVC.modalPresentationStyle = .overCurrentContext
+        self.present(nextVC, animated: true, completion: nil)
     }
     
     @objc func deleteVideoButtonClicked(_ sender:UIButton) {
@@ -994,19 +994,26 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         cell.configureCell(dataArray: dropdownArray, index: indexPath.row)
         let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
         
-                    if (indexPath.row == 8) {
-                        let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                        switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
-                        switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
-                        switchButton.isOn = false
-                        switchButton.backgroundColor = UIColor.clear
-                        switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
-                        cell.addSubview(switchButton)
-        
-                        //                    if (switchIsOpen) {
-                        //                        switchButton.isOn = true
-                        //                    }
-                    }
+        if (indexPath.row == 8) {
+            let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
+            switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
+            switchButton.isOn = false
+            switchButton.backgroundColor = UIColor.clear
+            if (paymentTypePurchased >= 0 || paymentTypePurchased == 1 || paymentTypePurchased == 2 ) {
+                switchButton.isUserInteractionEnabled = true
+                switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
+            }
+            else {
+                switchButton.isUserInteractionEnabled = false
+                switchButton.addTarget(self, action: #selector(showUpgradeOptions(_:)), for: .touchUpInside)
+            }
+            cell.addSubview(switchButton)
+            
+            //                    if (switchIsOpen) {
+            //                        switchButton.isOn = true
+            //                    }
+        }
         
         return cell
     }
@@ -1231,12 +1238,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
         print("paymentTypePurchased ====> \(paymentTypePurchased)")
         
-        if (paymentTypePurchased == 1 || paymentTypePurchased == 2 || paymentTypePurchased == 0) {
-            
-        }
-        else {
-            sender.setOn(false, animated: false)
-        }
         
         //        if (switchIsOpen) {
         //            switchIsOpen = false
@@ -1244,6 +1245,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //            switchIsOpen = true
         //        }
         //        tableView.reloadData()
+    }
+    @objc func showUpgradeOptions(_ sender:UISwitch) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+        nextVC.modalPresentationStyle = .overCurrentContext
+        nextVC.delegate = self
+        self.present(nextVC, animated: false, completion: nil)
+        
     }
     
     func addWatermarkClicked() {
@@ -1619,7 +1628,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
     }
     
-
+    
     
 }
 

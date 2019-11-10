@@ -15,17 +15,17 @@ class ProfileDropdownTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
     }
-
+    
     func configureCell(dataArray:[String], index:Int) {
         
         self.titleLabel.text = "\(dataArray[index])"
         
-        if (index == 0) {            
+        if (index == 0) {
             self.titleLabel.textColor =  #colorLiteral(red: 0.7752474546, green: 0.3023262918, blue: 0.373683393, alpha: 1)
             self.titleLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
             
         }
-
+        
         var iconName = "DropDown_\(dataArray[index])"
         
         iconName = iconName.replacingOccurrences(of: " ", with: "_")
@@ -52,6 +52,17 @@ class ProfileDropdownTableViewCell: UITableViewCell {
             
             if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
                 self.iconView.image = UIImage(named: "DropDown_RestoreGrowthOrPro")
+            }
+        }
+        if (index == 8) {
+            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            
+            if (paymentTypePurchased == 1 || paymentTypePurchased == 2 || paymentTypePurchased == 0) {
+                self.iconView.image = UIImage(named: "DropDown_High_Resolution_unlocked")
+            }
+            else {
+                self.iconView.image = UIImage(named:"DropDown_High_Resolution_Locked")
             }
         }
         

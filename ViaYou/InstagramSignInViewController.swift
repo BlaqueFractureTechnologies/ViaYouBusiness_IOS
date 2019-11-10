@@ -24,12 +24,14 @@ class InstagramSignInViewController: UIViewController {
         self.activityIndicator.isHidden = true
         // Do any additional setup after loading the view.
         let authURL = String(format: "%@?app_id=%@&redirect_uri=%@&response_type=code&scope=%@&DEBUG=True", arguments: [API.INSTAGRAM_AUTHURL,API.APP_ID,API.INSTAGRAM_REDIRECT_URI, API.INSTAGRAM_SCOPE])
+        print(authURL)
         let urlRequest = URLRequest.init(url: URL.init(string: authURL)!)
         webView.loadRequest(urlRequest)
     }
     
     func checkRequestForCallbackURL(request: URLRequest) -> Bool {
         let requestURLString = (request.url?.absoluteString)! as String
+        print(API.INSTAGRAM_REDIRECT_URI)
         if requestURLString.hasPrefix(API.INSTAGRAM_REDIRECT_URI) {
             let range: Range<String.Index> = requestURLString.range(of: "?code=")!
             handleAuth(authToken: requestURLString.substring(from: range.upperBound))
