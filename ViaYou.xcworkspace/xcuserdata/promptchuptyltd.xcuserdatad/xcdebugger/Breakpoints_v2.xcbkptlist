@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.398872"
+            timestampString = "595115612.396534"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.3989201"
+            timestampString = "595115612.3965991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.398955"
+            timestampString = "595115612.396638"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "fetchInstagramAuthToken()"
             landmarkType = "7">
             <Locations>
@@ -58,11 +58,11 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "595112182.217656"
+                  timestampString = "595114030.9976031"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
                   offsetFromSymbolStart = "876">
                </Location>
                <Location
@@ -73,11 +73,11 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "595112182.218884"
+                  timestampString = "595114030.998769"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
                   offsetFromSymbolStart = "204">
                </Location>
             </Locations>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.398986"
+            timestampString = "595115612.396673"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "fetchInstagramAuthToken()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399016"
+            timestampString = "595115612.396709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "fetchInstagramAuthToken()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.3990459"
+            timestampString = "595115612.3967431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "fetchInstagramAuthToken()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399075"
+            timestampString = "595115612.396777"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399103"
+            timestampString = "595115612.3968101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399132"
+            timestampString = "595115612.396847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
             <Locations>
@@ -186,11 +186,11 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "595112182.231787"
+                  timestampString = "595114031.011953"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
                   offsetFromSymbolStart = "484">
                </Location>
                <Location
@@ -201,11 +201,11 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "595112182.232861"
+                  timestampString = "595114031.013032"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "74"
-                  endingLineNumber = "74"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
                   offsetFromSymbolStart = "284">
                </Location>
             </Locations>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.3991621"
+            timestampString = "595115612.3968821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
             <Locations>
@@ -234,11 +234,11 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "595112182.2355649"
+                  timestampString = "595114031.015569"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
                   offsetFromSymbolStart = "1208">
                </Location>
                <Location
@@ -249,11 +249,11 @@
                   moduleName = "ViaYou"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/promptchuptyltd/Desktop/ViaYou_IOS/ViaYou/InstagramSignInViewController.swift"
-                  timestampString = "595112182.2366019"
+                  timestampString = "595114031.016571"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
                   offsetFromSymbolStart = "244">
                </Location>
             </Locations>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.3991899"
+            timestampString = "595115612.396915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,39 +282,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399219"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "fetchAuthResponseFromAPI()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.3992471"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "fetchAuthResponseFromAPI()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399277"
+            timestampString = "595115612.396948"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
@@ -330,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399305"
+            timestampString = "595115612.396981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399333"
+            timestampString = "595115612.397014"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399361"
+            timestampString = "595115612.397047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399389"
+            timestampString = "595115612.397079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "fetchAuthResponseFromAPI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,11 +362,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399419"
+            timestampString = "595115612.39712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "fetchAuthResponseFromAPI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/InstagramSignInViewController.swift"
+            timestampString = "595115612.397155"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "fetchAuthResponseFromAPI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/InstagramSignInViewController.swift"
+            timestampString = "595115612.3972009"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "checkRequestForCallbackURL(request:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399447"
+            timestampString = "595115612.397236"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "checkRequestForCallbackURL(request:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.3994761"
+            timestampString = "595115612.3972681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "checkRequestForCallbackURL(request:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399505"
+            timestampString = "595115612.3972991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "checkRequestForCallbackURL(request:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -458,11 +458,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViaYou/InstagramSignInViewController.swift"
-            timestampString = "595112717.399533"
+            timestampString = "595115612.397331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViaYou/InstagramSignInViewController.swift"
+            timestampString = "595115612.39737"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
