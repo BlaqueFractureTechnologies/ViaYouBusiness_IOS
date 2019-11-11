@@ -7131,16 +7131,13 @@ Cgo
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZbV-xm-A57">
                                                         <rect key="frame" x="20" y="0.0" width="335" height="36"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7V1-ay-LK0">
+                                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7V1-ay-LK0">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="36"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" red="0.71764705880000002" green="0.2156862745" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="MonarchaW01-Regular" family="MonarchaW01-Regular" pointSize="17"/>
                                                                 <state key="normal" title="Email">
                                                                     <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
-                                                                <connections>
-                                                                    <action selector="segmentButtonClicked:" destination="O1L-xh-yhh" eventType="touchUpInside" id="c3Y-G3-GyU"/>
-                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -7149,7 +7146,7 @@ Cgo
                                                             <constraint firstItem="7V1-ay-LK0" firstAttribute="leading" secondItem="ZbV-xm-A57" secondAttribute="leading" id="Qt7-Q5-Wvj"/>
                                                             <constraint firstItem="7V1-ay-LK0" firstAttribute="top" secondItem="ZbV-xm-A57" secondAttribute="top" id="TWL-es-pB4"/>
                                                             <constraint firstAttribute="bottom" secondItem="7V1-ay-LK0" secondAttribute="bottom" id="rBB-bA-I48"/>
-                                                            <constraint firstItem="7V1-ay-LK0" firstAttribute="width" secondItem="ZbV-xm-A57" secondAttribute="width" multiplier="0.5" constant="167.5" id="zGV-Xc-ofg"/>
+                                                            <constraint firstItem="7V1-ay-LK0" firstAttribute="width" secondItem="ZbV-xm-A57" secondAttribute="width" id="ycj-XO-WFP"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="18"/>
@@ -7347,6 +7344,7 @@ Cgo
                         <outlet property="segmentButonsContainerTopMarginConstraint" destination="yNW-sb-pKl" id="fe7-O3-kei"/>
                         <outlet property="segmentButtonsContainer" destination="ZbV-xm-A57" id="c6v-Vo-Qes"/>
                         <outlet property="segmentEmailButton" destination="7V1-ay-LK0" id="dUg-kn-lnr"/>
+                        <outlet property="segmentView" destination="e5f-Wn-Xky" id="LL4-Lz-fo3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zO3-zx-5JX" userLabel="First Responder" sceneMemberID="firstResponder"/>

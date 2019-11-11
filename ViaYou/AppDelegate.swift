@@ -34,8 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         Stripe.setDefaultPublishableKey("pk_test_kjt2etOhS9X6czAJxzLbEuM5007kPQdweC")
     //    Stripe.setDefaultPublishableKey("pk_live_ERcYOkG4ChP3Rpy7yzm2dh6L00xDyFrxYu")
-
-        userId = Auth.auth().currentUser!.uid
+        if let userid = Auth.auth().currentUser?.uid {
+            userId = userid
+        }
         return true
     }
     

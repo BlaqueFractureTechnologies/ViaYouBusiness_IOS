@@ -19,9 +19,10 @@ class SignUpMobileEntryViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var nextButtonContainer: UIView!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var segmentView: UIView!
     
     var emailButtonGradient:CAGradientLayer = CAGradientLayer()
-    var phoneButtonGradient:CAGradientLayer = CAGradientLayer()
+    //var phoneButtonGradient:CAGradientLayer = CAGradientLayer()
     
     var topMargin: CGFloat = 0.0
     
@@ -42,6 +43,7 @@ class SignUpMobileEntryViewController: UIViewController {
         DispatchQueue.main.async {
             self.nextButton.addAppGradient()
             self.segmentEmailButton.addAppGradient()
+            //self.segmentView.addAppGradient()
             self.segmentEmailButton.setTitleColor(UIColor.white, for: .normal)
         }
         setUpView()
@@ -83,8 +85,8 @@ class SignUpMobileEntryViewController: UIViewController {
     @IBAction func segmentButtonClicked(_ sender: UIButton) {
         //            segmentEmailButton.addAppGradient()
         DispatchQueue.main.async {
-            self.phoneButtonGradient.removeFromSuperlayer()
-            self.emailButtonGradient = self.segmentEmailButton.addAppGradientAndGetIt()
+            //self.phoneButtonGradient.removeFromSuperlayer()
+            //self.emailButtonGradient = self.segmentEmailButton.addAppGradientAndGetIt()
         }
         
         segmentEmailButton.setTitleColor(UIColor.white, for: .normal)
@@ -95,7 +97,7 @@ class SignUpMobileEntryViewController: UIViewController {
     }
     
     @IBAction func nextButtonClicked(_ sender: Any) {
-        self.phoneButtonGradient.removeFromSuperlayer()
+        //self.phoneButtonGradient.removeFromSuperlayer()
         self.emailButtonGradient.removeFromSuperlayer()
         
         let email = emailField.text ?? ""
