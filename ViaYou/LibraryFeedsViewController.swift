@@ -64,7 +64,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var uploadPercentageLabel: UILabel!
     @IBOutlet weak var uploadTextOverlayProgressFillBarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var progressArrowImageView: UIImageView!
-    
+    let uploadCompleteStatusNotification = Notification.Name("uploadCompleteStatusNotification") //k*
     
     
     var dataArray:[FeedDataArrayObject] = []
@@ -142,14 +142,32 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             if (percentage >= 100) {
                 DispatchQueue.main.async {
                     print("Upload completed... 100%...")
+                    NotificationCenter.default.removeObserver(self, name: self.uploadBarStatusNotification, object: nil)
                     UIView.animate(withDuration: 0.4, animations: {
                         self.uploadProgressBarContainer.layoutIfNeeded()
                         self.uploadProgressBarHeightConstraint.constant = 0
                     })
+                    //Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.reloadPageAfterVideoUpload), userInfo: nil, repeats: false)
                 }
                 
             }
         }
+        
+        //k*
+        if (notification.name == uploadCompleteStatusNotification) {
+            NotificationCenter.default.removeObserver(self, name: self.uploadCompleteStatusNotification, object: nil)
+            DispatchQueue.main.async {
+                self.reloadPageAfterVideoUpload()
+            }
+        }
+    }
+    
+    func reloadPageAfterVideoUpload() {
+        print("reloadPageAfterVideoUpload...")
+        self.dataArray = []
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        self.getResponseFromJSONFile()
     }
     
     override func viewDidLoad() {
@@ -449,11 +467,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         overlayViewWhenDropDownAppears.alpha = 0
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(withNotification:)), name: uploadBarStatusNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(withNotification:)), name: uploadCompleteStatusNotification, object: nil) //k*
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: uploadBarStatusNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: uploadCompleteStatusNotification, object: nil)
     }
     
     func getSubscriptionPlanResponseFromAPI() {
@@ -494,15 +515,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func getResponseFromJSONFile() {
-        //        readResponseFromFileForTest()
-        //        return
-        //
+        
+        print("getAllPostsAPI :: dataArray.count\(dataArray.count)")
         
         ApiManager().getAllPostsAPI(from: "0", size: "100") { (responseDict, error) in
             if error == nil {
-                print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.message)")
+                print("getAllPostsAPI :: responseDict\(responseDict.message)")
                 if responseDict.data.count == 0 {
-                    
+                    print("getAllPostsAPI :: responseDict.data.count\(responseDict.data.count)")
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 1
                         self.activityIndicator.isHidden = true
@@ -515,12 +535,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 }
                 else {
                     
-                    print("getNewsFeedsForYouResponseFromAPI :: responseDict\(responseDict.success)")
+                    print("getAllPostsAPI :: responseDict.success\(responseDict.success)")
                     for i in 0..<responseDict.data.count {
                         print("Total video count=====> \(responseDict.data.count)")
                         if responseDict.data.count == 1 {
                             DispatchQueue.main.async {
-                                
                                 self.totalVideoCount.text = "\(responseDict.data.count) video"
                             }                        }
                         else {
@@ -532,18 +551,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         indexDict.isInfoPopUpDisplaying = false
                         self.dataArray.append(indexDict)
                         
-                        print("getLibraryResponseFromAPI :: filename\(indexDict.fileName)")
+                        print("getAllPostsAPI :: filename\(indexDict.fileName)")
                     }
                     
-                    //  self.loadVideoSize()
-                    //                    DispatchQueue.main.sync {
-                    //                        self.loadAllVideoImagesForDataArray()
-                    //                    }
                     self.loadAllVideoImagesForDataArray()
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 0
                         self.collectioView.reloadData()
-                        
                         self.activityIndicator.isHidden = true
                         self.activityIndicator.stopAnimating()
                         self.collectioView.isUserInteractionEnabled = true
@@ -553,7 +567,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             }
                 
             else {
-                print(error?.localizedDescription)
+                print("getAllPostsAPI :: error ====> \(error?.localizedDescription ?? "Unknown error")")
                 DispatchQueue.main.async {
                     self.activityIndicator.isHidden = true
                     self.activityIndicator.stopAnimating()
@@ -640,8 +654,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let userID = dataArray[sender.tag].user._id
         let videoName = dataArray[sender.tag].fileName
         let videoId = dataArray[sender.tag]._id
-        //var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
-        var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
+        var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+        //var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
         videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
         
         let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)

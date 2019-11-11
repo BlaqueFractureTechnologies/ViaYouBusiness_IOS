@@ -2113,7 +2113,7 @@
                                         <rect key="frame" x="10" y="12" width="315" height="16"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
                                         <connections>
                                             <outlet property="delegate" destination="NAO-87-Wvd" id="Suo-V5-3yB"/>
                                         </connections>
@@ -7182,7 +7182,7 @@ Cgo
                                                                 <rect key="frame" x="10" y="13.5" width="315" height="17"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" textContentType="email"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="O1L-xh-yhh" id="XV9-3n-rS0"/>
                                                                 </connections>
