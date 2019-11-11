@@ -23,6 +23,8 @@ class SignUpPasswordEntryViewController: UIViewController {
     var topMargin: CGFloat = 0.0
     var passedEmailAddress: String = ""
     var generatedUserToken: String = ""
+    var ref: DatabaseReference?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +87,7 @@ class SignUpPasswordEntryViewController: UIViewController {
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         let password = passwordField.text ?? ""
-        let credential = EmailAuthProvider.credential(withEmail: self.passedEmailAddress, password: password)
+       // let credential = EmailAuthProvider.credential(withEmail: self.passedEmailAddress, password: password)
         if password.count < 8 {
             self.displaySingleButtonAlert(message: "Password must be 8 characters!")
             self.activityIndicator.isHidden = true
@@ -96,16 +98,19 @@ class SignUpPasswordEntryViewController: UIViewController {
             if (error == nil) {
                 if (responseDict.success == true) {
                     print(responseDict.message)
-                    if let user = Auth.auth().currentUser {
-                        user.link(with: credential) { (user, error) in
-                            // Complete any post sign-up tasks here.
-                            //                            if let user = user {
-                            //                                let userRecord = Database.database().reference().child("users").child(user.user.uid)
-                            //                                userRecord.child("last_signin_at").setValue(ServerValue.timestamp())
-                            //                            }
+//                    if let user = Auth.auth().currentUser {
+//                        user.link(with: credential) { (user, error) in
+//                             //Complete any post sign-up tasks here.
+//                                                        if let user = user {
+//                                                            let userRecord = Database.database().reference().child("users").child(user.user.uid)
+//                                                            userRecord.child("last_signin_at").setValue(ServerValue.timestamp())
+//
+//                                                        }
+                    
                             if (responseDict.message.count>0) {
                                 print(responseDict.message)
                                 self.generatedUserToken = ""
+                                
                                 UserDefaults.standard.set(self.generatedUserToken, forKey: "GeneratedUserToken")
                                 
                                 DispatchQueue.main.async {
@@ -131,8 +136,8 @@ class SignUpPasswordEntryViewController: UIViewController {
                                 let homeVC = storyBoard.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
                                 self.navigationController?.pushViewController(homeVC, animated: true)
                             }
-                        }
-                    }
+//                        }
+//                    }
                     
                 }else {
                     if (responseDict.message.count>0) {

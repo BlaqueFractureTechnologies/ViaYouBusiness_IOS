@@ -24,7 +24,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     var currentUserId: String = ""
     var currentUserName: String = ""
     var currnetUserEmail: String = ""
-    var ref: DatabaseReference!
+    var ref: DatabaseReference?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.isHidden = true
@@ -82,6 +82,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                             self.getFaceookAuthenticationToken()
                         })
                         
+                        
                     }
                 }
                 
@@ -91,6 +92,32 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 if newUserStatus {
                     print("I'm a new user")
                     UserDefaults.standard.set(true, forKey: "IsNewUser")
+                    //
+                    let userID = Auth.auth().currentUser?.uid
+                    self.ref = Database.database().reference()
+                    self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        // Get user value
+                        let value = snapshot.value as? NSDictionary
+                       // let referredUserName = value?["referred_by"] as? String ?? ""
+                        if let referredUserName = value?["referred_by"] as? String {
+                            let appReferredUserName = referredUserName
+                            print("print referral user name: \(appReferredUserName)")
+                            // ...
+                            ApiManager().callUserReferralAPI(referredBy: appReferredUserName, completion: { (response, error) in
+                                if error == nil {
+                                    print("User signed in using referral link")
+                                }
+                                else {
+                                    print(error.debugDescription)
+                                }
+                            })
+                        }
+
+                    }) { (error) in
+                        print(error.localizedDescription)
+                    }
+                    //
+
                 }
                 else {
                     UserDefaults.standard.set(false, forKey: "IsNewUser")
@@ -175,6 +202,26 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                     if error == nil {
                                         let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
                                         if boolValue == true {
+                                            //
+                                            let userID = Auth.auth().currentUser?.uid
+                                            self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                                // Get user value
+                                                let value = snapshot.value as? NSDictionary
+                                                let referredUserName = value?["referred_by"] as? String ?? ""
+                                                print(referredUserName)
+                                                // ...
+                                                ApiManager().callUserReferralAPI(referredBy: referredUserName, completion: { (response, error) in
+                                                    if error == nil {
+                                                        print("User signed in using referral link")
+                                                    }
+                                                    else {
+                                                        print(error.debugDescription)
+                                                    }
+                                                })
+                                            }) { (error) in
+                                                print(error.localizedDescription)
+                                            }
+                                            //
                                             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "UserTipsViewController") as! UserTipsViewController
                                             print(self.passingProfileImage)
@@ -277,6 +324,32 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 if newUserStatus {
                     print("I'm a new user")
                     UserDefaults.standard.set(true, forKey: "IsNewUser")
+                    //
+                    let userID = Auth.auth().currentUser?.uid
+                    self.ref = Database.database().reference()
+                    self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        // Get user value
+                        let value = snapshot.value as? NSDictionary
+                        // let referredUserName = value?["referred_by"] as? String ?? ""
+                        if let referredUserName = value?["referred_by"] as? String {
+                            let appReferredUserName = referredUserName
+                            print("print referral user name: \(appReferredUserName)")
+                            // ...
+                            ApiManager().callUserReferralAPI(referredBy: appReferredUserName, completion: { (response, error) in
+                                if error == nil {
+                                    print("User signed in using referral link")
+                                }
+                                else {
+                                    print(error.debugDescription)
+                                }
+                            })
+                        }
+                        
+                    }) { (error) in
+                        print(error.localizedDescription)
+                    }
+                    //
+                    
                 }
                 else {
                     UserDefaults.standard.set(false, forKey: "IsNewUser")
