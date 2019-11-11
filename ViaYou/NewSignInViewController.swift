@@ -95,7 +95,7 @@ class NewSignInViewController: UIViewController {
                 }
             }
             else {
-                print("result ====> \(result!)")
+                print("result ====> \(String(describing: result?.additionalUserInfo?.isNewUser))")
                                     if let user = Auth.auth().currentUser {
                                         user.link(with: credential) { (user, error) in
                                              //Complete any post sign-up tasks here.
