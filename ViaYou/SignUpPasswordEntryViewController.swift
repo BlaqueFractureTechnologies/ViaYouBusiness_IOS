@@ -24,7 +24,7 @@ class SignUpPasswordEntryViewController: UIViewController {
     var passedEmailAddress: String = ""
     var generatedUserToken: String = ""
     var ref: DatabaseReference?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,85 +87,86 @@ class SignUpPasswordEntryViewController: UIViewController {
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         let password = passwordField.text ?? ""
-       // let credential = EmailAuthProvider.credential(withEmail: self.passedEmailAddress, password: password)
+        // let credential = EmailAuthProvider.credential(withEmail: self.passedEmailAddress, password: password)
         if password.count < 8 {
             self.displaySingleButtonAlert(message: "Password must be 8 characters!")
             self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
         }
         else {
-        ApiManager().callRegistrationAPI( email: self.passedEmailAddress, password: password, gender: "Female") { (responseDict, error) in
-            if (error == nil) {
-                if (responseDict.success == true) {
-                    print(responseDict.message)
-//                    if let user = Auth.auth().currentUser {
-//                        user.link(with: credential) { (user, error) in
-//                             //Complete any post sign-up tasks here.
-//                                                        if let user = user {
-//                                                            let userRecord = Database.database().reference().child("users").child(user.user.uid)
-//                                                            userRecord.child("last_signin_at").setValue(ServerValue.timestamp())
-//
-//                                                        }
-                    
-                            if (responseDict.message.count>0) {
-                                print(responseDict.message)
-                                self.generatedUserToken = ""
-                                
-                                UserDefaults.standard.set(self.generatedUserToken, forKey: "GeneratedUserToken")
-                                
-                                DispatchQueue.main.async {
-                                    self.activityIndicator.stopAnimating()
-                                    self.activityIndicator.isHidden = true
-                                    let alert = UIAlertController(title: "Alert", message: responseDict.message, preferredStyle: .alert)
-                                    let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "NewSignInViewController") as! NewSignInViewController
-                                        self.navigationController?.pushViewController(homeVC, animated: true)
-                                    })
-                                    alert.addAction(okAction)
-                                    self.present(alert, animated: true, completion: nil)
-                                    
-                                }
-                                
-                            }else {
-                                // Registration success (& if message.count == 0)
+            ApiManager().callRegistrationAPI( email: self.passedEmailAddress, password: password, gender: "Female") { (responseDict, error) in
+                if (error == nil) {
+                    if (responseDict.success == true) {
+                        print(responseDict.message)
+                        //                    if let user = Auth.auth().currentUser {
+                        //                        user.link(with: credential) { (user, error) in
+                        //                             //Complete any post sign-up tasks here.
+                        //                                                        if let user = user {
+                        //                                                            let userRecord = Database.database().reference().child("users").child(user.user.uid)
+                        //                                                            userRecord.child("last_signin_at").setValue(ServerValue.timestamp())
+                        //
+                        //                                                        }
+                        
+                        if (responseDict.message.count>0) {
+                            print(responseDict.message)
+                            self.generatedUserToken = ""
+                            
+                            UserDefaults.standard.set(self.generatedUserToken, forKey: "GeneratedUserToken")
+                            
+                            DispatchQueue.main.async {
                                 self.activityIndicator.stopAnimating()
                                 self.activityIndicator.isHidden = true
-                                self.displaySingleButtonAlert(message: "Registration success. Please check your email for verification link")
-                                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                let homeVC = storyBoard.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
-                                self.navigationController?.pushViewController(homeVC, animated: true)
+                                let alert = UIAlertController(title: "Alert", message: responseDict.message, preferredStyle: .alert)
+                                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                                    DefaultWrapper().setFirstTimeUserStatusAfterSignUp(status: true, userEmail: self.passedEmailAddress) //k*
+                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "NewSignInViewController") as! NewSignInViewController
+                                    self.navigationController?.pushViewController(homeVC, animated: true)
+                                })
+                                alert.addAction(okAction)
+                                self.present(alert, animated: true, completion: nil)
+                                
                             }
-//                        }
-//                    }
-                    
-                }else {
-                    if (responseDict.message.count>0) {
-                        print(responseDict.message)
-                        // Registration failed (& if message.count > 0)
-                        DispatchQueue.main.async {
+                            
+                        }else {
+                            // Registration success (& if message.count == 0)
                             self.activityIndicator.stopAnimating()
                             self.activityIndicator.isHidden = true
-                            self.displaySingleButtonAlert(message: responseDict.message)
+                            self.displaySingleButtonAlert(message: "Registration success. Please check your email for verification link")
+                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
+                            self.navigationController?.pushViewController(homeVC, animated: true)
                         }
+                        //                        }
+                        //                    }
                         
                     }else {
-                        // Registration failed (& if message.count == 0)
-                        DispatchQueue.main.async {
-                            self.activityIndicator.stopAnimating()
-                            self.activityIndicator.isHidden = true
-                            self.displaySingleButtonAlert(message: "Registration failed. Please try again later")
+                        if (responseDict.message.count>0) {
+                            print(responseDict.message)
+                            // Registration failed (& if message.count > 0)
+                            DispatchQueue.main.async {
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
+                                self.displaySingleButtonAlert(message: responseDict.message)
+                            }
+                            
+                        }else {
+                            // Registration failed (& if message.count == 0)
+                            DispatchQueue.main.async {
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
+                                self.displaySingleButtonAlert(message: "Registration failed. Please try again later")
+                            }
+                            
                         }
-                     
                     }
+                }else {
+                    self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Unknown error")
                 }
-            }else {
-                self.displaySingleButtonAlert(message: error?.localizedDescription ?? "Unknown error")
+                DispatchQueue.main.async {
+                    //  SVProgressHUD.dismiss()
+                }
             }
-            DispatchQueue.main.async {
-                //  SVProgressHUD.dismiss()
-            }
-        }
         }
         //edit ends
         

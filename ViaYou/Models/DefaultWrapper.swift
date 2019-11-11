@@ -23,4 +23,13 @@ class DefaultWrapper: NSObject {
         let paymentTypePurchased = UserDefaults.standard.value(forKey: "PaymentTypePurchased") as? Int ?? -1
         return paymentTypePurchased
     }
+    
+    func setFirstTimeUserStatusAfterSignUp(status:Bool,userEmail:String) {
+        UserDefaults.standard.set(status, forKey: "isFirstTimeUser_\(userEmail)")
+    }
+    
+    func getFirstTimeUserStatus(userEmail:String) ->Bool {
+        let status = UserDefaults.standard.value(forKey: "isFirstTimeUser_\(userEmail)") as? Bool ?? false
+        return status
+    }
 }

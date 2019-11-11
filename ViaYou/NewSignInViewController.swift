@@ -84,7 +84,7 @@ class NewSignInViewController: UIViewController {
         print("passwordTextField.text: \(passwordTextField.text ?? "")")
         
         let credential = EmailAuthProvider.credential(withEmail: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "")
-
+        
         Auth.auth().signIn(withEmail: emailTextField.text ?? "Invalid Email Address", password: passwordTextField.text ?? "Wrong Password") { (result, error) in
             if error != nil {
                 print("Incorrect Credentials!")
@@ -96,11 +96,35 @@ class NewSignInViewController: UIViewController {
             }
             else {
                 print("result ====> \(String(describing: result?.additionalUserInfo?.isNewUser))")
-                                    if let user = Auth.auth().currentUser {
-                                        user.link(with: credential) { (user, error) in
-                                             //Complete any post sign-up tasks here.
-                                            self.getAuthenticationToken()        
-                                        }
+                if let user = Auth.auth().currentUser {
+                    user.link(with: credential) { (user, error) in
+                        //Complete any post sign-up tasks here.
+                        self.getAuthenticationToken()
+                        let userID = Auth.auth().currentUser?.uid
+                        self.ref = Database.database().reference()
+                        self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                            // Get user value
+                            let value = snapshot.value as? NSDictionary
+                            // let referredUserName = value?["referred_by"] as? String ?? ""
+                            if let referredUserName = value?["referred_by"] as? String {
+                                let appReferredUserName = referredUserName
+                                print("print referral user name: \(appReferredUserName)")
+                                // ...
+                                ApiManager().callUserReferralAPI(referredBy: appReferredUserName, completion: { (response, error) in
+                                    if error == nil {
+                                        print("User signed in using referral link")
+                                    }
+                                    else {
+                                        print(error.debugDescription)
+                                    }
+                                })
+                            }
+                            
+                        }) { (error) in
+                            print(error.localizedDescription)
+                        }
+                        //
+                    }
                 }
                 
                 // new user checking starts
@@ -138,7 +162,7 @@ class NewSignInViewController: UIViewController {
                     UserDefaults.standard.set(false, forKey: "IsNewUser")
                 }
                 
-               // new user checking ends
+                // new user checking ends
             }
         }
     }
@@ -172,8 +196,12 @@ class NewSignInViewController: UIViewController {
                         
                         DispatchQueue.main.async {
                             self.activityIndicator.stopAnimating()
-                            let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
+                            //let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
+                            let userEmail = Auth.auth().currentUser?.email ?? "" //k*
+                            let boolValue = DefaultWrapper().getFirstTimeUserStatus(userEmail: userEmail) //k*
+                            
                             if boolValue == true {
+                                DefaultWrapper().setFirstTimeUserStatusAfterSignUp(status: false, userEmail: userEmail)  //k*
                                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                                 let homeVC = storyBoard.instantiateViewController(withIdentifier: "UserTipsViewController") as! UserTipsViewController
                                 let navVC = UINavigationController(rootViewController: homeVC)
