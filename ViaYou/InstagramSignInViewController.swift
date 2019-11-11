@@ -16,6 +16,7 @@ class InstagramSignInViewController: UIViewController {
     @IBOutlet weak var webView: UIWebView!
     var generatedUserToken: String = ""
     var passingProfileImage = UIImage()
+    var ref: DatabaseReference?
     
     
     
@@ -94,15 +95,66 @@ class InstagramSignInViewController: UIViewController {
                                 UserDefaults.standard.set(self.generatedUserToken, forKey: "GeneratedUserToken")
                               //  let instagramAuthenticationToken = UserDefaults.standard.value(forKey: "InstagramAccessToken")
                                 UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
+                                
+                                //onboard screens
+                                // new user checking starts
+                                guard let newUserStatus = result?.additionalUserInfo?.isNewUser else {return}
+                                if newUserStatus {
+                                    print("I'm a new user")
+                                    UserDefaults.standard.set(true, forKey: "IsNewUser")
+                                    //
+                                    let userID = Auth.auth().currentUser?.uid
+                                    self.ref = Database.database().reference()
+                                    self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                        // Get user value
+                                        let value = snapshot.value as? NSDictionary
+                                        // let referredUserName = value?["referred_by"] as? String ?? ""
+                                        if let referredUserName = value?["referred_by"] as? String {
+                                            let appReferredUserName = referredUserName
+                                            print("print referral user name: \(appReferredUserName)")
+                                            // ...
+                                            ApiManager().callUserReferralAPI(referredBy: appReferredUserName, completion: { (response, error) in
+                                                if error == nil {
+                                                    print("User signed in using referral link")
+                                                }
+                                                else {
+                                                    print(error.debugDescription)
+                                                }
+                                            })
+                                        }
+                                        
+                                    }) { (error) in
+                                        print(error.localizedDescription)
+                                    }
+                                    //
+                                }
+                                else {
+                                    UserDefaults.standard.set(false, forKey: "IsNewUser")
+                                }
+                                
+                                // new user checking ends
+                                //onboard screens end
                                 DispatchQueue.main.async {
                                     self.activityIndicator.stopAnimating()
                                     self.activityIndicator.isHidden = true
-                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                    let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                    homeVC.passedProfileImage = self.passingProfileImage
-                                    let navVC = UINavigationController(rootViewController: homeVC)
-                                    navVC.isNavigationBarHidden = true
-                                    self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
+                                    if boolValue == true {
+                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "UserTipsViewController") as! UserTipsViewController
+                                        print(self.passingProfileImage)
+                                        homeVC.passedProfileImage = self.passingProfileImage
+                                        let navVC = UINavigationController(rootViewController: homeVC)
+                                        navVC.isNavigationBarHidden = true
+                                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    }
+                                    else if boolValue == false {
+                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+                                        homeVC.passedProfileImage = self.passingProfileImage
+                                        let navVC = UINavigationController(rootViewController: homeVC)
+                                        navVC.isNavigationBarHidden = true
+                                        self.navigationController?.present(navVC, animated: true, completion: nil)
+                                    }
                                 }
 //                                ApiManager().getInstaUserDetails(access_token: instagramAuthenticationToken as! String) { (responseDict, error) in
 //                                    if (error == nil) {
