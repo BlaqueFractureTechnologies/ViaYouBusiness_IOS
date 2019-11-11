@@ -192,6 +192,7 @@ class NewSignInViewController: UIViewController {
                         let generatedUserToken = userToken
                         UserDefaults.standard.set(generatedUserToken, forKey: "GeneratedUserToken")
                         print("Updated Token: \(generatedUserToken)")
+                        UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                         print("Signed in successfully!")
                         
                         DispatchQueue.main.async {
