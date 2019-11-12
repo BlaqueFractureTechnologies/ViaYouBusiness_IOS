@@ -47,7 +47,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -76,7 +76,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>5</string>
 	<key>FacebookAppID</key>
 	<string>2262777054012195</string>
 	<key>FacebookDisplayName</key>
@@ -105,9 +105,9 @@
 	<string>App needs to access your galley to save the video before sharing</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>"Monarcha_Bold.ttf"</string>
-		<string>"Monarcha_SemiBold.ttf"</string>
-		<string>"monarcha_regular.ttf"</string>
+		<string>&quot;Monarcha_Bold.ttf&quot;</string>
+		<string>&quot;Monarcha_SemiBold.ttf&quot;</string>
+		<string>&quot;monarcha_regular.ttf&quot;</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
