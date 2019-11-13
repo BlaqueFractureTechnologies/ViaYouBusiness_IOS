@@ -108,8 +108,8 @@ class InstagramSignInViewController: UIViewController {
                                     self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                                         // Get user value
                                         let value = snapshot.value as? NSDictionary
-                                        // let referredUserName = value?["referred_by"] as? String ?? ""
-                                        if let referredUserName = value?["referred_by"] as? String {
+                                        // let referredUserName = value?["referredBy"] as? String ?? ""
+                                        if let referredUserName = value?["referredBy"] as? String {
                                             let appReferredUserName = referredUserName
                                             print("print referral user name: \(appReferredUserName)")
                                             // ...

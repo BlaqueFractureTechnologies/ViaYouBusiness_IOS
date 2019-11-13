@@ -98,8 +98,8 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                         // Get user value
                         let value = snapshot.value as? NSDictionary
-                       // let referredUserName = value?["referred_by"] as? String ?? ""
-                        if let referredUserName = value?["referred_by"] as? String {
+                       // let referredUserName = value?["referredBy"] as? String ?? ""
+                        if let referredUserName = value?["referredBy"] as? String {
                             let appReferredUserName = referredUserName
                             print("print referral user name: \(appReferredUserName)")
                             // ...
@@ -207,7 +207,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                             self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                                                 // Get user value
                                                 let value = snapshot.value as? NSDictionary
-                                                let referredUserName = value?["referred_by"] as? String ?? ""
+                                                let referredUserName = value?["referredBy"] as? String ?? ""
                                                 print(referredUserName)
                                                 // ...
                                                 ApiManager().callUserReferralAPI(referredBy: referredUserName, completion: { (response, error) in
@@ -330,8 +330,8 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                         // Get user value
                         let value = snapshot.value as? NSDictionary
-                        // let referredUserName = value?["referred_by"] as? String ?? ""
-                        if let referredUserName = value?["referred_by"] as? String {
+                        // let referredUserName = value?["referredBy"] as? String ?? ""
+                        if let referredUserName = value?["referredBy"] as? String {
                             let appReferredUserName = referredUserName
                             print("print referral user name: \(appReferredUserName)")
                             // ...

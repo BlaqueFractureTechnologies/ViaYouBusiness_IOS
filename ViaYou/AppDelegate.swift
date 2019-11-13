@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             Auth.auth().signInAnonymously() { (user, error) in
                 if let user = user {
                     let userRecord = Database.database().reference().child("users").child(user.user.uid)
-                    userRecord.child("referred_by").setValue(invitedBy)
+                    userRecord.child("referredBy").setValue(invitedBy)
                     //                    if dynamicLink.matchConfidence == .weak {
                     //                        // If the Dynamic Link has a weak match confidence, it is possible
                     //                        // that the current device isn't the same device on which the invitation

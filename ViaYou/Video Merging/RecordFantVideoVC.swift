@@ -414,4 +414,34 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         _ = setupSession()
     }
     
+    var isSmallViewDragInProgress:Bool = false
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if self.isLongerThanBackVideo == false {
+            if let touch = touches.first {
+                let touchLocation = touch.location(in: self.view)
+                let captureVideoViewFrame = captureVideoView.bounds
+                if (captureVideoViewFrame.contains(touchLocation)) {
+                    print("touchesBegan :: Clicked Inside captureVideoViewFrame...")
+                    isSmallViewDragInProgress = true
+                }
+            }
+        }
+
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if self.isLongerThanBackVideo == false {
+            if let touch = touches.first {
+                let touchLocation = touch.location(in: self.view)
+                if (isSmallViewDragInProgress == true) {
+                    captureVideoView.center = touchLocation
+                }
+            }
+        }
+
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        isSmallViewDragInProgress = true
+    }
 }
