@@ -56,7 +56,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var isSelectingProfilePictureFromImagePicker:Bool = false
     
     
-    //k*
+    
     @IBOutlet weak var uploadProgressBarContainer: UIView!
     @IBOutlet weak var uploadProgressBarHeightConstraint: NSLayoutConstraint!
     let uploadBarStatusNotification = Notification.Name("uploadBarStatusNotification")
@@ -64,7 +64,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var uploadPercentageLabel: UILabel!
     @IBOutlet weak var uploadTextOverlayProgressFillBarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var progressArrowImageView: UIImageView!
-    let uploadCompleteStatusNotification = Notification.Name("uploadCompleteStatusNotification") //k*
+    let uploadCompleteStatusNotification = Notification.Name("uploadCompleteStatusNotification")
     
     
     var dataArray:[FeedDataArrayObject] = []
@@ -111,6 +111,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var isSelectingVideo: Bool = false
     var selectedVideo: URL!
     
+    //k*
+    var fetchStart:Int = 0
+    var isDataFetchInProgress:Bool = false
+    
     @objc func handleNotification(withNotification notification : NSNotification) {
         if (notification.name == uploadBarStatusNotification) {
             print("uploadBarStatusNotification...")
@@ -153,7 +157,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             }
         }
         
-        //k*
+        
         if (notification.name == uploadCompleteStatusNotification) {
             NotificationCenter.default.removeObserver(self, name: self.uploadCompleteStatusNotification, object: nil)
             DispatchQueue.main.async {
@@ -467,7 +471,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         overlayViewWhenDropDownAppears.alpha = 0
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(withNotification:)), name: uploadBarStatusNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(withNotification:)), name: uploadCompleteStatusNotification, object: nil) //k*
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(withNotification:)), name: uploadCompleteStatusNotification, object: nil)
         
     }
     
@@ -515,10 +519,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func getResponseFromJSONFile() {
-        
         print("getAllPostsAPI :: dataArray.count\(dataArray.count)")
         
-        ApiManager().getAllPostsAPI(from: "0", size: "100") { (responseDict, error) in
+        //k*
+        ApiManager().getAllPostsAPI(from: "\(fetchStart)", size: "10") { (responseDict, error) in
             if error == nil {
                 print("getAllPostsAPI :: responseDict\(responseDict.message)")
                 if responseDict.data.count == 0 {
@@ -530,7 +534,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.collectioView.isUserInteractionEnabled = true
                         
                         self.collectioView.reloadData()
-                        
+                        self.isDataFetchInProgress = false
                     }
                 }
                 else {
@@ -561,6 +565,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.activityIndicator.isHidden = true
                         self.activityIndicator.stopAnimating()
                         self.collectioView.isUserInteractionEnabled = true
+                        self.isDataFetchInProgress = false
                     }
                     
                 }
@@ -572,6 +577,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     self.activityIndicator.isHidden = true
                     self.activityIndicator.stopAnimating()
                     self.collectioView.isUserInteractionEnabled = true
+                    self.isDataFetchInProgress = false
                 }
             }
         }
@@ -619,6 +625,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             }) { (completed) in
                 self.isBottomButtonAnimationInProgress = false
             }
+        }
+    }
+    
+    //k*
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if (isDataFetchInProgress == false) {
+            isDataFetchInProgress = true
+            fetchStart = fetchStart + 10
+            getResponseFromJSONFile()
         }
     }
     
