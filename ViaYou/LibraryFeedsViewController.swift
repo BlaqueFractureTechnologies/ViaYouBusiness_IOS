@@ -541,14 +541,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     
                     print("getAllPostsAPI :: responseDict.success\(responseDict.success)")
                     for i in 0..<responseDict.data.count {
-                        print("Total video count=====> \(responseDict.data.count)")
-                        if responseDict.data.count == 1 {
+                        print("Total video count=====> \(self.dataArray.count)")
+                        if self.dataArray.count == 1 {
                             DispatchQueue.main.async {
-                                self.totalVideoCount.text = "\(responseDict.data.count) video"
+                                self.totalVideoCount.text = "\(self.dataArray.count) video"
                             }                        }
                         else {
                             DispatchQueue.main.async {
-                                self.totalVideoCount.text = "\(responseDict.data.count) videos"
+                                self.totalVideoCount.text = "\(self.dataArray.count) videos"
                             }
                         }
                         let indexDict = responseDict.data[i]
