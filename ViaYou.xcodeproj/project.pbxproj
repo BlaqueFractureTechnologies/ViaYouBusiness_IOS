@@ -51,6 +51,7 @@
 		9E3485BE234AE5E400DFADC9 /* ReferralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3485BD234AE5E400DFADC9 /* ReferralResponse.swift */; };
 		9E34D01D2357FDF40085ABAA /* StripePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34D01C2357FDF40085ABAA /* StripePaymentViewController.swift */; };
 		9E34D01F2357FE1E0085ABAA /* SubscriptionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34D01E2357FE1E0085ABAA /* SubscriptionResponse.swift */; };
+		9E388D142381F62000441FA6 /* SubmitEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E388D132381F62000441FA6 /* SubmitEmailViewController.swift */; };
 		9E403A39234434AE002E3749 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A38234434AE002E3749 /* ApiManager.swift */; };
 		9E403A3C2344352B002E3749 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3B2344352B002E3749 /* RegisterResponse.swift */; };
 		9E403A3E23443F0B002E3749 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3D23443F0B002E3749 /* Constants.swift */; };
@@ -159,6 +160,7 @@
 		9E3485BD234AE5E400DFADC9 /* ReferralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralResponse.swift; sourceTree = "<group>"; };
 		9E34D01C2357FDF40085ABAA /* StripePaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripePaymentViewController.swift; sourceTree = "<group>"; };
 		9E34D01E2357FE1E0085ABAA /* SubscriptionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionResponse.swift; sourceTree = "<group>"; };
+		9E388D132381F62000441FA6 /* SubmitEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitEmailViewController.swift; sourceTree = "<group>"; };
 		9E403A38234434AE002E3749 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		9E403A3B2344352B002E3749 /* RegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
 		9E403A3D23443F0B002E3749 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				9E159F0F235E8A4F0033FBE6 /* DeletedVideosViewController.swift */,
 				9EFE669A2360F68F002CF9C8 /* AddFeedPopUpViewController.swift */,
 				9EE57BF523628ADE00CAC421 /* AddTwoMenuViewController.swift */,
+				9E388D132381F62000441FA6 /* SubmitEmailViewController.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				9E3485BA234A903F00DFADC9 /* ContactsTableViewCell.swift in Sources */,
 				9E2723062374B99D006E93FE /* UserTipsViewController.swift in Sources */,
 				9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */,
+				9E388D142381F62000441FA6 /* SubmitEmailViewController.swift in Sources */,
 				9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */,
 				9E2091D1236A3193005D8919 /* MergeVideoInfoViewController.swift in Sources */,
 				9E2B87A22344020500941DF2 /* SignInViewController.swift in Sources */,

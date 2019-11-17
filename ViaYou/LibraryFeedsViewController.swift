@@ -49,10 +49,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var plusButtonBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var totalVideoCount: UILabel!
-    @IBOutlet weak var storageIndicatorGreenOnDropDown: UIView!
-    @IBOutlet weak var storageIndicatorRedOnDropDown: UIView!
-    @IBOutlet weak var storageIndicatorLabelOnDropDown: UILabel!
-    @IBOutlet weak var storageIndicatorRedOnDropDownWidthConstraint: NSLayoutConstraint!
+    //    @IBOutlet weak var storageIndicatorGreenOnDropDown: UIView!
+    //    @IBOutlet weak var storageIndicatorRedOnDropDown: UIView!
+    //    @IBOutlet weak var storageIndicatorLabelOnDropDown: UILabel!
+    //    @IBOutlet weak var storageIndicatorRedOnDropDownWidthConstraint: NSLayoutConstraint!
     var isSelectingProfilePictureFromImagePicker:Bool = false
     
     
@@ -73,15 +73,24 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var passedProfileImage = UIImage()
     var userId: String = ""
     var invitationUrl: URL!
+    //    var dropdownArray = ["Invite",
+    //                         "My Plan Or Upgrade",
+    //                         "Remove Watermark",
+    //                         "Restore",
+    //                         "Feedback",
+    //                         "Feature Request",
+    //                         "Privacy Policy",
+    //                         "Mobile Terms Of Use",
+    //                         "High Resolution",
+    //                         "Sign Out"]
     var dropdownArray = ["Invite",
-                         "My Plan Or Upgrade",
-                         "Remove Watermark",
-                         "Restore",
+                         "About Watermark",
+                         "Archive",
                          "Feedback",
                          "Feature Request",
                          "Privacy Policy",
                          "Mobile Terms Of Use",
-                         "High Resolution",
+                         "Resolution",
                          "Sign Out"]
     var dropdownArrayAfterPurchase = ["Invite",
                                       "My Plan Or Upgrade",
@@ -111,7 +120,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var isSelectingVideo: Bool = false
     var selectedVideo: URL!
     
-    //k*
+    
     var fetchStart:Int = 0
     var isDataFetchInProgress:Bool = false
     
@@ -271,10 +280,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let s3 = AWSS3.default()
         let getReq : AWSS3ListObjectsRequest = AWSS3ListObjectsRequest()
         getReq.bucket = self.bucketName
-        print(getReq.bucket)
+        //print(getReq.bucket)
         guard let uid = Auth.auth().currentUser?.uid else { return }
         getReq.prefix = "posts/\(uid)" //Folder path to get size
-        print(getReq.prefix)
+        //print(getReq.prefix)
         print(getReq)
         
         let downloadGroup = DispatchGroup()
@@ -282,7 +291,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         s3.listObjects(getReq) { (listObjects, error) in
             print(getReq)
-            print(listObjects)
+            // print(listObjects)
             var total : Int = 0
             if listObjects?.contents != nil {
                 for object in (listObjects?.contents)! {
@@ -391,17 +400,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     let storageIndicatorGreenWidth = self.storageIndicatorGreen.frame.size.width
                     let storageIndicatorRedWidth   = self.storageIndicatorRed.frame.size.width
                     
-                    let storageIndicatorGreenOnDropdownWidth = self.storageIndicatorGreenOnDropDown.frame.size.width
-                    let storageIndicatorRedOnDropdownWidth   = self.storageIndicatorRedOnDropDown.frame.size.width
+                    //                    let storageIndicatorGreenOnDropdownWidth = self.storageIndicatorGreenOnDropDown.frame.size.width
+                    //                    let storageIndicatorRedOnDropdownWidth   = self.storageIndicatorRedOnDropDown.frame.size.width
                     
                     print("storageIndicatorGreenWidth = \(storageIndicatorGreenWidth)")
                     print("storageIndicatorRedWidth = \(storageIndicatorRedWidth)")
                     
-                    print("storageIndicatorGreenWidth = \(storageIndicatorGreenOnDropdownWidth)")
-                    print("storageIndicatorRedWidth = \(storageIndicatorRedOnDropdownWidth)")
+                    //                    print("storageIndicatorGreenWidth = \(storageIndicatorGreenOnDropdownWidth)")
+                    //                    print("storageIndicatorRedWidth = \(storageIndicatorRedOnDropdownWidth)")
                     
                     self.storageIndicatorRedWidthConstraint.constant = CGFloat(percentage)
-                    self.storageIndicatorRedOnDropDownWidthConstraint.constant = CGFloat(percentage)
+                    // self.storageIndicatorRedOnDropDownWidthConstraint.constant = CGFloat(percentage)
                     
                 }
             }
@@ -415,7 +424,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             DispatchQueue.main.async {
                 
                 self.storageIndicatorLabel.text = "\(remainingSpaceInMB) GB Free"
-                self.storageIndicatorLabelOnDropDown.text = "\(remainingSpaceInMB) GB Free"
+                // self.storageIndicatorLabelOnDropDown.text = "\(remainingSpaceInMB) GB Free"
                 
             }
         }
@@ -425,9 +434,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 let storageIndicatorRedWidth   = self.storageIndicatorRed.frame.size.width
                 print("storageIndicatorRedWidth = \(storageIndicatorRedWidth)")
                 self.storageIndicatorRedWidthConstraint.constant = CGFloat(0.0)
-                self.storageIndicatorRedOnDropDownWidthConstraint.constant = CGFloat(0.0)
+                //self.storageIndicatorRedOnDropDownWidthConstraint.constant = CGFloat(0.0)
                 self.storageIndicatorLabel.text = "2 GB Free"
-                self.storageIndicatorLabelOnDropDown.text = "2 GB Free"
+                // self.storageIndicatorLabelOnDropDown.text = "2 GB Free"
             }
         }
     }
@@ -518,15 +527,30 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
+    //k*
+    func isDataArrayContains(indexDict:FeedDataArrayObject) -> Bool {
+        var isArrayContainsThisVideo:Bool = false
+        let indexDictId = indexDict._id
+        for i in 0..<self.dataArray.count {
+            let arrayElementId = self.dataArray[i]._id
+            if (arrayElementId == indexDictId) {
+                isArrayContainsThisVideo = true
+                break
+            }
+        }
+        return isArrayContainsThisVideo
+    }
+    
     func getResponseFromJSONFile() {
         print("getAllPostsAPI :: dataArray.count\(dataArray.count)")
+        print("getAllPostsAPI :: fetchStart\(fetchStart)")
         
-        //k*
+        
         ApiManager().getAllPostsAPI(from: "\(fetchStart)", size: "10") { (responseDict, error) in
             if error == nil {
-                print("getAllPostsAPI :: responseDict\(responseDict.message)")
-                if responseDict.data.count == 0 {
-                    print("getAllPostsAPI :: responseDict.data.count\(responseDict.data.count)")
+                //print("getAllPostsAPI :: responseDict\(responseDict.message)")
+                if (responseDict.data.count == 0 && self.dataArray.count == 0) {   //k*
+                    //print("getAllPostsAPI :: responseDict.data.count\(responseDict.data.count)")
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 1
                         self.activityIndicator.isHidden = true
@@ -538,10 +562,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                 }
                 else {
-                    
                     print("getAllPostsAPI :: responseDict.success\(responseDict.success)")
+                    print("Total video count=====> \(self.dataArray.count)")
                     for i in 0..<responseDict.data.count {
-                        print("Total video count=====> \(self.dataArray.count)")
                         if self.dataArray.count == 1 {
                             DispatchQueue.main.async {
                                 self.totalVideoCount.text = "\(self.dataArray.count) video"
@@ -553,9 +576,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         }
                         let indexDict = responseDict.data[i]
                         indexDict.isInfoPopUpDisplaying = false
-                        self.dataArray.append(indexDict)
                         
-                        print("getAllPostsAPI :: filename\(indexDict.fileName)")
+                        //k*
+                        if (self.isDataArrayContains(indexDict: indexDict) == false) {
+                            self.dataArray.append(indexDict)
+                        }
+                        //print("getAllPostsAPI :: filename ====> \(indexDict.fileName)")
                     }
                     
                     self.loadAllVideoImagesForDataArray()
@@ -628,9 +654,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
-    //k*
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if (isDataFetchInProgress == false) {
+            print("scrollViewDidEndDecelerating :: Calling API to fetch data again...")
             isDataFetchInProgress = true
             fetchStart = fetchStart + 10
             getResponseFromJSONFile()
@@ -877,13 +903,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 let videoName = dataArray[i].fileName
                 var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
                 videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-                print("videUrlString :: \(videUrlString)")
+                //print("videUrlString :: \(videUrlString)")
                 
                 //get duration time
                 let asset = AVAsset(url: URL(string: videUrlString)!)
                 let duration = asset.duration
                 let durationTime = CMTimeGetSeconds(duration)
-                print("durationTime====>\(durationTime)")
+                //print("durationTime====>\(durationTime)")
                 //get duration time ends
                 DispatchQueue.global(qos: .userInitiated).async {
                     let image = self.previewImageFromVideo(url: URL(string: videUrlString)! as NSURL)
@@ -893,9 +919,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                             self.dataArray[i].user.duration = String(durationTime)
                             self.dataArray[i].fileName = videoName
                             DispatchQueue.main.async {
-                                print("****Loaded image at index :: \(i)")
+                                //print("****Loaded image at index :: \(i)")
                                 self.collectioView.reloadData()
                             }
+                        }
+                    }
+                    if (i == (self.dataArray.count-1)) {
+                        DispatchQueue.main.async {
+                            self.activityIndicator.isHidden = true
+                            self.activityIndicator.stopAnimating()
                         }
                     }
                 }
@@ -1021,28 +1053,27 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileDropdownTableViewCell", for: indexPath) as! ProfileDropdownTableViewCell
         cell.configureCell(dataArray: dropdownArray, index: indexPath.row)
-        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-        
-        if (indexPath.row == 8) {
-            let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-            switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
-            switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
-            switchButton.isOn = false
-            switchButton.backgroundColor = UIColor.clear
-            if (paymentTypePurchased >= 0 || paymentTypePurchased == 1 || paymentTypePurchased == 2 ) {
-                switchButton.isUserInteractionEnabled = true
-                switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
-            }
-            else {
-                switchButton.isUserInteractionEnabled = false
-                switchButton.addTarget(self, action: #selector(showUpgradeOptions(_:)), for: .touchUpInside)
-            }
-            cell.addSubview(switchButton)
-            
-            //                    if (switchIsOpen) {
-            //                        switchButton.isOn = true
-            //                    }
-        }
+        //        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        //        if (indexPath.row == 8) {
+        //            let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        //            switchButton.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
+        //            switchButton.center = CGPoint(x: tableView.frame.size.width-40, y: 20)
+        //            switchButton.isOn = false
+        //            switchButton.backgroundColor = UIColor.clear
+        //            if (paymentTypePurchased >= 0 || paymentTypePurchased == 1 || paymentTypePurchased == 2 ) {
+        //                switchButton.isUserInteractionEnabled = true
+        //                switchButton.addTarget(self, action: #selector(enableSwitchStateChanged(_:)), for: .valueChanged)
+        //            }
+        //            else {
+        //                switchButton.isUserInteractionEnabled = false
+        //                switchButton.addTarget(self, action: #selector(showUpgradeOptions(_:)), for: .touchUpInside)
+        //            }
+        //            cell.addSubview(switchButton)
+        //
+        //            //                    if (switchIsOpen) {
+        //            //                        switchButton.isOn = true
+        //            //                    }
+        //        }
         
         return cell
     }
@@ -1054,21 +1085,23 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         if(indexPath.row == 0) {
             self.inviteFriendsPopUpView.alpha = 1
             self.popUpOverlayButton.alpha = 0.5
-        } else if (indexPath.row == 1) {
-            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-            print("paymentTypePurchased ====> \(paymentTypePurchased)")
-            
-            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-                self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
-            }else {
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-                nextVC.modalPresentationStyle = .overCurrentContext
-                nextVC.delegate = self
-                self.present(nextVC, animated: false, completion: nil)
-            }
-            
-        } else if (indexPath.row == 2) {
+        }
+            //            else if (indexPath.row == 1) {
+            //            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            //            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            //
+            //            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+            //                self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
+            //            }else {
+            //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            //                nextVC.modalPresentationStyle = .overCurrentContext
+            //                nextVC.delegate = self
+            //                self.present(nextVC, animated: false, completion: nil)
+            //            }
+            //
+            //        }
+        else if (indexPath.row == 1) {
             let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
             print("paymentTypePurchased ====> \(paymentTypePurchased)")
             
@@ -1084,7 +1117,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 self.present(nextVC, animated: false, completion: nil)
             }
         }
-        else if (indexPath.row == 3) {
+        else if (indexPath.row == 2) {
             // if (index == 2) {
             let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
             print("paymentTypePurchased ====> \(paymentTypePurchased)")
@@ -1103,162 +1136,32 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 nextVC.delegate = self
                 self.present(nextVC, animated: false, completion: nil)
             }
-        }  else if (indexPath.row == 4) {
+        }  else if (indexPath.row == 3) {
             if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:])
                 }
             }
             
-        }else if (indexPath.row == 5) {
+        }else if (indexPath.row == 4) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
             nextVC.modalPresentationStyle = .overCurrentContext
             self.navigationController?.pushViewController(nextVC, animated: true)
-        } else if (indexPath.row == 6) {
+        } else if (indexPath.row == 5) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
-        } else if (indexPath.row == 7) {
+        } else if (indexPath.row == 6) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
-        } else if (indexPath.row == 9) {
+        } else if (indexPath.row == 8) {
             UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        //        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-        //        if (paymentTypePurchased >= 0) {
-        //            if(indexPath.row == 0) {
-        //                self.inviteFriendsPopUpView.alpha = 1
-        //                self.popUpOverlayButton.alpha = 0.5
-        //            } else if (indexPath.row == 1) {
-        //                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-        //                print("paymentTypePurchased ====> \(paymentTypePurchased)")
-        //
-        //                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-        //                    self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
-        //                }else {
-        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-        //                    nextVC.modalPresentationStyle = .overCurrentContext
-        //                    nextVC.delegate = self
-        //                    self.present(nextVC, animated: false, completion: nil)
-        //                }
-        //
-        //            } else if (indexPath.row == 2) {
-        //                addWatermarkClicked()
-        //            } else if (indexPath.row == 3) {
-        //                // if (index == 2) {
-        //                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-        //                print("paymentTypePurchased ====> \(paymentTypePurchased)")
-        //
-        //                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
-        //                    nextVC.modalPresentationStyle = .overCurrentContext
-        //                    self.navigationController?.pushViewController(nextVC, animated: true)
-        //
-        //                }else {
-        //                    print("Restore option not available...")
-        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-        //                    nextVC.modalPresentationStyle = .overCurrentContext
-        //                    nextVC.delegate = self
-        //                    self.present(nextVC, animated: false, completion: nil)
-        //                }
-        //            }  else if (indexPath.row == 4) {
-        //                if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
-        //                    if UIApplication.shared.canOpenURL(url) {
-        //                        UIApplication.shared.open(url, options: [:])
-        //                    }
-        //                }
-        //
-        //            }else if (indexPath.row == 5) {
-        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
-        //                nextVC.modalPresentationStyle = .overCurrentContext
-        //                self.navigationController?.pushViewController(nextVC, animated: true)
-        //            } else if (indexPath.row == 6) {
-        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
-        //                self.navigationController?.pushViewController(nextVC, animated: true)
-        //            } else if (indexPath.row == 7) {
-        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
-        //                self.navigationController?.pushViewController(nextVC, animated: true)
-        //            } else if (indexPath.row == 8) {
-        //                UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
-        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
-        //                self.navigationController?.pushViewController(nextVC, animated: true)
-        //            }
-        //        }else {
-        //            if(indexPath.row == 0) {
-        //                self.inviteFriendsPopUpView.alpha = 1
-        //                self.popUpOverlayButton.alpha = 0.5
-        //            } else if (indexPath.row == 1) {
-        //                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-        //                print("paymentTypePurchased ====> \(paymentTypePurchased)")
-        //
-        //                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-        //                    self.becomeGrowthHostPopUpVC_SubscriptionBaseViewControllerrButtonClicked()
-        //                }else {
-        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-        //                    nextVC.modalPresentationStyle = .overCurrentContext
-        //                    nextVC.delegate = self
-        //                    self.present(nextVC, animated: false, completion: nil)
-        //                }
-        //
-        //            } else if (indexPath.row == 2) {
-        //                // if (index == 2) {
-        //                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-        //                print("paymentTypePurchased ====> \(paymentTypePurchased)")
-        //
-        //                if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
-        //                    nextVC.modalPresentationStyle = .overCurrentContext
-        //                    self.navigationController?.pushViewController(nextVC, animated: true)
-        //
-        //                }else {
-        //                    print("Restore option not available...")
-        //                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                    let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-        //                    nextVC.modalPresentationStyle = .overCurrentContext
-        //                    nextVC.delegate = self
-        //                    self.present(nextVC, animated: false, completion: nil)
-        //                }
-        //            }  else if (indexPath.row == 3) {
-        //                if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
-        //                    if UIApplication.shared.canOpenURL(url) {
-        //                        UIApplication.shared.open(url, options: [:])
-        //                    }
-        //                }
-        //
-        //            } else if (indexPath.row == 4) {
-        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
-        //                nextVC.modalPresentationStyle = .overCurrentContext
-        //                self.navigationController?.pushViewController(nextVC, animated: true)
-        //            } else if (indexPath.row == 5) {
-        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
-        //                self.navigationController?.pushViewController(nextVC, animated: true)
-        //            } else if (indexPath.row == 6) {
-        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
-        //                self.navigationController?.pushViewController(nextVC, animated: true)
-        //            } else if (indexPath.row == 7) {
-        //                UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
-        //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
-        //                self.navigationController?.pushViewController(nextVC, animated: true)
-        //            }
-        //        }
         
     }
     
@@ -1654,10 +1557,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 }
             }
         }
-        
     }
-    
-    
     
 }
 

@@ -119,6 +119,7 @@ class SignUpPasswordEntryViewController: UIViewController {
                                 let alert = UIAlertController(title: "Alert", message: responseDict.message, preferredStyle: .alert)
                                 let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
                                     DefaultWrapper().setFirstTimeUserStatusAfterSignUp(status: true, userEmail: self.passedEmailAddress) //k*
+                                    UserDefaults.standard.set(self.passedEmailAddress, forKey: "UserEmailAddress")
                                     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                                     let homeVC = storyBoard.instantiateViewController(withIdentifier: "NewSignInViewController") as! NewSignInViewController
                                     self.navigationController?.pushViewController(homeVC, animated: true)

@@ -30,7 +30,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         self.activityIndicator.isHidden = true
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-    //    GIDSignIn.sharedInstance().signInSilently()
+        //    GIDSignIn.sharedInstance().signInSilently()
         if (AccessToken.current != nil) {
             // User is logged in, do work such as go to next view controller.
         }
@@ -73,7 +73,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     return
                 }
                 
-
+                
                 
                 DispatchQueue.main.async {
                     
@@ -98,7 +98,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                         // Get user value
                         let value = snapshot.value as? NSDictionary
-                       // let referredUserName = value?["referredBy"] as? String ?? ""
+                        // let referredUserName = value?["referredBy"] as? String ?? ""
                         if let referredUserName = value?["referredBy"] as? String {
                             let appReferredUserName = referredUserName
                             print("print referral user name: \(appReferredUserName)")
@@ -112,35 +112,35 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                 }
                             })
                         }
-
+                        
                     }) { (error) in
                         print(error.localizedDescription)
                     }
                     //
-
+                    
                 }
                 else {
                     UserDefaults.standard.set(false, forKey: "IsNewUser")
                 }
-//                    let userID = Auth.auth().currentUser?.uid
-//                    self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-//                        // Get user value
-//                        let value = snapshot.value as? NSDictionary
-//                        let referredUserName = value?["isReferredBy"] as? String ?? ""
-//                        print(referredUserName)
-//                        // ...
-//                        ApiManager().callUserReferralAPI(referredBy: referredUserName, completion: { (response, error) in
-//                            if error == nil {
-//                                print("User signed in using referral link")
-//                            }
-//                            else {
-//                                print(error.debugDescription)
-//                            }
-//                        })
-//                    }) { (error) in
-//                        print(error.localizedDescription)
-//                    }
-               // }
+                //                    let userID = Auth.auth().currentUser?.uid
+                //                    self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                //                        // Get user value
+                //                        let value = snapshot.value as? NSDictionary
+                //                        let referredUserName = value?["isReferredBy"] as? String ?? ""
+                //                        print(referredUserName)
+                //                        // ...
+                //                        ApiManager().callUserReferralAPI(referredBy: referredUserName, completion: { (response, error) in
+                //                            if error == nil {
+                //                                print("User signed in using referral link")
+                //                            }
+                //                            else {
+                //                                print(error.debugDescription)
+                //                            }
+                //                        })
+                //                    }) { (error) in
+                //                        print(error.localizedDescription)
+                //                    }
+                // }
                 //handling referral events ends
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
@@ -185,7 +185,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                     }
                                 }
                                 //edit
-                               // self.getAuthenticationToken()
+                                // self.getAuthenticationToken()
                                 UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
                                 if let userId = Auth.auth().currentUser?.uid {
                                     self.currentUserId = userId
@@ -195,6 +195,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                     self.currentUserName = userName
                                     print(self.currentUserName)
                                 }
+                                UserDefaults.standard.set(self.currnetUserEmail, forKey: "UserEmailAddress")
                                 print(self.currnetUserEmail)
                                 //edit
                                 
@@ -248,11 +249,11 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                     }
                                     else {
                                         print(error.debugDescription)
-                                    self.displayAlert(msg: "Something went wrong. Please try again later!")
+                                        self.displayAlert(msg: "Something went wrong. Please try again later!")
                                     }
                                 })
                                 //edit ends
-     
+                                
                                 //edit ends
                             }
                         })
@@ -395,6 +396,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                 print(self.currentUserName)
                             }
                             print(self.currnetUserEmail)
+                            UserDefaults.standard.set(self.currnetUserEmail, forKey: "UserEmailAddress")
                             ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
                                 if error == nil {
                                     let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
@@ -427,10 +429,10 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                     print(error.debugDescription)
                                 }
                             })
-
+                            
                             //edit ends
                             
-                          
+                            
                         }
                         //get google profile picture ends
                         //let appDelegate = UIApplication.shared.delegate as! AppDelegate
