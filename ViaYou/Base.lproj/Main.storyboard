@@ -7739,18 +7739,70 @@ yourself.</string>
                                     <action selector="submitEmailButtonClicked:" destination="WGm-8J-hUP" eventType="touchUpInside" id="4hc-aN-pwt"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="powered" translatesAutoresizingMaskIntoConstraints="NO" id="yvz-U6-ieZ">
+                                <rect key="frame" x="147.5" y="172" width="80" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="5S1-V3-9qf"/>
+                                    <constraint firstAttribute="height" constant="13" id="yen-R9-ZLg"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEs-zX-wfG">
+                                <rect key="frame" x="127.5" y="50" width="120" height="120"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kidProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="Eq8-PR-m01">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                        <color key="backgroundColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="60"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhQ-hs-Q3f">
+                                        <rect key="frame" x="80" y="80" width="40" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="J86-Ej-XfK"/>
+                                            <constraint firstAttribute="width" constant="40" id="piQ-e3-X09"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="crownIcon">
+                                            <color key="titleColor" red="0.83921568629999999" green="0.33333333329999998" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Eq8-PR-m01" secondAttribute="bottom" id="3gJ-Jz-0Ra"/>
+                                    <constraint firstItem="nhQ-hs-Q3f" firstAttribute="bottom" secondItem="Eq8-PR-m01" secondAttribute="bottom" id="B3n-JG-ZPO"/>
+                                    <constraint firstAttribute="height" constant="120" id="Z4e-PI-JL6"/>
+                                    <constraint firstItem="Eq8-PR-m01" firstAttribute="leading" secondItem="rEs-zX-wfG" secondAttribute="leading" id="dT2-eW-wsq"/>
+                                    <constraint firstItem="Eq8-PR-m01" firstAttribute="top" secondItem="rEs-zX-wfG" secondAttribute="top" id="hFj-t4-ndL"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eq8-PR-m01" secondAttribute="trailing" id="lDG-jq-kFZ"/>
+                                    <constraint firstItem="nhQ-hs-Q3f" firstAttribute="trailing" secondItem="Eq8-PR-m01" secondAttribute="trailing" id="qbX-x6-3fQ"/>
+                                    <constraint firstAttribute="width" constant="120" id="qwl-7w-dWp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="yvz-U6-ieZ" firstAttribute="centerX" secondItem="rEs-zX-wfG" secondAttribute="centerX" id="1Dp-BZ-W8o"/>
+                            <constraint firstItem="yvz-U6-ieZ" firstAttribute="centerX" secondItem="vYm-ut-lYR" secondAttribute="centerX" id="9Eh-zW-zdi"/>
+                            <constraint firstItem="rEs-zX-wfG" firstAttribute="top" secondItem="1jl-zR-6M4" secondAttribute="top" constant="30" id="Bwa-cC-gst"/>
+                            <constraint firstItem="yvz-U6-ieZ" firstAttribute="top" secondItem="rEs-zX-wfG" secondAttribute="bottom" constant="2" id="Hpr-49-foV"/>
                             <constraint firstItem="brO-WR-bx0" firstAttribute="centerX" secondItem="vYm-ut-lYR" secondAttribute="centerX" id="VGa-ef-PzT"/>
                             <constraint firstItem="1jl-zR-6M4" firstAttribute="bottom" secondItem="brO-WR-bx0" secondAttribute="bottom" constant="139" id="frK-YB-MJF"/>
                             <constraint firstItem="9Ol-y0-nAR" firstAttribute="centerX" secondItem="vYm-ut-lYR" secondAttribute="centerX" id="iAQ-2U-pUi"/>
                             <constraint firstItem="brO-WR-bx0" firstAttribute="top" secondItem="9Ol-y0-nAR" secondAttribute="bottom" constant="43" id="lKW-IW-J3z"/>
+                            <constraint firstItem="rEs-zX-wfG" firstAttribute="centerX" secondItem="vYm-ut-lYR" secondAttribute="centerX" id="yiQ-99-fEl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1jl-zR-6M4"/>
                     </view>
                     <connections>
                         <outlet property="addEmailTextField" destination="bsP-Zo-Fqu" id="jQt-kF-vnA"/>
+                        <outlet property="emailTextFieldContainer" destination="9Ol-y0-nAR" id="E6r-PQ-mx1"/>
+                        <outlet property="profilePic" destination="Eq8-PR-m01" id="Bod-zi-ncA"/>
+                        <outlet property="submitEmailButton" destination="brO-WR-bx0" id="Cc4-pl-5lz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qlz-oA-2fi" userLabel="First Responder" sceneMemberID="firstResponder"/>

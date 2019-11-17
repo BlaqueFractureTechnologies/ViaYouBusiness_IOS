@@ -884,6 +884,10 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     @IBAction func uploadVideoButtonClicked(_ sender: Any) {
         print("uploadVideoButtonClicked...")
+        if promptTitleField.text == "" {
+            self.displayAlert(msg: "Please Enter a Title for the Video")
+            return
+        }
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         self.view.isUserInteractionEnabled = false
