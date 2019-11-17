@@ -36,11 +36,18 @@ class SubmitEmailViewController: UIViewController {
             })
         }
         
+         let emailAddress = UserDefaults.standard.value(forKey: "UserEmailAddress") //{
+        print("Email address ==> \(String(describing: emailAddress))")
+            self.addEmailTextField.text = emailAddress as? String
+       // }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.dismissKeyboard()
+        submitEmailButton.addAppGradient()
         self.emailTextFieldContainer.layer.borderColor = self.view.themeRedColor().cgColor
         self.emailTextFieldContainer.layer.borderWidth = 1.0
     }
@@ -61,4 +68,9 @@ class SubmitEmailViewController: UIViewController {
             self.view.frame.origin.y = 0
         }
     }
+    
+    @IBAction func backButtonClicked(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

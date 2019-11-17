@@ -82,7 +82,7 @@ class NewSignInViewController: UIViewController {
         }
         print("emailTextField.text: \(emailTextField.text ?? "")")
         print("passwordTextField.text: \(passwordTextField.text ?? "")")
-        
+        UserDefaults.standard.set(self.emailTextField.text, forKey: "UserEmailAddress")
         let credential = EmailAuthProvider.credential(withEmail: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "")
         
         Auth.auth().signIn(withEmail: emailTextField.text ?? "Invalid Email Address", password: passwordTextField.text ?? "Wrong Password") { (result, error) in

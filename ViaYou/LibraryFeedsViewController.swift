@@ -1246,12 +1246,18 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func becomeGrowthHostPopUpVC_UpgradeAndSubscriptionBaseViewControllerButtonClicked() {
+        
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
-        nextVC.isFromViewAllButtonClick = true
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
         let navVC = UINavigationController(rootViewController: nextVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.pushViewController(nextVC, animated: true)
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
+//        nextVC.isFromViewAllButtonClick = true
+//        let navVC = UINavigationController(rootViewController: nextVC)
+//        navVC.isNavigationBarHidden = true
+//        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     //MARK:- Select profile picture
