@@ -695,7 +695,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                 self.finalURL = newURL
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
-                self.view.isUserInteractionEnabled = true
+               // self.view.isUserInteractionEnabled = true
                 // self.uploadFile(with: strName, type: newURL.pathExtension, videoURL: newURL)
                 
             } catch let error {
@@ -860,7 +860,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         print("promptButtonClicked...")
         print("btnActionSaveToGallery :: dataDictToBePosted====>\(dataDictToBePosted)")
         self.activityIndicator.isHidden = false
-        self.view.isUserInteractionEnabled = false
+        //self.view.isUserInteractionEnabled = false
         self.activityIndicator.startAnimating()
         let asset = AVURLAsset(url: urlOfSmallVideo, options: nil)
         audioURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.m4a")
