@@ -202,6 +202,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                     print(self.currentUserName)
                                 }
                                 print(self.currnetUserEmail)
+                                UserDefaults.standard.set(self.currnetUserEmail, forKey: "UserEmailAddress")
                                 //edit
                                 ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
                                     if error == nil {
@@ -278,6 +279,8 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
         
         print(credentials)
+        print(user.profile.email)
+        self.currnetUserEmail = user.profile.email
         print(user.authentication.idToken)
         print(user.authentication.accessToken)
         DispatchQueue.main.async {
@@ -379,6 +382,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                 print(self.currentUserName)
                             }
                             print(self.currnetUserEmail)
+                            UserDefaults.standard.set(self.currnetUserEmail, forKey: "UserEmailAddress")
                             ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
                                 if error == nil {
                                     let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
