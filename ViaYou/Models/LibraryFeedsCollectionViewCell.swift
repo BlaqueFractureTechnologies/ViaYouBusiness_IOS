@@ -88,6 +88,5 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
     
     
     
-    
 }
 

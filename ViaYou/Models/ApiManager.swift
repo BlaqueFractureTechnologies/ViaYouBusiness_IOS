@@ -36,6 +36,7 @@ struct ApiManager {
     let restoreScreencastHeader = "restore"
     let firebaseRegisterHeader = "firebaseRegister"
     let addVideoPostHeader = "add"
+    let profileHeader = "profile"
 
     
     
@@ -776,5 +777,52 @@ struct ApiManager {
         })
         dataTask.resume()
     }
+    
+    //MARK:- get profile details api
+    
+    func getProfileDetails(userId:String,
+                           completion: @escaping (UserProfileResponse, _ error:Error?) -> ()) {
+        
+        let parameters: [String: Any] = [
+            "profileUserId":userId,
+        ]
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
+        
+        let requestURLString = "\(headerUrl)\(profileHeader)"
+        let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
+        request.setValue(generatedUserToken, forHTTPHeaderField: "token")
+        request.httpMethod = "POST"
+        let postData = NSMutableData()
+        for key in parameters.keys {
+            let keyString = "&\(key)"
+            let valueString = parameters[key] as? String ?? ""
+            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
+        }
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "")
+                completion(UserProfileResponse([:]),error)
+            } else {
+                do {
+                    if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        print("getProfileDetails :: jsonDict====>\(jsonDict)")
+                        completion(UserProfileResponse(jsonDict),nil)
+                        print(UserProfileResponse(jsonDict))
+                    }else {
+                        completion(UserProfileResponse([:]),nil)
+                    }
+                } catch let parsingError {
+                    print("parsingError=\(parsingError)")
+                    completion(UserProfileResponse([:]),parsingError)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    //get profile details api ends
+    
 }
 

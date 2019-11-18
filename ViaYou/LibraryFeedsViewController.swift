@@ -49,12 +49,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var plusButtonBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var totalVideoCount: UILabel!
+    @IBOutlet weak var remainingDaysLabel: UILabel!
+    
     //    @IBOutlet weak var storageIndicatorGreenOnDropDown: UIView!
     //    @IBOutlet weak var storageIndicatorRedOnDropDown: UIView!
     //    @IBOutlet weak var storageIndicatorLabelOnDropDown: UILabel!
     //    @IBOutlet weak var storageIndicatorRedOnDropDownWidthConstraint: NSLayoutConstraint!
     var isSelectingProfilePictureFromImagePicker:Bool = false
-    
+    var dataDict:UserDataDictionary = UserDataDictionary([:])
+
     
     
     @IBOutlet weak var uploadProgressBarContainer: UIView!
@@ -258,6 +261,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //  getResponseFromJSONFile()
         getBucketInfo()
         getTotalStorageSpace()
+        getProfileResponseFromAPI()
         DispatchQueue.main.async {
             self.popUpDontBeShhyButton.addAppGradient()
             self.uploadProgressBarHeightConstraint.constant = 0
@@ -1561,6 +1565,46 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         return nil
                     }
                 }
+            }
+        }
+    }
+    
+    //MARK:- Get Profile Response
+    func getProfileResponseFromAPI() {
+        userId = Auth.auth().currentUser!.uid
+        ApiManager().getProfileDetails(userId: userId) { (response, error) in
+            if error == nil {
+                print("Response Dictionary success status:\(response.success)")
+                self.dataDict = response.data
+                print("dataDict is dict: Name====>\(self.dataDict.createdDateTime)")
+                var dateFromApi = self.dataDict.createdDateTime
+                dateFromApi = dateFromApi.components(separatedBy: "T").first ?? dateFromApi
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                
+                // Reads date form variable `dateString `
+                let newdate = dateFormatter.date(from: dateFromApi)
+                var expiryDateForLabel:String = ""
+                if let expiryDate = Calendar.current.date(byAdding: .month, value: 1, to: newdate!) {
+                    print(expiryDate)
+                    
+                    if let diffInDays = Calendar.current.dateComponents([.day], from: Date(), to: expiryDate).day {
+                        print(diffInDays)
+                        expiryDateForLabel = String(diffInDays)
+                    }
+                    
+//                    let expiryDateToString = dateFormatter.string(from: expiryDate)
+//                    print(expiryDateToString.getReadableDateString())
+//                    expiryDateForLabel = expiryDateToString.getReadableDateString()
+                }
+                DispatchQueue.main.async {
+                   self.remainingDaysLabel.text = "\(expiryDateForLabel) days left"
+                }
+                
+            }
+            else {
+                print(error?.localizedDescription ?? "Error getting user details")
+                self.displaySingleButtonAlert(message: "Something went wrong. Please try again later!")
             }
         }
     }

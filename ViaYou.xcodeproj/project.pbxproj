@@ -52,6 +52,7 @@
 		9E34D01D2357FDF40085ABAA /* StripePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34D01C2357FDF40085ABAA /* StripePaymentViewController.swift */; };
 		9E34D01F2357FE1E0085ABAA /* SubscriptionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34D01E2357FE1E0085ABAA /* SubscriptionResponse.swift */; };
 		9E388D142381F62000441FA6 /* SubmitEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E388D132381F62000441FA6 /* SubmitEmailViewController.swift */; };
+		9E388D162382166000441FA6 /* UserProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E388D152382166000441FA6 /* UserProfileResponse.swift */; };
 		9E403A39234434AE002E3749 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A38234434AE002E3749 /* ApiManager.swift */; };
 		9E403A3C2344352B002E3749 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3B2344352B002E3749 /* RegisterResponse.swift */; };
 		9E403A3E23443F0B002E3749 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3D23443F0B002E3749 /* Constants.swift */; };
@@ -161,6 +162,7 @@
 		9E34D01C2357FDF40085ABAA /* StripePaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripePaymentViewController.swift; sourceTree = "<group>"; };
 		9E34D01E2357FE1E0085ABAA /* SubscriptionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionResponse.swift; sourceTree = "<group>"; };
 		9E388D132381F62000441FA6 /* SubmitEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitEmailViewController.swift; sourceTree = "<group>"; };
+		9E388D152382166000441FA6 /* UserProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileResponse.swift; sourceTree = "<group>"; };
 		9E403A38234434AE002E3749 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		9E403A3B2344352B002E3749 /* RegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
 		9E403A3D23443F0B002E3749 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				9E14A44123591F2400F56891 /* InstagramUserResponse.swift */,
 				9E14A44E23593F8600F56891 /* DeleteVideoResponse.swift */,
 				9E159F07235E6DE30033FBE6 /* FetchSubscriptionResponse.swift */,
+				9E388D152382166000441FA6 /* UserProfileResponse.swift */,
 			);
 			path = "Response Models";
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				9E2970DE234E8012003BC282 /* SubscriptionBaseViewController.swift in Sources */,
 				9E2B879C2344005B00941DF2 /* NoScreenCastsPopUpViewController.swift in Sources */,
 				9E31CB5C23625D90003651A1 /* MergeTagPopUpTableViewCell.swift in Sources */,
+				9E388D162382166000441FA6 /* UserProfileResponse.swift in Sources */,
 				9E31CB5923625D90003651A1 /* RecordedVideoPreviewVC.swift in Sources */,
 				9EA55F9D233C2B24003A1EBB /* SignUpViewController.swift in Sources */,
 				9EA55F9F233C2B3F003A1EBB /* SignUpMobileEntryViewController.swift in Sources */,
