@@ -19,7 +19,7 @@ import AWSCognito
 //import DTMessageHUD
 
 
-class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BecomeGrowthHostPopUpViewControllerDelegate, AddTwoMenuViewControllerDelegate, AddFeedPopUpViewControllerDelegate, UIScrollViewDelegate {
+class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BecomeGrowthHostPopUpViewControllerDelegate, AddTwoMenuViewControllerDelegate, AddFeedPopUpViewControllerDelegate, TrialPeriodEndedViewControllerDelegate, UIScrollViewDelegate {
     
     
     
@@ -567,17 +567,18 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 }
                 else {
                     print("getAllPostsAPI :: responseDict.success\(responseDict.success)")
-                    print("Total video count=====> \(self.dataArray.count)")
-                    for i in 0..<responseDict.data.count {
-                        if self.dataArray.count == 1 {
-                            DispatchQueue.main.async {
-                                self.totalVideoCount.text = "\(self.dataArray.count) video"
-                            }                        }
-                        else {
-                            DispatchQueue.main.async {
-                                self.totalVideoCount.text = "\(self.dataArray.count) videos"
-                            }
+                    print("Total video count=====> \(responseDict.count)")
+                    if responseDict.count == 1 {
+                        DispatchQueue.main.async {
+                            self.totalVideoCount.text = "\(String(responseDict.count)) video"
+                        }                        }
+                    else {
+                        DispatchQueue.main.async {
+                            self.totalVideoCount.text = "\(String(responseDict.count)) videos"
                         }
+                    }
+                    
+                    for i in 0..<responseDict.data.count {
                         let indexDict = responseDict.data[i]
                         indexDict.isInfoPopUpDisplaying = false
                         
@@ -814,23 +815,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
     
-    //    func selectRow(selectedRow:Int) {
-    //
-    //        if (dataArray.count>selectedRow) {
-    //            let userID = dataArray[selectedRow].user._id
-    //            let videoName = dataArray[selectedRow].fileName
-    //            let videoId = dataArray[selectedRow]._id
-    //            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
-    //            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-    //
-    //            let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-    //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-    //            nextVC.videoUrl = videUrlString
-    //            nextVC.postId = videoId
-    //            nextVC.modalPresentationStyle = .overCurrentContext
-    //            self.present(nextVC, animated: true, completion: nil)
-    //        }
-    //    }
     
     @IBAction func plusButtonClicked() {
         /*
@@ -840,7 +824,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let boolValue = UserDefaults.standard.bool(forKey: "TrialPeriodEnds")
         if boolValue == true {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
             nextVC.modalPresentationStyle = .overCurrentContext
             nextVC.delegate = self
             self.present(nextVC, animated: false, completion: nil)
@@ -1302,6 +1286,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        let navVC = UINavigationController(rootViewController: nextVC)
         //        navVC.isNavigationBarHidden = true
         //        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    func becomefullMember_LearnMoreButtonClicked() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
+        let navVC = UINavigationController(rootViewController: nextVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     //MARK:- Select profile picture

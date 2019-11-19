@@ -254,7 +254,7 @@ struct ApiManager {
             } else {
                 do {
                     if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
-                        print("jsonDict====>%@",jsonDict)
+                        print("GetAllPostsAPIjsonDict====>%@",jsonDict)
                         completion(LibraryFeedResponse(jsonDict),nil)
                     }else {
                         completion(LibraryFeedResponse([:]),nil)

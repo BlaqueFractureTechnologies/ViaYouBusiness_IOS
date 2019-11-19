@@ -11,11 +11,13 @@ import UIKit
 struct LibraryFeedResponse {
     var success:Bool = false
     var message:String = ""
+    var count:Int = 0
     var data:[FeedDataArrayObject] = []
     
     init(_ dictionary: [String: Any]) {
         self.success    = dictionary["success"] as? Bool ?? false
         self.message    = dictionary["message"] as? String ?? ""
+        self.count = dictionary["count"] as? Int ?? 0
         
         data = []
         let dataArray = dictionary["data"] as? [[String:Any]] ?? []

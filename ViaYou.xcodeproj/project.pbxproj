@@ -23,6 +23,7 @@
 		9E159F0E235E8A280033FBE6 /* DeletedVideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E159F0D235E8A280033FBE6 /* DeletedVideosCollectionViewCell.swift */; };
 		9E159F10235E8A4F0033FBE6 /* DeletedVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E159F0F235E8A4F0033FBE6 /* DeletedVideosViewController.swift */; };
 		9E2091D1236A3193005D8919 /* MergeVideoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2091D0236A3193005D8919 /* MergeVideoInfoViewController.swift */; };
+		9E25A63E23849BB9008E23BB /* TrialPeriodEndedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E25A63D23849BB9008E23BB /* TrialPeriodEndedViewController.swift */; };
 		9E2723062374B99D006E93FE /* UserTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2723052374B99D006E93FE /* UserTipsViewController.swift */; };
 		9E27E558235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */; };
 		9E27E55A235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */; };
@@ -133,6 +134,7 @@
 		9E159F0D235E8A280033FBE6 /* DeletedVideosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedVideosCollectionViewCell.swift; sourceTree = "<group>"; };
 		9E159F0F235E8A4F0033FBE6 /* DeletedVideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedVideosViewController.swift; sourceTree = "<group>"; };
 		9E2091D0236A3193005D8919 /* MergeVideoInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeVideoInfoViewController.swift; sourceTree = "<group>"; };
+		9E25A63D23849BB9008E23BB /* TrialPeriodEndedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialPeriodEndedViewController.swift; sourceTree = "<group>"; };
 		9E2723052374B99D006E93FE /* UserTipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTipsViewController.swift; sourceTree = "<group>"; };
 		9E27E557235513BE00B2EEFD /* FeatureResuestPage_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_1ViewController.swift; sourceTree = "<group>"; };
 		9E27E559235513E000B2EEFD /* FeatureResuestPage_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureResuestPage_2ViewController.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				9EFE669A2360F68F002CF9C8 /* AddFeedPopUpViewController.swift */,
 				9EE57BF523628ADE00CAC421 /* AddTwoMenuViewController.swift */,
 				9E388D132381F62000441FA6 /* SubmitEmailViewController.swift */,
+				9E25A63D23849BB9008E23BB /* TrialPeriodEndedViewController.swift */,
 			);
 			path = ViaYou;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				9E2723062374B99D006E93FE /* UserTipsViewController.swift in Sources */,
 				9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */,
 				9E388D142381F62000441FA6 /* SubmitEmailViewController.swift in Sources */,
+				9E25A63E23849BB9008E23BB /* TrialPeriodEndedViewController.swift in Sources */,
 				9EA55F6B233C208D003A1EBB /* AppDelegate.swift in Sources */,
 				9E2091D1236A3193005D8919 /* MergeVideoInfoViewController.swift in Sources */,
 				9E2B87A22344020500941DF2 /* SignInViewController.swift in Sources */,
