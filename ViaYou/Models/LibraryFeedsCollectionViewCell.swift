@@ -32,13 +32,13 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         
         infoTableView.estimatedRowHeight = 83.0
         infoTableView.rowHeight = UITableView.automaticDimension
-        
+        //self.durationLabel.text = "" //k*
     }
     
     func configureCell(dataDict:FeedDataArrayObject) {
         if (dataDict.isInfoPopUpDisplaying == false) {
             self.infoPopUpHeight.constant = 0
-    }else {
+        }else {
             UIView.animate(withDuration: 0.4) {
                 self.infoPopUpHeight.constant = 170
                 self.layoutIfNeeded()
@@ -48,18 +48,26 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         self.videoTitleLabel.text = dataDict.title
         // time calc starts
         let interval = dataDict.user.duration
+        //print("interval ====> \(interval)")
         
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .short
         
-        let formattedString = formatter.string(from: TimeInterval(interval) ?? 1.0)!
-        //print(formattedString)
-        self.durationLabel.text = formattedString
-        //time calc ends
-      //  self.durationLabel.text = dataDict.user.duration
-        cellDataDict = dataDict
-        infoTableView.reloadData()
+        if (interval.count > 0 && Double(interval)?.isNaN == false) { //k*
+            if let timeInterval = TimeInterval(interval) {
+                if let formattedString = formatter.string(from: timeInterval) {
+                    //print(formattedString)
+                    self.durationLabel.text = formattedString
+                    //time calc ends
+                    //  self.durationLabel.text = dataDict.user.duration
+                    cellDataDict = dataDict
+                    infoTableView.reloadData()
+                }
+            }
+            
+        }
+        
         
     }
     

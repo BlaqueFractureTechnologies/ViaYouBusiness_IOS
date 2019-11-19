@@ -57,7 +57,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     //    @IBOutlet weak var storageIndicatorRedOnDropDownWidthConstraint: NSLayoutConstraint!
     var isSelectingProfilePictureFromImagePicker:Bool = false
     var dataDict:UserDataDictionary = UserDataDictionary([:])
-
+    
     
     
     @IBOutlet weak var uploadProgressBarContainer: UIView!
@@ -470,10 +470,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         super.viewWillAppear(animated)
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
-       // self.collectioView.isUserInteractionEnabled = false
+        // self.collectioView.isUserInteractionEnabled = false
         
         getSubscriptionPlanResponseFromAPI()
-        self.dataArray = []
+        //self.dataArray = [] //k*
         self.tableView.reloadData()
         getResponseFromJSONFile()
         self.dropDownBaseView.alpha = 0
@@ -531,7 +531,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
-    //k*
     func isDataArrayContains(indexDict:FeedDataArrayObject) -> Bool {
         var isArrayContainsThisVideo:Bool = false
         let indexDictId = indexDict._id
@@ -553,13 +552,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         ApiManager().getAllPostsAPI(from: "\(fetchStart)", size: "10") { (responseDict, error) in
             if error == nil {
                 //print("getAllPostsAPI :: responseDict\(responseDict.message)")
-                if (responseDict.data.count == 0 && self.dataArray.count == 0) {   //k*
+                if (responseDict.data.count == 0 && self.dataArray.count == 0) {
                     //print("getAllPostsAPI :: responseDict.data.count\(responseDict.data.count)")
                     DispatchQueue.main.async {
                         self.noFeedPopUpView.alpha = 1
                         self.activityIndicator.isHidden = true
                         self.activityIndicator.stopAnimating()
-                      //  self.collectioView.isUserInteractionEnabled = true
+                        //  self.collectioView.isUserInteractionEnabled = true
                         
                         self.collectioView.reloadData()
                         self.isDataFetchInProgress = false
@@ -581,7 +580,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         let indexDict = responseDict.data[i]
                         indexDict.isInfoPopUpDisplaying = false
                         
-                        //k*
                         if (self.isDataArrayContains(indexDict: indexDict) == false) {
                             self.dataArray.append(indexDict)
                         }
@@ -594,7 +592,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.collectioView.reloadData()
                         self.activityIndicator.isHidden = true
                         self.activityIndicator.stopAnimating()
-                       // self.collectioView.isUserInteractionEnabled = true
+                        // self.collectioView.isUserInteractionEnabled = true
                         self.isDataFetchInProgress = false
                     }
                     
@@ -606,7 +604,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 DispatchQueue.main.async {
                     self.activityIndicator.isHidden = true
                     self.activityIndicator.stopAnimating()
-                   // self.collectioView.isUserInteractionEnabled = true
+                    // self.collectioView.isUserInteractionEnabled = true
                     self.isDataFetchInProgress = false
                 }
             }
@@ -685,37 +683,60 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: UIControl.Event.touchUpInside)
         
         cell.playButton.tag = indexPath.row
-        cell.playButton.addTarget(self, action: #selector(playButtonClicked), for: UIControl.Event.touchUpInside)
+        //        cell.playButton.addTarget(self, action: #selector(playButtonClicked), for: UIControl.Event.touchUpInside)
+        cell.playButton.showsTouchWhenHighlighted = true
+        //cell.playButton.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+        cell.playButton.addTarget(self, action: #selector(LibraryFeedsViewController.playVideoOnCell(_:)), for: .touchUpInside)
         
         cell.infoSliderCloseButton.tag = indexPath.row
         cell.infoSliderCloseButton.addTarget(self, action: #selector(infoSliderCloseButtonClicked), for: UIControl.Event.touchUpInside)
         
         return cell
     }
-    
-    @objc func playButtonClicked(_ sender:UIButton) {
-        print(sender.tag)
-        print(dataArray[sender.tag]._id)
-
-        let userID = dataArray[sender.tag].user._id
-        let videoName = dataArray[sender.tag].fileName
-        let videoId = dataArray[sender.tag]._id
-        var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
-        //var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
-        videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-
-        let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-        nextVC.videoUrl = videUrlString
-        nextVC.postId = videoId
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.navigationController?.pushViewController(nextVC, animated: true)
-//        nextVC.modalPresentationStyle = .overCurrentContext
-//        self.present(nextVC, animated: true, completion: nil)
+    @objc func playVideoOnCell(_ button:UIButton) {
+        print("playVideoOnCell :: ====> \(button.tag)")
+        //k*
+        if (dataArray.count > button.tag) {
+            print(dataArray[button.tag]._id)
+            
+            let userID = dataArray[button.tag].user._id
+            let videoName = dataArray[button.tag].fileName
+            let videoId = dataArray[button.tag]._id
+            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+            
+            let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+            nextVC.videoUrl = videUrlString
+            nextVC.postId = videoId
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        
     }
+    //    @objc func playButtonClicked(_ sender:UIButton) {
+    //        print(sender.tag)
+    //        print(dataArray[sender.tag]._id)
+    //
+    //        let userID = dataArray[sender.tag].user._id
+    //        let videoName = dataArray[sender.tag].fileName
+    //        let videoId = dataArray[sender.tag]._id
+    //        var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+    //        //var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
+    //        videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+    //
+    //        let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+    //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+    //        nextVC.videoUrl = videUrlString
+    //        nextVC.postId = videoId
+    //        let navVC = UINavigationController(rootViewController: nextVC)
+    //        navVC.isNavigationBarHidden = true
+    //        self.navigationController?.pushViewController(nextVC, animated: true)
+    ////        nextVC.modalPresentationStyle = .overCurrentContext
+    ////        self.present(nextVC, animated: true, completion: nil)
+    //    }
     
     @objc func deleteVideoButtonClicked(_ sender:UIButton) {
+        print(sender.tag)
         print(dataArray[sender.tag]._id)
         
         let boolValue = UserDefaults.standard.bool(forKey: "TrialPeriodEnds")
@@ -746,7 +767,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 }
             }
         }
-      
+        
     }
     
     @objc func shareButtonClicked(_ sender:UIButton) {
@@ -774,7 +795,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             navVC.isNavigationBarHidden = true
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-      
+        
     }
     
     @objc func infoButtonClicked(_ sender:UIButton) {
@@ -813,23 +834,23 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
     
-    func selectRow(selectedRow:Int) {
-        
-        if (dataArray.count>selectedRow) {
-            let userID = dataArray[selectedRow].user._id
-            let videoName = dataArray[selectedRow].fileName
-            let videoId = dataArray[selectedRow]._id
-            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
-            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-            
-            let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-            nextVC.videoUrl = videUrlString
-            nextVC.postId = videoId
-            nextVC.modalPresentationStyle = .overCurrentContext
-            self.present(nextVC, animated: true, completion: nil)
-        }
-    }
+    //    func selectRow(selectedRow:Int) {
+    //
+    //        if (dataArray.count>selectedRow) {
+    //            let userID = dataArray[selectedRow].user._id
+    //            let videoName = dataArray[selectedRow].fileName
+    //            let videoId = dataArray[selectedRow]._id
+    //            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+    //            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+    //
+    //            let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+    //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+    //            nextVC.videoUrl = videUrlString
+    //            nextVC.postId = videoId
+    //            nextVC.modalPresentationStyle = .overCurrentContext
+    //            self.present(nextVC, animated: true, completion: nil)
+    //        }
+    //    }
     
     @IBAction func plusButtonClicked() {
         /*
@@ -852,7 +873,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.present(nextVC, animated: false, completion: nil)
         }
         
-      
+        
         
         //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
@@ -935,7 +956,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     
+    
+    
+    //k*
     func loadAllVideoImagesForDataArray() {
+       // print("\(self.getCurrentTime()) :: loadAllVideoImagesForDataArray :: dataArray.count ====> \(dataArray.count)")
         for i in 0..<dataArray.count {
             if (self.dataArray.count > i) {
                 let userID = dataArray[i].user._id
@@ -944,18 +969,16 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
                 //print("videUrlString :: \(videUrlString)")
                 
-                //get duration time
-                let asset = AVAsset(url: URL(string: videUrlString)!)
-                let duration = asset.duration
-                let durationTime = CMTimeGetSeconds(duration)
-                //print("durationTime====>\(durationTime)")
-                //get duration time ends
                 DispatchQueue.global(qos: .userInitiated).async {
                     let image = self.previewImageFromVideo(url: URL(string: videUrlString)! as NSURL)
                     if (image != nil) {
+                        let asset = AVAsset(url: URL(string: videUrlString)!)
+                        let duration = asset.duration
+                        let durationTime = CMTimeGetSeconds(duration)
+                        
                         if (self.dataArray.count > i) {
                             self.dataArray[i].user.videoImage = image!
-                            self.dataArray[i].user.duration = String(durationTime)
+                            self.dataArray[i].user.duration = "\(durationTime)"
                             self.dataArray[i].fileName = videoName
                             DispatchQueue.main.async {
                                 //print("****Loaded image at index :: \(i)")
@@ -963,10 +986,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                             }
                         }
                     }
-                    if (i == (self.dataArray.count-1)) {
-                        DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        if (i == (self.dataArray.count-1)) {
                             self.activityIndicator.isHidden = true
                             self.activityIndicator.stopAnimating()
+                          //  print("\(self.getCurrentTime()) :: loadAllVideoImagesForDataArray :: stopAnimating")
+                            
                         }
                     }
                 }
@@ -1291,12 +1316,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let navVC = UINavigationController(rootViewController: nextVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.pushViewController(nextVC, animated: true)
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
-//        nextVC.isFromViewAllButtonClick = true
-//        let navVC = UINavigationController(rootViewController: nextVC)
-//        navVC.isNavigationBarHidden = true
-//        self.navigationController?.pushViewController(nextVC, animated: true)
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
+        //        nextVC.isFromViewAllButtonClick = true
+        //        let navVC = UINavigationController(rootViewController: nextVC)
+        //        navVC.isNavigationBarHidden = true
+        //        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     //MARK:- Select profile picture
@@ -1639,15 +1664,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.remainingDaysLabel.text = "Trial Period Ended"
                         UserDefaults.standard.set(true, forKey: "TrialPeriodEnds")
                     }
-                   
                     
                     
-//                    let expiryDateToString = dateFormatter.string(from: expiryDate)
-//                    print(expiryDateToString.getReadableDateString())
-//                    expiryDateForLabel = expiryDateToString.getReadableDateString()
+                    
+                    //                    let expiryDateToString = dateFormatter.string(from: expiryDate)
+                    //                    print(expiryDateToString.getReadableDateString())
+                    //                    expiryDateForLabel = expiryDateToString.getReadableDateString()
                 }
                 DispatchQueue.main.async {
-                   self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) days left"
+                    self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) days left"
                 }
                 
             }

@@ -23,8 +23,8 @@ class VideoViewController: UIViewController {
     @IBOutlet var videoViewContainer: UIView!
     @IBOutlet var seekBar: UISlider!
     @IBOutlet var playButton: UIButton!
-//    @IBOutlet var bottomButtonsContainerView: UIView!
-//    @IBOutlet var bottomButtonsContainerBottomMarginConstraint: NSLayoutConstraint!
+    //    @IBOutlet var bottomButtonsContainerView: UIView!
+    //    @IBOutlet var bottomButtonsContainerBottomMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var previewLayer: AVCaptureVideoPreviewLayer!
@@ -55,11 +55,16 @@ class VideoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //        var videoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4?playsinline=1"
-        
+        DispatchQueue.main.async {
+            self.setUpVideoPlayer()
+        }
+    }
+    
+    func setUpVideoPlayer() {
         
         videoUrl = videoUrl.replacingOccurrences(of: " ", with: "%20")
         print("Video url is: \(videoUrl)")
+        
         
         self.player = AVPlayer(url: URL(string: videoUrl)!)
         self.view.layoutIfNeeded()
@@ -71,12 +76,39 @@ class VideoViewController: UIViewController {
         
         playerLayer.videoGravity = AVLayerVideoGravity(rawValue: AVLayerVideoGravity.resizeAspectFill.rawValue)
         
-        if let duration = player.currentItem?.asset.duration {
+        //        if let duration = player.currentItem?.asset.duration {
+        //            let seconds = CMTimeGetSeconds(duration)
+        //            var totalVideoDuration:Float = Float(seconds*1000.0)
+        //            if (totalVideoDuration.isNaN == true) {
+        //                totalVideoDuration = 0
+        //            }
+        //
+        //            seekBar.minimumValue  = 0
+        //            seekBar.maximumValue = totalVideoDuration
+        //            seekBar.trackRect(forBounds: seekBar.bounds)
+        //        }
+        
+        let activityIndicator  = UIActivityIndicatorView(style: .white)
+        activityIndicator.center = CGPoint(x: UIScreen.main.bounds.size.width/2.0, y: UIScreen.main.bounds.size.height/2.0)
+        activityIndicator.hidesWhenStopped = true
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let asset = AVAsset(url: URL(string: self.videoUrl)!)
+            let duration = asset.duration
             let seconds = CMTimeGetSeconds(duration)
-            let totalVideoDuration:Float = Float(seconds*1000.0)
-            seekBar.minimumValue  = 0
-            seekBar.maximumValue = totalVideoDuration
-            seekBar.trackRect(forBounds: seekBar.bounds)
+            var totalVideoDuration:Float = Float(seconds*1000.0)
+            if (totalVideoDuration.isNaN == true) {
+                totalVideoDuration = 0
+            }
+            DispatchQueue.main.async {
+                self.seekBar.minimumValue  = 0
+                self.seekBar.maximumValue = totalVideoDuration
+                self.seekBar.trackRect(forBounds: self.seekBar.bounds)
+                print("Loaded video...")
+                self.activityIndicator.stopAnimating()
+            }
         }
         
         let interval = CMTime(seconds:1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
@@ -87,18 +119,12 @@ class VideoViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidPlayToEndTime), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
-       // pauseButton.alpha = 0
-        
-//        NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillShowNotification,object: nil)
-//        NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillHideNotification,object: nil)
-//        
         
         
         self.currentTimeCounter = 1
         
-        
     }
-
+    
     
     @IBAction func playButtonClicked(_ sender: Any) {
         if (isPlayCompleted == true) {
@@ -108,22 +134,22 @@ class VideoViewController: UIViewController {
         player.play()
         playerLayer.videoGravity = AVLayerVideoGravity(rawValue: AVLayerVideoGravity.resizeAspect.rawValue)
         playButton.alpha = 0
-       // pauseButton.alpha = 1
+        // pauseButton.alpha = 1
     }
     
     @objc func playerItemDidPlayToEndTime() {
         print("playerItemDidPlayToEndTime.........")
         self.seekBar.minimumTrackTintColor = UIColor.red
         playButton.alpha = 0.5
-     //   pauseButton.alpha = 0
+        //   pauseButton.alpha = 0
         isPlayCompleted = true
     }
     
     
     //MARK:-
-   
     
-
+    
+    
     
     func currentVideoOrientation() -> AVCaptureVideoOrientation {
         var orientation: AVCaptureVideoOrientation
@@ -157,10 +183,7 @@ class VideoViewController: UIViewController {
     
     
     @IBAction func backButtonClicked(_ sender: Any) {
-        
-        //self.dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
