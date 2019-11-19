@@ -69,6 +69,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     override func viewWillAppear(_ animated: Bool) {
         ViewSetUp()
         PlayVideo()
+        
         self.currentTimeCounter = 1
         videoTime = UserDefaults.standard.value(forKey: "videotime") as! Int
     }
@@ -84,11 +85,14 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     var playerLayer  = AVPlayerLayer()
     func PlayVideo() {
         //let videoURL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+        //mute audio
+        //mute audio ends
         let player = AVPlayer(url: getVideoURL!)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
         playVideoView.layer.addSublayer(playerLayer)
         //playVideoView.backgroundColor = UIColor.red
+        player.isMuted = true
         player.play()
     }
     func setupPreview() {
@@ -444,4 +448,11 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         isSmallViewDragInProgress = true
     }
+    
+    
+    //remove audio from video
+
+    //remove audio from video ends
 }
+
+

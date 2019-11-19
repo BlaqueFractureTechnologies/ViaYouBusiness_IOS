@@ -652,20 +652,30 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     {
         self.processVideo(url: self.watermarkURL!)
     }
-    
-    
+        
     func mergeVideos(firestUrl : URL , SecondUrl : URL )
     {
         let tempURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.mp4")
         print(tempURl)
         let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
         print("paymentTypePurchased ====> \(paymentTypePurchased)")
-        
-        if (paymentTypePurchased == 0) {
-            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
-        } else {
-            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+        let boolValue = UserDefaults.standard.bool(forKey: "IsSelectingVideoFromGallery")
+        if boolValue == true {
+            if (paymentTypePurchased == 0) {
+                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:1][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
+            } else {
+                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:1][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+            }
         }
+        else {
+            if (paymentTypePurchased == 0) {
+                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
+            } else {
+                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+            }
+        }
+        
+
         
         let tmpDirURL = FileManager.default.temporaryDirectory
         let strName : String = "viayou_\(self.randomStringWithLength(len: 13))"
@@ -688,21 +698,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         print("file size = \(fileUrl.fileSize), \(fileUrl.fileSizeString)")
         
         print("=============SAVE===========================")
-        //saving to gallery
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: newURL)
-        }) { saved, error in
-            if saved {
-                let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alertController.addAction(defaultAction)
-                self.present(alertController, animated: true, completion: nil)
-            }
-            else {
-                print(error.debugDescription)
-            }
-        }
-        //saving to gallery ends
+
         DispatchQueue.main.async {
             do {
                 try FileManager.default.copyItem(at: tempURl, to: newURL)
@@ -723,7 +719,6 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
             }
         }
     }
-    
     
     func exportCompositedVideo(compiledVideo: AVMutableComposition, toURL outputUrl: NSURL, withVideoComposition videoComposition: AVMutableVideoComposition) {
         DispatchQueue.main.async {
@@ -900,6 +895,22 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     
     @IBAction func uploadVideoButtonClicked(_ sender: Any) {
         print("uploadVideoButtonClicked...")
+        //saving to gallery
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: self.finalURL)
+        }) { saved, error in
+            if saved {
+                let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(defaultAction)
+                //self.present(alertController, animated: true, completion: nil)
+                print("Video saved in gallery")
+            }
+            else {
+                print(error.debugDescription)
+            }
+        }
+        //saving to gallery ends
         if promptTitleField.text == "" {
             self.displayAlert(msg: "Please Enter a Title for the Video")
             return
