@@ -470,7 +470,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         super.viewWillAppear(animated)
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
-        self.collectioView.isUserInteractionEnabled = false
+       // self.collectioView.isUserInteractionEnabled = false
         
         getSubscriptionPlanResponseFromAPI()
         self.dataArray = []
@@ -559,7 +559,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.noFeedPopUpView.alpha = 1
                         self.activityIndicator.isHidden = true
                         self.activityIndicator.stopAnimating()
-                        self.collectioView.isUserInteractionEnabled = true
+                      //  self.collectioView.isUserInteractionEnabled = true
                         
                         self.collectioView.reloadData()
                         self.isDataFetchInProgress = false
@@ -594,7 +594,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.collectioView.reloadData()
                         self.activityIndicator.isHidden = true
                         self.activityIndicator.stopAnimating()
-                        self.collectioView.isUserInteractionEnabled = true
+                       // self.collectioView.isUserInteractionEnabled = true
                         self.isDataFetchInProgress = false
                     }
                     
@@ -606,7 +606,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 DispatchQueue.main.async {
                     self.activityIndicator.isHidden = true
                     self.activityIndicator.stopAnimating()
-                    self.collectioView.isUserInteractionEnabled = true
+                   // self.collectioView.isUserInteractionEnabled = true
                     self.isDataFetchInProgress = false
                 }
             }
@@ -694,6 +694,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     @objc func playButtonClicked(_ sender:UIButton) {
+        print(sender.tag)
         print(dataArray[sender.tag]._id)
         
         let userID = dataArray[sender.tag].user._id
@@ -707,8 +708,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
         nextVC.videoUrl = videUrlString
         nextVC.postId = videoId
-        nextVC.modalPresentationStyle = .overCurrentContext
-        self.present(nextVC, animated: true, completion: nil)
+        let navVC = UINavigationController(rootViewController: nextVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.pushViewController(nextVC, animated: true)
+//        nextVC.modalPresentationStyle = .overCurrentContext
+//        self.present(nextVC, animated: true, completion: nil)
     }
     
     @objc func deleteVideoButtonClicked(_ sender:UIButton) {
@@ -1296,6 +1300,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         if let videoURL = info[.mediaURL] as? URL {
             selectedVideo = videoURL
+            let asset = AVURLAsset(url: videoURL)
+            
+            // get the time in seconds
+            let durationInSeconds = asset.duration.seconds
+            let durationInInt = Int(durationInSeconds)
+            print(durationInInt)
+            UserDefaults.standard.set(durationInInt, forKey: "videotime")
+            UserDefaults.standard.set(true, forKey: "IsSelectingVideoFromGallery")
         }
         
         
@@ -1584,21 +1596,25 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 
                 // Reads date form variable `dateString `
                 let newdate = dateFormatter.date(from: dateFromApi)
-                var expiryDateForLabel:String = ""
+                var expiryDateForLabel:Int = 0
                 if let expiryDate = Calendar.current.date(byAdding: .month, value: 1, to: newdate!) {
                     print(expiryDate)
                     
                     if let diffInDays = Calendar.current.dateComponents([.day], from: Date(), to: expiryDate).day {
                         print(diffInDays)
-                        expiryDateForLabel = String(diffInDays)
+                        expiryDateForLabel = diffInDays
                     }
+                    if expiryDateForLabel < 1 {
+                        
+                    }
+                    
                     
 //                    let expiryDateToString = dateFormatter.string(from: expiryDate)
 //                    print(expiryDateToString.getReadableDateString())
 //                    expiryDateForLabel = expiryDateToString.getReadableDateString()
                 }
                 DispatchQueue.main.async {
-                   self.remainingDaysLabel.text = "\(expiryDateForLabel) days left"
+                   self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) days left"
                 }
                 
             }

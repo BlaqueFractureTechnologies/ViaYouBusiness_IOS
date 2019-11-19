@@ -54,7 +54,7 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         formatter.unitsStyle = .short
         
         let formattedString = formatter.string(from: TimeInterval(interval) ?? 1.0)!
-        print(formattedString)
+        //print(formattedString)
         self.durationLabel.text = formattedString
         //time calc ends
       //  self.durationLabel.text = dataDict.user.duration

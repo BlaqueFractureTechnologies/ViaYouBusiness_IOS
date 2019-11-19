@@ -18,6 +18,7 @@ import AWSCore
 import AWSCognito
 import mobileffmpeg
 import Firebase
+import PhotosUI
 
 
 enum QUWatermarkPosition {
@@ -687,6 +688,21 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         print("file size = \(fileUrl.fileSize), \(fileUrl.fileSizeString)")
         
         print("=============SAVE===========================")
+        //saving to gallery
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: newURL)
+        }) { saved, error in
+            if saved {
+                let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(defaultAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else {
+                print(error.debugDescription)
+            }
+        }
+        //saving to gallery ends
         DispatchQueue.main.async {
             do {
                 try FileManager.default.copyItem(at: tempURl, to: newURL)
@@ -695,7 +711,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                 self.finalURL = newURL
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
-               // self.view.isUserInteractionEnabled = true
+                // self.view.isUserInteractionEnabled = true
                 // self.uploadFile(with: strName, type: newURL.pathExtension, videoURL: newURL)
                 
             } catch let error {

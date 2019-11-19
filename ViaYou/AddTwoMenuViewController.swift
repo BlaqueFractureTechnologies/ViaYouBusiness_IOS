@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 @objc protocol AddTwoMenuViewControllerDelegate{
     @objc optional func AddTwoMenuViewController_screencastButtonClicked()
     @objc optional func AddTwoMenuViewController_videomergeButtonClicked()
@@ -82,6 +83,14 @@ class AddTwoMenuViewController: UIViewController , UIImagePickerControllerDelega
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let videoURL = info[.mediaURL] as? URL
         print(videoURL)
+        // get the asset
+        let asset = AVURLAsset(url: videoURL!)
+        
+        // get the time in seconds
+        let durationInSeconds = asset.duration.seconds
+        print(durationInSeconds)
+        UserDefaults.standard.set(durationInSeconds, forKey: "videotime")
+        
         let recordVC = self.storyboard?.instantiateViewController(withIdentifier: "RecordFantVideoVC") as! RecordFantVideoVC
         recordVC.getVideoURL = videoURL
         self.navigationController?.pushViewController(recordVC, animated: true)
