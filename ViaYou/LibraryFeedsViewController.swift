@@ -126,6 +126,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     var fetchStart:Int = 0
     var isDataFetchInProgress:Bool = false
+    var mutableVideoURL: URL!
     
     @objc func handleNotification(withNotification notification : NSNotification) {
         if (notification.name == uploadBarStatusNotification) {
@@ -713,27 +714,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         
     }
-    //    @objc func playButtonClicked(_ sender:UIButton) {
-    //        print(sender.tag)
-    //        print(dataArray[sender.tag]._id)
-    //
-    //        let userID = dataArray[sender.tag].user._id
-    //        let videoName = dataArray[sender.tag].fileName
-    //        let videoId = dataArray[sender.tag]._id
-    //        var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
-    //        //var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
-    //        videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-    //
-    //        let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-    //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-    //        nextVC.videoUrl = videUrlString
-    //        nextVC.postId = videoId
-    //        let navVC = UINavigationController(rootViewController: nextVC)
-    //        navVC.isNavigationBarHidden = true
-    //        self.navigationController?.pushViewController(nextVC, animated: true)
-    ////        nextVC.modalPresentationStyle = .overCurrentContext
-    ////        self.present(nextVC, animated: true, completion: nil)
-    //    }
     
     @objc func deleteVideoButtonClicked(_ sender:UIButton) {
         print(sender.tag)
@@ -1350,6 +1330,53 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         pickerController.sourceType = source
         self.navigationController?.present(pickerController, animated: true, completion: nil)
     }
+    //edit starts
+    func removeAudioFromVideo(_ videoURL: URL) {
+        let inputVideoURL: URL = videoURL
+        let sourceAsset = AVURLAsset(url: inputVideoURL)
+        let sourceVideoTrack: AVAssetTrack? = sourceAsset.tracks(withMediaType: AVMediaType.video)[0]
+        let composition : AVMutableComposition = AVMutableComposition()
+        let compositionVideoTrack: AVMutableCompositionTrack? = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)
+        let x: CMTimeRange = CMTimeRangeMake(start: CMTime.zero, duration: sourceAsset.duration)
+        _ = try? compositionVideoTrack!.insertTimeRange(x, of: sourceVideoTrack!, at: CMTime.zero)
+        mutableVideoURL = NSURL(fileURLWithPath: NSHomeDirectory() + "/Documents/FinalVideo.mp4") as URL
+        let exporter: AVAssetExportSession = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)!
+        exporter.outputFileType = AVFileType.mp4
+        exporter.outputURL = mutableVideoURL as URL
+        removeFileAtURLIfExists(url: mutableVideoURL! as NSURL)
+        exporter.exportAsynchronously(completionHandler:
+            {
+                switch exporter.status
+                {
+                case AVAssetExportSessionStatus.failed:
+                    print("failed \(String(describing: exporter.error))")
+                case AVAssetExportSessionStatus.cancelled:
+                    print("cancelled \(String(describing: exporter.error))")
+                case AVAssetExportSessionStatus.unknown:
+                    print("unknown\(String(describing: exporter.error))")
+                case AVAssetExportSessionStatus.waiting:
+                    print("waiting\(String(describing: exporter.error))")
+                case AVAssetExportSessionStatus.exporting:
+                    print("exporting\(String(describing: exporter.error))")
+                default:
+                    print("-----Mutable video exportation complete.")
+                }
+        })
+    }
+    
+    func removeFileAtURLIfExists(url: NSURL) {
+        if let filePath = url.path {
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+                do{
+                    try fileManager.removeItem(atPath: filePath)
+                } catch let error as NSError {
+                    print("Couldn't remove existing destination file: \(error)")
+                }
+            }
+        }
+    }
+    //edit ends
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -1358,12 +1385,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             selectedVideo = videoURL
             let asset = AVURLAsset(url: videoURL)
             
+            removeAudioFromVideo(videoURL)
             // get the time in seconds
             let durationInSeconds = asset.duration.seconds
             let durationInInt = Int(durationInSeconds)
             print(durationInInt)
             UserDefaults.standard.set(durationInInt, forKey: "videotime")
             UserDefaults.standard.set(true, forKey: "IsSelectingVideoFromGallery")
+            
         }
         
         
@@ -1394,10 +1423,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         else if (isSelectingVideo == true) {
             print(selectedVideo)
+            print(mutableVideoURL)
             self.dismiss(animated: true, completion: {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "RecordFantVideoVC") as! RecordFantVideoVC
-                nextVC.getVideoURL = self.selectedVideo
+                //nextVC.getVideoURL = self.selectedVideo
+                nextVC.getVideoURL = self.mutableVideoURL
+
                 let navVC = UINavigationController(rootViewController: nextVC)
                 navVC.isNavigationBarHidden = true
                 self.navigationController?.pushViewController(nextVC, animated: true)

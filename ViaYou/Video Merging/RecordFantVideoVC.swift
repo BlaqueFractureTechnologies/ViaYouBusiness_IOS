@@ -92,7 +92,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
         playerLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height )
         playVideoView.layer.addSublayer(playerLayer)
         //playVideoView.backgroundColor = UIColor.red
-        player.isMuted = true
+        //player.isMuted = true
         player.play()
     }
     func setupPreview() {
