@@ -91,8 +91,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Archive",
                          "Feedback",
                          "Feature Request",
-                         "Privacy Policy",
-                         "Mobile Terms Of Use",
                          "Resolution",
                          "Sign Out"]
     var dropdownArrayAfterPurchase = ["Invite",
@@ -806,13 +804,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelectItemAt...")
-        //selectRow(selectedRow: indexPath.row)
-        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "NoScreenCastsPopUpViewController") as! NoScreenCastsPopUpViewController
-        //        nextVC.modalPresentationStyle = .overCurrentContext
-        //        let navVC = UINavigationController(rootViewController: nextVC)
-        //        navVC.isNavigationBarHidden = true
-        //        self.navigationController?.present(navVC, animated: false, completion: nil)
     }
     
     
@@ -836,14 +827,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             nextVC.delegate = self
             self.present(nextVC, animated: false, completion: nil)
         }
-        
-        
-        
-        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
-        //        let navVC = UINavigationController(rootViewController: nextVC)
-        //        navVC.isNavigationBarHidden = true
-        //        self.navigationController?.pushViewController(nextVC, animated: true)
         
     }
     
@@ -877,34 +860,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
-    
-    //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-    //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "LessSpacePopUpViewController") as! LessSpacePopUpViewController
-    //        nextVC.modalPresentationStyle = .overCurrentContext
-    //        let navVC = UINavigationController(rootViewController: nextVC)
-    //        navVC.isNavigationBarHidden = true
-    //        self.navigationController?.present(navVC, animated: false, completion: nil)
-    
-    //    func loadVideoSize() {
-    //        for i in 0..<dataArray.count {
-    //            let userID = dataArray[i].user._id
-    //            let videoName = dataArray[i].fileName
-    //            var videUrlString = "https://dev-promptchu.s3.us-east-2.amazonaws.com/posts/\(userID)/\(videoName)"
-    //            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-    //            print("videUrlString :: \(videUrlString)")
-    //
-    //            getDownloadSize(url: URL(string: videUrlString)!) { (size, error) in
-    //                if (error == nil) {
-    //                    DispatchQueue.main.async {
-    //                        let size = "\(size) KB"
-    //                        self.dataArray[i].videoFileSize = size
-    //                        self.collectioView.reloadData()
-    //                    }
-    //                }
-    //            }
-    //
-    //        }
-    //    }
+   
     
     func getDownloadSize(url: URL, completion: @escaping (Int64, Error?) -> Void) {
         let timeoutInterval = 5.0
@@ -1052,7 +1008,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             if (paymentTypePurchased >= 0) {
                 self.dropDownBaseViewHeightConstraint.constant = 520
             }else {
-                self.dropDownBaseViewHeightConstraint.constant = 480
+                self.dropDownBaseViewHeightConstraint.constant = 400
             }
             self.view.layoutIfNeeded()
         }
@@ -1176,15 +1132,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "FeatureResuestPage_1ViewController") as! FeatureResuestPage_1ViewController
             nextVC.modalPresentationStyle = .overCurrentContext
             self.navigationController?.pushViewController(nextVC, animated: true)
-        } else if (indexPath.row == 5) {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        } else if (indexPath.row == 6) {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        } else if (indexPath.row == 8) {
+        }
+//        else if (indexPath.row == 5) {
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
+//            self.navigationController?.pushViewController(nextVC, animated: true)
+//        } else if (indexPath.row == 6) {
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
+//            self.navigationController?.pushViewController(nextVC, animated: true)
+//        }
+        else if (indexPath.row == 6) {
             UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "NewLaunchViewController") as! NewLaunchViewController
