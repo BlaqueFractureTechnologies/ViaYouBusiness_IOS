@@ -717,44 +717,64 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     @objc func deleteVideoButtonClicked(_ sender:UIButton) {
         print(dataArray[sender.tag]._id)
-        let tappedPostId = dataArray[sender.tag]._id
-        ApiManager().deletePostAPI(postId: tappedPostId) { (response, error) in
-            if error == nil {
-                print(response.success)
-                print(response.message)
-                
-                DispatchQueue.main.async {
-                    self.dataArray.remove(at: sender.tag)
-                    self.collectioView.reloadData()
-                    self.dataArray.removeAll()
-                    self.getResponseFromJSONFile()
+        
+        let boolValue = UserDefaults.standard.bool(forKey: "TrialPeriodEnds")
+        if boolValue == true {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            nextVC.delegate = self
+            self.present(nextVC, animated: false, completion: nil)
+        }
+        else {
+            let tappedPostId = dataArray[sender.tag]._id
+            ApiManager().deletePostAPI(postId: tappedPostId) { (response, error) in
+                if error == nil {
+                    print(response.success)
+                    print(response.message)
+                    
+                    DispatchQueue.main.async {
+                        self.dataArray.remove(at: sender.tag)
+                        self.collectioView.reloadData()
+                        self.dataArray.removeAll()
+                        self.getResponseFromJSONFile()
+                    }
+                }
+                else
+                {
+                    print(error.debugDescription)
                 }
             }
-            else
-            {
-                print(error.debugDescription)
-            }
         }
-        
+      
     }
     
     @objc func shareButtonClicked(_ sender:UIButton) {
         print(dataArray[sender.tag]._id)
         
-        let userID = dataArray[sender.tag].user._id
-        let videoName = dataArray[sender.tag].fileName
-        //var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
-        var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
-        videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
-        UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
-        nextVC.passedUrlLink = videUrlString
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.navigationController?.pushViewController(nextVC, animated: true)
-        
-        
+        let boolValue = UserDefaults.standard.bool(forKey: "TrialPeriodEnds")
+        if boolValue == true {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            nextVC.delegate = self
+            self.present(nextVC, animated: false, completion: nil)
+        }
+        else {
+            let userID = dataArray[sender.tag].user._id
+            let videoName = dataArray[sender.tag].fileName
+            //var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+            var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
+            videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+            UserDefaults.standard.set(true, forKey: "isTappedFromSingleVideo")
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+            nextVC.passedUrlLink = videUrlString
+            let navVC = UINavigationController(rootViewController: nextVC)
+            navVC.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+      
     }
     
     @objc func infoButtonClicked(_ sender:UIButton) {
@@ -816,12 +836,23 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
          self.inviteFriendsPopUpView.alpha = 1
          self.popUpOverlayButton.alpha = 0.5
          */
+        let boolValue = UserDefaults.standard.bool(forKey: "TrialPeriodEnds")
+        if boolValue == true {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            nextVC.delegate = self
+            self.present(nextVC, animated: false, completion: nil)
+        }
+        else {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            nextVC.delegate = self
+            self.present(nextVC, animated: false, completion: nil)
+        }
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
-        nextVC.modalPresentationStyle = .overCurrentContext
-        nextVC.delegate = self
-        self.present(nextVC, animated: false, completion: nil)
+      
         
         //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoRecordVC") as! VideoRecordVC
@@ -1605,8 +1636,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         expiryDateForLabel = diffInDays
                     }
                     if expiryDateForLabel < 1 {
-                        
+                        self.remainingDaysLabel.text = "Trial Period Ended"
+                        UserDefaults.standard.set(true, forKey: "TrialPeriodEnds")
                     }
+                   
                     
                     
 //                    let expiryDateToString = dateFormatter.string(from: expiryDate)
