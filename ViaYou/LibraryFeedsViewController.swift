@@ -1677,20 +1677,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                     else if expiryDateForLabel == 1 {
                         self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) day left"
+                        UserDefaults.standard.set(false, forKey: "TrialPeriodEnds")
                     }
                     else {
                         DispatchQueue.main.async {
                             self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) days left"
+                            UserDefaults.standard.set(false, forKey: "TrialPeriodEnds")
                         }
                     }
 
                 }
 
-
-                
-
-         
-                
             }
             else {
                 print(error?.localizedDescription ?? "Error getting user details")
