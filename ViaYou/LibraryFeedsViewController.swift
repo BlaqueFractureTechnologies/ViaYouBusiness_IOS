@@ -1670,6 +1670,36 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     if let diffInDays = Calendar.current.dateComponents([.day], from: Date(), to: expiryDate).day {
                         print(diffInDays)
                         expiryDateForLabel = diffInDays
+                        
+                        //notified every week method
+                        
+                        var maxDays = 30 //Default :: If days is dynamic, change here
+                        let lastSavedMaxDay = DefaultWrapper().getMaxDaysDifferenceForUser(userId: self.userId)
+                        if (lastSavedMaxDay.count == 0) {
+                            //Max count not saved before (for this user)
+                            DefaultWrapper().setMaxDaysDifferenceForUser(maxDays: lastSavedMaxDay, userId: self.userId)
+                            maxDays = Int(lastSavedMaxDay) ?? maxDays
+                        }
+                        
+                        let daysDifference = maxDays - diffInDays
+                        if (daysDifference > 0) {
+                            print("daysDifference ====> \(daysDifference)")
+                            if (daysDifference % 7 == 0) {
+                                print("daysDifference ====> \(daysDifference)")
+                                
+                                let todaysDateString = self.getTodaysDate()
+                                let isUserNotifiedOnThisDate = DefaultWrapper().getIsUserNotifiedOnThisDate(dateString: todaysDateString, userId: self.userId)
+                                if (isUserNotifiedOnThisDate == false) {
+                                    print("User was not notified on this date")
+                                    DefaultWrapper().setIsUserNotifiedOnThisDate(status: true, dateString: todaysDateString, userId: self.userId)
+                                    DispatchQueue.main.async {
+                                        self.displayAlert(msg: "Remaining \(diffInDays) days")
+                                    }
+                                }
+                            }
+                        }
+                        
+                        //notified every week method ends
                     }
                     if expiryDateForLabel < 1 {
                         self.remainingDaysLabel.text = "Trial Period Ended"
@@ -1694,6 +1724,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 self.displaySingleButtonAlert(message: "Something went wrong. Please try again later!")
             }
         }
+    }
+    
+    func getTodaysDate() ->String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
     }
     
 }

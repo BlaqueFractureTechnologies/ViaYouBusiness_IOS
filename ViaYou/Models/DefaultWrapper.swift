@@ -32,4 +32,21 @@ class DefaultWrapper: NSObject {
         let status = UserDefaults.standard.value(forKey: "isFirstTimeUser_\(userEmail)") as? Bool ?? false
         return status
     }
+    func setMaxDaysDifferenceForUser(maxDays:String,userId:String) {
+        UserDefaults.standard.set(maxDays, forKey: "MAXDAYS_\(userId)")
+    }
+    
+    func getMaxDaysDifferenceForUser(userId:String) ->String {
+        let maxDays = UserDefaults.standard.value(forKey: "MAXDAYS_\(userId)") as? String ?? ""
+        return maxDays
+    }
+    
+    func setIsUserNotifiedOnThisDate(status:Bool, dateString:String, userId:String) {
+        UserDefaults.standard.set(status, forKey: "IS_NOTIFIED_\(userId)_FOR_DATE_\(dateString)")
+    }
+    
+    func getIsUserNotifiedOnThisDate(dateString:String, userId:String) ->Bool {
+        let status = UserDefaults.standard.value(forKey: "IS_NOTIFIED_\(userId)_FOR_DATE_\(dateString)") as? Bool ?? false
+        return status
+    }
 }
