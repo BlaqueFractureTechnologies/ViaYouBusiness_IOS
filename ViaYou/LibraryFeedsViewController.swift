@@ -1067,6 +1067,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         tableView.deselectRow(at: indexPath, animated: true)
         dropDownOverlayButtonClicked((Any).self)
         
+        let boolValue = UserDefaults.standard.bool(forKey: "TrialPeriodEnds")
+        
         if(indexPath.row == 0) {
             self.inviteFriendsPopUpView.alpha = 1
             self.popUpOverlayButton.alpha = 0.5
@@ -1087,33 +1089,36 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             //
             //        }
         else if (indexPath.row == 1) {
-            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-            print("paymentTypePurchased ====> \(paymentTypePurchased)")
             
-            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-                addWatermarkClicked()
-                
-            }
-            else {
+            if boolValue == true {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
                 nextVC.modalPresentationStyle = .overCurrentContext
                 nextVC.delegate = self
                 self.present(nextVC, animated: false, completion: nil)
             }
+            else {
+                addWatermarkClicked()
+
+            }
+            
+//            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+//            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+//
+//            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+//                addWatermarkClicked()
+//
+//            }
+//            else {
+//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+//                nextVC.modalPresentationStyle = .overCurrentContext
+//                nextVC.delegate = self
+//                self.present(nextVC, animated: false, completion: nil)
+//            }
         }
         else if (indexPath.row == 2) {
-            // if (index == 2) {
-            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-            print("paymentTypePurchased ====> \(paymentTypePurchased)")
-            
-            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
-                nextVC.modalPresentationStyle = .overCurrentContext
-                self.navigationController?.pushViewController(nextVC, animated: true)
-                
-            }else {
+            if boolValue == true {
                 print("Restore option not available...")
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
@@ -1121,6 +1126,29 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 nextVC.delegate = self
                 self.present(nextVC, animated: false, completion: nil)
             }
+            else {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
+                nextVC.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+//            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+//            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+//
+//            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
+//                nextVC.modalPresentationStyle = .overCurrentContext
+//                self.navigationController?.pushViewController(nextVC, animated: true)
+//
+//            }else {
+//                print("Restore option not available...")
+//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+//                nextVC.modalPresentationStyle = .overCurrentContext
+//                nextVC.delegate = self
+//                self.present(nextVC, animated: false, completion: nil)
+//            }
         }  else if (indexPath.row == 3) {
             if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
                 if UIApplication.shared.canOpenURL(url) {
@@ -1287,6 +1315,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let sourceVideoTrack: AVAssetTrack? = sourceAsset.tracks(withMediaType: AVMediaType.video)[0]
         let composition : AVMutableComposition = AVMutableComposition()
         let compositionVideoTrack: AVMutableCompositionTrack? = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)
+        compositionVideoTrack?.preferredTransform = sourceVideoTrack!.preferredTransform
         let x: CMTimeRange = CMTimeRangeMake(start: CMTime.zero, duration: sourceAsset.duration)
         _ = try? compositionVideoTrack!.insertTimeRange(x, of: sourceVideoTrack!, at: CMTime.zero)
         mutableVideoURL = NSURL(fileURLWithPath: NSHomeDirectory() + "/Documents/FinalVideo.mp4") as URL

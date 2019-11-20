@@ -657,14 +657,23 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
     {
         let tempURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.mp4")
         print(tempURl)
-        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-        print("paymentTypePurchased ====> \(paymentTypePurchased)")
-       
-        if (paymentTypePurchased == 0) {
-            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
-        } else {
-            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+        let boolValue = UserDefaults.standard.bool(forKey: "IsSelectingVideoFromGallery")
+                if boolValue == true {
+                      MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=250:h=90[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+                } else {
+                 MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
         }
+        
+      
+        
+//        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+//        print("paymentTypePurchased ====> \(paymentTypePurchased)")
+       
+//        if (paymentTypePurchased == 0) {
+//            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
+//        } else {
+//            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+//        }
          //let boolValue = UserDefaults.standard.bool(forKey: "IsSelectingVideoFromGallery")
 //        if boolValue == true {
 //            if (paymentTypePurchased == 0) {
