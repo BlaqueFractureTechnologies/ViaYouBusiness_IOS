@@ -1637,7 +1637,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 var expiryDateForLabel:Int = 0
                 if let expiryDate = Calendar.current.date(byAdding: .month, value: 1, to: newdate!) {
                     print(expiryDate)
-                    
+
                     if let diffInDays = Calendar.current.dateComponents([.day], from: Date(), to: expiryDate).day {
                         print(diffInDays)
                         expiryDateForLabel = diffInDays
@@ -1646,16 +1646,21 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.remainingDaysLabel.text = "Trial Period Ended"
                         UserDefaults.standard.set(true, forKey: "TrialPeriodEnds")
                     }
-                    
-                    
-                    
-                    //                    let expiryDateToString = dateFormatter.string(from: expiryDate)
-                    //                    print(expiryDateToString.getReadableDateString())
-                    //                    expiryDateForLabel = expiryDateToString.getReadableDateString()
+                    else if expiryDateForLabel == 1 {
+                        self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) day left"
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) days left"
+                        }
+                    }
+
                 }
-                DispatchQueue.main.async {
-                    self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) days left"
-                }
+
+
+                
+
+         
                 
             }
             else {
