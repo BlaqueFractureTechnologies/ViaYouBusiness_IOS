@@ -821,12 +821,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.present(nextVC, animated: false, completion: nil)
         }
         else {
-            
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
             nextVC.modalPresentationStyle = .overCurrentContext
             nextVC.delegate = self
             self.present(nextVC, animated: false, completion: nil)
+            
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+//            nextVC.modalPresentationStyle = .overCurrentContext
+//            nextVC.delegate = self
+//            self.present(nextVC, animated: false, completion: nil)
         }
         
     }
@@ -995,9 +1000,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         self.popUpOverlayButton.alpha = 0
         goToContactsVCToInvite()
     }
-    
-    
-    
+   
     @IBAction func profilePicButtonClicked(_ sender: Any) {
         let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
         
