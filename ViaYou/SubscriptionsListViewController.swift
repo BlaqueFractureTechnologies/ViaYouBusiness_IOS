@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StripePaymentViewControllerDelegate {
+class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {//}, StripePaymentViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     let subTitles = ["Solo Host save 15%", "Growth Host save 10%", "Pro Host save 25%"]
@@ -126,11 +126,11 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     @objc func upgradeToSoloHostButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
-        homeVC.passedTypeOfPayment = "SOLO"
-        homeVC.selectedPlanName = "Solo Host"
-        homeVC.selectedPlanCharge = "$9.95"
-        homeVC.selectedSlogan = "Go Solo! with Solo Host"
-        homeVC.delegate = self
+//        homeVC.passedTypeOfPayment = "SOLO"
+//        homeVC.selectedPlanName = "Solo Host"
+//        homeVC.selectedPlanCharge = "$9.95"
+//        homeVC.selectedSlogan = "Go Solo! with Solo Host"
+//        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
@@ -138,11 +138,11 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     @objc func upgradeToGrowthHostButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
-        homeVC.passedTypeOfPayment = "GROWTH"
-        homeVC.selectedPlanName = "Growth Host"
-        homeVC.selectedPlanCharge = "$75.50"
-        homeVC.selectedSlogan = "Scale Up! with Growth Host"
-        homeVC.delegate = self
+//        homeVC.passedTypeOfPayment = "GROWTH"
+//        homeVC.selectedPlanName = "Growth Host"
+//        homeVC.selectedPlanCharge = "$75.50"
+//        homeVC.selectedSlogan = "Scale Up! with Growth Host"
+//        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
@@ -150,11 +150,11 @@ class SubscriptionsListViewController: UIViewController, UITableViewDelegate, UI
     @objc func upgadeToProHostButtonClicked() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
-        homeVC.passedTypeOfPayment = "PRO"
-        homeVC.selectedPlanName = "Pro Host"
-        homeVC.selectedPlanCharge = "$18.90"
-        homeVC.selectedSlogan = "Go Pro! with Pro Host"
-        homeVC.delegate = self
+//        homeVC.passedTypeOfPayment = "PRO"
+//        homeVC.selectedPlanName = "Pro Host"
+//        homeVC.selectedPlanCharge = "$18.90"
+//        homeVC.selectedSlogan = "Go Pro! with Pro Host"
+//        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)

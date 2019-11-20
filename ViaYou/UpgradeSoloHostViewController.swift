@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import Stripe
+//import Stripe
 
-class UpgradeSoloHostViewController: UIViewController,StripePaymentViewControllerDelegate {
+class UpgradeSoloHostViewController: UIViewController {//},StripePaymentViewControllerDelegate {
     @IBOutlet weak var trySoloHostButton: UIButton!
     
     
@@ -61,11 +61,11 @@ class UpgradeSoloHostViewController: UIViewController,StripePaymentViewControlle
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
-        homeVC.passedTypeOfPayment = "SOLO"
-        homeVC.selectedPlanName = "Solo Host"
-        homeVC.selectedPlanCharge = "$9.95"
-        homeVC.selectedSlogan = "Go Solo! with Solo Host"
-        homeVC.delegate = self
+//        homeVC.passedTypeOfPayment = "SOLO"
+//        homeVC.selectedPlanName = "Solo Host"
+//        homeVC.selectedPlanCharge = "$9.95"
+//        homeVC.selectedSlogan = "Go Solo! with Solo Host"
+//        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)

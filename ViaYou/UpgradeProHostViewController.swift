@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UpgradeProHostViewController: UIViewController, StripePaymentViewControllerDelegate {
+class UpgradeProHostViewController: UIViewController {//}, StripePaymentViewControllerDelegate {
     
     @IBOutlet weak var prevButton: UIButton!
     
@@ -50,11 +50,11 @@ class UpgradeProHostViewController: UIViewController, StripePaymentViewControlle
     @IBAction func tryProHostButtonClicked(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
-        homeVC.passedTypeOfPayment = "PRO"
-        homeVC.selectedPlanName = "Pro Host"
-        homeVC.selectedPlanCharge = "$18.90"
-        homeVC.selectedSlogan = "Go Pro! with Pro Host"
-        homeVC.delegate = self
+//        homeVC.passedTypeOfPayment = "PRO"
+//        homeVC.selectedPlanName = "Pro Host"
+//        homeVC.selectedPlanCharge = "$18.90"
+//        homeVC.selectedSlogan = "Go Pro! with Pro Host"
+//        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)

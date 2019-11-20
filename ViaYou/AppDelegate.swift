@@ -11,7 +11,7 @@ import Firebase
 import FBSDKCoreKit
 import GoogleSignIn
 import Firebase
-import Stripe
+//import Stripe
 import AWSS3
 import AWSCore
 import AWSCognito
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().delegate = self
         
         //Stripe.setDefaultPublishableKey("pk_test_kjt2etOhS9X6czAJxzLbEuM5007kPQdweC")
-        Stripe.setDefaultPublishableKey("pk_live_ERcYOkG4ChP3Rpy7yzm2dh6L00xDyFrxYu")
+        //Stripe.setDefaultPublishableKey("pk_live_ERcYOkG4ChP3Rpy7yzm2dh6L00xDyFrxYu")
         if let userid = Auth.auth().currentUser?.uid {
             userId = userid
         }

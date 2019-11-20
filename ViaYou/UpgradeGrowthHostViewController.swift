@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UpgradeGrowthHostViewController: UIViewController, StripePaymentViewControllerDelegate {
+class UpgradeGrowthHostViewController: UIViewController {//}, StripePaymentViewControllerDelegate {
     
     @IBOutlet weak var mostPopularLabelContainer: UIView!
     @IBOutlet weak var tryGrowthHostButton: UIView!
@@ -56,11 +56,11 @@ class UpgradeGrowthHostViewController: UIViewController, StripePaymentViewContro
     @IBAction func tryGrowthHostButtonClicked(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let homeVC = storyBoard.instantiateViewController(withIdentifier: "StripePaymentViewController") as! StripePaymentViewController
-        homeVC.passedTypeOfPayment = "GROWTH"
-        homeVC.selectedPlanName = "Growth Host"
-        homeVC.selectedPlanCharge = "$75.50"
-        homeVC.selectedSlogan = "Scale Up! with Growth Host"
-        homeVC.delegate = self
+//        homeVC.passedTypeOfPayment = "GROWTH"
+//        homeVC.selectedPlanName = "Growth Host"
+//        homeVC.selectedPlanCharge = "$75.50"
+//        homeVC.selectedSlogan = "Scale Up! with Growth Host"
+//        homeVC.delegate = self
         let navVC = UINavigationController(rootViewController: homeVC)
         navVC.isNavigationBarHidden = true
         self.navigationController?.present(navVC, animated: true, completion: nil)
