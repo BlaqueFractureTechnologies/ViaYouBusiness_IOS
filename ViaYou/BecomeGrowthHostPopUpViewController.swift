@@ -19,8 +19,10 @@ class BecomeGrowthHostPopUpViewController: UIViewController {
     var delegate:BecomeGrowthHostPopUpViewControllerDelegate?
     @IBOutlet weak var tryGrowthButton: UIButton!
     @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var remainingLabel: UILabel!
+    
     let profileImageUrlHeader:String = "http://s3.viayou.net/"
-
+    var remainingDays:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +30,14 @@ class BecomeGrowthHostPopUpViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        DispatchQueue.main.async {
+            self.remainingLabel.text = "Your free trial ends in \(self.remainingDays) weeks"
+        }
     }
     
     
     @IBAction func closeButtonClicked() {
         self.dismiss(animated: true) {
-            
         }
     }
     

@@ -472,7 +472,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         // self.collectioView.isUserInteractionEnabled = false
         
         getSubscriptionPlanResponseFromAPI()
-        //self.dataArray = [] //k*
+        //self.dataArray = []
         self.tableView.reloadData()
         getResponseFromJSONFile()
         self.dropDownBaseView.alpha = 0
@@ -695,7 +695,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     @objc func playVideoOnCell(_ button:UIButton) {
         print("playVideoOnCell :: ====> \(button.tag)")
-        //k*
+        
         if (dataArray.count > button.tag) {
             print(dataArray[button.tag]._id)
             
@@ -821,17 +821,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.present(nextVC, animated: false, completion: nil)
         }
         else {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-            nextVC.modalPresentationStyle = .overCurrentContext
-            nextVC.delegate = self
-            self.present(nextVC, animated: false, completion: nil)
-            
 //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
 //            nextVC.modalPresentationStyle = .overCurrentContext
 //            nextVC.delegate = self
 //            self.present(nextVC, animated: false, completion: nil)
+            
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+                        nextVC.modalPresentationStyle = .overCurrentContext
+                        nextVC.delegate = self
+                        self.present(nextVC, animated: false, completion: nil)
         }
         
     }
@@ -866,7 +866,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
-   
+    
     
     func getDownloadSize(url: URL, completion: @escaping (Int64, Error?) -> Void) {
         let timeoutInterval = 5.0
@@ -884,9 +884,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     
     
-    //k*
+    
     func loadAllVideoImagesForDataArray() {
-       // print("\(self.getCurrentTime()) :: loadAllVideoImagesForDataArray :: dataArray.count ====> \(dataArray.count)")
+        // print("\(self.getCurrentTime()) :: loadAllVideoImagesForDataArray :: dataArray.count ====> \(dataArray.count)")
         for i in 0..<dataArray.count {
             if (self.dataArray.count > i) {
                 let userID = dataArray[i].user._id
@@ -916,7 +916,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         if (i == (self.dataArray.count-1)) {
                             self.activityIndicator.isHidden = true
                             self.activityIndicator.stopAnimating()
-                          //  print("\(self.getCurrentTime()) :: loadAllVideoImagesForDataArray :: stopAnimating")
+                            //  print("\(self.getCurrentTime()) :: loadAllVideoImagesForDataArray :: stopAnimating")
                             
                         }
                     }
@@ -1000,7 +1000,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         self.popUpOverlayButton.alpha = 0
         goToContactsVCToInvite()
     }
-   
+    
     @IBAction func profilePicButtonClicked(_ sender: Any) {
         let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
         
@@ -1102,23 +1102,23 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             }
             else {
                 addWatermarkClicked()
-
+                
             }
             
-//            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-//            print("paymentTypePurchased ====> \(paymentTypePurchased)")
-//
-//            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-//                addWatermarkClicked()
-//
-//            }
-//            else {
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-//                nextVC.modalPresentationStyle = .overCurrentContext
-//                nextVC.delegate = self
-//                self.present(nextVC, animated: false, completion: nil)
-//            }
+            //            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            //            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            //
+            //            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+            //                addWatermarkClicked()
+            //
+            //            }
+            //            else {
+            //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            //                nextVC.modalPresentationStyle = .overCurrentContext
+            //                nextVC.delegate = self
+            //                self.present(nextVC, animated: false, completion: nil)
+            //            }
         }
         else if (indexPath.row == 2) {
             if boolValue == true {
@@ -1135,23 +1135,23 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 nextVC.modalPresentationStyle = .overCurrentContext
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
-//            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-//            print("paymentTypePurchased ====> \(paymentTypePurchased)")
-//
-//            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
-//                nextVC.modalPresentationStyle = .overCurrentContext
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//
-//            }else {
-//                print("Restore option not available...")
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-//                nextVC.modalPresentationStyle = .overCurrentContext
-//                nextVC.delegate = self
-//                self.present(nextVC, animated: false, completion: nil)
-//            }
+            //            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            //            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            //
+            //            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
+            //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
+            //                nextVC.modalPresentationStyle = .overCurrentContext
+            //                self.navigationController?.pushViewController(nextVC, animated: true)
+            //
+            //            }else {
+            //                print("Restore option not available...")
+            //                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+            //                nextVC.modalPresentationStyle = .overCurrentContext
+            //                nextVC.delegate = self
+            //                self.present(nextVC, animated: false, completion: nil)
+            //            }
         }  else if (indexPath.row == 3) {
             if let url = URL(string: "http://www.blaquefracturetechnologies.com/") {
                 if UIApplication.shared.canOpenURL(url) {
@@ -1165,15 +1165,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             nextVC.modalPresentationStyle = .overCurrentContext
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-//        else if (indexPath.row == 5) {
-//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
-//            self.navigationController?.pushViewController(nextVC, animated: true)
-//        } else if (indexPath.row == 6) {
-//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
-//            self.navigationController?.pushViewController(nextVC, animated: true)
-//        }
+            //        else if (indexPath.row == 5) {
+            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
+            //            self.navigationController?.pushViewController(nextVC, animated: true)
+            //        } else if (indexPath.row == 6) {
+            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TermsNConditionsViewController") as! TermsNConditionsViewController
+            //            self.navigationController?.pushViewController(nextVC, animated: true)
+            //        }
         else if (indexPath.row == 6) {
             UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -1330,15 +1330,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             {
                 switch exporter.status
                 {
-                case AVAssetExportSessionStatus.failed:
+                case AVAssetExportSession.Status.failed:
                     print("failed \(String(describing: exporter.error))")
-                case AVAssetExportSessionStatus.cancelled:
+                case AVAssetExportSession.Status.cancelled:
                     print("cancelled \(String(describing: exporter.error))")
-                case AVAssetExportSessionStatus.unknown:
+                case AVAssetExportSession.Status.unknown:
                     print("unknown\(String(describing: exporter.error))")
-                case AVAssetExportSessionStatus.waiting:
+                case AVAssetExportSession.Status.waiting:
                     print("waiting\(String(describing: exporter.error))")
-                case AVAssetExportSessionStatus.exporting:
+                case AVAssetExportSession.Status.exporting:
                     print("exporting\(String(describing: exporter.error))")
                 default:
                     print("-----Mutable video exportation complete.")
@@ -1411,7 +1411,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "RecordFantVideoVC") as! RecordFantVideoVC
                 //nextVC.getVideoURL = self.selectedVideo
                 nextVC.getVideoURL = self.mutableVideoURL
-
+                
                 let navVC = UINavigationController(rootViewController: nextVC)
                 navVC.isNavigationBarHidden = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
@@ -1669,45 +1669,58 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 var expiryDateForLabel:Int = 0
                 if let expiryDate = Calendar.current.date(byAdding: .month, value: 1, to: newdate!) {
                     print(expiryDate)
-
+                    
                     if let diffInDays = Calendar.current.dateComponents([.day], from: Date(), to: expiryDate).day {
-                        print(diffInDays)
+                        print("daysDifference ====> \(diffInDays)")
                         expiryDateForLabel = diffInDays
                         
                         //notified every week method
-                        
-                        var maxDays = 30 //Default :: If days is dynamic, change here
-                        let lastSavedMaxDay = DefaultWrapper().getMaxDaysDifferenceForUser(userId: self.userId)
-                        if (lastSavedMaxDay.count == 0) {
-                            //Max count not saved before (for this user)
-                            DefaultWrapper().setMaxDaysDifferenceForUser(maxDays: lastSavedMaxDay, userId: self.userId)
-                            maxDays = Int(lastSavedMaxDay) ?? maxDays
-                        }
-                        
-                        let daysDifference = maxDays - diffInDays
-                        if (daysDifference > 0) {
-                            print("daysDifference ====> \(daysDifference)")
-                            if (daysDifference % 7 == 0) {
-                                print("daysDifference ====> \(daysDifference)")
-                                
+                        //k* --start
+                        if (diffInDays == 0) {
+                            //Date is over
+                            self.remainingDaysLabel.text = "Trial Period Ended"
+                            UserDefaults.standard.set(true, forKey: "TrialPeriodEnds")
+                            
+                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
+                            nextVC.modalPresentationStyle = .overCurrentContext
+                            nextVC.delegate = self
+                            self.present(nextVC, animated: false, completion: nil)
+                            
+                        }else {
+                            if (diffInDays % 7 == 0) {
+                                print("days Remaining  ====> \(diffInDays)")
+                                print("weeks Remaining ====> \(diffInDays/7)")
                                 let todaysDateString = self.getTodaysDate()
                                 let isUserNotifiedOnThisDate = DefaultWrapper().getIsUserNotifiedOnThisDate(dateString: todaysDateString, userId: self.userId)
                                 if (isUserNotifiedOnThisDate == false) {
                                     print("User was not notified on this date")
                                     DefaultWrapper().setIsUserNotifiedOnThisDate(status: true, dateString: todaysDateString, userId: self.userId)
                                     DispatchQueue.main.async {
-                                        self.displayAlert(msg: "Remaining \(diffInDays) days")
+                                        //self.displayAlert(msg: "Remaining \(diffInDays) days")
+                                        
+                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                        let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                                        nextVC.modalPresentationStyle = .overCurrentContext
+                                        nextVC.delegate = self
+                                        nextVC.remainingDays = "\(diffInDays/7)"
+                                        self.present(nextVC, animated: false, completion: nil)
                                     }
                                 }
                             }
                         }
-                        
-                        //notified every week method ends
                     }
                     if expiryDateForLabel < 1 {
                         self.remainingDaysLabel.text = "Trial Period Ended"
                         UserDefaults.standard.set(true, forKey: "TrialPeriodEnds")
+                        
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
+                        nextVC.modalPresentationStyle = .overCurrentContext
+                        nextVC.delegate = self
+                        self.present(nextVC, animated: false, completion: nil)
                     }
+                        //k* --end
                     else if expiryDateForLabel == 1 {
                         self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) day left"
                         UserDefaults.standard.set(false, forKey: "TrialPeriodEnds")
@@ -1718,9 +1731,9 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                             UserDefaults.standard.set(false, forKey: "TrialPeriodEnds")
                         }
                     }
-
+                    
                 }
-
+                
             }
             else {
                 print(error?.localizedDescription ?? "Error getting user details")
