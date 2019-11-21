@@ -327,7 +327,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     //get aws s3 bucket info ends
     
-    //get total bucket size
+    //get total bucket size                                                                                                                                                                                                                                                         
     func getTotalStorageSpace() {
         ApiManager().getTotalBucketSize { (response, error) in
             if error == nil {
@@ -484,7 +484,29 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         UserDefaults.standard.set(false, forKey: "isTappedFromSingleVideo")
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(withNotification:)), name: uploadBarStatusNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(withNotification:)), name: uploadCompleteStatusNotification, object: nil)
+        getTotalVideoCountFromAPI()
         
+    }
+    func getTotalVideoCountFromAPI() {
+        ApiManager().getAllPostsAPI(from: "\(fetchStart)", size: "10") { (responseDict, error) in
+            if error == nil {
+                print("getAllPostsAPI :: responseDict.success\(responseDict.success)")
+                print("Total video count=====> \(responseDict.count)")
+                if responseDict.count == 1 {
+                    DispatchQueue.main.async {
+                        self.totalVideoCount.text = "\(String(responseDict.count)) video"
+                    }                        }
+                else {
+                    DispatchQueue.main.async {
+                        self.totalVideoCount.text = "\(String(responseDict.count)) videos"
+                    }
+                }
+                
+            }
+            else {
+                
+            }
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -566,15 +588,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 else {
                     print("getAllPostsAPI :: responseDict.success\(responseDict.success)")
                     print("Total video count=====> \(responseDict.count)")
-                    if responseDict.count == 1 {
-                        DispatchQueue.main.async {
-                            self.totalVideoCount.text = "\(String(responseDict.count)) video"
-                        }                        }
-                    else {
-                        DispatchQueue.main.async {
-                            self.totalVideoCount.text = "\(String(responseDict.count)) videos"
-                        }
-                    }
+//                    if responseDict.count == 1 {
+//                        DispatchQueue.main.async {
+//                            self.totalVideoCount.text = "\(String(responseDict.count)) video"
+//                        }                        }
+//                    else {
+//                        DispatchQueue.main.async {
+//                            self.totalVideoCount.text = "\(String(responseDict.count)) videos"
+//                        }
+//                    }
                     
                     for i in 0..<responseDict.data.count {
                         let indexDict = responseDict.data[i]

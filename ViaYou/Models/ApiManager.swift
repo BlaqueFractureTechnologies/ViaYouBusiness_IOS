@@ -222,51 +222,79 @@ struct ApiManager {
     //MARK:- Library Posts Fetch API
     
     func getAllPostsAPI(from:String,
+                        
                         size:String,
+                        
                         completion: @escaping (LibraryFeedResponse, _ error:Error?) -> ()) {
         
-        let parameters: [String: Any] = [
-            "from":from,
-            "size":size,
-            
-            ]
-        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
         
+        
+        let parameters: [String: Int] = [
+            "from":Int(from) ?? 0,
+            "size":Int(size) ?? 10,
+            ]
+        
+        let generatedUserToken = UserDefaults.standard.value(forKey: "GeneratedUserToken") as! String
         let requestURLString = "\(headerUrl)\(fetchLibraryDataHeader)"
-       // let requestURLString = "\(headerUrlForGettingAllPosts)\(fetchLibraryDataHeader)"
         let request = NSMutableURLRequest(url: NSURL(string: requestURLString)! as URL)
-        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
         request.setValue(generatedUserToken, forHTTPHeaderField: "token")
         request.httpMethod = "POST"
         
-        let postData = NSMutableData()
-        for key in parameters.keys {
-            let keyString = "&\(key)"
-            let valueString = parameters[key] as? String ?? ""
-            postData.append("\(keyString)=\(valueString)".data(using: String.Encoding.utf8)!)
-        }
-        request.httpBody = postData as Data
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+  
         
+        do {
+            
+            let postData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            
+            request.httpBody = postData as Data
+            
+        }catch let error {
+            
+            NSLog("Unable to copy file: \(error)")
+            
+        }
+
         let session = URLSession.shared
+        
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            
             if (error != nil) {
+                
                 print(error ?? "")
+                
                 completion(LibraryFeedResponse([:]),error)
+                
             } else {
+                
                 do {
+                    
                     if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
+                        
                         print("GetAllPostsAPIjsonDict====>%@",jsonDict)
+                        
                         completion(LibraryFeedResponse(jsonDict),nil)
+                        
                     }else {
+                        
                         completion(LibraryFeedResponse([:]),nil)
+                        
                     }
+                    
                 } catch let parsingError {
+                    
                     print("parsingError=\(parsingError)")
+                    
                     completion(LibraryFeedResponse([:]),parsingError)
+                    
                 }
+                
             }
+            
         })
+        
         dataTask.resume()
+        
     }
     
     //MARK:- User Referral API
