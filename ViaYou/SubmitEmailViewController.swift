@@ -53,6 +53,16 @@ class SubmitEmailViewController: UIViewController {
     }
     
     @IBAction func submitEmailButtonClicked(_ sender: Any) {
+        ApiManager().getEmailToUpgradeAPI(emailId: addEmailTextField.text ?? "" ) { (response, error) in
+                if error == nil {
+                    print(response.message)
+                    self.displayAlert(msg: response.message)
+                }
+                else {
+                    print(error.debugDescription)
+                    self.displayAlert(msg: "Sorry! Please try again later.")
+                }
+            }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {

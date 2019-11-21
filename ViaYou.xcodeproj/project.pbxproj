@@ -60,6 +60,7 @@
 		9E403A4023443F34002E3749 /* InstagramSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A3F23443F34002E3749 /* InstagramSignInViewController.swift */; };
 		9E403A4223443FDA002E3749 /* InstagramAuthResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A4123443FDA002E3749 /* InstagramAuthResponseModel.swift */; };
 		9E403A4423443FF5002E3749 /* InstagramUserDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E403A4323443FF5002E3749 /* InstagramUserDetailsResponse.swift */; };
+		9E43BA2F2386208400CA3755 /* EmailUpgradeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E43BA2E2386208400CA3755 /* EmailUpgradeResponse.swift */; };
 		9E5085B623595AC700857277 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5085B523595AC700857277 /* VideoViewController.swift */; };
 		9E726A2A237212ED00AF1D61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E726A29237212ED00AF1D61 /* GoogleService-Info.plist */; };
 		9E91AE1D234D332A0044AB5C /* HomeInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E91AE1C234D33290044AB5C /* HomeInfoTableViewCell.swift */; };
@@ -171,6 +172,7 @@
 		9E403A3F23443F34002E3749 /* InstagramSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramSignInViewController.swift; sourceTree = "<group>"; };
 		9E403A4123443FDA002E3749 /* InstagramAuthResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAuthResponseModel.swift; sourceTree = "<group>"; };
 		9E403A4323443FF5002E3749 /* InstagramUserDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUserDetailsResponse.swift; sourceTree = "<group>"; };
+		9E43BA2E2386208400CA3755 /* EmailUpgradeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpgradeResponse.swift; sourceTree = "<group>"; };
 		9E5085B523595AC700857277 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9E726A282372123900AF1D61 /* ViaYou.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViaYou.entitlements; sourceTree = "<group>"; };
 		9E726A29237212ED00AF1D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				9E14A44E23593F8600F56891 /* DeleteVideoResponse.swift */,
 				9E159F07235E6DE30033FBE6 /* FetchSubscriptionResponse.swift */,
 				9E388D152382166000441FA6 /* UserProfileResponse.swift */,
+				9E43BA2E2386208400CA3755 /* EmailUpgradeResponse.swift */,
 			);
 			path = "Response Models";
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				9E3485B8234A8FEE00DFADC9 /* PhoneContact.swift in Sources */,
 				9E3485BA234A903F00DFADC9 /* ContactsTableViewCell.swift in Sources */,
 				9E2723062374B99D006E93FE /* UserTipsViewController.swift in Sources */,
+				9E43BA2F2386208400CA3755 /* EmailUpgradeResponse.swift in Sources */,
 				9E10ED0E234D748A00C54F84 /* ProfileDropdownTableViewCell.swift in Sources */,
 				9E388D142381F62000441FA6 /* SubmitEmailViewController.swift in Sources */,
 				9E25A63E23849BB9008E23BB /* TrialPeriodEndedViewController.swift in Sources */,

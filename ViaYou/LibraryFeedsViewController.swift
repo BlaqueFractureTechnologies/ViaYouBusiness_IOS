@@ -822,7 +822,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         else {
 //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
 //            nextVC.modalPresentationStyle = .overCurrentContext
 //            nextVC.delegate = self
 //            self.present(nextVC, animated: false, completion: nil)
@@ -1273,11 +1273,25 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func becomeGrowthHostPopUpVC_UpgradeAndSubscriptionBaseViewControllerButtonClicked() {
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        if let emailAddress = UserDefaults.standard.value(forKey: "UserEmailAddress"){
+            ApiManager().getEmailToUpgradeAPI(emailId: emailAddress as! String) { (response, error) in
+                if error == nil {
+                    print(response.message)
+                    self.displayAlert(msg: response.message)
+                }
+                else {
+                    print(error.debugDescription)
+                    self.displayAlert(msg: "Sorry! Please try again later.")
+                }
+            }
+        }
+        else {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
+            let navVC = UINavigationController(rootViewController: nextVC)
+            navVC.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
         //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
         //        nextVC.isFromViewAllButtonClick = true
@@ -1286,11 +1300,32 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     func becomefullMember_LearnMoreButtonClicked() {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
-        let navVC = UINavigationController(rootViewController: nextVC)
-        navVC.isNavigationBarHidden = true
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        if let emailAddress = UserDefaults.standard.value(forKey: "UserEmailAddress"){
+            ApiManager().getEmailToUpgradeAPI(emailId: emailAddress as! String) { (response, error) in
+                if error == nil {
+                    print(response.message)
+                    self.displayAlert(msg: response.message)
+                }
+                else {
+                    print(error.debugDescription)
+                    self.displayAlert(msg: "Sorry! Please try again later.")
+                }
+            }
+        }
+        else {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
+            let navVC = UINavigationController(rootViewController: nextVC)
+            navVC.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+
+        
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
+//        let navVC = UINavigationController(rootViewController: nextVC)
+//        navVC.isNavigationBarHidden = true
+//        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     //MARK:- Select profile picture

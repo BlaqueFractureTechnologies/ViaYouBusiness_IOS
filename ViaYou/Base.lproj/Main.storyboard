@@ -5259,22 +5259,22 @@ Cgo
         <scene sceneID="2aJ-pl-4we">
             <objects>
                 <viewController restorationIdentifier="RecordedVideoPreviewVC" storyboardIdentifier="RecordedVideoPreviewVC" id="OVK-e2-xky" customClass="RecordedVideoPreviewVC" customModule="ViaYou" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Vrp-Ra-xSM">
+                    <view key="view" contentMode="scaleToFill" id="Vrp-Ra-xSM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nI7-kd-HXr">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nI7-kd-HXr">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KNp-M8-pL3">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNp-M8-pL3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jpa-5G-PVL">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jpa-5G-PVL">
                                 <rect key="frame" x="0.0" y="550" width="375" height="117"/>
                                 <subviews>
-                                    <view alpha="0.44999998807907104" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EVY-bb-vYE">
+                                    <view alpha="0.44999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVY-bb-vYE">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1w-bg-UAB">
@@ -5289,7 +5289,7 @@ Cgo
                                                     <action selector="btnBackAction:" destination="OVK-e2-xky" eventType="touchUpInside" id="IeG-rJ-LNQ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPu-Cx-1Xq">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPu-Cx-1Xq">
                                                 <rect key="frame" x="308" y="35" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="pRj-fL-FhJ"/>
@@ -5301,7 +5301,7 @@ Cgo
                                                     <action selector="btnPressToNextVc:" destination="OVK-e2-xky" eventType="touchUpInside" id="6hM-t2-C9J"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ba-UP-TCS">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ba-UP-TCS">
                                                 <rect key="frame" x="170" y="36" width="35" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="35" id="ozQ-2G-zTS"/>
@@ -6857,7 +6857,7 @@ Cgo
                                 </connections>
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Exc-yK-UIg">
-                                <rect key="frame" x="103" y="612" width="169" height="45"/>
+                                <rect key="frame" x="96" y="612" width="183" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="OMO-vf-Xih"/>
@@ -8508,7 +8508,7 @@ yourself.</string>
                                 <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UPLOADING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzm-0N-Lx5">
-                                        <rect key="frame" x="10" y="24" width="288" height="12"/>
+                                        <rect key="frame" x="10" y="24" width="65" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="Y3J-qh-bfk"/>
                                         </constraints>
@@ -8517,21 +8517,21 @@ yourself.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgq-7p-XWY">
-                                        <rect key="frame" x="154" y="24" width="144" height="12"/>
+                                        <rect key="frame" x="42.5" y="24" width="32.5" height="12"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mcS-xa-Zey">
-                                        <rect key="frame" x="328" y="20" width="37" height="20"/>
+                                        <rect key="frame" x="105" y="20" width="260" height="20"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="progress_1" translatesAutoresizingMaskIntoConstraints="NO" id="TGZ-Do-W0W">
-                                                <rect key="frame" x="0.0" y="0.0" width="37" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="20"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7uT-Tx-cJs">
-                                                <rect key="frame" x="0.0" y="0.0" width="11" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="78" height="20"/>
                                                 <color key="backgroundColor" red="0.53333333329999999" green="0.1333333333" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aF0-hu-b6u">
-                                                <rect key="frame" x="5" y="0.0" width="27" height="20"/>
+                                                <rect key="frame" x="5" y="0.0" width="250" height="20"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
