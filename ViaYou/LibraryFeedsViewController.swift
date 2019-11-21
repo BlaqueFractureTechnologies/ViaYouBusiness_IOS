@@ -510,10 +510,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     print("1")
                     DefaultWrapper().setPaymentTypePurchased(type: 1)
                 }
-                else if type == "PRO" {
-                    print("2")
-                    DefaultWrapper().setPaymentTypePurchased(type: 2)
-                }
+//                else if type == "PRO" {
+//                    print("2")
+//                    DefaultWrapper().setPaymentTypePurchased(type: 2)
+//                }
                 else {
                     print("-1")
                     DefaultWrapper().setPaymentTypePurchased(type: -1)
@@ -1010,7 +1010,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         self.overlayViewWhenDropDownAppears.alpha = 0.4
         UIView.animate(withDuration: 0.4) {
             if (paymentTypePurchased >= 0) {
-                self.dropDownBaseViewHeightConstraint.constant = 520
+                self.dropDownBaseViewHeightConstraint.constant = 400
             }else {
                 self.dropDownBaseViewHeightConstraint.constant = 400
             }
@@ -1071,6 +1071,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         dropDownOverlayButtonClicked((Any).self)
         
         let boolValue = UserDefaults.standard.bool(forKey: "TrialPeriodEnds")
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+
         
         if(indexPath.row == 0) {
             self.inviteFriendsPopUpView.alpha = 1
@@ -1100,9 +1102,12 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 nextVC.delegate = self
                 self.present(nextVC, animated: false, completion: nil)
             }
-            else {
+            else if (boolValue == false || paymentTypePurchased == 0 || paymentTypePurchased == 1){
                 addWatermarkClicked()
                 
+            }
+            else {
+                addWatermarkClicked()
             }
             
             //            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
@@ -1129,11 +1134,14 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 nextVC.delegate = self
                 self.present(nextVC, animated: false, completion: nil)
             }
-            else {
+            else if (boolValue == false || paymentTypePurchased == 0 || paymentTypePurchased == 1){
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeletedVideosViewController") as! DeletedVideosViewController
                 nextVC.modalPresentationStyle = .overCurrentContext
                 self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+            else {
+                
             }
             //            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
             //            print("paymentTypePurchased ====> \(paymentTypePurchased)")

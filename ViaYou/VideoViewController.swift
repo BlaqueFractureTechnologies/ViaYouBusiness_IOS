@@ -88,10 +88,11 @@ class VideoViewController: UIViewController {
         //            seekBar.trackRect(forBounds: seekBar.bounds)
         //        }
         
-        let activityIndicator  = UIActivityIndicatorView(style: .white)
-        activityIndicator.center = CGPoint(x: UIScreen.main.bounds.size.width/2.0, y: UIScreen.main.bounds.size.height/2.0)
-        activityIndicator.hidesWhenStopped = true
-        self.view.addSubview(activityIndicator)
+//        let activityIndicator  = UIActivityIndicatorView(style: .white)
+//        activityIndicator.center = CGPoint(x: UIScreen.main.bounds.size.width/2.0, y: UIScreen.main.bounds.size.height/2.0)
+//        activityIndicator.hidesWhenStopped = true
+//        self.view.addSubview(activityIndicator)
+        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -108,6 +109,7 @@ class VideoViewController: UIViewController {
                 self.seekBar.trackRect(forBounds: self.seekBar.bounds)
                 print("Loaded video...")
                 self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
             }
         }
         
@@ -127,6 +129,8 @@ class VideoViewController: UIViewController {
     
     
     @IBAction func playButtonClicked(_ sender: Any) {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
         if (isPlayCompleted == true) {
             player.seek(to: CMTime(seconds: 0, preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
         }
