@@ -327,7 +327,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     //get aws s3 bucket info ends
     
-    //get total bucket size                                                                                                                                                                                                                                                         
+    //get total bucket size
     func getTotalStorageSpace() {
         ApiManager().getTotalBucketSize { (response, error) in
             if error == nil {
