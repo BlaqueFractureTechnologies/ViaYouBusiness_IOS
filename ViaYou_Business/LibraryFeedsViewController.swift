@@ -326,7 +326,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     //get aws s3 bucket info ends
-    
+    //test commit
     //get total bucket size
     func getTotalStorageSpace() {
         ApiManager().getTotalBucketSize { (response, error) in
@@ -532,10 +532,10 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                     print("1")
                     DefaultWrapper().setPaymentTypePurchased(type: 1)
                 }
-//                else if type == "PRO" {
-//                    print("2")
-//                    DefaultWrapper().setPaymentTypePurchased(type: 2)
-//                }
+                    //                else if type == "PRO" {
+                    //                    print("2")
+                    //                    DefaultWrapper().setPaymentTypePurchased(type: 2)
+                    //                }
                 else {
                     print("-1")
                     DefaultWrapper().setPaymentTypePurchased(type: -1)
@@ -588,15 +588,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 else {
                     print("getAllPostsAPI :: responseDict.success\(responseDict.success)")
                     print("Total video count=====> \(responseDict.count)")
-//                    if responseDict.count == 1 {
-//                        DispatchQueue.main.async {
-//                            self.totalVideoCount.text = "\(String(responseDict.count)) video"
-//                        }                        }
-//                    else {
-//                        DispatchQueue.main.async {
-//                            self.totalVideoCount.text = "\(String(responseDict.count)) videos"
-//                        }
-//                    }
+                    //                    if responseDict.count == 1 {
+                    //                        DispatchQueue.main.async {
+                    //                            self.totalVideoCount.text = "\(String(responseDict.count)) video"
+                    //                        }                        }
+                    //                    else {
+                    //                        DispatchQueue.main.async {
+                    //                            self.totalVideoCount.text = "\(String(responseDict.count)) videos"
+                    //                        }
+                    //                    }
                     
                     for i in 0..<responseDict.data.count {
                         let indexDict = responseDict.data[i]
@@ -843,17 +843,17 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.present(nextVC, animated: false, completion: nil)
         }
         else {
-//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
-//            nextVC.modalPresentationStyle = .overCurrentContext
-//            nextVC.delegate = self
-//            self.present(nextVC, animated: false, completion: nil)
+            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
+            //            nextVC.modalPresentationStyle = .overCurrentContext
+            //            nextVC.delegate = self
+            //            self.present(nextVC, animated: false, completion: nil)
             
-                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
-                        nextVC.modalPresentationStyle = .overCurrentContext
-                        nextVC.delegate = self
-                        self.present(nextVC, animated: false, completion: nil)
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            nextVC.delegate = self
+            self.present(nextVC, animated: false, completion: nil)
         }
         
     }
@@ -1094,11 +1094,16 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         let boolValue = UserDefaults.standard.bool(forKey: "TrialPeriodEnds")
         let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-
+        
         
         if(indexPath.row == 0) {
-            self.inviteFriendsPopUpView.alpha = 1
-            self.popUpOverlayButton.alpha = 0.5
+            //            self.inviteFriendsPopUpView.alpha = 1
+            //            self.popUpOverlayButton.alpha = 0.5
+            //            goToContactsVCToInvite()
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+            nextVC.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.pushViewController(nextVC, animated: true)
         }
             //            else if (indexPath.row == 1) {
             //            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
@@ -1341,13 +1346,13 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             navVC.isNavigationBarHidden = true
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-
         
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
-//        let navVC = UINavigationController(rootViewController: nextVC)
-//        navVC.isNavigationBarHidden = true
-//        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
+        //        let navVC = UINavigationController(rootViewController: nextVC)
+        //        navVC.isNavigationBarHidden = true
+        //        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     //MARK:- Select profile picture
