@@ -176,17 +176,17 @@
 		9E5085B523595AC700857277 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9E6E748123876541000B8F41 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9E91AE1C234D33290044AB5C /* HomeInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInfoTableViewCell.swift; sourceTree = "<group>"; };
-		9EA55F67233C208D003A1EBB /* ViaYou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaYou.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EA55F67233C208D003A1EBB /* ViaYou_Business.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaYou_Business.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA55F6A233C208D003A1EBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EA55F6C233C208D003A1EBB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9EA55F6F233C208D003A1EBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9EA55F71233C208E003A1EBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EA55F74233C208E003A1EBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EA55F76233C208E003A1EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9EA55F7B233C208E003A1EBB /* ViaYouTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViaYouTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EA55F7B233C208E003A1EBB /* ViaYou_BusinessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViaYou_BusinessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA55F7F233C208E003A1EBB /* ViaYouTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaYouTests.swift; sourceTree = "<group>"; };
 		9EA55F81233C208E003A1EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9EA55F86233C208E003A1EBB /* ViaYouUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViaYouUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EA55F86233C208E003A1EBB /* ViaYou_BusinessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViaYou_BusinessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA55F8A233C208E003A1EBB /* ViaYouUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaYouUITests.swift; sourceTree = "<group>"; };
 		9EA55F8C233C208E003A1EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EA55F98233C29FB003A1EBB /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -328,9 +328,9 @@
 		9EA55F5E233C208D003A1EBB = {
 			isa = PBXGroup;
 			children = (
-				9EA55F69233C208D003A1EBB /* ViaYou */,
-				9EA55F7E233C208E003A1EBB /* ViaYouTests */,
-				9EA55F89233C208E003A1EBB /* ViaYouUITests */,
+				9EA55F69233C208D003A1EBB /* ViaYou_Business */,
+				9EA55F7E233C208E003A1EBB /* ViaYou_BusinessTests */,
+				9EA55F89233C208E003A1EBB /* ViaYou_BusinessUITests */,
 				9EA55F68233C208D003A1EBB /* Products */,
 				D815FFEF80968839D0696CF9 /* Pods */,
 				E60C6272BB1EDD2DF60C4A63 /* Frameworks */,
@@ -340,14 +340,14 @@
 		9EA55F68233C208D003A1EBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9EA55F67233C208D003A1EBB /* ViaYou.app */,
-				9EA55F7B233C208E003A1EBB /* ViaYouTests.xctest */,
-				9EA55F86233C208E003A1EBB /* ViaYouUITests.xctest */,
+				9EA55F67233C208D003A1EBB /* ViaYou_Business.app */,
+				9EA55F7B233C208E003A1EBB /* ViaYou_BusinessTests.xctest */,
+				9EA55F86233C208E003A1EBB /* ViaYou_BusinessUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9EA55F69233C208D003A1EBB /* ViaYou */ = {
+		9EA55F69233C208D003A1EBB /* ViaYou_Business */ = {
 			isa = PBXGroup;
 			children = (
 				9E31CB4D23625D60003651A1 /* Video Merging */,
@@ -396,25 +396,25 @@
 				9E388D132381F62000441FA6 /* SubmitEmailViewController.swift */,
 				9E25A63D23849BB9008E23BB /* TrialPeriodEndedViewController.swift */,
 			);
-			path = ViaYou;
+			path = ViaYou_Business;
 			sourceTree = "<group>";
 		};
-		9EA55F7E233C208E003A1EBB /* ViaYouTests */ = {
+		9EA55F7E233C208E003A1EBB /* ViaYou_BusinessTests */ = {
 			isa = PBXGroup;
 			children = (
 				9EA55F7F233C208E003A1EBB /* ViaYouTests.swift */,
 				9EA55F81233C208E003A1EBB /* Info.plist */,
 			);
-			path = ViaYouTests;
+			path = ViaYou_BusinessTests;
 			sourceTree = "<group>";
 		};
-		9EA55F89233C208E003A1EBB /* ViaYouUITests */ = {
+		9EA55F89233C208E003A1EBB /* ViaYou_BusinessUITests */ = {
 			isa = PBXGroup;
 			children = (
 				9EA55F8A233C208E003A1EBB /* ViaYouUITests.swift */,
 				9EA55F8C233C208E003A1EBB /* Info.plist */,
 			);
-			path = ViaYouUITests;
+			path = ViaYou_BusinessUITests;
 			sourceTree = "<group>";
 		};
 		9EF50BC52346DC1D00D255FF /* Resources */ = {
@@ -451,9 +451,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9EA55F66233C208D003A1EBB /* ViaYou */ = {
+		9EA55F66233C208D003A1EBB /* ViaYou_Business */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9EA55F8F233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYou" */;
+			buildConfigurationList = 9EA55F8F233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYou_Business" */;
 			buildPhases = (
 				D1DBF4CA9E023932BCF9D5FE /* [CP] Check Pods Manifest.lock */,
 				9EA55F63233C208D003A1EBB /* Sources */,
@@ -467,14 +467,14 @@
 			);
 			dependencies = (
 			);
-			name = ViaYou;
+			name = ViaYou_Business;
 			productName = ViaYou;
-			productReference = 9EA55F67233C208D003A1EBB /* ViaYou.app */;
+			productReference = 9EA55F67233C208D003A1EBB /* ViaYou_Business.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9EA55F7A233C208E003A1EBB /* ViaYouTests */ = {
+		9EA55F7A233C208E003A1EBB /* ViaYou_BusinessTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9EA55F92233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYouTests" */;
+			buildConfigurationList = 9EA55F92233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYou_BusinessTests" */;
 			buildPhases = (
 				9EA55F77233C208E003A1EBB /* Sources */,
 				9EA55F78233C208E003A1EBB /* Frameworks */,
@@ -485,14 +485,14 @@
 			dependencies = (
 				9EA55F7D233C208E003A1EBB /* PBXTargetDependency */,
 			);
-			name = ViaYouTests;
+			name = ViaYou_BusinessTests;
 			productName = ViaYouTests;
-			productReference = 9EA55F7B233C208E003A1EBB /* ViaYouTests.xctest */;
+			productReference = 9EA55F7B233C208E003A1EBB /* ViaYou_BusinessTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		9EA55F85233C208E003A1EBB /* ViaYouUITests */ = {
+		9EA55F85233C208E003A1EBB /* ViaYou_BusinessUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9EA55F95233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYouUITests" */;
+			buildConfigurationList = 9EA55F95233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYou_BusinessUITests" */;
 			buildPhases = (
 				9EA55F82233C208E003A1EBB /* Sources */,
 				9EA55F83233C208E003A1EBB /* Frameworks */,
@@ -503,9 +503,9 @@
 			dependencies = (
 				9EA55F88233C208E003A1EBB /* PBXTargetDependency */,
 			);
-			name = ViaYouUITests;
+			name = ViaYou_BusinessUITests;
 			productName = ViaYouUITests;
-			productReference = 9EA55F86233C208E003A1EBB /* ViaYouUITests.xctest */;
+			productReference = 9EA55F86233C208E003A1EBB /* ViaYou_BusinessUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -540,7 +540,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9EA55F62233C208D003A1EBB /* Build configuration list for PBXProject "ViaYou" */;
+			buildConfigurationList = 9EA55F62233C208D003A1EBB /* Build configuration list for PBXProject "ViaYou_Business" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -553,9 +553,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9EA55F66233C208D003A1EBB /* ViaYou */,
-				9EA55F7A233C208E003A1EBB /* ViaYouTests */,
-				9EA55F85233C208E003A1EBB /* ViaYouUITests */,
+				9EA55F66233C208D003A1EBB /* ViaYou_Business */,
+				9EA55F7A233C208E003A1EBB /* ViaYou_BusinessTests */,
+				9EA55F85233C208E003A1EBB /* ViaYou_BusinessUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -774,12 +774,12 @@
 /* Begin PBXTargetDependency section */
 		9EA55F7D233C208E003A1EBB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9EA55F66233C208D003A1EBB /* ViaYou */;
+			target = 9EA55F66233C208D003A1EBB /* ViaYou_Business */;
 			targetProxy = 9EA55F7C233C208E003A1EBB /* PBXContainerItemProxy */;
 		};
 		9EA55F88233C208E003A1EBB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9EA55F66233C208D003A1EBB /* ViaYou */;
+			target = 9EA55F66233C208D003A1EBB /* ViaYou_Business */;
 			targetProxy = 9EA55F87233C208E003A1EBB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -938,7 +938,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H3MR6PS3FC;
-				INFOPLIST_FILE = ViaYou/Info.plist;
+				INFOPLIST_FILE = ViaYou_Business/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -946,7 +946,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.viayou.ViaYouBusinessApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "ViaYou/Libraries/JMImageCache/ViaYou-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ViaYou_Business/Libraries/JMImageCache/ViaYou-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -963,7 +963,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H3MR6PS3FC;
-				INFOPLIST_FILE = ViaYou/Info.plist;
+				INFOPLIST_FILE = ViaYou_Business/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -971,7 +971,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.viayou.ViaYouBusinessApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "ViaYou/Libraries/JMImageCache/ViaYou-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ViaYou_Business/Libraries/JMImageCache/ViaYou-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -985,7 +985,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = H3MR6PS3FC;
-				INFOPLIST_FILE = ViaYouTests/Info.plist;
+				INFOPLIST_FILE = ViaYou_BusinessTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -996,7 +996,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ViaYou.app/ViaYou";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ViaYou_Business.app/ViaYou_Business";
 			};
 			name = Debug;
 		};
@@ -1007,7 +1007,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = H3MR6PS3FC;
-				INFOPLIST_FILE = ViaYouTests/Info.plist;
+				INFOPLIST_FILE = ViaYou_BusinessTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1018,7 +1018,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ViaYou.app/ViaYou";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ViaYou_Business.app/ViaYou_Business";
 			};
 			name = Release;
 		};
@@ -1029,7 +1029,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = ViaYouUITests/Info.plist;
+				INFOPLIST_FILE = ViaYou_BusinessUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1051,7 +1051,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = ViaYouUITests/Info.plist;
+				INFOPLIST_FILE = ViaYou_BusinessUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1069,7 +1069,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9EA55F62233C208D003A1EBB /* Build configuration list for PBXProject "ViaYou" */ = {
+		9EA55F62233C208D003A1EBB /* Build configuration list for PBXProject "ViaYou_Business" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9EA55F8D233C208E003A1EBB /* Debug */,
@@ -1078,7 +1078,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9EA55F8F233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYou" */ = {
+		9EA55F8F233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYou_Business" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9EA55F90233C208E003A1EBB /* Debug */,
@@ -1087,7 +1087,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9EA55F92233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYouTests" */ = {
+		9EA55F92233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYou_BusinessTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9EA55F93233C208E003A1EBB /* Debug */,
@@ -1096,7 +1096,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9EA55F95233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYouUITests" */ = {
+		9EA55F95233C208E003A1EBB /* Build configuration list for PBXNativeTarget "ViaYou_BusinessUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9EA55F96233C208E003A1EBB /* Debug */,
