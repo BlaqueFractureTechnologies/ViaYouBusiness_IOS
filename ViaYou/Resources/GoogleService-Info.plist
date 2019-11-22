@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>695609349739-6a6705bio3ofe2a8rd97sutu7mrtfte5.apps.googleusercontent.com</string>
+	<string>574712445155-an44v4er0kmidf9dav9k1c914vo743kv.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.695609349739-6a6705bio3ofe2a8rd97sutu7mrtfte5</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>695609349739-rhp20b4dv96sfhuq7k7va41r0d7l62c0.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.574712445155-an44v4er0kmidf9dav9k1c914vo743kv</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB7pVTxSgui4SqUPydwUq4GzESx0b-yq5g</string>
+	<string>AIzaSyCwv2yvQxgq_RLIfXRLCmEXho92_8-zBrE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>695609349739</string>
+	<string>574712445155</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.viayou.ViaYouApp</string>
+	<string>com.viayou.ViaYouBusinessApp</string>
 	<key>PROJECT_ID</key>
-	<string>viayou-apps</string>
+	<string>viayou-business</string>
 	<key>STORAGE_BUCKET</key>
-	<string>viayou-apps.appspot.com</string>
+	<string>viayou-business.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:695609349739:ios:fe8c5ca9bbcb080fc4432e</string>
+	<string>1:574712445155:ios:cc089fc81663a1986aadd6</string>
 	<key>DATABASE_URL</key>
-	<string>https://viayou-apps.firebaseio.com</string>
+	<string>https://viayou-business.firebaseio.com</string>
 </dict>
 </plist>
