@@ -175,7 +175,6 @@
 		9E43BA2E2386208400CA3755 /* EmailUpgradeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpgradeResponse.swift; sourceTree = "<group>"; };
 		9E5085B523595AC700857277 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9E6E748123876541000B8F41 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9E726A282372123900AF1D61 /* ViaYou.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViaYou.entitlements; sourceTree = "<group>"; };
 		9E91AE1C234D33290044AB5C /* HomeInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9EA55F67233C208D003A1EBB /* ViaYou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaYou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA55F6A233C208D003A1EBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -351,7 +350,6 @@
 		9EA55F69233C208D003A1EBB /* ViaYou */ = {
 			isa = PBXGroup;
 			children = (
-				9E726A282372123900AF1D61 /* ViaYou.entitlements */,
 				9E31CB4D23625D60003651A1 /* Video Merging */,
 				9E14A4432359202F00F56891 /* Libraries */,
 				9EF90CBE2353C90700127322 /* response.json */,
@@ -528,7 +526,7 @@
 								enabled = 0;
 							};
 							com.apple.SafariKeychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -838,7 +836,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = ViaYou/ViaYou.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Nikolai Heaphy-Page (H3MR6PS3FC)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
@@ -903,7 +901,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = ViaYou/ViaYou.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Nikolai Heaphy-Page (H3MR6PS3FC)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
@@ -936,7 +934,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = ViaYou/ViaYou.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H3MR6PS3FC;
@@ -961,7 +959,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = ViaYou/ViaYou.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H3MR6PS3FC;
