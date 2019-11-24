@@ -294,7 +294,14 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             stopSession()
             self.lblRecordTime.text = String(format: "00:%02i", self.currentTimeCounter)
             print(self.currentTimeCounter)
-            self.totalVideoTime = self.currentTimeCounter
+            print(self.videoTime)
+            if self.videoTime > self.currentTimeCounter {
+                self.totalVideoTime = self.videoTime
+            }
+            else {
+                self.totalVideoTime = self.currentTimeCounter
+            }
+            print(self.totalVideoTime)
             lbltimer.invalidate()
             //
             let mergeVideo = self.storyboard?.instantiateViewController(withIdentifier: "MergeVideo") as! MergeVideo
@@ -430,7 +437,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
                 }
             }
         }
-
+        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -442,7 +449,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
                 }
             }
         }
-
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -451,7 +458,7 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
     
     
     //remove audio from video
-
+    
     //remove audio from video ends
 }
 

@@ -133,6 +133,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         //watermark image ends
         // time calc starts
         let interval = self.totalVideoTime
+        print(interval)
         
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
@@ -175,8 +176,6 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         print("Video time = \(videoTime)")
         videoTime = UserDefaults.standard.value(forKey: "videotime") as! Int
         self.currentTimeCounter = 1
-        self.lableCounterTime()
-        
         //Setup dict
         self.userID = Auth.auth().currentUser!.uid
         dataDictToBePosted["_id"] = ""
@@ -376,19 +375,6 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
                 player.play()
             }
         }
-    }
-    
-    func lableCounterTime()
-    {
-        //        lbltimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (returnedTimer) in
-        //            self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
-        //            self.currentTimeCounter += 1
-        //            if self.currentTimeCounter == self.videoTime - 1
-        //            {
-        //                self.lblTimer.text = String(format: "00:%02i", self.currentTimeCounter)
-        //                self.lbltimer.invalidate()
-        //            }
-        //        }
     }
     
     
@@ -978,7 +964,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         let filepath = directoryPath.appending(filename)
         let url = NSURL.fileURL(withPath: filepath)
         do {
-            //try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
+            // try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
             try chosenImage.pngData()?.write(to: url, options: .atomic)
             return url
             

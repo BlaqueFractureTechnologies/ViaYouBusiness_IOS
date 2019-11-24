@@ -724,7 +724,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let userID = dataArray[button.tag].user._id
             let videoName = dataArray[button.tag].fileName
             let videoId = dataArray[button.tag]._id
-            var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+            //var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+            var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
             videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
             
             let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
@@ -1565,7 +1566,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         let filepath = directoryPath.appending(filename)
         let url = NSURL.fileURL(withPath: filepath)
         do {
-            //try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
+            // try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
             try chosenImage.pngData()?.write(to: url, options: .atomic)
             return url
             
