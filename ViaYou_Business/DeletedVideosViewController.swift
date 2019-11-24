@@ -106,10 +106,9 @@ class DeletedVideosViewController: UIViewController, UICollectionViewDelegate, U
                     }
                     
                     //  self.loadVideoSize()
+                    self.loadAllVideoImagesForDataArray()
                     DispatchQueue.main.async {
-                        self.loadAllVideoImagesForDataArray()
                         self.collectioView.reloadData()
-                        
                         self.activityIndicator.isHidden = true
                         self.activityIndicator.stopAnimating()
                         self.collectioView.isUserInteractionEnabled = true

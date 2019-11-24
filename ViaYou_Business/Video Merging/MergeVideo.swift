@@ -978,7 +978,8 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
         let filepath = directoryPath.appending(filename)
         let url = NSURL.fileURL(withPath: filepath)
         do {
-            try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
+            //try chosenImage.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
+            try chosenImage.pngData()?.write(to: url, options: .atomic)
             return url
             
         } catch {
