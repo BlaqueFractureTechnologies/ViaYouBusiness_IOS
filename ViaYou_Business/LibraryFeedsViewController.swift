@@ -76,16 +76,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     var passedProfileImage = UIImage()
     var userId: String = ""
     var invitationUrl: URL!
-    //    var dropdownArray = ["Invite",
-    //                         "My Plan Or Upgrade",
-    //                         "Remove Watermark",
-    //                         "Restore",
-    //                         "Feedback",
-    //                         "Feature Request",
-    //                         "Privacy Policy",
-    //                         "Mobile Terms Of Use",
-    //                         "High Resolution",
-    //                         "Sign Out"]
     var dropdownArray = ["Invite",
                          "About Watermark",
                          "Archive",
@@ -93,16 +83,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                          "Feature Request",
                          "Resolution",
                          "Sign Out"]
-    var dropdownArrayAfterPurchase = ["Invite",
-                                      "My Plan Or Upgrade",
-                                      "Add Watermark",
-                                      "Restore",
-                                      "Feedback",
-                                      "Feature Request",
-                                      "Privacy Policy",
-                                      "Mobile Terms Of Use",
-                                      "High Resolution",
-                                      "Sign Out"]
     //AWS setup
     let bucketName = "s3.viayou.net"
     var contentUrl: URL!
@@ -844,11 +824,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             self.present(nextVC, animated: false, completion: nil)
         }
         else {
-            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
-            //            nextVC.modalPresentationStyle = .overCurrentContext
-            //            nextVC.delegate = self
-            //            self.present(nextVC, animated: false, completion: nil)
             
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddTwoMenuViewController") as! AddTwoMenuViewController
@@ -868,7 +843,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         referralLink!.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.viayou.ViaYouApp")
         referralLink!.iOSParameters?.minimumAppVersion = "1.0"
-        // referralLink!.iOSParameters?.appStoreID = "123456789"
+        referralLink!.iOSParameters?.appStoreID = "1485828375"
         
         referralLink!.androidParameters = DynamicLinkAndroidParameters(packageName: "net.viayou")
         //referralLink!.androidParameters?.minimumVersion = 125
@@ -1054,10 +1029,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     //MARK:- TableView Delegate Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //      let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-        //        if (paymentTypePurchased >= 0) { //Purchased any
-        //            return dropdownArrayAfterPurchase.count
-        //        }
         return dropdownArray.count
     }
     
@@ -1100,11 +1071,11 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         if(indexPath.row == 0) {
             //            self.inviteFriendsPopUpView.alpha = 1
             //            self.popUpOverlayButton.alpha = 0.5
-            //            goToContactsVCToInvite()
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
-            nextVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            goToContactsVCToInvite()
+            //            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            //            let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+            //            nextVC.modalPresentationStyle = .overCurrentContext
+            //            self.navigationController?.pushViewController(nextVC, animated: true)
         }
             //            else if (indexPath.row == 1) {
             //            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
