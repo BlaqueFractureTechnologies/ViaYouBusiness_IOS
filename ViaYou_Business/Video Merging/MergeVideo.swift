@@ -29,7 +29,7 @@ enum QUWatermarkPosition {
     case Default
 }
 
-class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPopUpViewControllerDelegate { //k*
+class MergeVideo: UIViewController, UITextFieldDelegate { //k*
     
     @IBOutlet weak var bigVIdeoView: UIView!
     @IBOutlet weak var smallVIdeoView: UIView!
@@ -294,24 +294,6 @@ class MergeVideo: UIViewController, UITextFieldDelegate, MergeVideoDescriptionPo
             }
         }
     }
-    
-    @IBAction func descriptionOverlayButtonClicked(_ sender: Any) {
-        print("descriptionOverlayButtonClicked...")
-        
-        let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "MergeVideoDescriptionPopUpViewController") as! MergeVideoDescriptionPopUpViewController
-        // nextVC.descriptionText = promptDescriptionTextView.text ?? ""
-        nextVC.delegate = self
-        nextVC.modalPresentationStyle = .overCurrentContext
-        self.present(nextVC, animated: true, completion: nil)
-    }
-    //
-    //    func mergeVideoDescriptionPopUpVCDescriptionTextSubmitted(descriptionString: String) {
-    //        print("mergeVideoDescriptionPopUpVCDescriptionTextSubmitted...")
-    //
-    //     //   self.promptDescriptionTextView.text = descriptionString
-    //        dataDictToBePosted["description"]   = descriptionString
-    //    }
     
     @IBAction func titleFieldTextChanged(_ sender: UITextField) {
         print("titleFieldTextChanged :: \(sender.text ?? "")")
