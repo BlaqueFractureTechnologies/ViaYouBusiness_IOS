@@ -10,11 +10,11 @@ import UIKit
 
 struct ApiManager {
     
-    let headerUrl       = "http://api.viayou.net/user/"
-    let POSTSHEADER     = "http://api.viayou.net/post/"
-    let COMPANY_HEADER  = "http://api.viayou.net/company/"
-    let COMMENT_HEADER  = "http://api.viayou.net/comment/"
-    let mainHeader = "http://api.viayou.net/"
+    let headerUrl       = "http://businessapi.viayou.net/user/"
+    let POSTSHEADER     = "http://businessapi.viayou.net/post/"
+    let COMPANY_HEADER  = "http://businessapi.viayou.net/company/"
+    let COMMENT_HEADER  = "http://businessapi.viayou.net/comment/"
+    let mainHeader = "http://businessapi.viayou.net/"
     
     let instagramMainHeader = "https://api.instagram.com/oauth/access_token"
     
