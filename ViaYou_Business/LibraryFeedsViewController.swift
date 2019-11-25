@@ -703,7 +703,8 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             
             let userID = dataArray[button.tag].user._id
             let videoName = dataArray[button.tag].fileName
-            let videoId = dataArray[button.tag]._id
+            let videoDuration = dataArray[button.tag].duration
+            //let videoId = dataArray[button.tag]._id
             //var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
             var videUrlString = "http://d1o52q4xl0mbqu.cloudfront.net/posts/\(userID)/\(videoName)"
             videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
@@ -711,7 +712,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             let storyBoard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
             nextVC.videoUrl = videUrlString
-            nextVC.postId = videoId
+            nextVC.videoDuration = videoDuration
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
         
@@ -741,6 +742,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         self.collectioView.reloadData()
                         self.dataArray.removeAll()
                         self.getResponseFromJSONFile()
+                        self.getTotalVideoCountFromAPI()
                     }
                 }
                 else
@@ -880,10 +882,41 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     
-    
-    
-    
+    //k*
     func loadAllVideoImagesForDataArray() {
+        // print("\(self.getCurrentTime()) :: loadAllVideoImagesForDataArray :: dataArray.count ====> \(dataArray.count)")
+        for i in 0..<dataArray.count {
+            if (self.dataArray.count > i) {
+                let userID = dataArray[i].user._id
+                let videoName = dataArray[i].fileName
+                var videUrlString = "http://s3.viayou.net/posts/\(userID)/\(videoName)"
+                videUrlString = videUrlString.replacingOccurrences(of: " ", with: "%20")
+                //print("videUrlString :: \(videUrlString)")
+                
+                DispatchQueue.global(qos: .userInitiated).async {
+                    if let image = self.previewImageFromVideo(url: URL(string: videUrlString)! as NSURL) {
+                        if (self.dataArray.count > i) {
+                            self.dataArray[i].user.videoImage = image
+                            self.dataArray[i].fileName = videoName
+                            DispatchQueue.main.async {
+                                let indexPath:NSIndexPath = NSIndexPath(item: i, section: 0)
+                                self.collectioView.reloadItems(at: [indexPath] as [IndexPath])
+                            }
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        if (i == (self.dataArray.count-1)) {
+                            self.activityIndicator.isHidden = true
+                            self.activityIndicator.stopAnimating()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func loadAllVideoImagesForDataArrayOld() { //k* (Renamed - not used)
         // print("\(self.getCurrentTime()) :: loadAllVideoImagesForDataArray :: dataArray.count ====> \(dataArray.count)")
         for i in 0..<dataArray.count {
             if (self.dataArray.count > i) {
@@ -1718,7 +1751,6 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         expiryDateForLabel = diffInDays
                         
                         //notified every week method
-                        //k* --start
                         if (diffInDays == 0) {
                             //Date is over
                             self.remainingDaysLabel.text = "Trial Period Ended"
@@ -1763,7 +1795,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                         nextVC.delegate = self
                         self.present(nextVC, animated: false, completion: nil)
                     }
-                        //k* --end
+                        
                     else if expiryDateForLabel == 1 {
                         self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) day left"
                         UserDefaults.standard.set(false, forKey: "TrialPeriodEnds")

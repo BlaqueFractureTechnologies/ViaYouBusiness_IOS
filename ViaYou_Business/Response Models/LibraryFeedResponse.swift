@@ -48,6 +48,8 @@ class FeedDataArrayObject: NSObject {
     var ratedBy:[FeedUserRatedByArrayObject] = []
     var viewedBy:[FeedUserViewdByArrayObject] = []
     
+    var duration:String = "" //k*
+    
     var isInfoPopUpDisplaying:Bool = false
     
     var videoImage:UIImage = UIImage(named: "defaultFeedCellBg")!
@@ -121,8 +123,21 @@ class FeedDataArrayObject: NSObject {
         }
         self.videoImage = dictionary["videoImage"] as? UIImage ?? UIImage(named: "defaultFeedCellBg")!
         
-        self.videoFileSize = dictionary["videoFileSize"] as? String ?? ""
+        // self.videoFileSize = dictionary["size"] as? String ?? "" //k*
         
+        //k*
+        if let sizeValue = dictionary["size"] as? Int {
+            self.videoFileSize = "\(sizeValue)"
+        }else if let sizeValue = dictionary["size"] as? String {
+            self.videoFileSize = "\(sizeValue)"
+        }
+        
+        //k*
+        if let durationdValue = dictionary["duration"] as? Int {
+            self.duration = "\(durationdValue)"
+        }else if let durationValue = dictionary["duration"] as? String {
+            self.duration = "\(durationValue)"
+        }
     }
 }
 
@@ -209,7 +224,13 @@ class FeedUser: NSObject {
         self._id                = dictionary["_id"] as? String ?? ""
         self.email              = dictionary["email"] as? String ?? ""
         self.name               = dictionary["name"] as? String ?? ""
-        self.duration           = dictionary["duration"] as? String ?? ""
+        
+        if let durationdValue = dictionary["duration"] as? Int {
+            self.duration = "\(durationdValue)"
+        }else if let durationValue = dictionary["duration"] as? String {
+            self.duration = "\(durationValue)"
+        }
+        
         
         shadows = []
         let shadowsDataArray = dictionary["shadows"] as? [[String:Any]] ?? []

@@ -75,6 +75,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
     //
     var nameOfVideo:String = ""
     var videoSize: String = ""
+    var videoSizeToPass: Int = 10
     var dateCreated: String = ""
     
     var strName: String = ""
@@ -183,6 +184,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         dataDictToBePosted["description"] = "description...."
         dataDictToBePosted["user"] = self.userID
         dataDictToBePosted["isScreenCast"] = true
+        dataDictToBePosted["type"] = "MOBILE"
         
         
         var locationDict:[String:Any] = [:]
@@ -217,8 +219,6 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         dataDictToBePosted["company"] = companyDict  //Setup companyDict to main Dict
         dataDictToBePosted["brand"] = "Brand..."
         dataDictToBePosted["duration"] = self.videoTime
-        dataDictToBePosted["size"] = self.videoSize
-        dataDictToBePosted["type"] = "MOBILE"
         
         print("dataDictToBePosted====>\(dataDictToBePosted)")
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillShowNotification,object: nil)
@@ -634,34 +634,8 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
             MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=250:h=90[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
         }
         else {
-            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=500:h=200[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
         }
-        
-        
-        
-        //        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-        //        print("paymentTypePurchased ====> \(paymentTypePurchased)")
-        
-        //        if (paymentTypePurchased == 0) {
-        //            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
-        //        } else {
-        //            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
-        //        }
-        //let boolValue = UserDefaults.standard.bool(forKey: "IsSelectingVideoFromGallery")
-        //        if boolValue == true {
-        //            if (paymentTypePurchased == 0) {
-        //                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:1][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
-        //            } else {
-        //                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:1][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
-        //            }
-        //        }
-        //        else {
-        //            if (paymentTypePurchased == 0) {
-        //                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
-        //            } else {
-        //                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=350:h=180[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
-        //            }
-        //        }
         
         
         
@@ -682,7 +656,8 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         print("\(strName).\(newURL.pathExtension)")
         self.nameOfVideo = "\(strName).\(newURL.pathExtension)"
         self.videoSize = "\(fileUrl.fileSizeString)"
-        
+        self.videoSizeToPass = Int(fileUrl.fileSize)
+        dataDictToBePosted["size"] = self.videoSizeToPass
         print("file size = \(fileUrl.fileSize), \(fileUrl.fileSizeString)")
         
         print("=============SAVE===========================")

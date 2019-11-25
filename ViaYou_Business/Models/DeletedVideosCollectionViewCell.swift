@@ -28,7 +28,21 @@ class DeletedVideosCollectionViewCell: UICollectionViewCell {
         
         self.videoImageView.image = dataDict.user.videoImage
         self.videoTitleLabel.text = dataDict.title
-        self.durationLabel.text = dataDict.user.duration
+        //self.durationLabel.text = dataDict.user.duration //k*
+        let interval = dataDict.duration //k*
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .abbreviated //k*
+        
+        if (interval.count > 0 && Double(interval)?.isNaN == false) { //k*
+            if let timeInterval = TimeInterval(interval) {
+                if let formattedString = formatter.string(from: timeInterval) {
+                    self.durationLabel.text = formattedString //k*
+                    cellDataDict = dataDict
+                }
+            }
+        }
         cellDataDict = dataDict
         
     }

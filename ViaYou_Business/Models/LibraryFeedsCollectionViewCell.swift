@@ -32,7 +32,8 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         
         infoTableView.estimatedRowHeight = 83.0
         infoTableView.rowHeight = UITableView.automaticDimension
-        //self.durationLabel.text = "" //k*
+        self.durationLabel.text = "" //k*
+        
     }
     
     func configureCell(dataDict:FeedDataArrayObject) {
@@ -47,25 +48,28 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         self.videoImageView.image = dataDict.user.videoImage
         self.videoTitleLabel.text = dataDict.title
         // time calc starts
-        let interval = dataDict.user.duration
-        //print("interval ====> \(interval)")
+        
+        let interval = dataDict.duration //k*
         
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .short
+        formatter.unitsStyle = .abbreviated //k*
         
         if (interval.count > 0 && Double(interval)?.isNaN == false) { //k*
             if let timeInterval = TimeInterval(interval) {
                 if let formattedString = formatter.string(from: timeInterval) {
-                    //print(formattedString)
-                    self.durationLabel.text = formattedString
-                    //time calc ends
-                    //  self.durationLabel.text = dataDict.user.duration
-                    cellDataDict = dataDict
-                    infoTableView.reloadData()
+                    self.durationLabel.text = formattedString //k*
                 }
             }
-            
+        }
+        
+        //k*
+        cellDataDict = dataDict
+        infoTableView.reloadData()
+        
+        //k*
+        if (dataDict.videoFileSize.count == 0) {
+            dataDict.videoFileSize = " "
         }
         
         
@@ -88,8 +92,12 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
             cell.titleLabel.text = cellDataDict.createdDateTime.getReadableDateString()
             cell.arrowIconHeightConstraint.constant = 15
         }else {
-            cell.titleLabel.text = cellDataDict.videoFileSize
+            cell.titleLabel.text = "\(cellDataDict.videoFileSize) KB"
             cell.arrowIconHeightConstraint.constant = 15
+            //k*
+            if (cell.titleLabel.text == " ") {
+                cell.arrowIconHeightConstraint.constant = 0
+            }
         }
         return cell
     }

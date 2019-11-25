@@ -37,7 +37,7 @@ class VideoViewController: UIViewController {
     var playerLayer:AVPlayerLayer = AVPlayerLayer()
     var isPlayCompleted:Bool = false
     var videoUrl: String = ""
-    var postId: String = ""
+    var videoDuration: String = ""
     
     
     override func viewDidLoad() {
@@ -71,23 +71,24 @@ class VideoViewController: UIViewController {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            let asset = AVAsset(url: URL(string: self.videoUrl)!)
-            let duration = asset.duration
-            let seconds = CMTimeGetSeconds(duration)
-            var totalVideoDuration:Float = Float(seconds*1000.0)
-            if (totalVideoDuration.isNaN == true) {
-                totalVideoDuration = 0
-            }
-            DispatchQueue.main.async {
-                self.seekBar.minimumValue  = 0
-                self.seekBar.maximumValue = totalVideoDuration
-                self.seekBar.trackRect(forBounds: self.seekBar.bounds)
-                print("Loaded video...")
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-            }
+        // DispatchQueue.global(qos: .userInitiated).async {
+        //            let asset = AVAsset(url: URL(string: self.videoUrl)!)
+        //            let duration = asset.duration
+        //            let seconds = CMTimeGetSeconds(duration)
+        //            var totalVideoDuration:Float = Float(seconds*1000.0)
+        //            if (totalVideoDuration.isNaN == true) {
+        //                totalVideoDuration = 0
+        //            }
+        DispatchQueue.main.async {
+            self.seekBar.minimumValue  = 0
+            let stringDuration = self.videoDuration as NSString
+            self.seekBar.maximumValue = stringDuration.floatValue
+            self.seekBar.trackRect(forBounds: self.seekBar.bounds)
+            print("Loaded video...")
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
         }
+        //}
         
         let interval = CMTime(seconds:1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         let mainQueue = DispatchQueue.main
