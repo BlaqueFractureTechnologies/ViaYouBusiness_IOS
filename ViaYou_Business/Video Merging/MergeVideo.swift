@@ -218,6 +218,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         dataDictToBePosted["brand"] = "Brand..."
         dataDictToBePosted["duration"] = self.videoTime
         dataDictToBePosted["size"] = self.videoSize
+        dataDictToBePosted["type"] = "MOBILE"
         
         print("dataDictToBePosted====>\(dataDictToBePosted)")
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillShowNotification,object: nil)
