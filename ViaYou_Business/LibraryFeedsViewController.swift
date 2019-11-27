@@ -153,6 +153,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             NotificationCenter.default.removeObserver(self, name: self.uploadCompleteStatusNotification, object: nil)
             DispatchQueue.main.async {
                 self.reloadPageAfterVideoUpload()
+                self.getTotalVideoCountFromAPI()
             }
         }
     }
@@ -266,7 +267,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         //print(getReq.bucket)
         guard let uid = Auth.auth().currentUser?.uid else { return }
         getReq.prefix = "posts/\(uid)" //Folder path to get size
-        //print(getReq.prefix)
+        // print(getReq.prefix)
         print(getReq)
         
         let downloadGroup = DispatchGroup()
@@ -274,7 +275,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         
         s3.listObjects(getReq) { (listObjects, error) in
             print(getReq)
-            // print(listObjects)
+            print(listObjects)
             var total : Int = 0
             if listObjects?.contents != nil {
                 for object in (listObjects?.contents)! {
@@ -369,7 +370,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         print("self.usedBucketSpace** = \(self.usedBucketSpace)")
         print("self.totalBucketSpace** = \(self.totalBucketSpace)")
         
-        if (self.totalBucketSpace.count > 0 && self.usedBucketSpace.count > 0) {
+        if (self.totalBucketSpace.count > 0 && self.usedBucketSpace.count >= 0) {
             let usedBucketSpaceValue  = Float(self.usedBucketSpace) ?? 0.0
             let totalBucketSpaceValue = Float(self.totalBucketSpace) ?? 0.0
             print("usedBucketSpaceValue = \(usedBucketSpaceValue)")
@@ -449,12 +450,15 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         super.viewWillAppear(animated)
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
+        self.profilePicOnNoFeedPopUp.layer.cornerRadius = self.profilePicOnNoFeedPopUp.frame.size.width/3.0
+        self.profilePicOnNoFeedPopUp.clipsToBounds = true
         // self.collectioView.isUserInteractionEnabled = false
         
         getSubscriptionPlanResponseFromAPI()
-        //self.dataArray = []
+        self.dataArray = []
         self.tableView.reloadData()
         getResponseFromJSONFile()
+        self.collectioView.reloadData()
         self.dropDownBaseView.alpha = 0
         self.dropdownOverlayButton.alpha = 0
         self.popUpOverlayButton.alpha = 0
@@ -504,13 +508,20 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 print(self.subscriptionArray.expiry.getReadableDateString())
                 
                 let type = self.subscriptionArray.type
+                let date = self.subscriptionArray.expiry.getReadableDateString()
                 if type == "SOLO" {
                     print("0")
                     DefaultWrapper().setPaymentTypePurchased(type: 0)
+                    DispatchQueue.main.async {
+                        self.remainingDaysLabel.text = "Expires on \(date)"
+                    }
                 }
                 else if type == "GROWTH" {
                     print("1")
                     DefaultWrapper().setPaymentTypePurchased(type: 1)
+                    DispatchQueue.main.async {
+                        self.remainingDaysLabel.text = "Expires on \(date)"
+                    }
                 }
                     //                else if type == "PRO" {
                     //                    print("2")
@@ -519,6 +530,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                 else {
                     print("-1")
                     DefaultWrapper().setPaymentTypePurchased(type: -1)
+                    
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -1098,6 +1110,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
         dropDownOverlayButtonClicked((Any).self)
         
         let boolValue = UserDefaults.standard.bool(forKey: "TrialPeriodEnds")
+        print(boolValue)
         let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
         
         
@@ -1129,7 +1142,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             
             if boolValue == true {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
                 nextVC.modalPresentationStyle = .overCurrentContext
                 nextVC.delegate = self
                 self.present(nextVC, animated: false, completion: nil)
@@ -1161,7 +1174,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             if boolValue == true {
                 print("Restore option not available...")
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
                 nextVC.modalPresentationStyle = .overCurrentContext
                 nextVC.delegate = self
                 self.present(nextVC, animated: false, completion: nil)
@@ -1238,7 +1251,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     @objc func showUpgradeOptions(_ sender:UISwitch) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
         nextVC.modalPresentationStyle = .overCurrentContext
         nextVC.delegate = self
         self.present(nextVC, animated: false, completion: nil)
@@ -1305,52 +1318,69 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     
     func becomeGrowthHostPopUpVC_UpgradeAndSubscriptionBaseViewControllerButtonClicked() {
         
-        if let emailAddress = UserDefaults.standard.value(forKey: "UserEmailAddress"){
-            ApiManager().getEmailToUpgradeAPI(emailId: emailAddress as! String) { (response, error) in
-                if error == nil {
-                    print(response.message)
-                    self.displayAlert(msg: response.message)
-                }
-                else {
-                    print(error.debugDescription)
-                    self.displayAlert(msg: "Sorry! Please try again later.")
-                }
-            }
-        }
-        else {
+        let boolValue = UserDefaults.standard.bool(forKey: "UserFromInstagram")
+        if boolValue == true {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
             let navVC = UINavigationController(rootViewController: nextVC)
             navVC.isNavigationBarHidden = true
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextVC = storyBoard.instantiateViewController(withIdentifier: "UpgradeAndSubscriptionBaseViewController") as! UpgradeAndSubscriptionBaseViewController
-        //        nextVC.isFromViewAllButtonClick = true
-        //        let navVC = UINavigationController(rootViewController: nextVC)
-        //        navVC.isNavigationBarHidden = true
-        //        self.navigationController?.pushViewController(nextVC, animated: true)
+        else {
+            if let emailAddress = UserDefaults.standard.value(forKey: "UserEmailAddress"){
+                print(emailAddress)
+                ApiManager().getEmailToUpgradeAPI(emailId: emailAddress as! String) { (response, error) in
+                    if error == nil {
+                        print(response.message)
+                        self.displayAlert(msg: response.message)
+                    }
+                    else {
+                        print(error.debugDescription)
+                        self.displayAlert(msg: "Sorry! Please try again later.")
+                    }
+                }
+            }
+            else {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
+                let navVC = UINavigationController(rootViewController: nextVC)
+                navVC.isNavigationBarHidden = true
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
     }
     func becomefullMember_LearnMoreButtonClicked() {
-        if let emailAddress = UserDefaults.standard.value(forKey: "UserEmailAddress"){
-            ApiManager().getEmailToUpgradeAPI(emailId: emailAddress as! String) { (response, error) in
-                if error == nil {
-                    print(response.message)
-                    self.displayAlert(msg: response.message)
-                }
-                else {
-                    print(error.debugDescription)
-                    self.displayAlert(msg: "Sorry! Please try again later.")
-                }
-            }
-        }
-        else {
+        let boolValue = UserDefaults.standard.bool(forKey: "UserFromInstagram")
+        if boolValue == true {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
             let navVC = UINavigationController(rootViewController: nextVC)
             navVC.isNavigationBarHidden = true
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
+        else {
+            if let emailAddress = UserDefaults.standard.value(forKey: "UserEmailAddress"){
+                print(emailAddress)
+                ApiManager().getEmailToUpgradeAPI(emailId: emailAddress as! String) { (response, error) in
+                    if error == nil {
+                        print(response.message)
+                        self.displayAlert(msg: response.message)
+                    }
+                    else {
+                        print(error.debugDescription)
+                        self.displayAlert(msg: "Sorry! Please try again later.")
+                    }
+                }
+            }
+            else {
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "SubmitEmailViewController") as! SubmitEmailViewController
+                let navVC = UINavigationController(rootViewController: nextVC)
+                navVC.isNavigationBarHidden = true
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
+        
         
         
         //        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -1730,30 +1760,74 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
     //MARK:- Get Profile Response
     func getProfileResponseFromAPI() {
         userId = Auth.auth().currentUser!.uid
-        ApiManager().getProfileDetails(userId: userId) { (response, error) in
-            if error == nil {
-                print("Response Dictionary success status:\(response.success)")
-                self.dataDict = response.data
-                print("dataDict is dict: Name====>\(self.dataDict.createdDateTime)")
-                var dateFromApi = self.dataDict.createdDateTime
-                dateFromApi = dateFromApi.components(separatedBy: "T").first ?? dateFromApi
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                
-                // Reads date form variable `dateString `
-                let newdate = dateFormatter.date(from: dateFromApi)
-                var expiryDateForLabel:Int = 0
-                if let expiryDate = Calendar.current.date(byAdding: .month, value: 1, to: newdate!) {
-                    print(expiryDate)
+        print(userId)
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        if (paymentTypePurchased >= 0) {
+            print("User on subscription type \(paymentTypePurchased)")
+        }
+        else {
+            ApiManager().getProfileDetails(userId: userId) { (response, error) in
+                if error == nil {
+                    print("Response Dictionary success status:\(response.success)")
+                    self.dataDict = response.data
+                    print("dataDict is dict: Name====>\(self.dataDict.createdDateTime)")
+                    var dateFromApi = self.dataDict.createdDateTime
+                    dateFromApi = dateFromApi.components(separatedBy: "T").first ?? dateFromApi
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
                     
-                    if let diffInDays = Calendar.current.dateComponents([.day], from: Date(), to: expiryDate).day {
-                        print("daysDifference ====> \(diffInDays)")
-                        expiryDateForLabel = diffInDays
+                    // Reads date form variable `dateString `
+                    let newdate = dateFormatter.date(from: dateFromApi)
+                    var expiryDateForLabel:Int = 0
+                    if let expiryDate = Calendar.current.date(byAdding: .month, value: 1, to: newdate!) {
+                        print(expiryDate)
                         
-                        //notified every week method
-                        if (diffInDays == 0) {
-                            //Date is over
-                            self.remainingDaysLabel.text = "Trial Period Ended"
+                        if let diffInDays = Calendar.current.dateComponents([.day], from: Date(), to: expiryDate).day {
+                            print("daysDifference ====> \(diffInDays)")
+                            expiryDateForLabel = diffInDays
+                            
+                            //notified every week method
+                            if (diffInDays == 0) {
+                                //Date is over
+                                DispatchQueue.main.async {
+                                    self.remainingDaysLabel.text = "Trial Period Ended"
+                                }
+                                UserDefaults.standard.set(true, forKey: "TrialPeriodEnds")
+                                
+                                
+                                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
+                                nextVC.modalPresentationStyle = .overCurrentContext
+                                nextVC.delegate = self
+                                self.present(nextVC, animated: false, completion: nil)
+                                
+                            }else {
+                                if (diffInDays % 7 == 0) {
+                                    print("days Remaining  ====> \(diffInDays)")
+                                    print("weeks Remaining ====> \(diffInDays/7)")
+                                    let todaysDateString = self.getTodaysDate()
+                                    let isUserNotifiedOnThisDate = DefaultWrapper().getIsUserNotifiedOnThisDate(dateString: todaysDateString, userId: self.userId)
+                                    if (isUserNotifiedOnThisDate == false) {
+                                        print("User was not notified on this date")
+                                        DefaultWrapper().setIsUserNotifiedOnThisDate(status: true, dateString: todaysDateString, userId: self.userId)
+                                        DispatchQueue.main.async {
+                                            //self.displayAlert(msg: "Remaining \(diffInDays) days")
+                                            
+                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                                            let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
+                                            nextVC.modalPresentationStyle = .overCurrentContext
+                                            nextVC.delegate = self
+                                            nextVC.remainingDays = "\(diffInDays/7)"
+                                            self.present(nextVC, animated: false, completion: nil)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if expiryDateForLabel < 1 {
+                            DispatchQueue.main.async {
+                                self.remainingDaysLabel.text = "Trial Period Ended"
+                            }
                             UserDefaults.standard.set(true, forKey: "TrialPeriodEnds")
                             
                             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -1761,60 +1835,31 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
                             nextVC.modalPresentationStyle = .overCurrentContext
                             nextVC.delegate = self
                             self.present(nextVC, animated: false, completion: nil)
-                            
-                        }else {
-                            if (diffInDays % 7 == 0) {
-                                print("days Remaining  ====> \(diffInDays)")
-                                print("weeks Remaining ====> \(diffInDays/7)")
-                                let todaysDateString = self.getTodaysDate()
-                                let isUserNotifiedOnThisDate = DefaultWrapper().getIsUserNotifiedOnThisDate(dateString: todaysDateString, userId: self.userId)
-                                if (isUserNotifiedOnThisDate == false) {
-                                    print("User was not notified on this date")
-                                    DefaultWrapper().setIsUserNotifiedOnThisDate(status: true, dateString: todaysDateString, userId: self.userId)
-                                    DispatchQueue.main.async {
-                                        //self.displayAlert(msg: "Remaining \(diffInDays) days")
-                                        
-                                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                        let nextVC = storyBoard.instantiateViewController(withIdentifier: "BecomeGrowthHostPopUpViewController") as! BecomeGrowthHostPopUpViewController
-                                        nextVC.modalPresentationStyle = .overCurrentContext
-                                        nextVC.delegate = self
-                                        nextVC.remainingDays = "\(diffInDays/7)"
-                                        self.present(nextVC, animated: false, completion: nil)
-                                    }
-                                }
-                            }
                         }
-                    }
-                    if expiryDateForLabel < 1 {
-                        self.remainingDaysLabel.text = "Trial Period Ended"
-                        UserDefaults.standard.set(true, forKey: "TrialPeriodEnds")
-                        
-                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                        let nextVC = storyBoard.instantiateViewController(withIdentifier: "TrialPeriodEndedViewController") as! TrialPeriodEndedViewController
-                        nextVC.modalPresentationStyle = .overCurrentContext
-                        nextVC.delegate = self
-                        self.present(nextVC, animated: false, completion: nil)
-                    }
-                        
-                    else if expiryDateForLabel == 1 {
-                        self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) day left"
-                        UserDefaults.standard.set(false, forKey: "TrialPeriodEnds")
-                    }
-                    else {
-                        DispatchQueue.main.async {
-                            self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) days left"
+                            
+                        else if expiryDateForLabel == 1 {
+                            DispatchQueue.main.async {
+                                self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) day left"
+                            }
                             UserDefaults.standard.set(false, forKey: "TrialPeriodEnds")
                         }
+                        else {
+                            DispatchQueue.main.async {
+                                self.remainingDaysLabel.text = "\(String(expiryDateForLabel)) days left"
+                            }
+                            UserDefaults.standard.set(false, forKey: "TrialPeriodEnds")
+                        }
+                        
                     }
                     
                 }
-                
-            }
-            else {
-                print(error?.localizedDescription ?? "Error getting user details")
-                self.displaySingleButtonAlert(message: "Something went wrong. Please try again later!")
+                else {
+                    print(error?.localizedDescription ?? "Error getting user details")
+                    self.displaySingleButtonAlert(message: "Something went wrong. Please try again later!")
+                }
             }
         }
+        
     }
     
     func getTodaysDate() ->String {

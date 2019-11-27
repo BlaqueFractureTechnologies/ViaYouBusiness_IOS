@@ -44,6 +44,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoTimerLabel: UILabel!
     @IBOutlet weak var uploadButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
     
     var timerForCheckPhotoLibraryStatus = Timer()
     
@@ -86,6 +87,14 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
     var thirdUrl: String = ""
     var userId: String = ""
     //
+    
+    //AWS setup
+    var totalBucketSpace = ""
+    var usedBucketSpace = ""
+    var bucketSpace: Int = 0
+    var bucketDataArray:BucketDataObject = BucketDataObject([:])
+    var globalRemainingSpace: Int = 0
+    
     
     override func viewDidLoad()
     {
@@ -158,6 +167,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast2, credentialsProvider: credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         s3Url = AWSS3.default().configuration.endpoint.url
+        
+        getBucketInfo()
+        getTotalStorageSpace()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -167,6 +179,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         
         activityIndicator.isHidden = true
         self.uploadButton.isUserInteractionEnabled = false
+        self.playButton.isUserInteractionEnabled = false
         PlaybigViewVideo()
         PlaysmallViewVideo()
         saveVideoToFile()
@@ -671,6 +684,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
                 self.uploadButton.isUserInteractionEnabled = true
+                self.playButton.isUserInteractionEnabled = true
                 // self.view.isUserInteractionEnabled = true
                 // self.uploadFile(with: strName, type: newURL.pathExtension, videoURL: newURL)
                 
@@ -859,6 +873,16 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
     
     @IBAction func uploadVideoButtonClicked(_ sender: Any) {
         print("uploadVideoButtonClicked...")
+        print("Final video size: \(self.videoSizeToPass)")
+        print("Final Remaining size: \(self.globalRemainingSpace)")
+        if (self.videoSizeToPass > self.globalRemainingSpace) {
+            self.displayAlert(msg: "Sorry! You dont have enough storage left to upload this video. Please Upgrade to post further videos!!!")
+            return
+        }
+        if promptTitleField.text == "" {
+            self.displayAlert(msg: "Please Enter a Title for the Video")
+            return
+        }
         //saving to gallery
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: self.finalURL)
@@ -875,10 +899,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
             }
         }
         //saving to gallery ends
-        if promptTitleField.text == "" {
-            self.displayAlert(msg: "Please Enter a Title for the Video")
-            return
-        }
+        
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         self.view.isUserInteractionEnabled = false
@@ -1005,6 +1026,177 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         }
     }
     
+    @IBAction func playButtonClicked(_ sender: Any) {
+        PlaybigViewVideo()
+        PlaysmallViewVideo()
+    }
+    
+    
+    //MARK:- Remaining Space Calculation
+    func setBucketSizeGraph() {
+        print("self.usedBucketSpace** = \(self.usedBucketSpace)")
+        print("self.totalBucketSpace** = \(self.totalBucketSpace)")
+        
+        if (self.totalBucketSpace.count > 0 && self.usedBucketSpace.count >= 0) {
+            let usedBucketSpaceValue  = Float(self.usedBucketSpace) ?? 0.0
+            let totalBucketSpaceValue = Float(self.totalBucketSpace) ?? 0.0
+            print("usedBucketSpaceValue = \(usedBucketSpaceValue)")
+            print("totalBucketSpaceValue = \(totalBucketSpaceValue)")
+            
+            if (totalBucketSpaceValue > 0) {
+                let percentage = (usedBucketSpaceValue/totalBucketSpaceValue)*100
+                print("percentage = \(percentage)")
+                
+                DispatchQueue.main.async {
+                    
+                    //                    let storageIndicatorGreenOnDropdownWidth = self.storageIndicatorGreenOnDropDown.frame.size.width
+                    //                    let storageIndicatorRedOnDropdownWidth   = self.storageIndicatorRedOnDropDown.frame.size.width
+                    
+                }
+            }
+            
+            let remainingSpace = totalBucketSpaceValue - usedBucketSpaceValue
+            print("remainingSpace = \(remainingSpace)")
+            self.globalRemainingSpace = Int(remainingSpace)
+            print(self.globalRemainingSpace)
+            
+            let remainingSpaceInMB = Float(remainingSpace) / 1000.0
+            //   let roundedValue = remainingSpaceInMB.rounded(.toNearestOrAwayFromZero)
+            
+            DispatchQueue.main.async {
+                
+                // self.storageIndicatorLabel.text = "\(remainingSpaceInMB) GB Free"
+                // self.storageIndicatorLabelOnDropDown.text = "\(remainingSpaceInMB) GB Free"
+                
+            }
+        }
+        else
+        {
+            DispatchQueue.main.async {
+                //let storageIndicatorRedWidth   = self.storageIndicatorRed.frame.size.width
+                // print("storageIndicatorRedWidth = \(storageIndicatorRedWidth)")
+                //self.storageIndicatorRedWidthConstraint.constant = CGFloat(0.0)
+                //self.storageIndicatorRedOnDropDownWidthConstraint.constant = CGFloat(0.0)
+                // self.storageIndicatorLabel.text = "2 GB Free"
+                // self.storageIndicatorLabelOnDropDown.text = "2 GB Free"
+            }
+        }
+    }
+    
+    //get total bucket size
+    func getTotalStorageSpace() {
+        ApiManager().getTotalBucketSize { (response, error) in
+            if error == nil {
+                print(response.message)
+                self.bucketDataArray = response.data
+                print("Total storage space = \(self.bucketDataArray.storage)")
+                
+                let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+                if (paymentTypePurchased == 0) {
+                    let spaceInInt = Int(self.bucketDataArray.storage)
+                    if let value = spaceInInt {
+                        self.bucketSpace = value + 15
+                        print(self.bucketSpace)
+                    }
+                    
+                    
+                    self.totalBucketSpace = "\((Float(self.bucketSpace))*1000.0)"
+                    print("self.totalBucketSpace = \(self.totalBucketSpace)")
+                    
+                }
+                else if (paymentTypePurchased == 1) {
+                    let spaceInInt = Int(self.bucketDataArray.storage)
+                    if let value = spaceInInt {
+                        self.bucketSpace = value + 30
+                        print(self.bucketSpace)
+                    }
+                    
+                    
+                    self.totalBucketSpace = "\((Float(self.bucketSpace))*1000.0)"
+                    print("self.totalBucketSpace = \(self.totalBucketSpace)")
+                }
+                else if (paymentTypePurchased == 2) {
+                    let spaceInInt = Int(self.bucketDataArray.storage)
+                    if let value = spaceInInt {
+                        self.bucketSpace = value + 100
+                        print(self.bucketSpace)
+                    }
+                    
+                    
+                    self.totalBucketSpace = "\((Float(self.bucketSpace))*1000.0)"
+                    print("self.totalBucketSpace = \(self.totalBucketSpace)")
+                }
+                else {
+                    self.totalBucketSpace = "\((Float(self.bucketDataArray.storage) ?? 0.0)*1000.0)"
+                    print("self.totalBucketSpace = \(self.totalBucketSpace)")
+                }
+                
+                self.setBucketSizeGraph()
+                
+            }
+            else {
+                print(error.debugDescription)
+            }
+        }
+    }
+    //get total bucket size ends
+    
+    //get aws s3 bucket info
+    func getBucketInfo() {
+        //aws configuration
+        let accessKey = "AKIA6JJLBT2ZHL52PQLQ"
+        let secretKey = "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"
+        //let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2, identityPoolId:"us-east-2:3d024c5d-faba-4922-85e4-9b3d2d9581c9")
+        let credentialsProvider = AWSStaticCredentialsProvider(accessKey: accessKey, secretKey: secretKey)
+        let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast2, credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        s3Url = AWSS3.default().configuration.endpoint.url
+        let s3 = AWSS3.default()
+        let getReq : AWSS3ListObjectsRequest = AWSS3ListObjectsRequest()
+        getReq.bucket = self.bucketName
+        //print(getReq.bucket)
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        getReq.prefix = "posts/\(uid)" //Folder path to get size
+        print(getReq.prefix)
+        print(getReq)
+        
+        let downloadGroup = DispatchGroup()
+        downloadGroup.enter()
+        
+        s3.listObjects(getReq) { (listObjects, error) in
+            print(getReq)
+            print(listObjects)
+            var total : Int = 0
+            if listObjects?.contents != nil {
+                for object in (listObjects?.contents)! {
+                    do {
+                        let s3Object : AWSS3Object = object
+                        total += (s3Object.size?.intValue)!
+                    }
+                }
+                
+                print(total)
+                
+                let byteCount = total // replace with data.count
+                let bcf = ByteCountFormatter()
+                bcf.allowedUnits = [.useMB] // optional: restricts the units to MB only
+                bcf.countStyle = .file
+                let string = bcf.string(fromByteCount: Int64(byteCount))
+                print("File size in MB : \(string)")
+                
+                self.usedBucketSpace = "\(string)"
+                if (self.usedBucketSpace.contains(" ")) {
+                    self.usedBucketSpace = self.usedBucketSpace.components(separatedBy: " ").first ?? ""
+                }
+                self.setBucketSizeGraph()
+            }
+            else {
+                print("contents is blank")
+                print(error.debugDescription)
+            }
+        }
+    }
+    //edit ends
 }
 
 
