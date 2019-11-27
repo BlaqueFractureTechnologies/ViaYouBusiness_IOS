@@ -398,6 +398,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                             print(self.currnetUserEmail)
                             UserDefaults.standard.set(self.currnetUserEmail, forKey: "UserEmailAddress")
                             ApiManager().mongoDBRegisterAPI(name: self.currentUserName, email: self.currnetUserEmail, userId: self.currentUserId, completion: { (response, error) in
+                                print(response)
                                 if error == nil {
                                     let boolValue = UserDefaults.standard.bool(forKey: "IsNewUser")
                                     if boolValue == true {

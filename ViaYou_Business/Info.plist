@@ -53,7 +53,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb2262777054012195</string>
+				<string>fb542205219692220</string>
 			</array>
 		</dict>
 		<dict>
@@ -78,7 +78,7 @@
 	<key>CFBundleVersion</key>
 	<string>9</string>
 	<key>FacebookAppID</key>
-	<string>2262777054012195</string>
+	<string>542205219692220</string>
 	<key>FacebookDisplayName</key>
 	<string>ViaYou</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -105,9 +105,9 @@
 	<string>App needs to access your gallery to save the video before sharing</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>"Monarcha_Bold.ttf"</string>
-		<string>"Monarcha_SemiBold.ttf"</string>
-		<string>"monarcha_regular.ttf"</string>
+		<string>&quot;Monarcha_Bold.ttf&quot;</string>
+		<string>&quot;Monarcha_SemiBold.ttf&quot;</string>
+		<string>&quot;monarcha_regular.ttf&quot;</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
