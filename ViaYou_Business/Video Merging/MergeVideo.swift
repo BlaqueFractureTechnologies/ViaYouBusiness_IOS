@@ -875,10 +875,14 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         print("uploadVideoButtonClicked...")
         print("Final video size: \(self.videoSizeToPass)")
         print("Final Remaining size: \(self.globalRemainingSpace)")
-        if (self.videoSizeToPass > self.globalRemainingSpace) {
-            self.displayAlert(msg: "Sorry! You dont have enough storage left to upload this video. Please Upgrade to post further videos!!!")
-            return
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        if paymentTypePurchased >= 0 {
+            if (self.videoSizeToPass > self.globalRemainingSpace) {
+                self.displayAlert(msg: "Sorry! You dont have enough storage left to upload this video. Please Upgrade to increase your storage!!!")
+                return
+            }
         }
+        
         if promptTitleField.text == "" {
             self.displayAlert(msg: "Please Enter a Title for the Video")
             return
