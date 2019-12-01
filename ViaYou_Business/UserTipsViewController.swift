@@ -30,7 +30,7 @@ class UserTipsViewController: UIViewController, UIScrollViewDelegate {
     func setUpScrollViewElements() {
         let _w = UIScreen.main.bounds.size.width
         scrollView.layoutIfNeeded()
-        for i in 0...4 {
+        for i in 0...3 {
             let infoImage = UIImageView(frame: scrollView.bounds)
             infoImage.backgroundColor = UIColor.clear
             infoImage.center = CGPoint(x: (_w/2.0)+(_w*CGFloat(i)), y: scrollView.frame.size.height/2.0)
@@ -39,7 +39,7 @@ class UserTipsViewController: UIViewController, UIScrollViewDelegate {
             infoImage.contentMode = .scaleAspectFit
             scrollView.addSubview(infoImage)
         }
-        scrollView.contentSize = CGSize(width: (_w*CGFloat(5)), height: 0)
+        scrollView.contentSize = CGSize(width: (_w*CGFloat(4)), height: 0)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -48,7 +48,7 @@ class UserTipsViewController: UIViewController, UIScrollViewDelegate {
         pageControl.currentPage = currentPage
         nextButton.alpha = 1.0
         prevButton.alpha = 1.0
-        if (currentPage==4) {
+        if (currentPage==3) {
             nextButton.alpha = 0.5
             finishButton.alpha = 1
             skipButton.alpha = 0
@@ -61,12 +61,12 @@ class UserTipsViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func nextButtonClicked(_ sender: Any) {
         let _w = UIScreen.main.bounds.size.width
-        if (currentPage>=4) {
+        if (currentPage>=3) {
             return
         }
         currentPage = currentPage+1
         print("nextButtonClicked :: currentPage====>\(currentPage)")
-        if (currentPage==4) { nextButton.alpha = 0.65 }
+        if (currentPage==3) { nextButton.alpha = 0.65 }
         prevButton.alpha = 1.0
         scrollView.setContentOffset(CGPoint(x: (_w*CGFloat(currentPage)), y: 0), animated: true)
         pageControl.currentPage = currentPage
@@ -87,13 +87,13 @@ class UserTipsViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func skipButtonClicked(_ sender: Any) {
         print("skipButtonClicked...")
-                                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
-                                            print(self.passedProfileImage)
-                                            homeVC.passedProfileImage = self.passedProfileImage
-                                            let navVC = UINavigationController(rootViewController: homeVC)
-                                            navVC.isNavigationBarHidden = true
-                                            self.navigationController?.present(navVC, animated: true, completion: nil)
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let homeVC = storyBoard.instantiateViewController(withIdentifier: "LibraryFeedsViewController") as! LibraryFeedsViewController
+        print(self.passedProfileImage)
+        homeVC.passedProfileImage = self.passedProfileImage
+        let navVC = UINavigationController(rootViewController: homeVC)
+        navVC.isNavigationBarHidden = true
+        self.navigationController?.present(navVC, animated: true, completion: nil)
     }
     
     @IBAction func finishButtonClicked(_ sender: Any) {

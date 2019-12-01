@@ -27,14 +27,19 @@ class ProfileDropdownTableViewCell: UITableViewCell {
         }
         
         var iconName = "DropDown_\(dataArray[index])"
-        
         iconName = iconName.replacingOccurrences(of: " ", with: "_")
-        
         self.iconView.image = UIImage(named: iconName)
+        //        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        //        if paymentTypePurchased >= 0
+        //        {
+        //            if (index == 1) {
+        //
+        //            }
+        //        }
         
         if (index == 1) {
-            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            //            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            //            print("paymentTypePurchased ====> \(paymentTypePurchased)")
             //            if (paymentTypePurchased == 0) {
             //                self.titleLabel.text = "Add Watermark"
             //            }
@@ -47,8 +52,8 @@ class ProfileDropdownTableViewCell: UITableViewCell {
         }
         
         if (index == 2) {
-            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
-            print("paymentTypePurchased ====> \(paymentTypePurchased)")
+            //            let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+            //            print("paymentTypePurchased ====> \(paymentTypePurchased)")
             
             //            if (paymentTypePurchased == 1 || paymentTypePurchased == 2) {
             //                self.iconView.image = UIImage(named: "DropDown_RestoreGrowthOrPro")

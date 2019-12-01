@@ -296,10 +296,10 @@ class RecordFantVideoVC: UIViewController,AVCaptureFileOutputRecordingDelegate {
             print(self.currentTimeCounter)
             print(self.videoTime)
             if self.videoTime > self.currentTimeCounter {
-                self.totalVideoTime = self.videoTime
+                self.totalVideoTime = (self.videoTime) * 1000
             }
             else {
-                self.totalVideoTime = self.currentTimeCounter
+                self.totalVideoTime = (self.currentTimeCounter) * 1000
             }
             print(self.totalVideoTime)
             lbltimer.invalidate()

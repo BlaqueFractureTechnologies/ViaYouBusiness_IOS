@@ -142,7 +142,9 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         
         //watermark image ends
         // time calc starts
-        let interval = self.totalVideoTime
+        let interValInt = Int(self.totalVideoTime)
+        let intervalToSec = interValInt/1000
+        let interval = intervalToSec
         print(interval)
         
         let formatter = DateComponentsFormatter()
@@ -231,7 +233,7 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
         companyDict["name"] = "company_name..."
         dataDictToBePosted["company"] = companyDict  //Setup companyDict to main Dict
         dataDictToBePosted["brand"] = "Brand..."
-        dataDictToBePosted["duration"] = self.videoTime
+        dataDictToBePosted["duration"] = self.totalVideoTime
         
         print("dataDictToBePosted====>\(dataDictToBePosted)")
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardDidShowNotification),name: UIResponder.keyboardWillShowNotification,object: nil)
@@ -642,15 +644,32 @@ class MergeVideo: UIViewController, UITextFieldDelegate { //k*
     {
         let tempURl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.mp4")
         print(tempURl)
-        let boolValue = UserDefaults.standard.bool(forKey: "IsSelectingVideoFromGallery")
-        if boolValue == true {
-            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=250:h=90[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+        let paymentTypePurchased = DefaultWrapper().getPaymentTypePurchased()
+        if paymentTypePurchased >= 0 {
+            let boolValueForWatermark = UserDefaults.standard.bool(forKey: "WatermarkUploaded")
+            if boolValueForWatermark == true {
+                let boolValue = UserDefaults.standard.bool(forKey: "IsSelectingVideoFromGallery")
+                if boolValue == true {
+                    MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=250:h=90[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+                }
+                else {
+                    MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=500:h=200[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+                }
+            }
+            else {
+                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16 \(tempURl.absoluteString)")
+            }
+            
         }
         else {
-            MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=500:h=200[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+            let boolValue = UserDefaults.standard.bool(forKey: "IsSelectingVideoFromGallery")
+            if boolValue == true {
+                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=250:h=90[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+            }
+            else {
+                MobileFFmpeg.execute( "-y -i \(SecondUrl.absoluteString) -i \(firestUrl.absoluteString) -i \(thirdUrl) -filter_complex [1]scale=(iw*0.30):(ih*0.30),pad=(iw+5):(ih+5):2:2:0xD6556B[scaled];[0:0][scaled]overlay=x=W-w-16:y=16[merged];[2:0]scale=w=500:h=200[water];[merged][water]overlay=x=(main_w-overlay_w):y=(main_h-overlay_h) \(tempURl.absoluteString)")
+            }
         }
-        
-        
         
         let tmpDirURL = FileManager.default.temporaryDirectory
         let strName : String = "viayou_\(self.randomStringWithLength(len: 13))"

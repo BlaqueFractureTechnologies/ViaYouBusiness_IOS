@@ -72,7 +72,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         else {
             inviteAFriendLabel.text = "Invite A Friend"
-            inviteText = "I am on ViaYou, check out it's awesome video features. We'll both get 1 GB extra cloud storage for free."
+            inviteText = "I am on ViaYou, check out it's awesome video features. Dont just share your story, be a part of it. Download for free."
         }
         
         self.getContacts { (status,contactsArray) in

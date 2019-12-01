@@ -22,6 +22,7 @@ class NewLaunchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
     }
     
     override func viewWillAppear(_ animated: Bool) {

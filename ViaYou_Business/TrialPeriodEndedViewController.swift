@@ -13,14 +13,15 @@ import Firebase
     
 }
 class TrialPeriodEndedViewController: UIViewController {
-
+    
     var delegate:TrialPeriodEndedViewControllerDelegate?
-    @IBOutlet weak var tryGrowthButton: UIButton!
     @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var learnMoreButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        learnMoreButton.setTitle("Learn More", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

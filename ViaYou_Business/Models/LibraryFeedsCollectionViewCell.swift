@@ -49,7 +49,9 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         self.videoTitleLabel.text = dataDict.title
         // time calc starts
         
-        let interval = dataDict.duration //k*
+        let intervalInt = Int(dataDict.duration) ?? 0
+        let intervalInSeconds = intervalInt/1000
+        let interval = String(intervalInSeconds)//k*
         
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
@@ -59,6 +61,7 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
             if let timeInterval = TimeInterval(interval) {
                 if let formattedString = formatter.string(from: timeInterval) {
                     self.durationLabel.text = formattedString //k*
+                    // print("Duration of videos : \(String(describing: self.durationLabel.text))")
                 }
             }
         }
@@ -86,7 +89,7 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeInfoTableViewCell", for: indexPath) as! HomeInfoTableViewCell
         if (indexPath.row == 0) {
-            cell.titleLabel.text = cellDataDict.fileName
+            cell.titleLabel.text = cellDataDict.title
             cell.arrowIconHeightConstraint.constant = 15
         }else if (indexPath.row == 1) {
             cell.titleLabel.text = cellDataDict.createdDateTime.getReadableDateString()
@@ -101,8 +104,5 @@ class LibraryFeedsCollectionViewCell: UICollectionViewCell, UITableViewDelegate,
         }
         return cell
     }
-    
-    
-    
 }
 

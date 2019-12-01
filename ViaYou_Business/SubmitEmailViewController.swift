@@ -16,7 +16,7 @@ class SubmitEmailViewController: UIViewController {
     @IBOutlet weak var emailTextFieldContainer: UIView!
     
     let profileImageUrlHeader:String = "http://s3.viayou.net/"
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,10 +36,10 @@ class SubmitEmailViewController: UIViewController {
             })
         }
         
-         let emailAddress = UserDefaults.standard.value(forKey: "UserEmailAddress") //{
+        let emailAddress = UserDefaults.standard.value(forKey: "UserEmailAddress") //{
         print("Email address ==> \(String(describing: emailAddress))")
-            self.addEmailTextField.text = emailAddress as? String
-       // }
+        self.addEmailTextField.text = emailAddress as? String
+        // }
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -54,15 +54,15 @@ class SubmitEmailViewController: UIViewController {
     
     @IBAction func submitEmailButtonClicked(_ sender: Any) {
         ApiManager().getEmailToUpgradeAPI(emailId: addEmailTextField.text ?? "" ) { (response, error) in
-                if error == nil {
-                    print(response.message)
-                    self.displayAlert(msg: response.message)
-                }
-                else {
-                    print(error.debugDescription)
-                    self.displayAlert(msg: "Sorry! Please try again later.")
-                }
+            if error == nil {
+                print(response.message)
+                self.displayAlert(msg: response.message)
             }
+            else {
+                print(error.debugDescription)
+                self.displayAlert(msg: "Sorry! Please try again later.")
+            }
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
