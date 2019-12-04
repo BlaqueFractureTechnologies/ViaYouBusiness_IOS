@@ -703,7 +703,8 @@ struct ApiManager {
             if (error != nil) {
                 print(error ?? "")
                 completion(SubscriptionResponse([:]),error)
-            } else {
+            }
+            else {
                 do {
                     if  let jsonDict = try JSONSerialization.jsonObject(with: data!) as? [String:Any] {
                         print("jsonDict====>%@",jsonDict)
