@@ -15,11 +15,11 @@ struct ApiManager {
 //    let COMPANY_HEADER  = "https://viayou.net/businessapi/company/"
 //    let COMMENT_HEADER  = "https://viayou.net/businessapi/comment/"
 //    let mainHeader = "https://viayou.net/businessapi/"
-    let headerUrl       = "http://18.191.255.29:9000/user/"
-    let POSTSHEADER     = "http://18.191.255.29:9000/post/"
-    let COMPANY_HEADER  = "http://18.191.255.29:9000/company/"
-    let COMMENT_HEADER  = "http://18.191.255.29:9000/comment/"
-    let mainHeader = "http://18.191.255.29:9000/"
+    let headerUrl       = "https://viayou.net/businessapi/user/"
+    let POSTSHEADER     = "https://viayou.net/businessapi/post/"
+    let COMPANY_HEADER  = "https://viayou.net/businessapi/company/"
+    let COMMENT_HEADER  = "https://viayou.net/businessapi/comment/"
+    let mainHeader = "https://viayou.net/businessapi/"
     
     let instagramMainHeader = "https://api.instagram.com/oauth/access_token"
     

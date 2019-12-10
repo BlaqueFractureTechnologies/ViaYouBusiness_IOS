@@ -931,7 +931,7 @@ class LibraryFeedsViewController: UIViewController, UICollectionViewDelegate, UI
             }
             self.invitationUrl = shortURL!
             print(self.invitationUrl.absoluteString)
-            
+                  
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
             nextVC.passedUrlLink = self.invitationUrl.absoluteString
